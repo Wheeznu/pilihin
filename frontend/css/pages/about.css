@@ -1,0 +1,116 @@
+.about-page {
+    min-height: 100vh;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.about-hero {
+    text-align: center;
+    padding: var(--space-3xl) var(--space-xl) var(--space-2xl);
+    background: linear-gradient(to bottom, var(--bg-secondary), var(--bg-primary));
+}
+
+.about-hero__title {
+    font-size: var(--font-4xl);
+    font-weight: var(--fw-bold);
+    margin-bottom: var(--space-md);
+}
+
+.about-hero__subtitle {
+    color: var(--text-secondary);
+    font-size: var(--font-lg);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.about-grid {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-xl) var(--space-3xl);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: var(--space-xl);
+}
+
+.about-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    text-align: center;
+    transition: all var(--transition-base);
+    text-decoration: none;
+    color: var(--text-primary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.about-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-primary);
+    box-shadow: 0 8px 24px rgba(29, 185, 84, 0.15);
+}
+
+.about-card__avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: var(--radius-full);
+    object-fit: cover;
+    border: 3px solid var(--border-color);
+    transition: border-color var(--transition-fast);
+}
+
+.about-card:hover .about-card__avatar {
+    border-color: var(--accent-primary);
+}
+
+.about-card__name {
+    font-size: var(--font-md);
+    font-weight: var(--fw-semibold);
+}
+
+.about-card__role {
+    font-size: var(--font-sm);
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.about-card__role span {
+    color: var(--accent-primary);
+    font-weight: var(--fw-medium);
+}
+
+.about-card__icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-full);
+    background: rgba(29, 185, 84, 0.1);
+    color: var(--accent-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .about-hero__title {
+        font-size: var(--font-2xl);
+    }
+
+    .about-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        padding: 0 var(--space-md) var(--space-xl);
+        gap: var(--space-md);
+    }
+
+    .about-card {
+        padding: var(--space-lg);
+    }
+
+    .about-card__avatar {
+        width: 60px;
+        height: 60px;
+    }
+}

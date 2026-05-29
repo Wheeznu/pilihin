@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Masuk - Pilih.in</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100..900&display=swap"
+            rel="stylesheet"
+        />
+
+        <link rel="stylesheet" href="../../css/reset.css" />
+        <link rel="stylesheet" href="../../css/design-system.css" />
+        <link rel="stylesheet" href="../../css/components/button.css" />
+        <link rel="stylesheet" href="../../css/pages/auth.css" />
+    </head>
+    <body>
+        <div class="auth-page">
+            <div class="auth-card">
+                <div class="auth-brand">
+                    <a href="../../index.html" class="auth-brand__logo">
+                        Pilih<span class="text-primary">.in</span>
+                    </a>
+                    <p class="auth-brand__tagline">
+                        Masuk untuk menikmati ribuan film Indonesia
+                    </p>
+                </div>
+
+                <div class="auth-alert" id="loginAlert" hidden>
+                    <span id="loginAlertText"></span>
+                </div>
+
+                <form class="auth-form" id="loginForm" novalidate>
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email</label>
+                        <div class="form-input-wrapper">
+                            <i data-feather="mail" class="form-input-icon"></i>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                class="form-input"
+                                placeholder="contoh@email.com"
+                                autocomplete="email"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="password">Password</label>
+                        <div class="form-input-wrapper">
+                            <i data-feather="lock" class="form-input-icon"></i>
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                class="form-input"
+                                placeholder="Masukkan password"
+                                autocomplete="current-password"
+                                required
+                            />
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                id="togglePassword"
+                                aria-label="Tampilkan password"
+                            >
+                                <i data-feather="eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary auth-submit" id="loginSubmit">
+                        <i data-feather="log-in"></i> Masuk
+                    </button>
+                </form>
+
+                    <div class="auth-footer">
+                        <p>Belum punya akun? <a href="register.html">Daftar</a></p>
+                        <p style="margin-top: var(--space-sm);"><a href="forgot-password.html">Lupa password?</a></p>
+                    </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
+        <script type="module">
+            import LoginPage from "../../js/logic-pages/login.js";
+            new LoginPage();
+        </script>
+    </body>
+</html>

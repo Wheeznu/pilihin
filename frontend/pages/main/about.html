@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Tentang Kami - Pilih.in</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100..900&display=swap"
+            rel="stylesheet"
+        />
+
+        <link rel="stylesheet" href="../../css/reset.css" />
+        <link rel="stylesheet" href="../../css/design-system.css" />
+        <link rel="stylesheet" href="../../css/components/navbar.css" />
+        <link rel="stylesheet" href="../../css/components/button.css" />
+        <link rel="stylesheet" href="../../css/pages/about.css" />
+    </head>
+    <body>
+        <div id="navbar-container"></div>
+
+        <main class="about-page">
+            <section class="about-hero">
+                <h1 class="about-hero__title">Tentang <span class="text-primary">Pilih.in</span></h1>
+                <p class="about-hero__subtitle">
+                    Platform streaming film Indonesia yang dikembangkan oleh tim
+                    berbakat untuk menghadirkan hiburan berkualitas ke seluruh
+                    pelosok negeri.
+                </p>
+            </section>
+
+            <section class="about-grid">
+                <a href="https://github.com/dev1" target="_blank" class="about-card">
+                    <img
+                        src="https://ui-avatars.com/api/?name=Dashboard+Utama&background=1db954&color=fff&size=80"
+                        alt="Developer 1"
+                        class="about-card__avatar"
+                        loading="lazy"
+                    />
+                    <div class="about-card__icon">
+                        <i data-feather="grid"></i>
+                    </div>
+                    <h3 class="about-card__name">Dashboard Utama</h3>
+                    <p class="about-card__role">
+                        Pengembang <span>Dashboard Utama</span>
+                    </p>
+                </a>
+
+                <a href="https://github.com/dev2" target="_blank" class="about-card">
+                    <img
+                        src="https://ui-avatars.com/api/?name=Kreator+Katalog&background=3498ff&color=fff&size=80"
+                        alt="Developer 2"
+                        class="about-card__avatar"
+                        loading="lazy"
+                    />
+                    <div class="about-card__icon">
+                        <i data-feather="film"></i>
+                    </div>
+                    <h3 class="about-card__name">Kreator Katalog</h3>
+                    <p class="about-card__role">
+                        Pengembang <span>Kreator Katalog</span>
+                    </p>
+                </a>
+
+                <a href="https://github.com/dev3" target="_blank" class="about-card">
+                    <img
+                        src="https://ui-avatars.com/api/?name=Dashboard+User&background=f5c518&color=fff&size=80"
+                        alt="Developer 3"
+                        class="about-card__avatar"
+                        loading="lazy"
+                    />
+                    <div class="about-card__icon">
+                        <i data-feather="user"></i>
+                    </div>
+                    <h3 class="about-card__name">Dashboard User</h3>
+                    <p class="about-card__role">
+                        Pengembang <span>Dashboard User</span>
+                    </p>
+                </a>
+
+                <a href="https://github.com/dev4" target="_blank" class="about-card">
+                    <img
+                        src="https://ui-avatars.com/api/?name=Dashboard+Admin&background=e22134&color=fff&size=80"
+                        alt="Developer 4"
+                        class="about-card__avatar"
+                        loading="lazy"
+                    />
+                    <div class="about-card__icon">
+                        <i data-feather="shield"></i>
+                    </div>
+                    <h3 class="about-card__name">Dashboard Admin</h3>
+                    <p class="about-card__role">
+                        Pengembang <span>Dashboard Admin</span>
+                    </p>
+                </a>
+
+                <a href="https://github.com/dev5" target="_blank" class="about-card">
+                    <img
+                        src="https://ui-avatars.com/api/?name=Dashboard+Manager&background=8e44ad&color=fff&size=80"
+                        alt="Developer 5"
+                        class="about-card__avatar"
+                        loading="lazy"
+                    />
+                    <div class="about-card__icon">
+                        <i data-feather="bar-chart-2"></i>
+                    </div>
+                    <h3 class="about-card__name">Dashboard Manager</h3>
+                    <p class="about-card__role">
+                        Pengembang <span>Dashboard Manager</span>
+                    </p>
+                </a>
+            </section>
+        </main>
+
+        <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
+        <script type="module">
+            import Navbar from "../../js/components/navbar.js";
+            document.addEventListener("DOMContentLoaded", async () => {
+                await Navbar.load("navbar-container");
+                feather.replace();
+            });
+        </script>
+    </body>
+</html>

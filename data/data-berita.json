@@ -1,0 +1,49 @@
+{
+  "news": [
+    {
+      "id": "news-001",
+      "title": "Pilih.in Resmi Hadir sebagai Platform Streaming Lokal",
+      "slug": "pilih-in-resmi-hadir",
+      "content": "Platform streaming lokal Pilih.in resmi diluncurkan hari ini dengan membawa ribuan konten film dan serial berkualitas tinggi untuk masyarakat Indonesia.",
+      "excerpt": "Pilih.in resmi meluncur sebagai platform streaming lokal terbaru.",
+      "coverImage": "https://picsum.photos/seed/news1/800/400",
+      "category": "Press Release",
+      "tags": ["peluncuran", "pilih.in", "streaming"],
+      "views": 3400,
+      "status": "published",
+      "publishedAt": "2024-01-01T00:00:00.000Z",
+      "createdAt": "2024-01-01T00:00:00.000Z",
+      "updatedAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "news-002",
+      "title": "Kerjasama Pilih.in dengan 3 Production House Ternama",
+      "slug": "kerjasama-production-house",
+      "content": "Pilih.in menjalin kerjasama strategis dengan tiga production house ternama di Indonesia untuk menghadirkan konten orisinal berkualitas tinggi.",
+      "excerpt": "Pilih.in jalin kerjasama dengan 3 PH ternama di Indonesia.",
+      "coverImage": "https://picsum.photos/seed/news2/800/400",
+      "category": "Kerjasama",
+      "tags": ["kerjasama", "production house", "konten orisinal"],
+      "views": 2100,
+      "status": "published",
+      "publishedAt": "2024-03-15T00:00:00.000Z",
+      "createdAt": "2024-03-15T00:00:00.000Z",
+      "updatedAt": "2024-03-15T00:00:00.000Z"
+    },
+    {
+      "id": "news-003",
+      "title": "Fitur Baru: Download Offline Kini Tersedia",
+      "slug": "fitur-download-offline",
+      "content": "Pilih.in menghadirkan fitur download offline untuk pengguna premium, memungkinkan nonton film tanpa koneksi internet kapan saja dan di mana saja.",
+      "excerpt": "Nikmati fitur download offline terbaru dari Pilih.in.",
+      "coverImage": "https://picsum.photos/seed/news3/800/400",
+      "category": "Fitur",
+      "tags": ["fitur baru", "download offline", "premium"],
+      "views": 5600,
+      "status": "published",
+      "publishedAt": "2024-06-01T00:00:00.000Z",
+      "createdAt": "2024-06-01T00:00:00.000Z",
+      "updatedAt": "2024-06-01T00:00:00.000Z"
+    }
+  ]
+}

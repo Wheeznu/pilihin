@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Pilih.in — Streaming Film Indonesia</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100..900&display=swap"
+            rel="stylesheet"
+        />
+
+        <link rel="stylesheet" href="css/reset.css" />
+        <link rel="stylesheet" href="css/design-system.css" />
+        <link rel="stylesheet" href="css/components/navbar.css" />
+        <link rel="stylesheet" href="css/components/button.css" />
+        <link rel="stylesheet" href="css/components/card.css" />
+        <link rel="stylesheet" href="css/pages/home.css" />
+    </head>
+    <body>
+        <div class="app-layout">
+            <div class="app-main">
+                <div id="navbar-container"></div>
+
+                <!-- Main Content -->
+                <main class="page-content">
+                    <!-- Hero Section -->
+                    <section class="hero" id="hero">
+                        <div class="hero__bg">
+                            <img id="heroBg" src="" alt="Featured Film" />
+                        </div>
+                        <div class="hero__gradient"></div>
+                        <div class="hero__content">
+                            <div class="hero__badge">
+                                <i data-feather="trending-up"></i>
+                                Trending
+                            </div>
+                            <h1 class="hero__title" id="heroTitle"></h1>
+                            <div class="hero__meta">
+                                <span id="heroMeta"></span>
+                            </div>
+                            <p class="hero__description" id="heroDescription"></p>
+                            <div class="hero__actions">
+                                <a href="#" class="btn btn-primary btn-lg">
+                                    <i data-feather="play-circle"></i> Tonton Sekarang
+                                </a>
+                                <a href="#" class="btn btn-ghost btn-lg">
+                                    <i data-feather="info"></i> Selengkapnya
+                                </a>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Trending Section -->
+                    <section class="section">
+                        <div class="section__header">
+                            <h2 class="section__title">
+                                <i data-feather="trending-up"></i> Trending
+                            </h2>
+                            <a href="#" class="section__link">
+                                Lihat Semua <i data-feather="arrow-right"></i>
+                            </a>
+                        </div>
+                        <div class="film-grid" id="trendingGrid"></div>
+                    </section>
+
+                    <!-- Latest Section -->
+                    <section class="section">
+                        <div class="section__header">
+                            <h2 class="section__title">
+                                <i data-feather="clock"></i> Terbaru
+                            </h2>
+                            <a href="#" class="section__link">
+                                Lihat Semua <i data-feather="arrow-right"></i>
+                            </a>
+                        </div>
+                        <div class="film-grid" id="latestGrid"></div>
+                    </section>
+                </main>
+
+                <!-- Footer -->
+                <footer class="footer">
+                    <div class="footer__inner">
+                        <div>
+                            <div class="footer__brand">
+                                Pilih<span class="text-primary">.in</span>
+                            </div>
+                            <p class="footer__description">
+                                Platform streaming film Indonesia terbaik. 
+                                Nikmati ribuan film berkualitas dari sineas 
+                                tanah air kapan saja dan di mana saja.
+                            </p>
+                            <div class="footer__social">
+                                <a href="#" aria-label="Instagram">
+                                    <i data-feather="instagram"></i>
+                                </a>
+                                <a href="#" aria-label="Twitter">
+                                    <i data-feather="twitter"></i>
+                                </a>
+                                <a href="#" aria-label="YouTube">
+                                    <i data-feather="youtube"></i>
+                                </a>
+                                <a href="#" aria-label="Facebook">
+                                    <i data-feather="facebook"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="footer__heading">Navigasi</h3>
+                            <nav class="footer__links">
+                                <a href="#">Beranda</a>
+                                <a href="#">Film</a>
+                                <a href="#">Genre</a>
+                                <a href="#">Terbaru</a>
+                                <a href="#">Trending</a>
+                            </nav>
+                        </div>
+                        <div>
+                            <h3 class="footer__heading">Bantuan</h3>
+                            <nav class="footer__links">
+                                <a href="#">FAQ</a>
+                                <a href="#">Pusat Bantuan</a>
+                                <a href="#">Hubungi Kami</a>
+                                <a href="#">Panduan</a>
+                                <a href="#">Syarat & Ketentuan</a>
+                            </nav>
+                        </div>
+                        <div>
+                            <h3 class="footer__heading">Langganan</h3>
+                            <nav class="footer__links">
+                                <a href="#">Paket Harga</a>
+                                <a href="#">Premium</a>
+                                <a href="#">Standard</a>
+                                <a href="#">Basic</a>
+                                <a href="#">Promo</a>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="footer__bottom">
+                        <span>&copy; 2026 Pilih.in. All rights reserved.</span>
+                        <span>Made with <i data-feather="heart" style="width:12px;height:12px;display:inline;"></i> for Indonesian Cinema</span>
+                    </div>
+                </footer>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
+        <script type="module" src="js/main.js"></script>
+    </body>
+</html>

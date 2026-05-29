@@ -1,0 +1,49 @@
+{
+  "articles": [
+    {
+      "id": "article-001",
+      "title": "Tips Memilih Film Sesuai Suasana Hati",
+      "slug": "tips-memilih-film-sesuai-suasana-hati",
+      "content": "Pernah bingung mau nonton apa? Simak panduan lengkap memilih film berdasarkan mood kamu hari ini. Dari film action yang bikin semangat sampai drama romantis yang bikin baper.",
+      "excerpt": "Panduan lengkap memilih film berdasarkan mood kamu hari ini.",
+      "author": "user-002",
+      "coverImage": "https://picsum.photos/seed/art1/800/400",
+      "category": "Tips & Trik",
+      "tags": ["tips", "nonton", "film", "rekomendasi"],
+      "views": 15200,
+      "status": "published",
+      "createdAt": "2024-06-15T00:00:00.000Z",
+      "updatedAt": "2024-06-15T00:00:00.000Z"
+    },
+    {
+      "id": "article-002",
+      "title": "Sejarah Perfilman Indonesia dari Masa ke Masa",
+      "slug": "sejarah-perfilman-indonesia",
+      "content": "Mari kita telusuri perjalanan industri perfilman Indonesia dari era film bisu hitam putih hingga era digital 4K seperti sekarang.",
+      "excerpt": "Perjalanan industri perfilman Indonesia dari era ke era.",
+      "author": "user-002",
+      "coverImage": "https://picsum.photos/seed/art2/800/400",
+      "category": "Edukasi",
+      "tags": ["sejarah", "film indonesia", "edukasi"],
+      "views": 8900,
+      "status": "published",
+      "createdAt": "2024-07-01T00:00:00.000Z",
+      "updatedAt": "2024-07-01T00:00:00.000Z"
+    },
+    {
+      "id": "article-003",
+      "title": "5 Film Indonesia dengan Sinematografi Terbaik",
+      "slug": "5-film-indonesia-sinematografi-terbaik",
+      "content": "Deretan film Indonesia yang berhasil memukau penonton dengan sinematografi memukau dan visual yang luar biasa.",
+      "excerpt": "Deretan film Indonesia dengan sinematografi paling memukau.",
+      "author": "user-005",
+      "coverImage": "https://picsum.photos/seed/art3/800/400",
+      "category": "Review",
+      "tags": ["film indonesia", "sinematografi", "review"],
+      "views": 12300,
+      "status": "published",
+      "createdAt": "2024-08-10T00:00:00.000Z",
+      "updatedAt": "2024-08-10T00:00:00.000Z"
+    }
+  ]
+}

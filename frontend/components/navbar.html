@@ -1,0 +1,36 @@
+<header class="navbar" id="navbar" data-component="navbar">
+    <div class="navbar__left">
+        <a href="/frontend/index.html" class="navbar__brand">
+            Pilih<span class="text-primary">.in</span>
+        </a>
+        <nav class="navbar__nav">
+                    <a href="/frontend/pages/main/about.html" class="navbar__link">About Us</a>
+            <div class="navbar__dropdown">
+                <button class="navbar__dropdown-trigger">
+                    Informasi <i data-feather="chevron-down"></i>
+                </button>
+                <div class="navbar__dropdown-menu">
+                    <a href="#">Artikel</a>
+                    <a href="#">Berita</a>
+                    <a href="/frontend/pages/main/forgot-password.html">Langganan</a>
+                    <a href="#">Promo</a>
+                </div>
+            </div>
+            <a href="/frontend/pages/film/katalog.html" class="navbar__link">Katalog</a>
+        </nav>
+    </div>
+    <div class="navbar__center">
+        <div class="navbar__search">
+            <i data-feather="search"></i>
+            <input type="text" placeholder="Cari film..." />
+        </div>
+    </div>
+    <div class="navbar__right">
+        <a href="/frontend/pages/main/login.html" class="btn btn-ghost btn-sm">
+            <i data-feather="log-in"></i> Masuk
+        </a>
+        <a href="/frontend/pages/main/register.html" class="btn btn-primary btn-sm">
+            <i data-feather="user-plus"></i> Daftar
+        </a>
+    </div>
+</header>
