@@ -1,3 +1,9 @@
+@import "./sidebar.css";
+
+body {
+    padding-top: var(--navbar-height);
+}
+
 .navbar {
     height: var(--navbar-height);
     display: flex;
@@ -6,8 +12,10 @@
     padding: 0 var(--space-xl);
     background: var(--bg-secondary);
     border-bottom: 1px solid var(--border-color);
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: var(--z-sticky);
     gap: var(--space-lg);
 }
@@ -38,6 +46,7 @@
     font-weight: var(--fw-medium);
     transition: color var(--transition-fast);
     text-decoration: none;
+    padding: var(--space-sm) 0;
 }
 
 .navbar__link:hover {
@@ -71,27 +80,26 @@
     transition: transform var(--transition-fast);
 }
 
-.navbar__dropdown:hover .navbar__dropdown-trigger .feather {
+.navbar__dropdown--open .navbar__dropdown-trigger .feather {
     transform: rotate(180deg);
 }
 
 .navbar__dropdown-menu {
     position: absolute;
-    top: calc(100% + var(--space-sm));
-    left: 0;
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-md);
-    padding: var(--space-sm);
-    min-width: 180px;
+    top: 100%;
+    left: calc(-16px - var(--space-md));
+    background: var(--bg-secondary);
+    border: none;
+    border-radius: 0;
+    padding: var(--space-xs) 0;
+    min-width: 200px;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(8px);
-    transition: all var(--transition-base);
+    transform: translateY(-4px);
+    transition: all var(--transition-fast);
     box-shadow: var(--shadow-lg);
 }
 
-.navbar__dropdown:hover .navbar__dropdown-menu,
 .navbar__dropdown--open .navbar__dropdown-menu {
     opacity: 1;
     visibility: visible;
@@ -99,18 +107,28 @@
 }
 
 .navbar__dropdown-menu a {
-    display: block;
-    padding: var(--space-sm) var(--space-md);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-xs);
+    padding-left: var(--space-sm);
     color: var(--text-secondary);
     font-size: var(--font-sm);
-    border-radius: var(--radius-sm);
+    font-weight: var(--fw-medium);
+    border-radius: 0;
     transition: all var(--transition-fast);
     text-decoration: none;
+    white-space: nowrap;
 }
 
 .navbar__dropdown-menu a:hover {
     background: var(--bg-hover);
     color: var(--accent-primary);
+}
+
+.navbar__dropdown-menu a .feather {
+    width: 16px;
+    height: 16px;
 }
 
 .navbar__center {

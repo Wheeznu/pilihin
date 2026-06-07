@@ -9,7 +9,18 @@ class LoginPage {
             return;
         }
         this._cacheElements();
+        this._checkRegisteredAlert();
         this._bindEvents();
+    }
+
+    _checkRegisteredAlert() {
+        const params = new URLSearchParams(window.location.search);
+        if (params.has("registered")) {
+            this._showAlert("success", "Akun telah berhasil dibuat, silakan login");
+            const url = new URL(window.location);
+            url.searchParams.delete("registered");
+            window.history.replaceState({}, "", url);
+        }
     }
 
     _cacheElements() {

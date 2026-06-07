@@ -1,3 +1,5 @@
+import Sidebar from "./sidebar.js";
+
 class Navbar {
     constructor(element) {
         this.el = element;
@@ -77,6 +79,10 @@ class Navbar {
                     localStorage.removeItem("pilih-in-session");
                     window.location.href = "/frontend/index.html";
                 });
+            }
+
+            if (session.role === "admin" || session.role === "manager") {
+                Sidebar.init();
             }
         }
     }

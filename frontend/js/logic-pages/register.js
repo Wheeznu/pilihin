@@ -113,16 +113,18 @@ class RegisterPage {
                 throw new Error(result.error || "Pendaftaran gagal");
             }
 
-            const db = JSON.parse(localStorage.getItem("pilih-in-db"));
-            if (db) {
-                db.users.push(result.user);
-                localStorage.setItem("pilih-in-db", JSON.stringify(db));
+            try {
+                const db = JSON.parse(localStorage.getItem("pilih-in-db"));
+                if (db) {
+                    db.users.push(result.user);
+                    localStorage.setItem("pilih-in-db", JSON.stringify(db));
+                }
+            } catch {
+                // localStorage belum ada — skip sync
             }
 
-            this._showAlert("success", "Pendaftaran berhasil! Mengarahkan ke halaman login...");
-            setTimeout(() => {
-                window.location.href = "login.html";
-            }, 1500);
+            this._setLoading(false);
+            window.location.href = "login.html?registered=true";
         } catch (err) {
             if (err.message === "Failed to fetch") {
                 this._showAlert("error", "Server tidak terhubung. Jalankan backend/server.js");

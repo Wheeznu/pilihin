@@ -8,7 +8,7 @@ export const SCHEMA = {
         id: { type: "string", required: true, description: "ID unik user" },
         username: { type: "string", required: true, minLength: 3, maxLength: 50 },
         email: { type: "string", required: true, pattern: "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$" },
-        password: { type: "string", required: true, description: "Harus di-hash, jangan plain text" },
+        password: { type: "string", required: true, description: "Plain text, tanpa hash" },
         role: { type: "string", required: true, enum: ["user", "admin", "manager"], default: "user" },
         profilePhoto: { type: "string", default: null },
         fullName: { type: "string", maxLength: 100 },
