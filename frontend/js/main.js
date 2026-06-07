@@ -1,5 +1,6 @@
 import { getDbReady } from "../../backend/init.js";
 import Navbar from "./components/navbar.js";
+import Footer from "./components/footer.js";
 import HomePage from "./logic-pages/home.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -13,5 +14,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         new HomePage();
     }
 
+    await Footer.load("footer-container");
     feather.replace();
 });

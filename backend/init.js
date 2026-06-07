@@ -9,6 +9,7 @@ const DATA_SOURCES = [
   { path: "/data/data-film.json", key: "films" },
   { path: "/data/data-artikel.json", key: "articles" },
   { path: "/data/data-berita.json", key: "news" },
+  { path: "/data/faq.json", key: "faqs" },
 ];
 
 async function _loadInitialData() {
@@ -35,6 +36,7 @@ async function _loadInitialData() {
     totalFilms: db.films?.length || 0,
     totalArticles: db.articles?.length || 0,
     totalNews: db.news?.length || 0,
+    totalFaqs: db.faqs?.length || 0,
   };
 
   dbManager.saveDatabase(db);

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id" data-theme="dark">
     <head>
         <meta charset="UTF-8" />
@@ -6,25 +6,51 @@
         <title>FAQ - Pilih.in</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100..900&display=swap" rel="stylesheet" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100..900&display=swap"
+            rel="stylesheet"
+        />
         <link rel="stylesheet" href="../../css/reset.css" />
         <link rel="stylesheet" href="../../css/design-system.css" />
         <link rel="stylesheet" href="../../css/components/navbar.css" />
         <link rel="stylesheet" href="../../css/components/button.css" />
+        <link rel="stylesheet" href="../../css/components/footer.css" />
+        <link rel="stylesheet" href="../../css/pages/faq.css" />
     </head>
     <body>
         <div id="navbar-container"></div>
         <main class="faq-page">
             <section class="page-hero">
                 <h1>Pertanyaan Umum</h1>
+                <p>Temukan jawaban untuk pertanyaan yang sering diajukan</p>
             </section>
+
+            <div class="faq-search">
+                <i data-feather="search"></i>
+                <input
+                    type="text"
+                    id="faqSearch"
+                    placeholder="Cari pertanyaan..."
+                />
+            </div>
+
+            <div class="faq-categories" id="faqCategories"></div>
+
+            <div class="faq-list" id="faqList"></div>
         </main>
+        <div id="footer-container"></div>
         <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
         <script type="module">
             import Navbar from "../../js/components/navbar.js";
+            import Footer from "../../js/components/footer.js";
+            import FaqPage from "../../js/logic-pages/faq.js";
+            import { getDbReady } from "../../../backend/init.js";
             document.addEventListener("DOMContentLoaded", async () => {
                 await Navbar.load("navbar-container");
+                await Footer.load("footer-container");
+                await getDbReady();
                 feather.replace();
+                new FaqPage();
             });
         </script>
     </body>
