@@ -3,24 +3,34 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Film Terlaris - Pilih.in</title>
+        <title>Film Terpopuler - Pilih.in</title>
+
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100..900&display=swap" rel="stylesheet" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100..900&display=swap"
+            rel="stylesheet"
+        />
+
         <link rel="stylesheet" href="../../css/reset.css" />
         <link rel="stylesheet" href="../../css/design-system.css" />
         <link rel="stylesheet" href="../../css/components/navbar.css" />
         <link rel="stylesheet" href="../../css/components/sidebar.css" />
         <link rel="stylesheet" href="../../css/components/button.css" />
+        <link rel="stylesheet" href="../../css/pages/manager-top-films.css" />
     </head>
     <body>
         <div id="navbar-container"></div>
         <main class="manager-top-films-page" id="managerTopFilmsPage"></main>
+
         <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
         <script type="module">
             import Navbar from "../../js/components/navbar.js";
+            import ManagerTopFilmsPage from "../../js/logic-pages/manager-top-films.js";
+
             document.addEventListener("DOMContentLoaded", async () => {
                 await Navbar.load("navbar-container");
+                new ManagerTopFilmsPage();
                 feather.replace();
             });
         </script>

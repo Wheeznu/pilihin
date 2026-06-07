@@ -3,24 +3,34 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Laporan Penghasilan - Pilih.in</title>
+        <title>Pendapatan - Pilih.in</title>
+
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100..900&display=swap" rel="stylesheet" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100..900&display=swap"
+            rel="stylesheet"
+        />
+
         <link rel="stylesheet" href="../../css/reset.css" />
         <link rel="stylesheet" href="../../css/design-system.css" />
         <link rel="stylesheet" href="../../css/components/navbar.css" />
         <link rel="stylesheet" href="../../css/components/sidebar.css" />
         <link rel="stylesheet" href="../../css/components/button.css" />
+        <link rel="stylesheet" href="../../css/pages/manager-earnings.css" />
     </head>
     <body>
         <div id="navbar-container"></div>
         <main class="manager-earnings-page" id="managerEarningsPage"></main>
+
         <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
         <script type="module">
             import Navbar from "../../js/components/navbar.js";
+            import ManagerEarningsPage from "../../js/logic-pages/manager-earnings.js";
+
             document.addEventListener("DOMContentLoaded", async () => {
                 await Navbar.load("navbar-container");
+                new ManagerEarningsPage();
                 feather.replace();
             });
         </script>

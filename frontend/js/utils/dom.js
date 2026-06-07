@@ -39,4 +39,12 @@ export const DOM = {
     remove(el) {
         el.remove();
     },
+
+    showToast(message, type = "success", duration = 3000) {
+        const toast = document.createElement("div");
+        toast.className = `toast toast--${type}`;
+        toast.textContent = message;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), duration);
+    },
 };

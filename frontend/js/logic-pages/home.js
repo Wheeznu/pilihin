@@ -41,7 +41,9 @@ class HomePage {
 
         if (!featured) return;
 
-        DOM.$("#heroBg").src = featured.banner || featured.poster;
+        const heroImg = DOM.$("#heroBg");
+        heroImg.src = featured.banner || featured.poster;
+        heroImg.onerror = () => { heroImg.src = featured.poster; };
         DOM.$("#heroTitle").textContent = featured.title;
         DOM.$("#heroMeta").textContent = `${new Date(featured.releaseDate).getFullYear()} • ${featured.duration} mnt • ${featured.videoQuality?.join(", ") || "HD"}`;
         DOM.$("#heroDescription").textContent = featured.description;

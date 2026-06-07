@@ -16,7 +16,7 @@ const MANAGER_LINKS = [
   { href: "/frontend/pages/manager/traffic-stats.html", icon: "trending-up", label: "Statistik Traffic" },
   { href: "/frontend/pages/manager/top-films.html", icon: "award", label: "Film Terpopuler" },
   { href: "/frontend/pages/manager/approvals.html", icon: "check-circle", label: "Persetujuan" },
-  { href: "/frontend/pages/manager/reports-export.html", icon: "download", label: "Laporan" },
+  { href: "/frontend/pages/manager/exports.html", icon: "download", label: "Ekspor Laporan" },
 ];
 
 class Sidebar {
