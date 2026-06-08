@@ -52,8 +52,7 @@ class HomePage {
         if (!grid) return;
 
         const trending = films
-            .sort((a, b) => b.watchCount - a.watchCount)
-            .slice(0, 8);
+            .sort((a, b) => b.watchCount - a.watchCount);
 
         grid.innerHTML = trending.map((f) => this._filmCardHTML(f)).join("");
         feather.replace();
@@ -64,8 +63,7 @@ class HomePage {
         if (!grid) return;
 
         const latest = films
-            .sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate))
-            .slice(0, 8);
+            .sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate));
 
         grid.innerHTML = latest.map((f) => this._filmCardHTML(f)).join("");
         feather.replace();

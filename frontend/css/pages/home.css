@@ -45,8 +45,8 @@
     background: linear-gradient(
         to top,
         var(--bg-primary) 0%,
-        rgba(18, 18, 18, 0.85) 40%,
-        rgba(18, 18, 18, 0.4) 100%
+        rgba(var(--hero-gradient-rgb), 0.85) 40%,
+        rgba(var(--hero-gradient-rgb), 0.4) 100%
     );
     z-index: 1;
 }
@@ -54,11 +54,10 @@
 .hero__content {
     position: relative;
     z-index: 2;
-    max-width: var(--content-max-width);
     width: 100%;
-    margin: 0 auto;
-    padding: 0 var(--space-xl);
+    padding: 0 var(--space-2xl);
     padding-bottom: var(--space-3xl);
+    box-sizing: border-box;
 }
 
 .hero__badge {
@@ -111,10 +110,9 @@
 }
 
 .section {
-    padding: var(--space-3xl) var(--space-xl);
-    max-width: var(--content-max-width);
-    margin: 0 auto;
+    padding: var(--space-3xl) var(--space-2xl);
     width: 100%;
+    box-sizing: border-box;
 }
 
 .section__header {
@@ -146,12 +144,10 @@
 .footer {
     background: var(--bg-secondary);
     border-top: 1px solid var(--border-color);
-    padding: var(--space-3xl) var(--space-xl) var(--space-xl);
+    padding: var(--space-3xl) var(--space-2xl) var(--space-xl);
 }
 
 .footer__inner {
-    max-width: var(--content-max-width);
-    margin: 0 auto;
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr;
     gap: var(--space-xl);
@@ -218,8 +214,7 @@
 }
 
 .footer__bottom {
-    max-width: var(--content-max-width);
-    margin: var(--space-xl) auto 0;
+    margin: var(--space-xl) 0 0;
     padding-top: var(--space-lg);
     border-top: 1px solid var(--border-color);
     display: flex;
@@ -244,7 +239,7 @@
     }
 
     .section {
-        padding: var(--space-xl) var(--space-md);
+        padding: var(--space-xl) 0;
     }
 
     .footer__inner {

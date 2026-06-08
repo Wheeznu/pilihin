@@ -48,7 +48,7 @@
     top: var(--space-sm);
     right: var(--space-sm);
     background: rgba(0, 0, 0, 0.8);
-    color: var(--text-primary);
+    color: #fff;
     font-size: var(--font-xs);
     font-weight: var(--fw-bold);
     padding: var(--space-xs) var(--space-sm);
@@ -84,14 +84,40 @@
 }
 
 .film-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    display: flex;
     gap: var(--space-lg);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: var(--space-sm);
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-color) transparent;
+}
+
+.film-grid::-webkit-scrollbar {
+    height: 6px;
+}
+
+.film-grid::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.film-grid::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: var(--radius-full);
+}
+
+.film-grid .film-card {
+    flex: 0 0 200px;
+    scroll-snap-align: start;
 }
 
 @media (max-width: 768px) {
     .film-grid {
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
         gap: var(--space-md);
+    }
+
+    .film-grid .film-card {
+        flex: 0 0 160px;
     }
 }

@@ -1,12 +1,10 @@
 .footer {
     background: var(--bg-secondary);
     border-top: 1px solid var(--border-color);
-    padding: var(--space-3xl) var(--space-xl) var(--space-xl);
+    padding: var(--space-3xl) var(--space-2xl) var(--space-xl);
 }
 
 .footer__inner {
-    max-width: var(--content-max-width);
-    margin: 0 auto;
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr;
     gap: var(--space-xl);
@@ -74,8 +72,7 @@
 }
 
 .footer__bottom {
-    max-width: var(--content-max-width);
-    margin: var(--space-xl) auto 0;
+    margin: var(--space-xl) 0 0;
     padding-top: var(--space-lg);
     border-top: 1px solid var(--border-color);
     display: flex;

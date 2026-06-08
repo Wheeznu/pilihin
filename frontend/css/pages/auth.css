@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: center;
     background: var(--bg-primary);
-    padding: var(--space-md);
+    padding: var(--space-md) var(--space-2xl);
 }
 
 .auth-card {

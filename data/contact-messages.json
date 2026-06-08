@@ -1,0 +1,20 @@
+{
+    "messages": [
+        {
+            "id": "msg-1780831396650-b228c5",
+            "name": "Test User",
+            "email": "test@example.com",
+            "message": "Ini adalah pesan test untuk verifikasi",
+            "createdAt": "2026-06-07T11:23:16.649Z",
+            "read": false
+        },
+        {
+            "id": "msg-1780831436414-47c422",
+            "name": "wisnu",
+            "email": "wisnu@gmail.com",
+            "message": "halooooooooooooooooooo",
+            "createdAt": "2026-06-07T11:23:56.414Z",
+            "read": false
+        }
+    ]
+}

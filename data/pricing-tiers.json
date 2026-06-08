@@ -1,0 +1,54 @@
+{
+  "tiers": [
+    {
+      "id": "basic",
+      "name": "Basic",
+      "price": 0,
+      "period": "",
+      "description": "Nikmati streaming gratis dengan fitur dasar",
+      "features": [
+        "Kualitas SD 480p",
+        "Streaming di 1 perangkat",
+        "Akses konten standar",
+        "Iklan saat menonton"
+      ],
+      "highlighted": false
+    },
+    {
+      "id": "standard",
+      "name": "Standard",
+      "price": 49000,
+      "originalPrice": 79000,
+      "period": "bulan",
+      "description": "Pilihan terbaik untuk pengalaman menonton HD tanpa gangguan",
+      "features": [
+        "Kualitas HD 720p & Full HD 1080p",
+        "Streaming di 2 perangkat bersamaan",
+        "Akses semua konten",
+        "Download 30 film/bulan",
+        "Mode offline",
+        "Bebas iklan"
+      ],
+      "highlighted": true
+    },
+    {
+      "id": "premium",
+      "name": "Premium",
+      "price": 79000,
+      "originalPrice": 119000,
+      "period": "bulan",
+      "description": "Pengalaman streaming maksimal dengan kualitas terbaik",
+      "features": [
+        "Kualitas HD, 4K, & HDR",
+        "Streaming di 4 perangkat bersamaan",
+        "Akses semua konten premium & eksklusif",
+        "Download unlimited",
+        "Mode offline",
+        "Suara surround 5.1",
+        "Bebas iklan",
+        "Prioritas pelanggan (customer support 24/7)"
+      ],
+      "highlighted": false
+    }
+  ]
+}

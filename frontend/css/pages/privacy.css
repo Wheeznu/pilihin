@@ -1,0 +1,89 @@
+.privacy-page {
+    padding: var(--space-3xl) var(--space-2xl);
+}
+
+.privacy-page .page-hero {
+    text-align: center;
+    margin-bottom: var(--space-3xl);
+}
+
+.privacy-page .page-hero h1 {
+    font-size: var(--font-3xl);
+    font-weight: var(--fw-bold);
+    margin-bottom: var(--space-sm);
+}
+
+.privacy-page .page-hero p {
+    color: var(--text-secondary);
+    font-size: var(--font-md);
+}
+
+.privacy-section {
+    margin-bottom: var(--space-2xl);
+}
+
+.privacy-section h2 {
+    font-size: var(--font-xl);
+    font-weight: var(--fw-bold);
+    color: var(--accent-primary);
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.privacy-section h3 {
+    font-size: var(--font-md);
+    font-weight: var(--fw-semibold);
+    margin-bottom: var(--space-md);
+    margin-top: var(--space-lg);
+}
+
+.privacy-section p,
+.privacy-section li {
+    color: var(--text-secondary);
+    font-size: var(--font-sm);
+    line-height: 1.8;
+    margin-bottom: var(--space-md);
+}
+
+.privacy-section ul,
+.privacy-section ol {
+    padding-left: var(--space-lg);
+    margin-bottom: var(--space-md);
+}
+
+.privacy-section li {
+    margin-bottom: var(--space-sm);
+}
+
+.privacy-section .highlight-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    margin: var(--space-lg) 0;
+}
+
+.privacy-section .highlight-box p {
+    margin-bottom: 0;
+}
+
+.privacy-divider {
+    border: none;
+    border-top: 2px solid var(--border-color);
+    margin: var(--space-3xl) 0;
+}
+
+.privacy-footer-note {
+    text-align: center;
+    padding: var(--space-xl);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    margin-top: var(--space-3xl);
+}
+
+.privacy-footer-note p {
+    color: var(--text-secondary);
+    font-size: var(--font-sm);
+}
