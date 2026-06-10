@@ -1,0 +1,268 @@
+/* ===================================================
+   TEMA: SAGE GREEN & MATCHA LATTE (SUPER SEGAR & PREMIUM)
+   =================================================== */
+:root {
+    --primary: #6b8e75;          /* Hijau Sage Sage (Aksen Utama) */
+    --primary-hover: #52705b;
+    --bg-main: #f1f5f2;          /* Latar belakang Matcha Light */
+    --text-main: #2d3b32;        /* Hijau Pinus Gelap (Lebih natural dibanding hitam) */
+    --text-secondary: #5a6e61;   /* Hijau Lumut Halus untuk teks sekunder */
+    --border: #d4ded7;           /* Garis pembatas pastel sage */
+    --card-bg: rgba(255, 255, 255, 0.45); /* Efek Kaca Transparan */
+}
+
+/* BASE STYLES */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f1f5f2;
+    /* MESH GRADIENT SEGAR: Perpaduan soft sage, light matcha, dan warm cream */
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(212, 227, 215, 0.7) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(193, 212, 197, 0.6) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(245, 242, 235, 0.8) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, rgba(206, 222, 210, 0.6) 0px, transparent 50%),
+        linear-gradient(rgba(241, 245, 242, 0.5), rgba(241, 245, 242, 0.6)),
+        url('wb.jpg'); /* Tekstur wb.jpg bawaanmu tetap menyatu di belakang */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    color: var(--text-main);
+    min-height: 100vh;
+}
+
+/* NAVBAR (TIDAK PUTIH - Menggunakan Hijau Sage Tua Transparan) */
+.navbar {
+    background-color: rgba(45, 59, 50, 0.85); /* Warna dasar hijau pinus gelap transparan */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 15px 30px;
+    position: fixed; 
+    width: 100%;
+    top: 0;
+    box-sizing: border-box;
+    z-index: 10;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar h1 {
+    font-size: 20px;
+    margin: 0;
+    font-weight: 600;
+    color: #ffffff; /* Teks navbar putih agar kontras */
+    letter-spacing: 0.5px;
+}
+
+.highlight {
+    color: #bcebb5; /* Warna hijau neon pastel cerah untuk highlight navbar */
+}
+
+.nav-links {
+    font-size: 14px;
+    color: #cedcd1; /* Warna teks sekunder navbar yang lembut */
+    font-weight: 400;
+}
+
+/* TATA LETAK GRID CONTAINER */
+.main-container {
+    margin-top: 100px;
+    padding: 20px;
+    max-width: 1150px;
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    box-sizing: border-box;
+}
+
+@media (min-width: 850px) {
+    .main-container {
+        grid-template-columns: 280px 1fr; /* Kiri sidebar, Kanan konten */
+    }
+}
+
+/* STYLING SIDEBAR (KIRI) */
+.sidebar {
+    position: relative;
+}
+
+@media (min-width: 850px) {
+    .profile-sticky {
+        position: sticky;
+        top: 110px; /* Sidebar melayang saat di-scroll */
+    }
+}
+
+/* PREMIUM GLASSMORPHISM CARDS */
+.profile-sticky, .content-card {
+    background: var(--card-bg); 
+    border: 1px solid rgba(255, 255, 255, 0.6); 
+    border-radius: 20px;
+    padding: 30px;
+    backdrop-filter: blur(16px); 
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 
+        0 10px 30px rgba(90, 110, 97, 0.04),
+        0 1px 3px rgba(0, 0, 0, 0.01),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5); 
+}
+
+.profile-sticky {
+    text-align: center;
+    padding: 25px;
+}
+
+.profile-sticky img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--primary);
+    margin-bottom: 15px;
+    box-shadow: 0 4px 15px rgba(107, 142, 117, 0.2);
+}
+
+.profile-sticky h2 {
+    margin: 0 0 15px 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.meta-info {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px 15px;
+    font-size: 14px;
+    text-align: left;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--border);
+    padding-top: 15px;
+}
+
+.meta-label {
+    font-weight: 500;
+    color: var(--primary);
+}
+
+/* STYLING AREA KONTEN (KANAN) */
+.content-area {
+    display: flex;
+    flex-direction: column;
+}
+
+.project-header {
+    text-align: left;
+    margin-bottom: 25px;
+    padding-left: 5px;
+}
+
+.project-header h3 {
+    color: var(--primary);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0 0 5px 0;
+    font-weight: 600;
+}
+
+.project-header h2 {
+    font-size: 24px;
+    margin: 0;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--text-main);
+}
+
+/* KATA SAMBUTAN DENGAN BLUR GLASS */
+.intro-box {
+    background: rgba(107, 142, 117, 0.07);
+    backdrop-filter: blur(8px);
+    border-left: 4px solid var(--primary);
+    padding: 20px;
+    border-radius: 4px 16px 16px 4px;
+    margin-bottom: 30px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.intro-box i {
+    color: var(--primary);
+    margin-right: 5px;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-main);
+}
+
+.section-title i {
+    color: var(--primary);
+}
+
+/* INTERFACE ITEMS */
+.interface-item {
+    margin-bottom: 30px;
+    padding-bottom: 25px;
+    border-bottom: 1px dashed var(--border);
+}
+
+.interface-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.interface-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-main);
+    margin: 0 0 8px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.interface-title span {
+    background: rgba(107, 142, 117, 0.12);
+    color: var(--primary);
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.interface-desc {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 12px;
+}
+
+.feature-list {
+    padding-left: 20px;
+    font-size: 13.5px;
+    color: var(--text-secondary);
+}
+
+.feature-list li {
+    margin-bottom: 6px;
+}
+
+.feature-list strong {
+    color: var(--text-main);
+}

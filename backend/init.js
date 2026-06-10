@@ -1,6 +1,8 @@
 import DatabaseManager from "./DatabaseManager.js";
 import FilmRepository from "./repositories/FilmRepository.js";
 import UserRepository from "./repositories/UserRepository.js";
+import ArticleRepository from "./repositories/ArticleRepository.js";
+import NewsRepository from "./repositories/NewsRepository.js";
 
 export const dbManager = new DatabaseManager("pilih-in-db");
 
@@ -49,6 +51,8 @@ const initPromise = _loadInitialData();
 export const repositories = {
   films: new FilmRepository(dbManager),
   users: new UserRepository(dbManager),
+  articles: new ArticleRepository(dbManager),
+  news: new NewsRepository(dbManager),
 };
 
 export function getDbReady() {

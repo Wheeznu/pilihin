@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Portofolio | Blog Yukyy</title>
+        <link rel="stylesheet" href="css/portofolio.css" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;800;900&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <header class="neo-header">
+            <div class="logo">YUKYY.</div>
+            <nav class="neo-nav">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="../fitur-lainnya/404/404.html" class="nav-link">Artikel</a>
+                <a href="portofolio.html" class="nav-link active">Portofolio</a>
+            </nav>
+        </header>
+
+        <main class="container">
+            <h1 class="section-title-neo">Karya & Proyek</h1>
+            <p class="hero-description">
+                Beberapa eksplorasi antarmuka web dan implementasi algoritma
+                yang telah saya kembangkan selama masa perkuliahan.
+            </p>
+
+            <div class="portfolio-grid">
+                <article class="neo-card portfolio-card">
+                    <div class="portfolio-img-container">
+                        <div class="placeholder-img">Screenshot PILIH.IN</div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h2>PILIH.IN - Movie Web</h2>
+                        <p>
+                            Website pencarian dan rekomendasi film interaktif
+                            yang dilengkapi dengan fitur watchlist personal dan
+                            kuis film.
+                        </p>
+                        <div class="project-tags">
+                            <span class="hobby-tag">HTML/CSS/JS</span>
+                            <span class="hobby-tag">Web Design</span>
+                        </div>
+                        <a
+                            href="../index.html"
+                            class="btn-primary btn-small"
+                            >Lihat Detail Project</a
+                        >
+                    </div>
+                </article>
+
+                <article class="neo-card portfolio-card">
+                    <div class="portfolio-img-container">
+                        <div class="placeholder-img">Catatan Strukdat</div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h2>Catatan Struktur Data</h2>
+                        <p>
+                            Kumpulan materi perkuliahan dan implementasi fungsi
+                            hashing menggunakan pendekatan logika prosedural
+                            tanpa class.
+                        </p>
+                        <div class="project-tags">
+                            <span class="hobby-tag">Python</span>
+                            <span class="hobby-tag">Strukdat</span>
+                        </div>
+                        <button
+                            class="btn-primary btn-small w-full text-center"
+                            data-action="toggle-catatan"
+                        >
+                            Lihat Catatan Strukdat
+                        </button>
+                    </div>
+                </article>
+            </div>
+
+            <div
+                id="area-catatan"
+                class="neo-card catatan-area"
+            >
+                <div class="catatan-header">
+                    <h3 class="catatan-title">
+                        Isi Catatan Struktur Data Lengkap
+                    </h3>
+                    <button
+                        class="btn-close"
+                        data-action="toggle-catatan"
+                    >
+                        Tutup [X]
+                    </button>
+                </div>
+
+                <div class="isi-catatan-user catatan-body">
+                    <p class="mb-20">
+                        Berikut adalah seluruh dokumentasi kode, konsep dasar,
+                        dan implementasi materi Struktur Data hasil pengerjaan
+                        di Jupyter Notebook:
+                    </p>
+
+                    <details class="catatan-details">
+                        <summary class="catatan-summary">
+                            1. Stack (Tumpukan) & Simulasi
+                        </summary>
+                        <div class="catatan-content">
+                            <p>
+                                <strong>Konsep:</strong> Sebuah kumpulan item
+                                yang terurut di mana penambahan item baru dan
+                                penghapusan item yang sudah ada selalu dilakukan
+                                pada ujung yang sama (top). Prinsip pengurutan
+                                ini disebut sebagai LIFO (Last In, First Out).
+                            </p>
+                            <pre class="catatan-code"><code>class Stack:
+    def __init__(self): self.items = []
+    def isEmpty(self): return self.items == []
+    def push(self, item): self.items.append(item)
+    def pop(self): return self.items.pop()
+    def peek(self): return self.items[-1]
+    def size(self): return len(self.items)</code></pre>
+
+                            <h4 class="mt-15">
+                                Studi Kasus 1: Pengecekan Palindrome
+                            </h4>
+                            <pre class="catatan-code"><code>kata = "KATAK"
+stack = []
+for huruf in kata: stack.append(huruf)
+hasil = ""
+while stack: hasil += stack.pop()
+print("Palindrome" if kata == hasil else "Bukan Palindrome")</code></pre>
+
+                            <h4 class="mt-15">
+                                Studi Kasus 2: Simulasi Fitur Undo Teks
+                            </h4>
+                            <pre class="catatan-code"><code>stack = []
+while True:
+    teks = input("Input: ")
+    if teks == "UNDO":
+        if stack: stack.pop() 
+        else: print("Tidak ada yang bisa di-UNDO")
+    else: stack.append(teks) 
+    print("Output:", stack[-1] if stack else "")</code></pre>
+
+                            <h4 class="mt-15">
+                                Studi Kasus 3: Simulasi Parkiran (LIFO)
+                            </h4>
+                            <pre class="catatan-code"><code>maks = 5
+parkiran = []
+while True:
+    pilihan = input("Pilih menu (1 Masuk / 2 Keluar): ")
+    if pilihan == "1":
+        if len(parkiran) < maks:
+            mobil = input("Masukkan plat: ")
+            parkiran.append(mobil)
+        else: print("Parkiran Penuh!")
+    elif pilihan == "2":
+        if parkiran: print("Mobil keluar:", parkiran.pop())</code></pre>
+                        </div>
+                    </details>
+
+                    <details class="catatan-details">
+                        <summary class="catatan-summary">
+                            2. Queue & Deque (Antrean)
+                        </summary>
+                        <div class="catatan-content">
+                            <p>
+                                <strong>Queue (FIFO):</strong> Penambahan item
+                                di belakang (rear) dan penghapusan di depan
+                                (front).
+                            </p>
+                            <pre class="catatan-code"><code>class Queue:
+    def __init__(self): self.items = []
+    def enqueue(self, item): self.items.insert(0, item)
+    def dequeue(self): return self.items.pop()</code></pre>
+
+                            <p>
+                                <strong>Deque (Double-Ended Queue):</strong>
+                                Item dapat ditambahkan atau dihapus dari kedua
+                                ujung.
+                            </p>
+                            <pre class="catatan-code"><code>class DeQueue:
+    def __init__(self): self.items = []
+    def addRear(self, item): self.items.insert(0, item)
+    def addFront(self, item): self.items.append(item)
+    def removeFront(self): return self.items.pop()
+    def removeRear(self): return self.items.pop(0)</code></pre>
+                        </div>
+                    </details>
+
+                    <details class="catatan-details">
+                        <summary class="catatan-summary">
+                            3. Evaluasi Ekspresi Postfix
+                        </summary>
+                        <div class="catatan-content">
+                            <p>
+                                Pemanfaatan Stack untuk mengonversi dan
+                                menghitung hasil dari notasi postfix.
+                            </p>
+                            <pre class="catatan-code"><code>def evaluate_postfix(postfix_expr):
+    stack = []
+    for char in postfix_expr:
+        if char.isdigit(): 
+            stack.append(int(char))
+        else:
+            val1 = stack.pop()
+            val2 = stack.pop()
+            if char == '+': stack.append(val2 + val1)
+            elif char == '-': stack.append(val2 - val1)
+            elif char == '*': stack.append(val2 * val1)
+            elif char == '/': stack.append(val2 / val1)
+    return stack.pop()</code></pre>
+                        </div>
+                    </details>
+
+                    <details class="catatan-details">
+                        <summary class="catatan-summary">
+                            4. Algoritma Sorting (Pengurutan)
+                        </summary>
+                        <div class="catatan-content">
+                            <p>
+                                <strong>Bubble Sort:</strong> Menukar elemen
+                                yang bersebelahan.
+                            </p>
+                            <pre class="catatan-code"><code>def bubble_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        for j in range(0, n - i - 1):
+            if arr[j] > arr[j + 1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]</code></pre>
+
+                            <p>
+                                <strong>Selection Sort:</strong> Mencari elemen
+                                terkecil dan memindahkannya ke kiri.
+                            </p>
+                            <pre class="catatan-code"><code>def selection_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        min_idx = i
+        for j in range(i + 1, n):
+            if arr[j] < arr[min_idx]: min_idx = j
+        arr[i], arr[min_idx] = arr[min_idx], arr[i]</code></pre>
+
+                            <p>
+                                <strong>Insertion Sort:</strong> Menyisipkan
+                                kartu ke posisi yang tepat.
+                            </p>
+                            <pre class="catatan-code"><code>def insertion_sort(arr):
+    for i in range(1, len(arr)):
+        key = arr[i]
+        j = i - 1
+        while j >= 0 and key < arr[j]:
+            arr[j + 1] = arr[j]
+            j -= 1
+        arr[j + 1] = key</code></pre>
+
+                            <p>
+                                <strong>Quick Sort:</strong> Menggunakan Pivot
+                                (Divide and Conquer).
+                            </p>
+                            <pre class="catatan-code"><code>def quick_sort(arr):
+    if len(arr) <= 1: return arr
+    else:
+        pivot = arr[len(arr) // 2]
+        left = [x for x in arr if x < pivot]
+        middle = [x for x in arr if x == pivot]
+        right = [x for x in arr if x > pivot]
+        return quick_sort(left) + middle + quick_sort(right)</code></pre>
+
+                            <p>
+                                <strong>Merge Sort:</strong> Membagi array dan
+                                menggabungkannya saat terurut.
+                            </p>
+                            <pre class="catatan-code"><code>def MergedSort(A):
+    if len(A) > 1:
+        mid = len(A) // 2
+        left, right = A[:mid], A[mid:]
+        MergedSort(left); MergedSort(right)
+        i = j = k = 0
+        while i < len(left) and j < len(right):
+            if left[i] < right[j]: A[k] = left[i]; i += 1
+            else: A[k] = right[j]; j += 1
+            k += 1
+        while i < len(left): A[k] = left[i]; i += 1; k += 1
+        while j < len(right): A[k] = right[j]; j += 1; k += 1</code></pre>
+
+                            <p>
+                                <strong>Shell Sort:</strong> Bubble Sort
+                                berjarak gap.
+                            </p>
+                            <pre class="catatan-code"><code>def shellSort(alist):
+    sublistcount = len(alist) // 2
+    while sublistcount > 0:
+        for startposition in range(sublistcount):
+            gapInsertionSort(alist, startposition, sublistcount)
+        sublistcount = sublistcount // 2</code></pre>
+                        </div>
+                    </details>
+
+                    <details class="catatan-details">
+                        <summary class="catatan-summary">
+                            5. Algoritma Searching (Pencarian)
+                        </summary>
+                        <div class="catatan-content">
+                            <p><strong>Sequential / Linear Search:</strong></p>
+                            <pre class="catatan-code"><code>def sequentialSearch(alist, item):
+    pos = 0; found = False
+    while pos < len(alist) and not found:
+        if alist[pos] == item: found = True
+        else: pos = pos + 1
+    return found</code></pre>
+
+                            <p><strong>Binary Search:</strong></p>
+                            <pre class="catatan-code"><code>def binarySearch(alist, item):
+    first, last = 0, len(alist) - 1
+    found = False
+    while first <= last and not found:
+        midpoint = (first + last) // 2
+        if alist[midpoint] == item: found = True
+        elif item < alist[midpoint]: last = midpoint - 1
+        else: first = midpoint + 1
+    return found</code></pre>
+                        </div>
+                    </details>
+
+                    <details
+                        open
+                        class="catatan-details"
+                    >
+                        <summary class="catatan-summary">
+                            6. Implementasi Hashing Prosedural
+                        </summary>
+                        <div class="catatan-content">
+                            <p>
+                                <strong>Konsep Hash Table:</strong> Struktur
+                                data tempat penyimpanan elemen berdasarkan nilai
+                                kunci pencarian (hash key) guna mempercepat
+                                proses pencarian data (mencapai O(1)).
+                            </p>
+
+                            <div class="catatan-info-box">
+                                <p>
+                                    <strong
+                                        >⚠️ Aturan Batasan Pengodean
+                                        Tugas:</strong
+                                    >
+                                </p>
+                                <ul>
+                                    <li>
+                                        Dilarang keras menggunakan arsitektur
+                                        OOP / <code>class</code>. Wajib
+                                        menggunakan fungsi prosedural.
+                                    </li>
+                                    <li>
+                                        Sistem input tidak digabungkan;
+                                        ditangani per individu prompt (satu
+                                        persatu).
+                                    </li>
+                                    <li>
+                                        Boleh menggunakan parameter
+                                        <code>num</code> dalam operasi
+                                        perhitungan nilai/biner.
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <h4 class="mt-15">1. Linear Probing</h4>
+                            <pre class="catatan-code"><code>table = [None] * 11        
+value = 44                 
+collision = value % 11     
+
+table[collision] = 999    
+found = False
+ind = collision + 1
+if ind >= len(table): ind = 0
+
+while (ind <= len(table) - 1) and not found:
+    if table[ind] == None:
+        found = True; table[ind] = value
+    ind = ind + 1</code></pre>
+
+                            <h4 class="mt-15">
+                                2. Quadratic Probing
+                            </h4>
+                            <pre class="catatan-code"><code>found = False
+i = 1
+ind = collision + 1
+if ind > len(table) - 1: ind = ind - len(table)
+
+while (ind <= len(table) - 1) and not found:
+    if table[ind] == None:
+        found = True; table[ind] = value
+    else:
+        ind = (collision + (i*i)) % 11
+        i = i + 1</code></pre>
+
+                            <h4 class="mt-15">3. Chaining</h4>
+                            <pre class="catatan-code"><code>table = [[] for _ in range(11)]
+
+def hash(x): return x % 11
+def insert(table, key, value): table[hash(key)].append(value)
+
+insert(table, 44, 44)
+insert(table, 55, 55)</code></pre>
+                        </div>
+                    </details>
+                </div>
+            </div>
+
+            <section class="contact-section mt-80">
+                <h2 class="section-title-neo fs-2rem">
+                    Mari Berdiskusi
+                </h2>
+                <form action="#" class="neo-form">
+                    <div class="form-group">
+                        <label for="nama" class="form-label"
+                            >Nama Lengkap</label
+                        >
+                        <input
+                            type="text"
+                            id="nama"
+                            class="form-input"
+                            placeholder="Masukkan namamu..."
+                            required
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="form-label"
+                            >Email Aktif</label
+                        >
+                        <input
+                            type="email"
+                            id="email"
+                            class="form-input"
+                            placeholder="alamat@email.com"
+                            required
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="pesan" class="form-label"
+                            >Pesan / Penawaran Kolaborasi</label
+                        >
+                        <textarea
+                            id="pesan"
+                            class="form-input"
+                            rows="5"
+                            placeholder="Tuliskan pesanmu di sini..."
+                            required
+                        ></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary btn-submit">
+                        Kirim Pesan
+                    </button>
+                </form>
+            </section>
+        </main>
+
+        <footer class="neo-footer">
+            <p>
+                &copy; 2026 Rizky Ahmad Nasrulloh - Universitas Trunojoyo Madura
+            </p>
+        </footer>
+
+        <script src="js/portofolio.js"></script>
+    </body>
+</html>

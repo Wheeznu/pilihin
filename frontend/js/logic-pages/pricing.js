@@ -40,7 +40,6 @@ class PricingPage {
                     <h2 class="pricing-tier__name">${tier.name}</h2>
                     <div class="pricing-tier__price-row">
                         ${isFree ? '<span class="pricing-tier__price">Gratis</span>' : `<span class="pricing-tier__price">Rp ${this._formatPrice(tier.price)}</span>`}
-                        ${tier.originalPrice ? `<span class="pricing-tier__price-original">Rp ${this._formatPrice(tier.originalPrice)}</span>` : ""}
                         ${tier.period ? `<span class="pricing-tier__period">/ ${tier.period}</span>` : ""}
                     </div>
                     <p class="pricing-tier__description">${tier.description}</p>

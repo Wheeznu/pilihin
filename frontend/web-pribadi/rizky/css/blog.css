@@ -1,0 +1,307 @@
+/* --- 1. Reset & Variabel Dasar --- */
+:root {
+    --bg-dark: #121212;
+    --spotify-green: #1DB954;
+    --white: #FFFFFF;
+    --black: #000000;
+    --border-width: 4px;
+    --neo-shadow: 8px 8px 0px 0px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--white);
+    font-family: 'Public Sans', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* --- 2. Header & Navigasi --- */
+.neo-header {
+    background-color: var(--black);
+    border-bottom: var(--border-width) solid var(--spotify-green);
+    padding: 20px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-weight: 900;
+    font-size: 1.8rem;
+    color: var(--spotify-green);
+    letter-spacing: -1px;
+}
+
+.neo-nav {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-link {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    padding: 5px 10px;
+    transition: 0.2s;
+    border: 2px solid transparent;
+}
+
+.nav-link:hover, .nav-link.active {
+    background-color: var(--spotify-green);
+    color: var(--black);
+    border-color: var(--black);
+    box-shadow: 4px 4px 0px 0px var(--white);
+}
+
+/* --- 3. Kartu Profil Utama --- */
+.profile-card {
+    background-color: var(--white);
+    color: var(--black);
+    padding: 40px;
+    border: var(--border-width) solid var(--black);
+    box-shadow: 12px 12px 0px 0px var(--spotify-green);
+    margin-bottom: 60px;
+}
+
+.profile-layout {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 40px;
+    align-items: center;
+}
+
+@media (min-width: 768px) {
+    .profile-layout {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .profile-text { flex: 1; }
+}
+
+/* Foto Profil Lingkaran */
+.profile-image-container {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    border: 6px solid var(--black);
+    background-color: var(--bg-dark);
+    box-shadow: 10px 10px 0px 0px var(--spotify-green);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s ease;
+}
+
+.neo-foto {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%); /* Efek Hitam Putih ala Spotify */
+    transition: 0.3s ease;
+}
+
+.profile-image-container:hover {
+    transform: translate(-5px, -5px);
+    box-shadow: 15px 15px 0px 0px var(--spotify-green);
+}
+
+.profile-image-container:hover .neo-foto {
+    filter: grayscale(0%); /* Kembali berwarna saat hover */
+}
+
+/* Detail Biodata */
+.badge {
+    background-color: var(--spotify-green);
+    color: var(--black);
+    display: inline-block;
+    padding: 5px 15px;
+    font-weight: 900;
+    text-transform: uppercase;
+    border: 3px solid var(--black);
+    margin-bottom: 15px;
+}
+
+.name {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+}
+
+.info-grid {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.info-item {
+    border-bottom: 2px solid var(--black);
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 5px;
+}
+
+.label { font-weight: 800; font-size: 0.75rem; color: #444; text-transform: uppercase; }
+.value { font-weight: 900; font-size: 1rem; }
+
+.btn-primary {
+    background-color: var(--black);
+    color: var(--white);
+    padding: 15px 30px;
+    border: 3px solid var(--black);
+    font-weight: 900;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 6px 6px 0px 0px var(--spotify-green);
+    transition: 0.1s;
+}
+
+.btn-primary:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 9px 9px 0px 0px var(--spotify-green);
+}
+
+/* --- 4. Section Judul & Skills --- */
+.section-title-neo {
+    color: var(--spotify-green);
+    font-size: 2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    text-shadow: 3px 3px 0px var(--white);
+}
+
+.skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 60px;
+}
+
+.skill-badge {
+    background-color: var(--white);
+    color: var(--black);
+    padding: 10px 20px;
+    font-weight: 800;
+    border: 3px solid var(--spotify-green);
+    box-shadow: 5px 5px 0px 0px var(--spotify-green);
+    text-transform: uppercase;
+}
+
+/* --- 5. Hobi Grid --- */
+.hobbies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.hobby-card {
+    background-color: var(--bg-dark);
+    border: 4px solid var(--white);
+    box-shadow: var(--neo-shadow) var(--spotify-green);
+    padding: 30px;
+    transition: 0.2s;
+}
+
+.hobby-card:hover {
+    transform: translate(-5px, -5px);
+    box-shadow: 12px 12px 0px 0px var(--spotify-green);
+}
+
+.hobby-icon { font-size: 3rem; margin-bottom: 10px; }
+.hobby-tag {
+    background-color: var(--spotify-green);
+    color: var(--black);
+    display: inline-block;
+    padding: 4px 10px;
+    font-weight: 900;
+    margin-bottom: 15px;
+}
+
+/* --- 6. Footer --- */
+.neo-footer {
+    text-align: center;
+    padding: 40px;
+    border-top: 4px solid var(--white);
+    margin-top: 60px;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    background-color: var(--black);
+}
+
+/* --- 7. Halaman Artikel (Filter & Blog Grid) --- */
+.filter-container {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background-color: var(--bg-dark);
+    color: var(--white);
+    border: 3px solid var(--white);
+    padding: 10px 20px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 4px 4px 0px 0px var(--white);
+    transition: 0.2s;
+    text-transform: uppercase;
+}
+
+/* Gaya saat tombol filter disorot atau sedang aktif */
+.filter-btn:hover, .active-filter {
+    background-color: var(--spotify-green);
+    color: var(--black);
+    border-color: var(--spotify-green);
+    box-shadow: 4px 4px 0px 0px var(--white);
+    transform: translate(-2px, -2px);
+}
+
+.blog-grid {
+    display: grid;
+    /* Membuat kartu otomatis menyesuaikan lebar layar */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+/* Memastikan tombol "Baca Artikel" selalu berada di bagian bawah kartu */
+.blog-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.blog-title {
+    margin-bottom: 15px;
+    font-weight: 900;
+}
+
+.btn-small {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 0.8rem;
+}

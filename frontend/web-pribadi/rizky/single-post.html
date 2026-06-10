@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Memahami Algoritma Hashing | Blog Yukyy</title>
+        <link rel="stylesheet" href="css/single.css" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;800;900&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <div class="progress-container">
+            <div class="progress-bar" id="readingProgress"></div>
+        </div>
+
+        <header class="neo-header">
+            <div class="logo">YUKYY.</div>
+            <nav class="neo-nav">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="../fitur-lainnya/404/404.html" class="nav-link active">Artikel</a>
+                <a href="portofolio.html" class="nav-link">Portofolio</a>
+            </nav>
+        </header>
+
+        <main class="container article-container">
+            <a href="blog.html" class="btn-back">&larr; Kembali ke Blog</a>
+
+            <header class="article-header">
+                <span class="hobby-tag">Coding & Tugas</span>
+                <h1 class="article-title">
+                    Memahami Algoritma Hashing Tanpa Pusing
+                </h1>
+                <div class="article-meta">
+                    <span>📅 14 Mei 2026</span>
+                    <span>✍️ Rizky Ahmad Nasrulloh</span>
+                </div>
+            </header>
+
+            <article class="article-content">
+                <p>
+                    Saat mengerjakan tugas struktur data, seringkali kita
+                    terjebak pada pemikiran bahwa semuanya harus diselesaikan
+                    dengan pendekatan
+                    <em>Object-Oriented Programming</em> (OOP). Padahal, untuk
+                    memahami dasar kerja sebuah algoritma, terkadang kembali ke
+                    dasar itu jauh lebih baik.
+                </p>
+
+                <p>
+                    Dalam pengerjaan tugas implementasi hashing kali ini, ada
+                    aturan main yang cukup menantang:
+                    <strong>dilarang menggunakan class</strong>. Kita harus
+                    menyelesaikan program pengurutan dan konversi data murni
+                    menggunakan pendekatan fungsi prosedural.
+                </p>
+
+                <h3>Kenapa Fungsi Prosedural?</h3>
+                <p>
+                    Membangun fungsi <em>hash</em> tanpa
+                    <code>class</code> memaksa kita untuk benar-benar memahami
+                    bagaimana data mengalir dari satu fungsi ke fungsi lain.
+                    Kita tidak bisa menyembunyikan <em>state</em> di dalam
+                    objek.
+                </p>
+
+                <blockquote>
+                    "Kadang batasan (constraints) dalam coding justru membuat
+                    kita lebih kreatif dan paham fundamental."
+                </blockquote>
+
+                <h3>Contoh Snippet Logika</h3>
+                <p>
+                    Berikut adalah bayangan kasar bagaimana kita bisa mengelola
+                    <em>hash table</em> menggunakan array dan fungsi sederhana
+                    di Python, tanpa melibatkan OOP sama sekali:
+                </p>
+
+                <pre><code>
+# Inisialisasi hash table kosong
+hash_table = [None] * 10
+
+# Fungsi prosedural untuk menghitung index
+def hitung_hash(nilai):
+    return nilai % 10
+
+# Fungsi prosedural untuk memasukkan data
+def insert_data(tabel, nilai):
+    index = hitung_hash(nilai)
+    tabel[index] = nilai
+            </code></pre>
+
+                <p>
+                    Pendekatan ini sangat <em>straightforward</em>. Output dan
+                    inputnya jelas. Bagi yang sedang belajar algoritma, cobalah
+                    sesekali membuang <code>class</code> dan lihat bagaimana
+                    kodemu terbentuk murni dari deretan fungsi prosedural.
+                </p>
+            </article>
+        </main>
+
+        <footer class="neo-footer">
+            <p>
+                &copy; 2026 Rizky Ahmad Nasrulloh - Universitas Trunojoyo Madura
+            </p>
+        </footer>
+
+        <script src="/js/single.js"></script>
+    </body>
+</html>

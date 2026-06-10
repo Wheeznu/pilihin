@@ -1,0 +1,76 @@
+{
+  "promotions": [
+    {
+      "id": "promo-001",
+      "title": "Hemat 3 Bulan",
+      "subtitle": "Langganan Premium 3 Bulan",
+      "description": "Dapatkan akses Premium selama 3 bulan dengan harga spesial. Cocok buat marathon film dan series favorit!",
+      "originalPrice": 237000,
+      "promoPrice": 169000,
+      "discount": 29,
+      "badge": "Hemat 68rb",
+      "icon": "calendar",
+      "color": "var(--accent-primary)"
+    },
+    {
+      "id": "promo-002",
+      "title": "Paket Tahunan",
+      "subtitle": "Premium 1 Tahun",
+      "description": "Langganan Premium setahun penuh dengan diskon besar. Hanya Rp 699rb, hemat lebih dari Rp 200rb!",
+      "originalPrice": 948000,
+      "promoPrice": 699000,
+      "discount": 26,
+      "badge": "Best Value",
+      "icon": "zap",
+      "color": "#f5c518"
+    },
+    {
+      "id": "promo-003",
+      "title": "Duo Hemat",
+      "subtitle": "2 Akun Standard",
+      "description": "Ajak teman atau keluargamu! Dapatkan 2 akun Standard dengan harga spesial. Streaming bareng makin seru!",
+      "originalPrice": 98000,
+      "promoPrice": 69000,
+      "discount": 30,
+      "badge": "Hemat 29rb",
+      "icon": "users",
+      "color": "#e22134"
+    },
+    {
+      "id": "promo-004",
+      "title": "Student Pass",
+      "subtitle": "Premium Pelajar",
+      "description": "Promo khusus pelajar & mahasiswa. Nikmati Premium dengan harga terjangkau. Cukup dengan email .edu atau kartu pelajar!",
+      "originalPrice": 79000,
+      "promoPrice": 39000,
+      "discount": 51,
+      "badge": "Diskon 51%",
+      "icon": "book-open",
+      "color": "#3498ff"
+    },
+    {
+      "id": "promo-005",
+      "title": "Coba Gratis 7 Hari",
+      "subtitle": "Trial Premium",
+      "description": "Belum yakin? Coba Premium gratis selama 7 hari tanpa dikenakan biaya. Batalkan kapan saja!",
+      "originalPrice": null,
+      "promoPrice": 0,
+      "discount": 100,
+      "badge": "Gratis",
+      "icon": "gift",
+      "color": "#1db954"
+    },
+    {
+      "id": "promo-006",
+      "title": "Weekend Spesial",
+      "subtitle": "Akhir Pekan Makin Seru",
+      "description": "Promo akhir pekan! Upgrade ke Premium 2 hari dengan harga spesial. Nikmati kualitas 4K & download unlimited!",
+      "originalPrice": 15000,
+      "promoPrice": 5000,
+      "discount": 67,
+      "badge": "Promo Akhir Pekan",
+      "icon": "sun",
+      "color": "#8e44ad"
+    }
+  ]
+}

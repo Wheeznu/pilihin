@@ -1,0 +1,502 @@
+/* --- 1. Reset & Variabel Dasar --- */
+:root {
+    --bg-dark: #121212;
+    --spotify-green: #1DB954;
+    --white: #FFFFFF;
+    --black: #000000;
+    --border-width: 4px;
+    --neo-shadow: 8px 8px 0px 0px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--white);
+    font-family: 'Public Sans', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* --- 2. Header & Navigasi --- */
+.neo-header {
+    background-color: var(--black);
+    border-bottom: var(--border-width) solid var(--spotify-green);
+    padding: 20px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-weight: 900;
+    font-size: 1.8rem;
+    color: var(--spotify-green);
+    letter-spacing: -1px;
+}
+
+.neo-nav {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-link {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    padding: 5px 10px;
+    transition: 0.2s;
+    border: 2px solid transparent;
+}
+
+.nav-link:hover, .nav-link.active {
+    background-color: var(--spotify-green);
+    color: var(--black);
+    border-color: var(--black);
+    box-shadow: 4px 4px 0px 0px var(--white);
+}
+
+/* --- 3. Kartu Profil Utama --- */
+.profile-card {
+    background-color: var(--white);
+    color: var(--black);
+    padding: 40px;
+    border: var(--border-width) solid var(--black);
+    box-shadow: 12px 12px 0px 0px var(--spotify-green);
+    margin-bottom: 60px;
+}
+
+.profile-layout {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 40px;
+    align-items: center;
+}
+
+@media (min-width: 768px) {
+    .profile-layout {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .profile-text { flex: 1; }
+}
+
+/* Foto Profil Lingkaran */
+.profile-image-container {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    border: 6px solid var(--black);
+    background-color: var(--bg-dark);
+    box-shadow: 10px 10px 0px 0px var(--spotify-green);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s ease;
+}
+
+.neo-foto {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+    transition: 0.3s ease;
+}
+
+.profile-image-container:hover {
+    transform: translate(-5px, -5px);
+    box-shadow: 15px 15px 0px 0px var(--spotify-green);
+}
+
+.profile-image-container:hover .neo-foto {
+    filter: grayscale(0%);
+}
+
+/* Detail Biodata */
+.badge {
+    background-color: var(--spotify-green);
+    color: var(--black);
+    display: inline-block;
+    padding: 5px 15px;
+    font-weight: 900;
+    text-transform: uppercase;
+    border: 3px solid var(--black);
+    margin-bottom: 15px;
+}
+
+.name {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+}
+
+.info-grid {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.info-item {
+    border-bottom: 2px solid var(--black);
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 5px;
+}
+
+.label { font-weight: 800; font-size: 0.75rem; color: #444; text-transform: uppercase; }
+.value { font-weight: 900; font-size: 1rem; }
+
+.btn-primary {
+    background-color: var(--black);
+    color: var(--white);
+    padding: 15px 30px;
+    border: 3px solid var(--black);
+    font-weight: 900;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 6px 6px 0px 0px var(--spotify-green);
+    transition: 0.1s;
+}
+
+.btn-primary:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 9px 9px 0px 0px var(--spotify-green);
+}
+
+/* --- 4. Section Judul & Skills --- */
+.section-title-neo {
+    color: var(--spotify-green);
+    font-size: 2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    text-shadow: 3px 3px 0px var(--white);
+}
+
+.skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 60px;
+}
+
+.skill-badge {
+    background-color: var(--white);
+    color: var(--black);
+    padding: 10px 20px;
+    font-weight: 800;
+    border: 3px solid var(--spotify-green);
+    box-shadow: 5px 5px 0px 0px var(--spotify-green);
+    text-transform: uppercase;
+}
+
+/* --- 5. Hobi Grid --- */
+.hobbies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.hobby-card {
+    background-color: var(--bg-dark);
+    border: 4px solid var(--white);
+    box-shadow: var(--neo-shadow) var(--spotify-green);
+    padding: 30px;
+    transition: 0.2s;
+}
+
+.hobby-card:hover {
+    transform: translate(-5px, -5px);
+    box-shadow: 12px 12px 0px 0px var(--spotify-green);
+}
+
+.hobby-icon { font-size: 3rem; margin-bottom: 10px; }
+.hobby-tag {
+    background-color: var(--spotify-green);
+    color: var(--black);
+    display: inline-block;
+    padding: 4px 10px;
+    font-weight: 900;
+    margin-bottom: 15px;
+}
+
+/* --- 6. Footer --- */
+.neo-footer {
+    text-align: center;
+    padding: 40px;
+    border-top: 4px solid var(--white);
+    margin-top: 60px;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    background-color: var(--black);
+}
+
+/* --- 10. Halaman Portofolio (Grid Proyek) --- */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+}
+
+.portfolio-card {
+    background-color: var(--white);
+    border: 5px solid var(--black);
+    box-shadow: 10px 10px 0px 0px var(--spotify-green);
+    padding: 0; 
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: 0.2s;
+}
+
+.portfolio-card:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 14px 14px 0px 0px var(--spotify-green);
+}
+
+.portfolio-img-container {
+    height: 200px;
+    background-color: var(--black);
+    border-bottom: 5px solid var(--black);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.placeholder-img {
+    color: var(--spotify-green);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.portfolio-content {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.portfolio-content h2 {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--black);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.portfolio-content p {
+    color: #333;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.project-tags {
+    margin-bottom: 20px;
+}
+
+/* --- 11. Formulir Kontak Neobrutalism --- */
+.neo-form {
+    background-color: var(--bg-dark);
+    border: 5px solid var(--white);
+    padding: 40px;
+    box-shadow: 12px 12px 0px 0px var(--spotify-green);
+    max-width: 600px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-label {
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    color: var(--spotify-green);
+}
+
+.form-input {
+    background-color: var(--white);
+    color: var(--black);
+    border: 4px solid var(--black);
+    padding: 15px;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: bold;
+    outline: none;
+    transition: 0.2s;
+}
+
+.form-input:focus {
+    border-color: var(--spotify-green);
+    box-shadow: 6px 6px 0px 0px var(--spotify-green);
+    transform: translate(-2px, -2px);
+}
+
+.btn-submit {
+    width: 100%;
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+/* --- 13. Utility & Refactoring Classes --- */
+.hero-description {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    max-width: 600px;
+}
+
+.btn-small {
+    padding: 10px 15px;
+    font-size: 0.8rem;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.catatan-area {
+    display: none;
+    margin-top: 40px;
+    background-color: var(--white);
+    color: var(--black);
+    padding: 30px;
+    border: 5px solid var(--black);
+    box-shadow: 12px 12px 0px 0px var(--spotify-green);
+}
+
+.catatan-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 4px solid var(--black);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.catatan-title {
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+}
+
+.btn-close {
+    background-color: var(--black);
+    color: var(--white);
+    border: 2px solid var(--black);
+    padding: 5px 12px;
+    font-weight: 900;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.catatan-body {
+    line-height: 1.8;
+    font-size: 1.05rem;
+    max-height: 75vh;
+    overflow-y: auto;
+    padding-right: 15px;
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+.mb-15 {
+    margin-bottom: 15px;
+}
+
+.mt-15 {
+    margin-top: 15px;
+}
+
+.mt-80 {
+    margin-top: 80px;
+}
+
+.fs-2rem {
+    font-size: 2rem;
+}
+
+.catatan-details {
+    margin-bottom: 15px;
+    border: 3px solid var(--black);
+    padding: 12px;
+    background-color: #f4f4f4;
+}
+
+.catatan-summary {
+    font-weight: 900;
+    font-size: 1.2rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    color: var(--spotify-green);
+    text-shadow: 1px 1px 0px var(--black);
+}
+
+.catatan-content {
+    margin-top: 15px;
+    border-top: 2px solid var(--black);
+    padding-top: 10px;
+}
+
+.catatan-code {
+    background-color: var(--black);
+    color: var(--white);
+    padding: 15px;
+    border: 3px solid var(--spotify-green);
+    overflow-x: auto;
+    font-size: 0.9rem;
+}
+
+.catatan-info-box {
+    background-color: #fff;
+    border: 2px solid var(--black);
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+/* --- 12. Custom Scrollbar untuk Area Catatan --- */
+.isi-catatan-user::-webkit-scrollbar {
+    width: 14px; 
+}
+
+.isi-catatan-user::-webkit-scrollbar-track {
+    background: var(--white); 
+    border-left: 4px solid var(--black); 
+}
+
+.isi-catatan-user::-webkit-scrollbar-thumb {
+    background-color: var(--spotify-green); 
+    border: 3px solid var(--black); 
+    border-right: none;
+}
+
+.isi-catatan-user::-webkit-scrollbar-thumb:hover {
+    background-color: var(--black); 
+}

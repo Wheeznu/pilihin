@@ -18,7 +18,6 @@
       "id": "standard",
       "name": "Standard",
       "price": 49000,
-      "originalPrice": 79000,
       "period": "bulan",
       "description": "Pilihan terbaik untuk pengalaman menonton HD tanpa gangguan",
       "features": [
@@ -35,7 +34,6 @@
       "id": "premium",
       "name": "Premium",
       "price": 79000,
-      "originalPrice": 119000,
       "period": "bulan",
       "description": "Pengalaman streaming maksimal dengan kualitas terbaik",
       "features": [

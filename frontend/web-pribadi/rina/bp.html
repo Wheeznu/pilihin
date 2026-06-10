@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Pribadi | Rina Suhita</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css-bp.css">
+</head>
+
+<body>
+
+    <div class="navbar">
+        <h1>Blog <span class="highlight">Pribadi</span></h1>
+        <div class="nav-links">Progres Project Kelompok</div>
+    </div>
+
+    <div class="main-container">
+        
+        <aside class="sidebar">
+            <div class="profile-sticky">
+                <img src="foto.jpeg" alt="Foto Rina Suhita">
+                <h2>Rina Suhita</h2>
+                
+                <div class="meta-info">
+                    <div class="meta-label">NIM</div>
+                    <div>250411100067</div>
+                    
+                    <div class="meta-label">Kelas</div>
+                    <div>IF-2B</div>
+                    
+                    <div class="meta-label">Prodi</div>
+                    <div>Teknik Informatika</div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="content-area">
+            
+            <div class="project-header">
+                <h3>Project Akhir Mata Kuliah Dasar Pemrograman Web</h3>
+                <h2>Pengembangan Antarmuka Website Rekomendasi & Review Film: "PILIH.IN"</h2>
+            </div>
+
+            <div class="intro-box">
+                <i class="fas fa-quote-left"></i> 
+                Halo semua, selamat datang di blog pribadi saya. Artikel ini dibuat untuk mendokumentasikan progres pengerjaan proyek akhir mata kuliah DPW, yaitu website <strong>PILIH.IN</strong>. Di sini, saya berfokus pada pengembangan dashboard reviewer, detail website, dan jadwal rilis film. Berikut adalah detail interface yang telah saya selesaikan:
+            </div>
+
+            <div class="content-card">
+                <div class="section-title">
+                    <i class="fas fa-laptop-code"></i> Penjelasan Interface
+                </div>
+
+                <div class="interface-item">
+                    <h4 class="interface-title">1. Edit Profil Reviewer</h4>
+                    <p class="interface-desc">Halaman khusus yang digunakan oleh reviewer untuk mengubah atau mengatur informasi akun mereka sendiri secara langsung di website.</p>
+                    <ul class="feature-list">
+                        <li>Reviewer dapat langsung mengganti dan melihat pratinjau <strong>(preview) foto profil</strong> sebelum disimpan.</li>
+                        <li>Dapat mengubah nama pengguna <strong>(username)</strong> secara instan di halaman tersebut.</li>
+                        <li>Terdapat kolom bio untuk menulis deskripsi singkat atau perkenalan diri mengenai jenis film favorit mereka.</li>
+                    </ul>
+                </div>
+
+                <div class="interface-item">
+                    <h4 class="interface-title">2. Detail Ulasan (Riwayat Bulanan & Keseluruhan)</h4>
+                    <p class="interface-desc">Berbentuk tabel rapi yang menampilkan daftar lengkap ulasan film yang pernah ditulis oleh pengguna, baik riwayat di bulan ini maupun keseluruhan.</p>
+                    <ul class="feature-list">
+                        <li>Menampilkan info lengkap ulasan mulai dari poster film, tanggal tulis, sampai jumlah rating bintang.</li>
+                        <li>Menampilkan statistik interaksi seperti jumlah orang yang menyukai <strong>(likes)</strong> dan komentar dari pengguna lain.</li>
+                        <li>Dilengkapi tombol <strong>Edit Ulasan</strong> untuk mengubah teks ulasan dan tombol <strong>Hapus Ulasan</strong> dengan kotak konfirmasi keamanan.</li>
+                    </ul>
+                </div>
+
+                <div class="interface-item">
+                    <h4 class="interface-title">3. Manajemen Draf Ulasan (Draft Review)</h4>
+                    <p class="interface-desc">Tempat penampungan ulasan film berbentuk susunan kartu (grid) untuk menyimpan tulisan ulasan yang statusnya masih disimpan sementara dan belum diterbitkan.</p>
+                    <ul class="feature-list">
+                        <li>Menampilkan tulisan ulasan lama yang belum sempat selesai diketik dengan penanda status draf yang jelas.</li>
+                        <li>Memudahkan pengguna untuk membuka kembali draf dan mengedit isinya sebelum siap dipublikasikan.</li>
+                        <li>Terdapat tombol utama <strong>Publish Ulasan</strong> untuk menerbitkan tulisan agar otomatis pindah ke halaman riwayat utama.</li>
+                        <li>Ada tombol hapus jika pengguna ingin membatalkan atau membuang draf ulasan film tersebut.</li>
+                    </ul>
+                </div>
+
+                <div class="interface-item">
+                    <h4 class="interface-title">4. Galeri Daftar Film Favorit</h4>
+                    <p class="interface-desc">Halaman galeri visual yang mengumpulkan poster-poster film yang telah ditandai atau disukai dengan menekan ikon hati oleh pengguna.</p>
+                    <ul class="feature-list">
+                        <li>Jumlah film favorit yang dimasukkan otomatis terhitung dan muncul sebagai angka statistik di profil pengguna.</li>
+                        <li>Tampilan poster film tersusun rapi, responsif, dan terlihat estetik saat dibuka di laptop maupun HP.</li>
+                        <li>Menyediakan tombol silang kecil di ujung kartu film untuk membatalkan pilihan atau menghapus film dari daftar favorit secara cepat.</li>
+                    </ul>
+                </div>
+
+                <div class="interface-item">
+                    <h4 class="interface-title">5. Notifikasi Aktivitas Terbaru</h4>
+                    <p class="interface-desc">Sebuah jendela kecil (pop-up) di pojok atas yang berguna untuk memberi tahu pengguna jika ada aktivitas atau interaksi terbaru dari orang lain.</p>
+                    <ul class="feature-list">
+                        <li>Dilengkapi ikon tanda angka merah di atas tombol lonceng yang otomatis hilang begitu jendela notifikasi diklik.</li>
+                        <li>Menampilkan pemberitahuan real-time ketika tulisan ulasan kita mendapat tanda suka baru atau mendapat balasan komentar dari sesama anggota komunitas film.</li>
+                    </ul>
+                </div>
+
+                <div class="interface-item">
+                    <h4 class="interface-title">6. Jadwal Rilis Sinema</h4>
+                    <p class="interface-desc">Antarmuka visual berbentuk daftar kartu yang menginformasikan tanggal rilis film-film global dan domestik mendatang secara real-time.</p>
+                    <ul class="feature-list">
+                        <li>Terdapat filter kategori jadwal (Sedang Tayang vs Akan Datang)</li>
+                        <li>Setiap kartu film telah dilengkapi dengan tombol interaktif "Tonton Trailer" untuk melihat cuplikan video, serta tombol "Ingatkan Saya" sebagai fitur penanda rilis internal bagi pengguna.</li>
+                    </ul>
+                </div>
+
+                <div class="interface-item">
+                    <h4 class="interface-title">7. Informasi Detail Website dengan Sistem Navigasi Lintas Fitur & Form Feedback</h4>
+                    <p class="interface-desc">Komponen antarmuka informatif berstruktur Landing Page yang mengenalkan anatomi ekosistem PILIH.IN, serta dilengkapi tombol navigasi taktis terintegrasi menuju fitur lain dan halaman kontribusi komunitas.</p>
+                    <ul class="feature-list">
+                        <li>Berisi informasi tentang website, untuk mengedukasi pengguna mengenai alur website pilih.in.</li>
+                        <li>Tombol Navigasi dan Form Masukan: Ada tombol "Temukan Film Favorit" buat langsung pindah ke halaman All Film, dan tombol "Kontribusi & Feedback" buat mengarahkan user ke form pengisian nama, email, kategori, serta pesan masukan.</li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+</body>
+</html>
