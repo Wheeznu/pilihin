@@ -4,25 +4,27 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Keamanan Akun - Pilih.in</title>
+        <script>(function(){var t=localStorage.getItem("pilih-in-theme");if(t)document.documentElement.setAttribute("data-theme",t);})();</script>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100..900&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="../../css/reset.css" />
         <link rel="stylesheet" href="../../css/design-system.css" />
-        <link rel="stylesheet" href="../../css/components/navbar.css" />
+        <link rel="stylesheet" href="../../css/components/sidebar.css" />
         <link rel="stylesheet" href="../../css/components/button.css" />
-        <link rel="stylesheet" href="../../css/components/form.css" />
+        <link rel="stylesheet" href="../../css/pages/user-security.css" />
     </head>
     <body>
-        <div id="navbar-container"></div>
-        <main class="security-page" id="securityPage"></main>
+        <div class="user-layout">
+            <aside class="user-sidebar" id="userSidebar"></aside>
+            <div class="user-main">
+                <main id="securityMain"></main>
+            </div>
+        </div>
         <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
         <script type="module">
-            import Navbar from "../../js/components/navbar.js";
-            document.addEventListener("DOMContentLoaded", async () => {
-                await Navbar.load("navbar-container");
-                feather.replace();
-            });
+            import UserSecurityPage from "../../js/logic-pages/user-security.js";
+            new UserSecurityPage();
         </script>
     </body>
 </html>
