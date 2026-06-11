@@ -1,21 +1,76 @@
 .privacy-page {
     padding: var(--space-3xl) var(--space-2xl);
+    position: relative;
+    overflow: hidden;
 }
+
+/* ── Deco Blobs ────────────────────────────────── */
+
+.privacy-deco {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.privacy-deco--1 {
+    width: 280px;
+    height: 280px;
+    background: rgba(29, 185, 84, 0.08);
+    top: -80px;
+    left: -60px;
+}
+
+.privacy-deco--2 {
+    width: 200px;
+    height: 200px;
+    background: rgba(52, 152, 219, 0.06);
+    bottom: 10%;
+    right: -80px;
+}
+
+/* ── Hero ──────────────────────────────────────── */
 
 .privacy-page .page-hero {
     text-align: center;
     margin-bottom: var(--space-3xl);
+    position: relative;
+    z-index: 1;
+}
+
+.page-hero__brand {
+    font-size: var(--font-sm);
+    font-weight: var(--fw-bold);
+    color: var(--text-secondary);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: var(--space-sm);
 }
 
 .privacy-page .page-hero h1 {
-    font-size: var(--font-3xl);
+    font-size: var(--font-4xl);
     font-weight: var(--fw-bold);
     margin-bottom: var(--space-sm);
+    line-height: 1.2;
 }
 
 .privacy-page .page-hero p {
     color: var(--text-secondary);
     font-size: var(--font-md);
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* ── Content ───────────────────────────────────── */
+
+.privacy-content {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
 }
 
 .privacy-section {
@@ -57,8 +112,10 @@
 }
 
 .privacy-section .highlight-box {
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
+    background: var(--glass-bg-strong);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
     border-radius: var(--radius-lg);
     padding: var(--space-lg);
     margin: var(--space-lg) 0;
@@ -68,22 +125,40 @@
     margin-bottom: 0;
 }
 
+/* ── Divider ───────────────────────────────────── */
+
 .privacy-divider {
     border: none;
-    border-top: 2px solid var(--border-color);
+    border-top: 1px solid var(--border-color);
     margin: var(--space-3xl) 0;
 }
+
+/* ── Footer Note ───────────────────────────────── */
 
 .privacy-footer-note {
     text-align: center;
     padding: var(--space-xl);
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
     margin-top: var(--space-3xl);
+    position: relative;
+    z-index: 1;
 }
 
 .privacy-footer-note p {
     color: var(--text-secondary);
     font-size: var(--font-sm);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+/* ── Responsive ────────────────────────────────── */
+
+@media (max-width: 768px) {
+    .privacy-page {
+        padding: var(--space-2xl) var(--space-lg);
+    }
+
+    .privacy-page .page-hero h1 {
+        font-size: var(--font-2xl);
+    }
 }

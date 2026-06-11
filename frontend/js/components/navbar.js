@@ -67,10 +67,10 @@ class Navbar {
         if (session) {
             right.innerHTML = `
                 <a href="/frontend/pages/user/profile.html" class="btn btn-ghost btn-sm">
-                    <i data-feather="user"></i> Profil
+                    <i data-feather="user"></i> <span>Profil</span>
                 </a>
                 <button class="btn btn-danger btn-sm" id="logoutBtn">
-                    <i data-feather="log-out"></i> Keluar
+                    <i data-feather="log-out"></i> <span>Keluar</span>
                 </button>
             `;
             const logoutBtn = right.querySelector("#logoutBtn");

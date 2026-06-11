@@ -10,7 +10,8 @@
       "discount": 29,
       "badge": "Hemat 68rb",
       "icon": "calendar",
-      "color": "var(--accent-primary)"
+      "color": "var(--accent-primary)",
+      "featured": false
     },
     {
       "id": "promo-002",
@@ -22,7 +23,8 @@
       "discount": 26,
       "badge": "Best Value",
       "icon": "zap",
-      "color": "#f5c518"
+      "color": "var(--warning)",
+      "featured": true
     },
     {
       "id": "promo-003",
@@ -34,7 +36,8 @@
       "discount": 30,
       "badge": "Hemat 29rb",
       "icon": "users",
-      "color": "#e22134"
+      "color": "var(--danger)",
+      "featured": false
     },
     {
       "id": "promo-004",
@@ -46,7 +49,8 @@
       "discount": 51,
       "badge": "Diskon 51%",
       "icon": "book-open",
-      "color": "#3498ff"
+      "color": "var(--info)",
+      "featured": true
     },
     {
       "id": "promo-005",
@@ -58,7 +62,8 @@
       "discount": 100,
       "badge": "Gratis",
       "icon": "gift",
-      "color": "#1db954"
+      "color": "var(--accent-primary)",
+      "featured": true
     },
     {
       "id": "promo-006",
@@ -70,7 +75,8 @@
       "discount": 67,
       "badge": "Promo Akhir Pekan",
       "icon": "sun",
-      "color": "#8e44ad"
+      "color": "var(--accent-secondary)",
+      "featured": false
     }
   ]
 }
