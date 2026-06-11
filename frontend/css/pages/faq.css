@@ -1,5 +1,7 @@
 .faq-page {
-    padding: var(--space-3xl) var(--space-2xl);
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--space-3xl) var(--space-xl);
 }
 
 .faq-page .page-hero {

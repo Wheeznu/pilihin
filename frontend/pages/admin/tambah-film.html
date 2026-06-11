@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="id" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tambah Film - Admin Panel Pilih.in</title>
+
+    <!-- GOOGLE SANS FLEX - WAJIB sesuai MD -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS WAJIB: reset → design-system → components → pages -->
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/design-system.css" />
+    <link rel="stylesheet" href="../../css/components/button.css" />
+    <link rel="stylesheet" href="../../css/components/card.css" />
+    <link rel="stylesheet" href="../../css/components/modal.css" />
+    <link rel="stylesheet" href="../../css/pages/tambah-film.css" />
+  </head>
+  <body>
+    <div class="app-layout">
+      <!-- SIDEBAR -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar__logo">
+          <a href="../../index.html"
+            >Pilih<span class="text-primary">.in</span></a
+          >
+        </div>
+        <nav class="sidebar__nav">
+          <a href="../../index.html" class="nav-item">
+            <i data-feather="home"></i> Beranda
+          </a>
+          <a href="../film/katalog.html" class="nav-item">
+            <i data-feather="film"></i> Film
+          </a>
+          <a href="dashboard.html" class="nav-item">
+            <i data-feather="grid"></i> Dashboard
+          </a>
+          <a href="tambah-film.html" class="nav-item active">
+            <i data-feather="plus-circle"></i> Tambah Film
+          </a>
+          <a href="films-crud.html" class="nav-item">
+            <i data-feather="list"></i> Kelola Film
+          </a>
+        </nav>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <div class="app-main">
+        <!-- Navbar container - akan diisi oleh Navbar component -->
+        <div id="navbar-container"></div>
+
+        <main class="page-content">
+          <!-- STATISTIK (dari repository konten) -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon"><i data-feather="film"></i></div>
+              <div class="stat-info">
+                <span class="stat-label">Total Film</span>
+                <span class="stat-value" id="totalFilms">0</span>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon"><i data-feather="users"></i></div>
+              <div class="stat-info">
+                <span class="stat-label">Total Aktor</span>
+                <span class="stat-value" id="totalActors">0</span>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon"><i data-feather="video"></i></div>
+              <div class="stat-info">
+                <span class="stat-label">Total Sutradara</span>
+                <span class="stat-value" id="totalDirectors">0</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- FORM TAMBAH FILM -->
+          <div class="form-card">
+            <div class="form-card__header">
+              <h2>Tambah Film Baru</h2>
+              <p>Lengkapi data di bawah untuk menambahkan film ke repositori</p>
+            </div>
+
+            <form id="formTambahFilm">
+              <div class="form-two-columns">
+                <!-- POSTER UPLOAD -->
+                <div class="poster-column">
+                  <label class="form-label"
+                    >Poster Film <span class="required">*</span></label
+                  >
+                  <div class="poster-upload" id="posterDropZone">
+                    <input
+                      type="file"
+                      id="posterInput"
+                      accept="image/*"
+                      hidden
+                    />
+                    <img
+                      id="posterPreview"
+                      src="#"
+                      alt="Preview"
+                      style="display: none"
+                    />
+                    <div class="poster-placeholder" id="posterPlaceholder">
+                      <i data-feather="upload-cloud"></i>
+                      <p>Klik atau drag & drop</p>
+                      <span>JPG, PNG (min. 300x450)</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- DATA FILM -->
+                <div class="data-column">
+                  <div class="form-group">
+                    <label class="form-label"
+                      >Judul Film <span class="required">*</span></label
+                    >
+                    <input
+                      type="text"
+                      id="filmTitle"
+                      class="form-input"
+                      placeholder="Contoh: Samudra Api"
+                      required
+                    />
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label"
+                        >Tanggal Rilis <span class="required">*</span></label
+                      >
+                      <input
+                        type="date"
+                        id="releaseDate"
+                        class="form-input"
+                        required
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Durasi (menit)</label>
+                      <input
+                        type="number"
+                        id="duration"
+                        class="form-input"
+                        placeholder="120"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Sutradara</label>
+                      <input
+                        type="text"
+                        id="director"
+                        class="form-input"
+                        placeholder="Nama sutradara"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Rating (1-10)</label>
+                      <input
+                        type="number"
+                        id="rating"
+                        class="form-input"
+                        step="0.1"
+                        min="1"
+                        max="10"
+                        placeholder="8.5"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Genre</label>
+                    <select id="genre" class="form-select">
+                      <option value="">Pilih Genre</option>
+                      <option value="Action">Action</option>
+                      <option value="Drama">Drama</option>
+                      <option value="Komedi">Komedi</option>
+                      <option value="Horor">Horor</option>
+                      <option value="Romantis">Romantis</option>
+                      <option value="Thriller">Thriller</option>
+                      <option value="Sci-Fi">Sci-Fi</option>
+                      <option value="Animasi">Animasi</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Aktor / Pemeran</label>
+                    <input
+                      type="text"
+                      id="actors"
+                      class="form-input"
+                      placeholder="Pisahkan dengan koma"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Sinopsis</label>
+                <textarea
+                  id="synopsis"
+                  class="form-textarea"
+                  rows="4"
+                  placeholder="Tulis sinopsis film..."
+                ></textarea>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Link Trailer (YouTube)</label>
+                <input
+                  type="url"
+                  id="trailerLink"
+                  class="form-input"
+                  placeholder="https://youtube.com/watch?v=..."
+                />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Link Streaming</label>
+                <div class="streaming-grid">
+                  <input
+                    type="url"
+                    id="link480p"
+                    class="form-input"
+                    placeholder="480p"
+                  />
+                  <input
+                    type="url"
+                    id="link720p"
+                    class="form-input"
+                    placeholder="720p"
+                  />
+                  <input
+                    type="url"
+                    id="link1080p"
+                    class="form-input"
+                    placeholder="1080p"
+                  />
+                </div>
+              </div>
+
+              <button type="submit" class="btn-submit">
+                <i data-feather="save"></i>
+                Publikasikan ke Repositori
+              </button>
+            </form>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Feather Icons CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
+    <!-- Main Script -->
+    <script type="module" src="../../js/logic-pages/tambah-film.js"></script>
+  </body>
+</html>

@@ -1,29 +1,20 @@
-/* Film Card - Enhanced Design & Interactivity */
-
 .film-card {
     background: var(--bg-card);
     border-radius: var(--radius-lg);
     overflow: hidden;
-    transition: all var(--transition-base);
+    transition: transform var(--transition-base);
     cursor: pointer;
-    border: 1px solid var(--border-color);
-    position: relative;
-    display: flex;
-    flex-direction: column;
 }
 
 .film-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
-    border-color: var(--accent-primary);
-    z-index: 10;
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
 }
 
 .film-card__poster {
     position: relative;
     aspect-ratio: 2 / 3;
     overflow: hidden;
-    background: var(--bg-tertiary);
 }
 
 .film-card__poster img {
@@ -34,19 +25,16 @@
 }
 
 .film-card:hover .film-card__poster img {
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
-/* Gradient Overlay instead of solid color */
 .film-card__overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 60%);
+    background: var(--overlay-dark);
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: flex-end;
-    padding-bottom: var(--space-xl);
+    justify-content: center;
     opacity: 0;
     transition: opacity var(--transition-base);
 }
@@ -58,122 +46,52 @@
 .film-card__rating {
     position: absolute;
     top: var(--space-sm);
-    left: var(--space-sm);
-    background: var(--accent-primary);
-    color: var(--bg-primary);
+    right: var(--space-sm);
+    background: rgba(0, 0, 0, 0.8);
+    color: var(--text-primary);
     font-size: var(--font-xs);
     font-weight: var(--fw-bold);
-    padding: 2px 8px;
+    padding: var(--space-xs) var(--space-sm);
     border-radius: var(--radius-sm);
     display: flex;
     align-items: center;
-    gap: 4px;
-    box-shadow: 0 2px 8px rgba(29, 185, 84, 0.4);
-    z-index: 2;
-}
-
-.film-card__quality {
-    position: absolute;
-    top: var(--space-sm);
-    right: var(--space-sm);
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(4px);
-    color: #fff;
-    font-size: 10px;
-    font-weight: var(--fw-bold);
-    padding: 2px 6px;
-    border-radius: 2px;
-    text-transform: uppercase;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    gap: 2px;
 }
 
 .film-card__info {
     padding: var(--space-md);
-    background: var(--bg-card);
-    flex: 1;
-    transition: background var(--transition-base);
-}
-
-.film-card:hover .film-card__info {
-    background: var(--bg-hover);
 }
 
 .film-card__title {
     color: var(--text-primary);
     font-size: var(--font-md);
-    font-weight: var(--fw-bold);
-    margin-bottom: 4px;
+    font-weight: var(--fw-semibold);
+    margin-bottom: var(--space-xs);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    transition: color var(--transition-fast);
-}
-
-.film-card:hover .film-card__title {
-    color: var(--accent-primary);
 }
 
 .film-card__meta {
     color: var(--text-secondary);
-    font-size: var(--font-xs);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    font-size: var(--font-sm);
 }
 
 .film-card__genre {
     color: var(--text-muted);
-    font-size: 11px;
-    margin-top: 4px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-size: var(--font-xs);
+    margin-top: var(--space-xs);
 }
 
-/* Play Button Animation */
-.film-card__play-btn {
-    width: 44px;
-    height: 44px;
-    background: var(--accent-primary);
-    border-radius: var(--radius-full);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--bg-primary);
-    transform: translateY(20px);
-    transition: all var(--transition-base);
-    box-shadow: 0 4px 15px rgba(29, 185, 84, 0.5);
-}
-
-.film-card:hover .film-card__play-btn {
-    transform: translateY(0);
-}
-
-/* Grid Layout */
 .film-grid {
-    display: flex;
-    gap: var(--space-xl);
-    padding: var(--space-md) var(--space-xl) var(--space-2xl);
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    scrollbar-width: none;
-}
-
-.film-grid::-webkit-scrollbar {
-    display: none;
-}
-
-.film-grid .film-card {
-    flex: 0 0 220px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: var(--space-lg);
 }
 
 @media (max-width: 768px) {
     .film-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
         gap: var(--space-md);
-        padding: var(--space-md);
-    }
-
-    .film-grid .film-card {
-        flex: 0 0 160px;
     }
 }

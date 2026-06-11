@@ -1,29 +1,511 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id" data-theme="dark">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Profil Admin - Pilih.in</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100..900&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href="../../css/reset.css" />
-        <link rel="stylesheet" href="../../css/design-system.css" />
-        <link rel="stylesheet" href="../../css/components/navbar.css" />
-        <link rel="stylesheet" href="../../css/components/sidebar.css" />
-        <link rel="stylesheet" href="../../css/components/button.css" />
-        <link rel="stylesheet" href="../../css/pages/admin-panel.css" />
-    </head>
-    <body>
-        <div id="navbar-container"></div>
-        <main class="admin-profile-page" id="adminProfilePage"></main>
-        <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-        <script type="module">
-            import Navbar from "../../js/components/navbar.js";
-            document.addEventListener("DOMContentLoaded", async () => {
-                await Navbar.load("navbar-container");
-                feather.replace();
-            });
-        </script>
-    </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profil Pengguna - Pilih.in</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/frontend/css/reset.css" />
+    <link rel="stylesheet" href="/frontend/css/design-system.css" />
+    <link rel="stylesheet" href="/frontend/css/pages/user-profile.css" />
+
+    <!-- Feather Icons -->
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  </head>
+  <body>
+    <div class="app-layout">
+      <!-- Sidebar - RAPIH -->
+      <aside class="sidebar">
+        <div class="sidebar__logo">
+          <a href="/frontend/index.html">Pilih<span>.in</span></a>
+        </div>
+
+        <div class="sidebar__menu-group">
+          <div class="menu-label">MENU UTAMA</div>
+          <nav class="sidebar__nav">
+            <a href="/frontend/index.html" class="nav-item">
+              <span class="nav-dot"></span>
+              Beranda
+            </a>
+            <a href="/frontend/pages/film/katalog.html" class="nav-item">
+              <span class="nav-dot"></span>
+              Film
+            </a>
+            <a href="/frontend/pages/user/favorites-film.html" class="nav-item">
+              <span class="nav-dot"></span>
+              Favorit
+            </a>
+            <a href="/frontend/pages/user/watchlist.html" class="nav-item">
+              <span class="nav-dot"></span>
+              Daftar Tonton
+            </a>
+            <a href="/frontend/pages/user/history.html" class="nav-item">
+              <span class="nav-dot"></span>
+              Riwayat
+            </a>
+          </nav>
+        </div>
+
+        <div class="sidebar__menu-group">
+          <div class="menu-label">LAINNYA</div>
+          <nav class="sidebar__nav">
+            <a href="/frontend/pages/user/profile.html" class="nav-item active">
+              <span class="nav-dot active"></span>
+              Profil Saya
+            </a>
+            <a href="/frontend/pages/main/settings.html" class="nav-item">
+              <span class="nav-dot"></span>
+              Pengaturan
+            </a>
+          </nav>
+        </div>
+
+        <div class="sidebar__footer">
+          <button class="theme-toggle" id="themeToggleBtn">
+            <span>Tema Gelap</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <div class="app-main">
+        <!-- Navbar -->
+        <header class="navbar" id="navbar-container">
+          <div class="navbar__title">Profil Pengguna</div>
+          <button class="btn-logout" id="logoutBtn">Keluar</button>
+        </header>
+
+        <!-- Page Content -->
+        <main class="page-content">
+          <div class="container">
+            <!-- Profile Header -->
+            <div class="profile-header">
+              <div class="profile-avatar-wrapper">
+                <div class="avatar-container">
+                  <img
+                    id="profileAvatar"
+                    class="profile-avatar"
+                    src="https://ui-avatars.com/api/?background=1DB954&color=fff&bold=true&size=120&name=BS"
+                    alt="Foto Profil"
+                  />
+                  <button class="avatar-edit-btn" id="editAvatarBtn">
+                    Ganti Foto
+                  </button>
+                </div>
+                <h2 id="profileName" class="profile-name">Budi Santoso</h2>
+                <p id="profileEmail" class="profile-email">
+                  budi.santoso@gmail.com
+                </p>
+                <div class="profile-badges">
+                  <span id="profileRole" class="badge">Member</span>
+                  <span id="profileStatus" class="badge badge-success"
+                    >Aktif</span
+                  >
+                </div>
+              </div>
+
+              <!-- Quick Stats -->
+              <div class="quick-stats">
+                <div class="stat-box">
+                  <div>
+                    <span class="stat-number" id="statMovies">47</span>
+                    <span class="stat-text">Film Ditonton</span>
+                  </div>
+                </div>
+                <div class="stat-box">
+                  <div>
+                    <span class="stat-number" id="statFavorites">12</span>
+                    <span class="stat-text">Film Favorit</span>
+                  </div>
+                </div>
+                <div class="stat-box">
+                  <div>
+                    <span class="stat-number" id="statHours">128</span>
+                    <span class="stat-text">Jam Tonton</span>
+                  </div>
+                </div>
+              </div>
+
+              <button class="btn-edit" id="editProfileBtn">
+                Yuk Edit Profi Kamu Agar Lebih Seru
+              </button>
+            </div>
+
+            <!-- Profile Info Cards -->
+            <div class="profile-cards">
+              <!-- Informasi Dasar Card -->
+              <div class="info-card">
+                <div class="card-title">
+                  <h3>Informasi Dasar</h3>
+                </div>
+                <div class="info-list" id="infoList">
+                  <!-- Dynamic from JS -->
+                </div>
+              </div>
+
+              <!-- Langganan Card -->
+              <div class="info-card">
+                <div class="card-title">
+                  <h3>Langganan</h3>
+                </div>
+                <div class="subscription-info" id="subscriptionInfo">
+                  <!-- Dynamic from JS -->
+                </div>
+              </div>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="cta-section">
+              <p>Ini profil pengguna kamu, yuk cari film yang kamu suka!</p>
+              <a href="/frontend/pages/film/katalog.html" class="btn-cta">
+                Cari Film Sekarang
+              </a>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- Modal Edit Avatar -->
+    <div id="avatarModal" class="modal">
+      <div class="modal-overlay" id="avatarOverlay"></div>
+      <div class="modal-container">
+        <div class="modal-header">
+          <h3>Ubah Foto Profil</h3>
+          <button class="modal-close" id="closeAvatarBtn">Tutup</button>
+        </div>
+        <div class="modal-body">
+          <div class="avatar-preview-area">
+            <img
+              id="avatarPreview"
+              class="avatar-preview-img"
+              src=""
+              alt="Preview"
+            />
+          </div>
+          <input
+            type="file"
+            id="avatarFile"
+            accept="image/jpeg,image/png,image/jpg"
+            style="display: none"
+          />
+          <div class="modal-buttons">
+            <button class="btn-outline" id="selectImageBtn">
+              Pilih Gambar
+            </button>
+            <button class="btn-primary" id="saveAvatarBtn" disabled>
+              Simpan
+            </button>
+          </div>
+          <p class="hint-text">Format: JPG, PNG. Maksimal 2MB</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Edit Profile -->
+    <div id="editProfileModal" class="modal">
+      <div class="modal-overlay" id="editOverlay"></div>
+      <div class="modal-container">
+        <div class="modal-header">
+          <h3>Edit Profil</h3>
+          <button class="modal-close" id="closeEditBtn">Tutup</button>
+        </div>
+        <div class="modal-body">
+          <form id="editProfileFormModal">
+            <div class="form-group">
+              <label>Nama Lengkap</label>
+              <input
+                type="text"
+                id="editFullnameInput"
+                class="form-input"
+                placeholder="Masukkan nama lengkap"
+              />
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input
+                type="email"
+                id="editEmailInput"
+                class="form-input"
+                placeholder="Masukkan email"
+              />
+            </div>
+            <div class="form-group">
+              <label>Username</label>
+              <input
+                type="text"
+                id="editUsernameInput"
+                class="form-input"
+                placeholder="Masukkan username"
+              />
+            </div>
+            <div class="modal-buttons">
+              <button type="button" class="btn-outline" id="cancelEditBtn">
+                Batal
+              </button>
+              <button type="submit" class="btn-primary" id="saveEditBtn">
+                Simpan
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+      // ========================================
+      // DATA STATE
+      // ========================================
+      const state = {
+        user: {
+          fullname: "Budi Santoso",
+          username: "budi.santoso",
+          email: "budi.santoso@gmail.com",
+          role: "member",
+          status: "active",
+          subscriptionTier: "Premium",
+          subscriptionExpiry: "15 Juni 2026",
+          memberSince: "15 Januari 2024",
+        },
+        stats: {
+          moviesWatched: 47,
+          favorites: 12,
+          watchHours: 128,
+        },
+        selectedAvatarFile: null,
+      };
+
+      // ========================================
+      // FUNGSI UTILITAS
+      // ========================================
+      const showToast = (message, type = "success") => {
+        const existingToast = document.querySelector(".toast");
+        if (existingToast) existingToast.remove();
+
+        const toast = document.createElement("div");
+        toast.className = `toast toast-${type}`;
+        toast.textContent = message;
+        document.body.appendChild(toast);
+
+        setTimeout(() => toast.remove(), 3000);
+      };
+
+      const initFeather = () => {
+        if (typeof feather !== "undefined") feather.replace();
+      };
+
+      // ========================================
+      // RENDER UI
+      // ========================================
+      const renderProfile = () => {
+        // Render teks sederhana
+        document.getElementById("profileName").textContent =
+          state.user.fullname;
+        document.getElementById("profileEmail").textContent = state.user.email;
+        document.getElementById("profileRole").textContent =
+          state.user.role === "admin" ? "Admin" : "Member";
+        document.getElementById("profileStatus").textContent =
+          state.user.status === "active" ? "Aktif" : "Tidak Aktif";
+
+        // Render Stats
+        document.getElementById("statMovies").textContent =
+          state.stats.moviesWatched;
+        document.getElementById("statFavorites").textContent =
+          state.stats.favorites;
+        document.getElementById("statHours").textContent =
+          state.stats.watchHours;
+
+        // Render Info List dengan Template Literals
+        const infoList = document.getElementById("infoList");
+        if (infoList) {
+          infoList.innerHTML = `
+                    ${renderInfoRow("Nama Lengkap", state.user.fullname)}
+                    ${renderInfoRow("Username", state.user.username)}
+                    ${renderInfoRow("Email", state.user.email)}
+                    ${renderInfoRow("Role", state.user.role === "admin" ? "Administrator" : "Member")}
+                    ${renderInfoRow("Status", state.user.status === "active" ? "Aktif" : "Tidak Aktif")}
+                    ${renderInfoRow("Bergabung", state.user.memberSince)}
+                `;
+        }
+
+        // Render Subscription
+        const subEl = document.getElementById("subscriptionInfo");
+        if (subEl) {
+          subEl.innerHTML = `
+                    <div class="subscription-plan">${state.user.subscriptionTier}</div>
+                    <div class="subscription-expiry">Berlaku hingga: ${state.user.subscriptionExpiry}</div>
+                `;
+        }
+        initFeather();
+      };
+
+      const renderInfoRow = (label, value) => `
+            <div class="info-row">
+                <span class="info-label">${label}</span>
+                <span class="info-value">${value}</span>
+            </div>
+        `;
+
+      // ========================================
+      // MANAJEMEN MODAL & AVATAR
+      // ========================================
+      const toggleModal = (modalId, show = true) => {
+        const modal = document.getElementById(modalId);
+        if (modal) modal.classList.toggle("active", show);
+      };
+
+      const handleAvatarChange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        if (!file.type.startsWith("image/"))
+          return showToast("File harus gambar!", "error");
+        if (file.size > 2 * 1024 * 1024)
+          return showToast("Maksimal 2MB!", "error");
+
+        state.selectedAvatarFile = file;
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          document.getElementById("avatarPreview").src = event.target.result;
+          document.getElementById("saveAvatarBtn").disabled = false;
+        };
+        reader.readAsDataURL(file);
+      };
+
+      // ========================================
+      // FUNGSI EDIT PROFIL
+      // ========================================
+      const openEditProfileModal = () => {
+        // Isi form dengan data current user
+        document.getElementById("editFullnameInput").value =
+          state.user.fullname;
+        document.getElementById("editEmailInput").value = state.user.email;
+        document.getElementById("editUsernameInput").value =
+          state.user.username;
+        toggleModal("editProfileModal", true);
+      };
+
+      const closeEditProfileModal = () => {
+        toggleModal("editProfileModal", false);
+      };
+
+      const saveProfileChanges = (e) => {
+        e.preventDefault();
+
+        const newFullname = document
+          .getElementById("editFullnameInput")
+          .value.trim();
+        const newEmail = document.getElementById("editEmailInput").value.trim();
+        const newUsername = document
+          .getElementById("editUsernameInput")
+          .value.trim();
+
+        if (newFullname) state.user.fullname = newFullname;
+        if (newEmail) state.user.email = newEmail;
+        if (newUsername) state.user.username = newUsername;
+
+        renderProfile();
+        showToast("Profil berhasil diperbarui!");
+        closeEditProfileModal();
+      };
+
+      // ========================================
+      // INISIALISASI & EVENT BINDING
+      // ========================================
+      document.addEventListener("DOMContentLoaded", () => {
+        renderProfile();
+
+        // Theme logic
+        const savedTheme = localStorage.getItem("pilih-in-theme") || "light";
+        document.documentElement.setAttribute("data-theme", savedTheme);
+
+        // Event Listeners
+        document
+          .getElementById("themeToggleBtn")
+          ?.addEventListener("click", () => {
+            const newTheme =
+              document.documentElement.getAttribute("data-theme") === "dark"
+                ? "light"
+                : "dark";
+            document.documentElement.setAttribute("data-theme", newTheme);
+            localStorage.setItem("pilih-in-theme", newTheme);
+
+            // Update button text
+            const themeBtn = document.getElementById("themeToggleBtn");
+            if (themeBtn) {
+              const isDark = newTheme === "dark";
+              themeBtn.innerHTML = isDark
+                ? '<span class="theme-icon">🌙</span><span>Tema Gelap</span>'
+                : '<span class="theme-icon">☀️</span><span>Tema Terang</span>';
+            }
+          });
+
+        document.getElementById("logoutBtn")?.addEventListener("click", () => {
+          if (confirm("Keluar dari akun?")) {
+            localStorage.removeItem("pilih-in-session");
+            window.location.href = "/frontend/pages/main/login.html";
+          }
+        });
+
+        // Avatar Handlers
+        document
+          .getElementById("editAvatarBtn")
+          ?.addEventListener("click", () => toggleModal("avatarModal"));
+        document
+          .getElementById("closeAvatarBtn")
+          ?.addEventListener("click", () => toggleModal("avatarModal", false));
+        document
+          .getElementById("avatarFile")
+          ?.addEventListener("change", handleAvatarChange);
+
+        document
+          .getElementById("selectImageBtn")
+          ?.addEventListener("click", () => {
+            document.getElementById("avatarFile").click();
+          });
+
+        document
+          .getElementById("saveAvatarBtn")
+          ?.addEventListener("click", () => {
+            document.getElementById("profileAvatar").src =
+              document.getElementById("avatarPreview").src;
+            showToast("Avatar diperbarui!");
+            toggleModal("avatarModal", false);
+          });
+
+        document
+          .getElementById("avatarOverlay")
+          ?.addEventListener("click", () => {
+            toggleModal("avatarModal", false);
+          });
+
+        // Edit Profile Handlers
+        document
+          .getElementById("editProfileBtn")
+          ?.addEventListener("click", openEditProfileModal);
+        document
+          .getElementById("closeEditBtn")
+          ?.addEventListener("click", closeEditProfileModal);
+        document
+          .getElementById("cancelEditBtn")
+          ?.addEventListener("click", closeEditProfileModal);
+        document
+          .getElementById("editOverlay")
+          ?.addEventListener("click", closeEditProfileModal);
+        document
+          .getElementById("editProfileFormModal")
+          ?.addEventListener("submit", saveProfileChanges);
+      });
+    </script>
+  </body>
 </html>

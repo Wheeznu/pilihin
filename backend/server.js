@@ -6,7 +6,6 @@ const crypto = require("crypto");
 const PORT = 3000;
 const DATA_DIR = path.join(__dirname, "..", "data");
 const ACCOUNT_FILE = path.join(DATA_DIR, "account.json");
-const CONTACT_FILE = path.join(DATA_DIR, "contact-messages.json");
 
 const CORS_ORIGINS = [
   "http://127.0.0.1:5500",
@@ -28,8 +27,8 @@ function writeJSON(filePath, data) {
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2), "utf-8");
 }
 
-function generateId(prefix = "user") {
-  return `${prefix}-${Date.now()}-${crypto.randomBytes(3).toString("hex")}`;
+function generateId() {
+  return `user-${Date.now()}-${crypto.randomBytes(3).toString("hex")}`;
 }
 
 function parseBody(req) {
@@ -93,7 +92,7 @@ async function handleRegister(req, res) {
 
   const now = new Date().toISOString();
   const newUser = {
-    id: generateId("user"),
+    id: generateId(),
     username,
     email,
     password,
@@ -154,47 +153,6 @@ async function handleForgotPassword(req, res) {
   });
 }
 
-async function handleContact(req, res) {
-  const body = await parseBody(req);
-  if (!body || !body.name || !body.email || !body.message) {
-    return sendJSON(res, 400, { success: false, error: "Semua field wajib diisi" });
-  }
-
-  const name = body.name.trim();
-  const email = body.email.trim().toLowerCase();
-  const message = body.message.trim();
-
-  if (name.length < 3) {
-    return sendJSON(res, 400, { success: false, error: "Nama minimal 3 karakter" });
-  }
-  if (message.length < 10) {
-    return sendJSON(res, 400, { success: false, error: "Pesan minimal 10 karakter" });
-  }
-
-  const db = readJSON(CONTACT_FILE);
-  if (!db) {
-    return sendJSON(res, 500, { success: false, error: "Gagal membaca database" });
-  }
-
-  const now = new Date().toISOString();
-  const newMessage = {
-    id: generateId("msg"),
-    name,
-    email,
-    message,
-    createdAt: now,
-    read: false,
-  };
-
-  db.messages.push(newMessage);
-  writeJSON(CONTACT_FILE, db);
-
-  sendJSON(res, 201, {
-    success: true,
-    message: "Pesan berhasil dikirim",
-  });
-}
-
 const server = http.createServer(async (req, res) => {
   if (handleCORS(req, res)) return;
 
@@ -205,8 +163,6 @@ const server = http.createServer(async (req, res) => {
     await handleRegister(req, res);
   } else if (req.method === "POST" && pathname === "/api/auth/forgot-password") {
     await handleForgotPassword(req, res);
-  } else if (req.method === "POST" && pathname === "/api/contact") {
-    await handleContact(req, res);
   } else {
     sendJSON(res, 404, { success: false, error: "Endpoint tidak ditemukan" });
   }

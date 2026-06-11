@@ -1,121 +1,22 @@
 const ADMIN_LINKS = [
-  {
-    href: "/frontend/pages/admin/konten.html",
-    icon: "film",
-    label: "Kelola Konten",
-    isActive: (path) => path.includes("/admin/konten.html")
-  },
-  {
-    href: "/frontend/pages/admin/film-create.html",
-    icon: "plus-circle",
-    label: "Tambah Film",
-    isActive: (path) => path.includes("/admin/film-create.html")
-  },
-  {
-    href: "/frontend/pages/admin/film-edit.html",
-    icon: "edit-3",
-    label: "Edit Film",
-    isActive: (path) => path.includes("/admin/film-edit.html")
-  },
-  {
-    href: "/frontend/pages/admin/aktor-create.html",
-    icon: "plus-circle",
-    label: "Tambah Aktor",
-    isActive: (path) => path.includes("/admin/aktor-create.html")
-  },
-  {
-    href: "/frontend/pages/admin/aktor-edit.html",
-    icon: "edit-3",
-    label: "Edit Aktor",
-    isActive: (path) => path.includes("/admin/aktor-edit.html")
-  },
-  {
-    href: "/frontend/pages/admin/sutradara-create.html",
-    icon: "plus-circle",
-    label: "Tambah Sutradara",
-    isActive: (path) => path.includes("/admin/sutradara-create.html")
-  },
-  {
-    href: "/frontend/pages/admin/sutradara-edit.html",
-    icon: "edit-3",
-    label: "Edit Sutradara",
-    isActive: (path) => path.includes("/admin/sutradara-edit.html")
-  },
-  {
-    href: "/frontend/pages/admin/users.html",
-    icon: "users",
-    label: "Kelola Pengguna",
-    isActive: (path) => path.includes("/admin/users.html")
-  },
-  {
-    href: "/frontend/pages/admin/reviews.html",
-    icon: "message-square",
-    label: "Kelola Ulasan",
-    isActive: (path) => path.includes("/admin/reviews.html")
-  },
-  {
-    href: "/frontend/pages/admin/promo.html",
-    icon: "tag",
-    label: "Kelola Promo",
-    isActive: (path) => path.includes("/admin/promo.html")
-  },
-  {
-    href: "/frontend/pages/admin/faq.html",
-    icon: "help-circle",
-    label: "Kelola FAQ",
-    isActive: (path) => path.includes("/admin/faq.html")
-  },
-  {
-    href: "/frontend/pages/admin/laporan.html",
-    icon: "file-text",
-    label: "Laporan",
-    isActive: (path) => path.includes("/admin/laporan.html")
-  },
-  {
-    href: "/frontend/pages/admin/notifications.html",
-    icon: "bell",
-    label: "Notifikasi",
-    isActive: (path) => path.includes("/admin/notifications.html")
-  }
+  { href: "/frontend/pages/admin/dashboard.html", icon: "grid", label: "Dashboard" },
+  { href: "/frontend/pages/admin/films-crud.html", icon: "video", label: "Kelola Film" },
+  { href: "/frontend/pages/admin/actors-crud.html", icon: "users", label: "Kelola Aktor" },
+  { href: "/frontend/pages/admin/directors-crud.html", icon: "camera", label: "Kelola Sutradara" },
+  { href: "/frontend/pages/admin/articles-crud.html", icon: "file-text", label: "Kelola Artikel" },
+  { href: "/frontend/pages/admin/users-management.html", icon: "user-check", label: "Manajemen User" },
+  { href: "/frontend/pages/admin/pricing-vouchers.html", icon: "tag", label: "Harga & Voucher" },
+  { href: "/frontend/pages/admin/faq-crud.html", icon: "help-circle", label: "Kelola FAQ" },
+  { href: "/frontend/pages/admin/reviews-moderation.html", icon: "message-square", label: "Moderasi Review" },
 ];
 
 const MANAGER_LINKS = [
-  {
-    href: "/frontend/pages/manager/earnings.html",
-    icon: "dollar-sign",
-    label: "Pendapatan",
-    isActive: (path) => path.includes("/manager/earnings.html")
-  },
-  {
-    href: "/frontend/pages/manager/traffic.html",
-    icon: "trending-up",
-    label: "Statistik Traffic",
-    isActive: (path) => path.includes("/manager/traffic.html")
-  },
-  {
-    href: "/frontend/pages/manager/top-films.html",
-    icon: "award",
-    label: "Film Terpopuler",
-    isActive: (path) => path.includes("/manager/top-films.html")
-  },
-  {
-    href: "/frontend/pages/manager/approvals.html",
-    icon: "check-circle",
-    label: "Persetujuan",
-    isActive: (path) => path.includes("/manager/approvals.html")
-  },
-  {
-    href: "/frontend/pages/manager/exports.html",
-    icon: "download",
-    label: "Ekspor Laporan",
-    isActive: (path) => path.includes("/manager/exports.html")
-  },
-  {
-    href: "/frontend/pages/manager/reviews.html",
-    icon: "message-square",
-    label: "Ulasan Film",
-    isActive: (path) => path.includes("/manager/reviews.html")
-  }
+  { href: "/frontend/pages/manager/dashboard.html", icon: "bar-chart-2", label: "Dashboard" },
+  { href: "/frontend/pages/manager/earnings.html", icon: "dollar-sign", label: "Pendapatan" },
+  { href: "/frontend/pages/manager/traffic-stats.html", icon: "trending-up", label: "Statistik Traffic" },
+  { href: "/frontend/pages/manager/top-films.html", icon: "award", label: "Film Terpopuler" },
+  { href: "/frontend/pages/manager/approvals.html", icon: "check-circle", label: "Persetujuan" },
+  { href: "/frontend/pages/manager/reports-export.html", icon: "download", label: "Laporan" },
 ];
 
 class Sidebar {
@@ -129,12 +30,10 @@ class Sidebar {
     const session = Sidebar._getSession();
     if (!session || (session.role !== "admin" && session.role !== "manager")) return;
 
-    const isDesktop = window.innerWidth > 768;
-
-    Sidebar._createToggle(isDesktop);
-    Sidebar._createPanel(session.role, isDesktop);
-    Sidebar._createOverlay(isDesktop);
-    Sidebar._bindEvents(isDesktop);
+    Sidebar._createToggle();
+    Sidebar._createPanel(session.role);
+    Sidebar._createOverlay();
+    Sidebar._bindEvents();
   }
 
   static _getSession() {
@@ -145,34 +44,23 @@ class Sidebar {
     }
   }
 
-  static _createToggle(isDesktop) {
+  static _createToggle() {
     const btn = document.createElement("button");
     btn.id = Sidebar.TOGGLE_ID;
-    btn.className = "sidebar-toggle-btn";
-    btn.innerHTML = isDesktop ? '<i data-feather="x"></i>' : '<i data-feather="menu"></i>';
-    btn.setAttribute("aria-label", "Toggle Sidebar");
-
-    const navbarLeft = document.querySelector(".navbar__left");
-    if (navbarLeft) {
-      navbarLeft.insertBefore(btn, navbarLeft.firstChild);
-    } else {
-      btn.classList.add("sidebar-toggle-fallback");
-      document.body.appendChild(btn);
-    }
+    btn.className = "sidebar-toggle";
+    btn.innerHTML = '<i data-feather="chevron-right"></i>';
+    document.body.appendChild(btn);
 
     requestAnimationFrame(() => {
+      btn.classList.add("sidebar-toggle--visible");
       feather.replace();
     });
   }
 
-  static _createPanel(role, isDesktop) {
+  static _createPanel(role) {
     const panel = document.createElement("aside");
     panel.id = Sidebar.PANEL_ID;
     panel.className = "sidebar-panel";
-    if (isDesktop) {
-      panel.classList.add("sidebar-panel--open");
-      document.body.classList.add("sidebar-open");
-    }
 
     const links = role === "admin" ? ADMIN_LINKS : MANAGER_LINKS;
     const roleLabel = role === "admin" ? "Administrator" : "Manager";
@@ -185,7 +73,7 @@ class Sidebar {
       </div>
       <nav class="sidebar-panel__nav">
         ${links.map((link) => `
-          <a href="${link.href}" class="sidebar-panel__link${link.isActive(currentPath) ? " sidebar-panel__link--active" : ""}">
+          <a href="${link.href}" class="sidebar-panel__link${currentPath === link.href ? " sidebar-panel__link--active" : ""}">
             <i data-feather="${link.icon}"></i>
             <span>${link.label}</span>
           </a>
@@ -200,34 +88,25 @@ class Sidebar {
     });
   }
 
-  static _createOverlay(isDesktop) {
+  static _createOverlay() {
     const overlay = document.createElement("div");
     overlay.id = Sidebar.OVERLAY_ID;
     overlay.className = "sidebar-overlay";
     document.body.appendChild(overlay);
   }
 
-  static _bindEvents(isDesktop) {
+  static _bindEvents() {
     const toggle = document.getElementById(Sidebar.TOGGLE_ID);
     const panel = document.getElementById(Sidebar.PANEL_ID);
     const overlay = document.getElementById(Sidebar.OVERLAY_ID);
 
     toggle?.addEventListener("click", () => {
       const isOpen = panel?.classList.toggle("sidebar-panel--open");
-      const currentIsDesktop = window.innerWidth > 768;
-
-      if (currentIsDesktop) {
-        document.body.classList.toggle("sidebar-open", isOpen);
-        overlay?.classList.remove("sidebar-overlay--open");
-      } else {
-        document.body.classList.remove("sidebar-open");
-        overlay?.classList.toggle("sidebar-overlay--open", isOpen);
-      }
-
+      overlay?.classList.toggle("sidebar-overlay--open", isOpen);
       if (toggle) {
         toggle.innerHTML = isOpen
-          ? '<i data-feather="x"></i>'
-          : '<i data-feather="menu"></i>';
+          ? '<i data-feather="chevron-left"></i>'
+          : '<i data-feather="chevron-right"></i>';
         feather.replace();
       }
     });
@@ -236,7 +115,7 @@ class Sidebar {
       panel?.classList.remove("sidebar-panel--open");
       overlay.classList.remove("sidebar-overlay--open");
       if (toggle) {
-        toggle.innerHTML = '<i data-feather="menu"></i>';
+        toggle.innerHTML = '<i data-feather="chevron-right"></i>';
         feather.replace();
       }
     });
@@ -245,35 +124,9 @@ class Sidebar {
       if (e.key === "Escape") {
         panel?.classList.remove("sidebar-panel--open");
         overlay?.classList.remove("sidebar-overlay--open");
-        document.body.classList.remove("sidebar-open");
         if (toggle) {
-          toggle.innerHTML = '<i data-feather="menu"></i>';
+          toggle.innerHTML = '<i data-feather="chevron-right"></i>';
           feather.replace();
-        }
-      }
-    });
-
-    window.addEventListener("resize", () => {
-      const isNowDesktop = window.innerWidth > 768;
-      const isOpen = panel?.classList.contains("sidebar-panel--open");
-
-      if (isNowDesktop) {
-        overlay?.classList.remove("sidebar-overlay--open");
-        if (isOpen) {
-          document.body.classList.add("sidebar-open");
-          if (toggle) {
-            toggle.innerHTML = '<i data-feather="x"></i>';
-            feather.replace();
-          }
-        }
-      } else {
-        document.body.classList.remove("sidebar-open");
-        if (isOpen) {
-          overlay?.classList.add("sidebar-overlay--open");
-          if (toggle) {
-            toggle.innerHTML = '<i data-feather="x"></i>';
-            feather.replace();
-          }
         }
       }
     });

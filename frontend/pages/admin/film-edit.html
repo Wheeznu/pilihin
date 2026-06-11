@@ -1,30 +1,274 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id" data-theme="dark">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Edit & Hapus Film - Pilih.in</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100..900&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href="../../css/reset.css" />
-        <link rel="stylesheet" href="../../css/design-system.css" />
-        <link rel="stylesheet" href="../../css/components/navbar.css" />
-        <link rel="stylesheet" href="../../css/components/sidebar.css" />
-        <link rel="stylesheet" href="../../css/components/button.css" />
-        <link rel="stylesheet" href="../../css/components/form.css" />
-        <link rel="stylesheet" href="../../css/pages/admin-panel.css" />
-    </head>
-    <body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit & Hapus Film - Pilih.in</title>
+
+    <!-- Google Sans Flex - WAJIB sesuai MD -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS WAJIB: reset → design-system → components → pages -->
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/design-system.css" />
+    <link rel="stylesheet" href="../../css/components/navbar.css" />
+    <link rel="stylesheet" href="../../css/components/sidebar.css" />
+    <link rel="stylesheet" href="../../css/components/button.css" />
+    <link rel="stylesheet" href="../../css/components/modal.css" />
+    <link rel="stylesheet" href="../../css/components/card.css" />
+    <link rel="stylesheet" href="../../css/pages/edit-film.css" />
+
+    <style>
+      * {
+        font-family:
+          "Google Sans Flex",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          sans-serif !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-layout">
+      <!-- SIDEBAR -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar__logo">
+          <a href="../../index.html"
+            >Pilih<span class="text-primary">.in</span></a
+          >
+        </div>
+        <nav class="sidebar__nav">
+          <a href="../../index.html" class="nav-item">
+            <i data-feather="home"></i> Beranda
+          </a>
+          <a href="../film/katalog.html" class="nav-item">
+            <i data-feather="film"></i> Film
+          </a>
+          <a href="dashboard.html" class="nav-item">
+            <i data-feather="grid"></i> Dashboard
+          </a>
+          <a href="tambah-film.html" class="nav-item">
+            <i data-feather="plus-circle"></i> Tambah Film
+          </a>
+          <a href="edit-film.html" class="nav-item active">
+            <i data-feather="edit-2"></i> Edit & Hapus Film
+          </a>
+        </nav>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <div class="app-main">
         <div id="navbar-container"></div>
-        <main class="admin-film-edit-page" id="filmEditPage"></main>
-        <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-        <script type="module">
-            import Navbar from "../../js/components/navbar.js";
-            document.addEventListener("DOMContentLoaded", async () => {
-                await Navbar.load("navbar-container");
-                feather.replace();
-            });
-        </script>
-    </body>
+
+        <main class="page-content">
+          <!-- HEADER -->
+          <div class="page-header">
+            <h1>Kelola Film</h1>
+            <p>Edit atau hapus film dari repositori sinema</p>
+          </div>
+
+          <!-- SEARCH & FILTER -->
+          <div class="search-bar">
+            <div class="search-input-wrapper">
+              <i data-feather="search"></i>
+              <input
+                type="text"
+                id="searchFilm"
+                class="search-input"
+                placeholder="Cari judul film..."
+              />
+            </div>
+            <div class="filter-wrapper">
+              <select id="filterGenre" class="filter-select">
+                <option value="">Semua Genre</option>
+                <option value="Action">Action</option>
+                <option value="Drama">Drama</option>
+                <option value="Komedi">Komedi</option>
+                <option value="Horor">Horor</option>
+                <option value="Romantis">Romantis</option>
+                <option value="Thriller">Thriller</option>
+                <option value="Sci-Fi">Sci-Fi</option>
+                <option value="Animasi">Animasi</option>
+                <option value="Bencana">Bencana</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- STATISTIK -->
+          <div class="stats-row">
+            <div class="stat-badge">
+              <i data-feather="film"></i>
+              <span id="totalFilmsCount">0</span>
+              <label>Total Film</label>
+            </div>
+          </div>
+
+          <!-- DAFTAR FILM GRID -->
+          <div class="films-grid" id="filmsGrid">
+            <div class="loading-state">
+              <i data-feather="loader"></i>
+              <p>Memuat daftar film...</p>
+            </div>
+          </div>
+
+          <!-- PAGINATION -->
+          <div class="pagination" id="pagination"></div>
+        </main>
+      </div>
+    </div>
+
+    <!-- MODAL EDIT FILM -->
+    <div class="modal" id="editModal">
+      <div class="modal-overlay" data-action="close"></div>
+      <div class="modal-content modal-lg">
+        <div class="modal-header">
+          <h2>Edit Film</h2>
+          <button class="modal-close" data-action="close">
+            <i data-feather="x"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="editFilmForm">
+            <div class="form-two-columns">
+              <div class="form-group">
+                <label class="form-label"
+                  >Judul Film <span class="required">*</span></label
+                >
+                <input type="text" id="editTitle" class="form-input" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label"
+                  >Tanggal Rilis <span class="required">*</span></label
+                >
+                <input
+                  type="date"
+                  id="editReleaseDate"
+                  class="form-input"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-two-columns">
+              <div class="form-group">
+                <label class="form-label">Sutradara</label>
+                <input type="text" id="editDirector" class="form-input" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Rating (1-10)</label>
+                <input
+                  type="number"
+                  id="editRating"
+                  class="form-input"
+                  step="0.1"
+                  min="1"
+                  max="10"
+                />
+              </div>
+            </div>
+            <div class="form-two-columns">
+              <div class="form-group">
+                <label class="form-label">Durasi (menit)</label>
+                <input type="number" id="editDuration" class="form-input" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Genre</label>
+                <select id="editGenre" class="form-select">
+                  <option value="Action">Action</option>
+                  <option value="Drama">Drama</option>
+                  <option value="Komedi">Komedi</option>
+                  <option value="Horor">Horor</option>
+                  <option value="Romantis">Romantis</option>
+                  <option value="Thriller">Thriller</option>
+                  <option value="Sci-Fi">Sci-Fi</option>
+                  <option value="Animasi">Animasi</option>
+                  <option value="Bencana">Bencana</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Aktor / Pemeran</label>
+              <input
+                type="text"
+                id="editActors"
+                class="form-input"
+                placeholder="Pisahkan dengan koma"
+              />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Sinopsis</label>
+              <textarea
+                id="editSynopsis"
+                class="form-textarea"
+                rows="4"
+              ></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Link Trailer (YouTube)</label>
+              <input type="url" id="editTrailer" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Link Streaming (1080p)</label>
+              <input type="url" id="editStreamingUrl" class="form-input" />
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-action="close"
+              >
+                Batal
+              </button>
+              <button type="submit" class="btn btn-primary">
+                Simpan Perubahan
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL HAPUS FILM -->
+    <div class="modal" id="deleteModal">
+      <div class="modal-overlay" data-action="close"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Hapus Film</h2>
+          <button class="modal-close" data-action="close">
+            <i data-feather="x"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="delete-warning">
+            <i data-feather="alert-triangle"></i>
+            <p>
+              Apakah Anda yakin ingin menghapus film
+              <strong id="deleteFilmTitle"></strong>?
+            </p>
+            <span class="warning-text"
+              >Tindakan ini tidak dapat dibatalkan!</span
+            >
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-action="close">Batal</button>
+          <button class="btn btn-danger" id="confirmDeleteBtn">
+            Hapus Permanen
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOAST CONTAINER -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script type="module" src="../../js/logic-pages/edit-film.js"></script>
+  </body>
 </html>

@@ -4,102 +4,27 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Hubungi Kami - Pilih.in</title>
-
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100..900&display=swap"
-            rel="stylesheet"
-        />
-
+        <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100..900&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="../../css/reset.css" />
         <link rel="stylesheet" href="../../css/design-system.css" />
         <link rel="stylesheet" href="../../css/components/navbar.css" />
         <link rel="stylesheet" href="../../css/components/button.css" />
-        <link rel="stylesheet" href="../../css/components/footer.css" />
-        <link rel="stylesheet" href="../../css/pages/contact.css" />
     </head>
     <body>
         <div id="navbar-container"></div>
-
         <main class="contact-page">
             <section class="page-hero">
                 <h1>Hubungi Kami</h1>
-                <p>Punya pertanyaan atau masukan? Kami siap membantu Anda</p>
-            </section>
-
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <div class="contact-info-card">
-                        <i data-feather="map-pin"></i>
-                        <div>
-                            <h3>Alamat</h3>
-                            <p>Universitas Trunojoyo Madura<br />Jl. Raya Telang, Kec. Kamal, Kab. Bangkalan, Jawa Timur 69162</p>
-                        </div>
-                    </div>
-                    <div class="contact-info-card">
-                        <i data-feather="mail"></i>
-                        <div>
-                            <h3>Email</h3>
-                            <p>support@pilih.in</p>
-                        </div>
-                    </div>
-                    <div class="contact-info-card">
-                        <i data-feather="clock"></i>
-                        <div>
-                            <h3>Jam Operasional</h3>
-                            <p>Senin - Jumat, 08:00 - 17:00 WIB</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="contact-form-wrapper">
-                    <h2>Kirim Pesan</h2>
-                    <div id="contactAlert" class="contact-alert"></div>
-                    <form class="contact-form" id="contactForm" novalidate>
-                        <div class="form-group">
-                            <label for="contactName">Nama Lengkap</label>
-                            <input type="text" id="contactName" placeholder="Masukkan nama Anda" required />
-                        </div>
-                        <div class="form-group">
-                            <label for="contactEmail">Email</label>
-                            <input type="email" id="contactEmail" placeholder="Masukkan email Anda" required />
-                        </div>
-                        <div class="form-group">
-                            <label for="contactMessage">Pesan</label>
-                            <textarea id="contactMessage" placeholder="Tulis pesan Anda di sini..." required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary" id="contactSubmit">
-                            <i data-feather="send"></i> Kirim Pesan
-                        </button>
-                    </form>
-                </div>
-            </div>
-
-            <section class="contact-map">
-                <h2>Lokasi Kami</h2>
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.8070480269827!2d112.724200974544!3d-7.129194869360306!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd803da36ce0ce3%3A0x7f0640586b531c77!2sUniversitas%20Trunojoyo%20Madura!5e0!3m2!1sid!2sid!4v1"
-                    allowfullscreen=""
-                    loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"
-                ></iframe>
             </section>
         </main>
-
-        <div id="footer-container"></div>
-
         <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-
         <script type="module">
             import Navbar from "../../js/components/navbar.js";
-            import Footer from "../../js/components/footer.js";
-            import ContactPage from "../../js/logic-pages/contact.js";
             document.addEventListener("DOMContentLoaded", async () => {
                 await Navbar.load("navbar-container");
-                await Footer.load("footer-container");
                 feather.replace();
-                new ContactPage();
             });
         </script>
     </body>

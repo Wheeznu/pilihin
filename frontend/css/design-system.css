@@ -23,7 +23,6 @@
 
     --overlay-dark: rgba(0, 0, 0, 0.65);
     --overlay-light: rgba(255, 255, 255, 0.08);
-    --hero-gradient-rgb: 18, 18, 18;
 }
 
 :root[data-theme="light"] {
@@ -51,7 +50,6 @@
 
     --overlay-dark: rgba(0, 0, 0, 0.12);
     --overlay-light: rgba(255, 255, 255, 0.65);
-    --hero-gradient-rgb: 255, 255, 255;
 }
 
 :root {
@@ -102,10 +100,6 @@
     --sidebar-width: 220px;
     --navbar-height: 64px;
     --content-max-width: 1280px;
-}
-
-body {
-    font-family: var(--font-family);
 }
 
 [data-feather], .feather {

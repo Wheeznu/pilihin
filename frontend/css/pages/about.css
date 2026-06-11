@@ -6,7 +6,7 @@
 
 .about-hero {
     text-align: center;
-    padding: var(--space-3xl) var(--space-2xl) var(--space-2xl);
+    padding: var(--space-3xl) var(--space-xl) var(--space-2xl);
     background: linear-gradient(to bottom, var(--bg-secondary), var(--bg-primary));
 }
 
@@ -25,11 +25,12 @@
 }
 
 .about-grid {
-    padding: 0 var(--space-2xl) var(--space-3xl);
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-xl) var(--space-3xl);
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: var(--space-xl);
-    justify-content: center;
 }
 
 .about-card {
@@ -99,8 +100,8 @@
     }
 
     .about-grid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        padding: 0 var(--space-2xl) var(--space-xl);
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        padding: 0 var(--space-md) var(--space-xl);
         gap: var(--space-md);
     }
 

@@ -3,47 +3,28 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Harga & Langganan - Pilih.in</title>
-
+        <title>Harga Langganan - Pilih.in</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100..900&display=swap"
-            rel="stylesheet"
-        />
-
+        <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100..900&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="../../css/reset.css" />
         <link rel="stylesheet" href="../../css/design-system.css" />
         <link rel="stylesheet" href="../../css/components/navbar.css" />
         <link rel="stylesheet" href="../../css/components/button.css" />
-        <link rel="stylesheet" href="../../css/components/footer.css" />
-        <link rel="stylesheet" href="../../css/pages/pricing.css" />
     </head>
     <body>
         <div id="navbar-container"></div>
-
         <main class="pricing-page">
-            <section class="pricing-hero">
-                <h1 class="pricing-hero__title">Pilih Paket <span class="text-primary">Langganan</span></h1>
-                <p class="pricing-hero__subtitle">Nikmati konten tanpa batas dengan harga terbaik. Hemat hingga 40%!</p>
+            <section class="page-hero">
+                <h1>Pilih Paket Langganan</h1>
             </section>
-
-            <div class="pricing-list" id="pricingList"></div>
         </main>
-
-        <div id="footer-container"></div>
-
         <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-
         <script type="module">
             import Navbar from "../../js/components/navbar.js";
-            import Footer from "../../js/components/footer.js";
-            import PricingPage from "../../js/logic-pages/pricing.js";
             document.addEventListener("DOMContentLoaded", async () => {
                 await Navbar.load("navbar-container");
-                await Footer.load("footer-container");
                 feather.replace();
-                new PricingPage();
             });
         </script>
     </body>

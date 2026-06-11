@@ -4,46 +4,27 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Promo - Pilih.in</title>
-
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100..900&display=swap"
-            rel="stylesheet"
-        />
-
+        <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100..900&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="../../css/reset.css" />
         <link rel="stylesheet" href="../../css/design-system.css" />
         <link rel="stylesheet" href="../../css/components/navbar.css" />
         <link rel="stylesheet" href="../../css/components/button.css" />
-        <link rel="stylesheet" href="../../css/components/footer.css" />
-        <link rel="stylesheet" href="../../css/pages/promo.css" />
     </head>
     <body>
         <div id="navbar-container"></div>
-
         <main class="promo-page">
-            <section class="promo-hero">
-                <h1 class="promo-hero__title">Promo <span class="text-primary">Spesial</span></h1>
-                <p class="promo-hero__subtitle">Jangan lewatkan penawaran terbaik dari Pilih.in. Hemat lebih banyak dengan promo-promo menarik!</p>
+            <section class="page-hero">
+                <h1>Info Promo</h1>
             </section>
-
-            <div class="promo-grid" id="promoGrid"></div>
         </main>
-
-        <div id="footer-container"></div>
-
         <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-
         <script type="module">
             import Navbar from "../../js/components/navbar.js";
-            import Footer from "../../js/components/footer.js";
-            import PromoPage from "../../js/logic-pages/promo.js";
             document.addEventListener("DOMContentLoaded", async () => {
                 await Navbar.load("navbar-container");
-                await Footer.load("footer-container");
                 feather.replace();
-                new PromoPage();
             });
         </script>
     </body>
