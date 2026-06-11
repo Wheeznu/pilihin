@@ -336,3 +336,35 @@
 
 /* ===== UTILITY ===== */
 .is-hidden { display: none !important; }
+/* ===== AVATAR OVERLAY 2 TOMBOL ===== */
+.profile-card__avatar-overlay {
+    position: absolute;
+    inset: 4px;
+    border-radius: var(--radius-full);
+    background: var(--overlay-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+}
+.profile-card__avatar-wrap:hover .profile-card__avatar-overlay { opacity: 1; }
+
+.avatar-action-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: var(--radius-full);
+    background: rgba(255,255,255,0.15);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    transition: background var(--transition-fast);
+    backdrop-filter: blur(4px);
+}
+.avatar-action-btn:hover { background: rgba(255,255,255,0.3); }
+.avatar-action-btn--danger:hover { background: rgba(226,33,52,0.7); }
+.avatar-action-btn .feather { width: 14px; height: 14px; }

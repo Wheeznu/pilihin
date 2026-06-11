@@ -132,10 +132,12 @@ class UserProfilePage {
                     <div class="profile-card__avatar-wrap">
                         <img src="${photo}" alt="${u.username}"
                              class="profile-card__avatar" id="profileAvatarImg">
-                        <label class="profile-card__avatar-overlay" for="photoInput" title="Ganti foto profil">
-                            <i data-feather="camera"></i>
-                        </label>
-                        <!-- Input tersembunyi -->
+                        <div class="profile-card__avatar-overlay">
+                            <label class="avatar-action-btn" for="photoInput" title="Ganti foto">
+                                <i data-feather="camera"></i>
+                            </label>
+                            ${u.profilePhoto ? `<button class="avatar-action-btn avatar-action-btn--danger" id="btnDeletePhoto" type="button" title="Hapus foto"><i data-feather="trash-2"></i></button>` : ""}
+                        </div>
                         <input type="file" id="photoInput" accept="image/jpeg,image/png,image/webp" class="is-hidden">
                     </div>
 
@@ -282,6 +284,7 @@ class UserProfilePage {
 
         document.getElementById("btnCancelPhoto")?.addEventListener("click", () => this._resetPhotoBar());
         document.getElementById("btnSavePhoto")?.addEventListener("click", () => this._savePhoto());
+        document.getElementById("btnDeletePhoto")?.addEventListener("click", () => this._deletePhoto());
 
         // Info form
         document.getElementById("btnResetInfo")?.addEventListener("click", () => this._resetInfoForm());
@@ -427,6 +430,41 @@ class UserProfilePage {
     }
 
     /* ─────────── HELPERS ─────────── */
+    async _deletePhoto() {
+        if (!confirm("Hapus foto profil? Foto akan diganti dengan avatar default.")) return;
+
+        const btn = document.getElementById("btnDeletePhoto");
+        if (btn) { btn.disabled = true; btn.innerHTML = '<i data-feather="loader"></i>'; feather.replace(); }
+
+        try {
+            const res = await fetch("http://localhost:3000/api/auth/update-profile", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ userId: this._user.id, profilePhoto: null }),
+            });
+            const data = await res.json();
+            if (!data.success) throw new Error(data.error);
+
+            this._user = data.user;
+            const fallback = this._fallback(this._user.username);
+
+            // Update avatar di card dan sidebar
+            document.getElementById("profileAvatarImg").src = fallback;
+            document.getElementById("sidebarAvatar").src = fallback;
+
+            // Sembunyikan tombol hapus (tidak ada foto lagi)
+            btn?.remove();
+
+            this._toast("Foto profil dihapus.", "success");
+        } catch (err) {
+            const msg = err.message === "Failed to fetch"
+                ? "Server tidak terhubung. Jalankan: node backend/server.js"
+                : err.message;
+            this._toast(msg, "error");
+            if (btn) { btn.disabled = false; btn.innerHTML = '<i data-feather="trash-2"></i>'; feather.replace(); }
+        }
+    }
+
     _toast(message, type = "success") {
         document.querySelector(".toast")?.remove();
         const icon  = type === "success" ? "check-circle" : "alert-circle";
