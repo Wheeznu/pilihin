@@ -12,23 +12,168 @@
         <link rel="stylesheet" href="../../css/components/navbar.css" />
         <link rel="stylesheet" href="../../css/components/button.css" />
         <link rel="stylesheet" href="../../css/components/footer.css" />
+        <link rel="stylesheet" href="../../css/pages/help.css" />
     </head>
     <body>
         <div id="navbar-container"></div>
+
         <main class="help-page">
+            <div class="help-deco help-deco--1"></div>
+            <div class="help-deco help-deco--2"></div>
+
             <section class="page-hero">
                 <h1>Pusat Bantuan</h1>
+                <p>Temukan jawaban dan panduan seputar Pilih.in</p>
+                <div class="help-search">
+                    <i data-feather="search"></i>
+                    <input type="text" id="helpSearch" placeholder="Cari bantuan..." />
+                </div>
+            </section>
+
+            <section>
+                <h2 class="help-section-title">Jelajahi Bantuan</h2>
+                <p class="help-section-desc">Pilih kategori yang sesuai dengan kebutuhanmu</p>
+                <div class="help-categories">
+                    <a href="/frontend/pages/main/faq.html" class="help-category-card">
+                        <div class="help-category-card__icon">
+                            <i data-feather="help-circle"></i>
+                        </div>
+                        <h3>FAQ</h3>
+                        <p>Pertanyaan yang sering diajukan seputar akun, langganan, dan pemutaran film.</p>
+                    </a>
+                    <a href="/frontend/pages/main/panduan.html" class="help-category-card">
+                        <div class="help-category-card__icon">
+                            <i data-feather="book-open"></i>
+                        </div>
+                        <h3>Panduan</h3>
+                        <p>Panduan lengkap menggunakan Pilih.in, dari mendaftar hingga menonton film.</p>
+                    </a>
+                    <a href="/frontend/pages/main/contact.html" class="help-category-card">
+                        <div class="help-category-card__icon">
+                            <i data-feather="mail"></i>
+                        </div>
+                        <h3>Hubungi Kami</h3>
+                        <p>Butuh bantuan lebih lanjut? Hubungi tim dukungan Pilih.in.</p>
+                    </a>
+                    <a href="/frontend/pages/main/privacy.html" class="help-category-card">
+                        <div class="help-category-card__icon">
+                            <i data-feather="shield"></i>
+                        </div>
+                        <h3>Kebijakan &amp; Privasi</h3>
+                        <p>Informasi tentang kebijakan privasi, syarat, dan ketentuan layanan.</p>
+                    </a>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="help-section-title">Pertanyaan Populer</h2>
+                <p class="help-section-desc">Jawaban cepat untuk pertanyaan yang paling sering ditanyakan</p>
+                <div class="help-faq" id="helpFaq">
+                    <div class="faq-item">
+                        <button class="faq-item__question">
+                            <span>Bagaimana cara membuat akun di Pilih.in?</span>
+                            <i data-feather="chevron-down"></i>
+                        </button>
+                        <div class="faq-item__answer">
+                            <div class="faq-item__answer-inner">
+                                <p>Klik tombol <strong>Daftar</strong> di pojok kanan atas halaman beranda. Isi form pendaftaran dengan username, email, dan password. Setelah mendaftar, kamu bisa langsung login dan menikmati konten Pilih.in.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-item__question">
+                            <span>Apakah Pilih.in gratis?</span>
+                            <i data-feather="chevron-down"></i>
+                        </button>
+                        <div class="faq-item__answer">
+                            <div class="faq-item__answer-inner">
+                                <p>Ya, Pilih.in menawarkan paket <strong>Free</strong> yang bisa kamu nikmati secara gratis. Untuk pengalaman menonton yang lebih maksimal, tersedia paket berbayar seperti Basic, Standard, dan Premium dengan kualitas video hingga 4K dan akses multi-perangkat.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-item__question">
+                            <span>Bagaimana cara menonton film?</span>
+                            <i data-feather="chevron-down"></i>
+                        </button>
+                        <div class="faq-item__answer">
+                            <div class="faq-item__answer-inner">
+                                <p>Buka halaman <strong>Katalog</strong>, pilih film yang ingin ditonton, lalu klik untuk membuka halaman detail. Di halaman detail, klik tombol putar pada video player untuk mulai menonton. Pastikan kamu sudah login untuk mengakses pemutaran film.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-item__question">
+                            <span>Bagaimana cara menyimpan film ke Daftar Tonton?</span>
+                            <i data-feather="chevron-down"></i>
+                        </button>
+                        <div class="faq-item__answer">
+                            <div class="faq-item__answer-inner">
+                                <p>Di halaman detail film, klik tombol <strong>Watchlist</strong> (ikon bookmark) untuk menyimpan film ke daftar tonton. Kamu bisa mengakses semua film yang disimpan melalui halaman Daftar Tonton di menu pengguna.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-item__question">
+                            <span>Bagaimana cara menghubungi tim dukungan?</span>
+                            <i data-feather="chevron-down"></i>
+                        </button>
+                        <div class="faq-item__answer">
+                            <div class="faq-item__answer-inner">
+                                <p>Kamu bisa menghubungi tim dukungan Pilih.in melalui halaman <a href="/frontend/pages/main/contact.html">Hubungi Kami</a>. Tim kami akan merespons pertanyaan atau laporanmu secepat mungkin.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="help-cta">
+                <div class="help-cta__icon">
+                    <i data-feather="message-circle"></i>
+                </div>
+                <h3>Masih butuh bantuan?</h3>
+                <p>Tim dukungan kami siap membantu. Hubungi kami melalui halaman kontak atau kirimkan pertanyaanmu.</p>
+                <a href="/frontend/pages/main/contact.html" class="btn btn-primary">
+                    <i data-feather="mail"></i> Hubungi Kami
+                </a>
             </section>
         </main>
+
         <div id="footer-container"></div>
+
         <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
         <script type="module">
             import Navbar from "../../js/components/navbar.js";
             import Footer from "../../js/components/footer.js";
+
+            function initHelpAccordion() {
+                document.addEventListener("click", (e) => {
+                    const question = e.target.closest(".faq-item__question");
+                    if (!question) return;
+                    const item = question.closest(".faq-item");
+                    if (!item) return;
+                    item.classList.toggle("faq-item--open");
+                });
+            }
+
+            function initHelpSearch() {
+                const input = document.getElementById("helpSearch");
+                if (!input) return;
+                input.addEventListener("input", () => {
+                    const q = input.value.toLowerCase();
+                    document.querySelectorAll(".help-category-card").forEach((card) => {
+                        const text = card.textContent.toLowerCase();
+                        card.style.display = text.includes(q) ? "" : "none";
+                    });
+                });
+            }
+
             document.addEventListener("DOMContentLoaded", async () => {
                 await Navbar.load("navbar-container");
                 await Footer.load("footer-container");
                 feather.replace();
+                initHelpAccordion();
+                initHelpSearch();
             });
         </script>
     </body>

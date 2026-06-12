@@ -17,10 +17,20 @@ class HomePage {
             this._renderLatest(films);
             this._renderArticles(articles);
             this._renderNews(news);
+            this._bindCardClicks();
         } catch (err) {
             console.warn("HomePage: data belum siap, retrying...", err);
             setTimeout(() => this._init(), 500);
         }
+    }
+
+    _bindCardClicks() {
+        document.addEventListener("click", (e) => {
+            const card = e.target.closest(".film-card[data-film-id]");
+            if (!card) return;
+            const filmId = card.dataset.filmId;
+            window.location.href = `/frontend/pages/film/detail.html#${filmId}`;
+        });
     }
 
     _getGenres() {
@@ -91,10 +101,10 @@ class HomePage {
                     </div>
                     <p class="hero__description">${film.description || ''}</p>
                     <div class="hero__actions">
-                        <a href="#" class="btn btn-primary btn-lg">
+                        <a href="${film.streamingUrl || `/frontend/pages/film/detail.html#${film.id}`}" class="btn btn-primary btn-lg">
                             <i data-feather="play-circle"></i> Tonton Sekarang
                         </a>
-                        <a href="#" class="btn btn-ghost btn-lg">
+                        <a href="/frontend/pages/film/detail.html#${film.id}" class="btn btn-ghost btn-lg">
                             <i data-feather="info"></i> Selengkapnya
                         </a>
                     </div>

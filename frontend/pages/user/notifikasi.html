@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Panduan Pengguna - Pilih.in</title>
+        <title>Notifikasi - Pilih.in</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100..900&display=swap" rel="stylesheet" />
@@ -12,29 +12,13 @@
         <link rel="stylesheet" href="../../css/components/navbar.css" />
         <link rel="stylesheet" href="../../css/components/footer.css" />
         <link rel="stylesheet" href="../../css/components/button.css" />
-        <link rel="stylesheet" href="../../css/pages/panduan.css" />
+        <link rel="stylesheet" href="../../css/pages/notifikasi.css" />
     </head>
     <body>
         <div class="app-layout">
             <div class="app-main">
                 <div id="navbar-container"></div>
-                <main class="panduan-page" id="panduanPage">
-                    <div class="panduan-hero">
-                        <h1>Panduan Pengguna</h1>
-                        <p>Pelajari cara menggunakan Pilih.in dari awal hingga mahir</p>
-                    </div>
-
-                    <div class="panduan-layout">
-                        <aside class="panduan-sidebar" id="panduanSidebar">
-                            <nav class="panduan-nav">
-                                <h3 class="panduan-nav__title">Daftar Isi</h3>
-                                <ul class="panduan-nav__list" id="panduanNav"></ul>
-                            </nav>
-                        </aside>
-
-                        <div class="panduan-content" id="panduanContent"></div>
-                    </div>
-                </main>
+                <main class="notifikasi-page" id="notifikasiPage"></main>
                 <div id="footer-container"></div>
             </div>
         </div>
@@ -42,12 +26,12 @@
         <script type="module">
             import Navbar from "../../js/components/navbar.js";
             import Footer from "../../js/components/footer.js";
-            import PanduanPage from "../../js/logic-pages/panduan.js";
+            import NotifikasiPage from "../../js/logic-pages/notifikasi.js";
             document.addEventListener("DOMContentLoaded", async () => {
                 await Navbar.load("navbar-container");
                 await Footer.load("footer-container");
                 feather.replace();
-                new PanduanPage();
+                new NotifikasiPage();
             });
         </script>
     </body>

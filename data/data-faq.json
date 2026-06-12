@@ -1,0 +1,124 @@
+{
+  "faqs": [
+    {
+      "id": "faq-001",
+      "question": "Apa itu Pilih.in?",
+      "answer": "Pilih.in adalah platform streaming film Indonesia yang menyediakan ribuan film berkualitas dari sineas tanah air. Anda dapat menonton film kapan saja dan di mana saja melalui berbagai perangkat.",
+      "category": "umum",
+      "order": 1,
+      "status": "published",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2024-03-10T00:00:00.000Z"
+    },
+    {
+      "id": "faq-002",
+      "question": "Apakah Pilih.in gratis?",
+      "answer": "Pilih.in menawarkan paket gratis (Free) dengan akses terbatas ke konten tertentu. Untuk menikmati seluruh fitur dan konten tanpa batas, Anda dapat berlangganan paket Basic, Standard, atau Premium.",
+      "category": "umum",
+      "order": 2,
+      "status": "published",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2024-03-10T00:00:00.000Z"
+    },
+    {
+      "id": "faq-003",
+      "question": "Bagaimana cara mendaftar akun?",
+      "answer": "Klik tombol 'Daftar' di pojok kanan atas, isi form dengan username, email, dan password. Setelah berhasil, Anda bisa langsung login dan menikmati konten Pilih.in.",
+      "category": "akun",
+      "order": 3,
+      "status": "published",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2024-03-10T00:00:00.000Z"
+    },
+    {
+      "id": "faq-004",
+      "question": "Bagaimana cara mengganti password?",
+      "answer": "Masuk ke halaman Profil, pilih menu Keamanan. Masukkan password lama dan password baru, lalu simpan. Jika lupa password, gunakan fitur 'Lupa Sandi' di halaman login.",
+      "category": "akun",
+      "order": 4,
+      "status": "published",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2024-03-10T00:00:00.000Z"
+    },
+    {
+      "id": "faq-005",
+      "question": "Bagaimana cara berlangganan paket premium?",
+      "answer": "Masuk ke halaman Pengaturan, pilih menu Langganan. Pilih paket yang diinginkan (Basic, Standard, atau Premium), lalu lakukan pembayaran melalui metode yang tersedia.",
+      "category": "langganan",
+      "order": 5,
+      "status": "published",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2024-03-10T00:00:00.000Z"
+    },
+    {
+      "id": "faq-006",
+      "question": "Metode pembayaran apa saja yang didukung?",
+      "answer": "Kami mendukung pembayaran melalui transfer bank, kartu kredit, GoPay, OVO, DANA, dan QRIS. Metode pembayaran dapat dipilih saat checkout.",
+      "category": "langganan",
+      "order": 6,
+      "status": "published",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2024-03-10T00:00:00.000Z"
+    },
+    {
+      "id": "faq-007",
+      "question": "Apakah bisa menonton di lebih dari satu perangkat?",
+      "answer": "Ya, tergantung paket Anda. Paket Basic mendukung 1 perangkat, Standard 2 perangkat, dan Premium hingga 4 perangkat secara bersamaan.",
+      "category": "teknis",
+      "order": 7,
+      "status": "published",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2024-03-10T00:00:00.000Z"
+    },
+    {
+      "id": "faq-008",
+      "question": "Bagaimana kualitas video yang tersedia?",
+      "answer": "Kualitas video bervariasi tergantung paket: Free (720p), Basic (720p), Standard (1080p), dan Premium (1080p + 4K untuk konten tertentu).",
+      "category": "teknis",
+      "order": 8,
+      "status": "published",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2024-03-10T00:00:00.000Z"
+    },
+    {
+      "id": "faq-009",
+      "question": "Apakah tersedia subtitle?",
+      "answer": "Ya, sebagian besar film dilengkapi dengan subtitle Bahasa Indonesia dan Bahasa Inggris. Anda dapat mengaktifkan atau menonaktifkan subtitle melalui pemutar video.",
+      "category": "teknis",
+      "order": 9,
+      "status": "published",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2024-03-10T00:00:00.000Z"
+    },
+    {
+      "id": "faq-010",
+      "question": "Bagaimana cara membatalkan langganan?",
+      "answer": "Masuk ke Pengaturan > Langganan, klik 'Batalkan Langganan'. Langganan tetap aktif hingga periode berakhir dan tidak akan diperpanjang.",
+      "category": "langganan",
+      "order": 10,
+      "status": "published",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2024-03-10T00:00:00.000Z"
+    },
+    {
+      "id": "faq-011",
+      "question": "Apakah saya bisa mendapatkan refund?",
+      "answer": "Refund diberikan dalam kondisi tertentu sesuai kebijakan kami. Silakan hubungi tim dukungan melalui halaman Contact Us untuk informasi lebih lanjut.",
+      "category": "langganan",
+      "order": 11,
+      "status": "published",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2024-03-10T00:00:00.000Z"
+    },
+    {
+      "id": "faq-012",
+      "question": "Bagaimana cara melaporkan bug atau masalah?",
+      "answer": "Anda dapat melaporkan masalah melalui halaman Contact Us, atau mengirim email ke support@pilih.in. Tim kami akan merespon dalam 1x24 jam.",
+      "category": "umum",
+      "order": 12,
+      "status": "published",
+      "createdAt": "2024-01-15T00:00:00.000Z",
+      "updatedAt": "2024-03-10T00:00:00.000Z"
+    }
+  ]
+}

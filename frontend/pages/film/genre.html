@@ -10,23 +10,37 @@
         <link rel="stylesheet" href="../../css/reset.css" />
         <link rel="stylesheet" href="../../css/design-system.css" />
         <link rel="stylesheet" href="../../css/components/navbar.css" />
+        <link rel="stylesheet" href="../../css/components/footer.css" />
         <link rel="stylesheet" href="../../css/components/button.css" />
         <link rel="stylesheet" href="../../css/components/card.css" />
+        <link rel="stylesheet" href="../../css/pages/film-genre.css" />
     </head>
     <body>
-        <div id="navbar-container"></div>
-        <main class="genre-page">
-            <section class="page-hero">
-                <h1>Genre Film</h1>
-            </section>
-            <section class="genre-list" id="genreList"></section>
-        </main>
+        <div class="app-layout">
+            <div class="app-main">
+                <div id="navbar-container"></div>
+                <main class="genre-page">
+                    <section class="page-hero">
+                        <h1>Genre Film</h1>
+                        <p>Jelajahi film berdasarkan genre favoritmu</p>
+                    </section>
+                    <section class="genre-grid" id="genreList"></section>
+                </main>
+                <div id="footer-container"></div>
+            </div>
+        </div>
         <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
         <script type="module">
             import Navbar from "../../js/components/navbar.js";
+            import Footer from "../../js/components/footer.js";
+            import GenrePage from "../../js/logic-pages/film-genre.js";
+            import { getDbReady } from "../../../backend/init.js";
             document.addEventListener("DOMContentLoaded", async () => {
                 await Navbar.load("navbar-container");
+                await Footer.load("footer-container");
+                await getDbReady();
                 feather.replace();
+                new GenrePage();
             });
         </script>
     </body>

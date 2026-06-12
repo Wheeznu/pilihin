@@ -10,24 +10,32 @@
         <link rel="stylesheet" href="../../css/reset.css" />
         <link rel="stylesheet" href="../../css/design-system.css" />
         <link rel="stylesheet" href="../../css/components/navbar.css" />
+        <link rel="stylesheet" href="../../css/components/footer.css" />
         <link rel="stylesheet" href="../../css/components/button.css" />
         <link rel="stylesheet" href="../../css/components/card.css" />
+        <link rel="stylesheet" href="../../css/pages/film-catalog.css" />
+        <link rel="stylesheet" href="../../css/pages/film-search.css" />
     </head>
     <body>
         <div id="navbar-container"></div>
         <main class="search-page">
-            <section class="search-header">
+            <section class="page-hero">
                 <h1>Hasil Pencarian</h1>
                 <div class="search-info" id="searchInfo"></div>
             </section>
             <section class="film-grid" id="searchGrid"></section>
         </main>
+        <div id="footer-container"></div>
         <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
         <script type="module">
             import Navbar from "../../js/components/navbar.js";
+            import Footer from "../../js/components/footer.js";
+            import SearchPage from "../../js/logic-pages/film-search.js";
             document.addEventListener("DOMContentLoaded", async () => {
                 await Navbar.load("navbar-container");
+                await Footer.load("footer-container");
                 feather.replace();
+                new SearchPage();
             });
         </script>
     </body>
