@@ -1,5 +1,7 @@
 class PricingPage {
     constructor() {
+        this._tiers = [];
+        this._isYearly = false;
         this._init();
     }
 
@@ -7,61 +9,92 @@ class PricingPage {
         try {
             const res = await fetch("/data/pricing-tiers.json");
             const data = await res.json();
-            this._renderTiers(data.tiers);
+            this._tiers = data.tiers;
+            this._render();
         } catch (err) {
             console.warn("PricingPage: gagal load data", err);
         }
     }
 
-    _renderTiers(tiers) {
-        const container = document.getElementById("pricingList");
-        if (!container) return;
-
-        container.innerHTML = tiers.map((tier) => this._tierHTML(tier)).join("");
+    _render() {
+        this._renderToggle();
+        this._renderGrid();
         feather.replace();
-
-        const hash = window.location.hash;
-        if (hash) {
-            const target = document.getElementById(hash.slice(1));
-            if (target) {
-                setTimeout(() => target.scrollIntoView({ behavior: "smooth" }), 100);
-            }
-        }
     }
 
-    _tierHTML(tier) {
-        const isFeatured = tier.highlighted;
+    /* ── Toggle ──────────────────────────────── */
+
+    _renderToggle() {
+        const container = document.getElementById("pricingToggle");
+        if (!container) return;
+        container.innerHTML = `
+            <button class="pricing-toggle__btn --active" data-period="monthly">Bulanan</button>
+            <button class="pricing-toggle__btn" data-period="yearly">Tahunan <span class="pricing-toggle__badge">Hemat 20%</span></button>
+        `;
+        container.addEventListener("click", (e) => {
+            const btn = e.target.closest(".pricing-toggle__btn");
+            if (!btn) return;
+            container.querySelectorAll(".pricing-toggle__btn").forEach((b) => b.classList.remove("--active"));
+            btn.classList.add("--active");
+            this._isYearly = btn.dataset.period === "yearly";
+            this._reloadPrices();
+        });
+    }
+
+    /* ── Grid ────────────────────────────────── */
+
+    _renderGrid() {
+        const container = document.getElementById("pricingGrid");
+        if (!container) return;
+        container.innerHTML = this._tiers.map((t) => this._cardHTML(t)).join("");
+    }
+
+    _cardHTML(tier) {
         const isFree = tier.price === 0;
+        const isFeatured = tier.highlighted;
+        const price = this._isYearly ? tier.priceYearly : tier.price;
+        const period = this._isYearly ? "tahun" : tier.period;
+        const showOriginal = this._isYearly && tier.priceYearly < tier.price * 12;
 
         return `
-            <section class="pricing-tier ${isFeatured ? "pricing-tier--featured" : ""}" id="${tier.id}">
-                ${isFeatured ? '<div class="pricing-tier__badge">Paling Laris</div>' : ""}
-                <div class="pricing-tier__header">
-                    <h2 class="pricing-tier__name">${tier.name}</h2>
-                    <div class="pricing-tier__price-row">
-                        ${isFree ? '<span class="pricing-tier__price">Gratis</span>' : `<span class="pricing-tier__price">Rp ${this._formatPrice(tier.price)}</span>`}
-                        ${tier.period ? `<span class="pricing-tier__period">/ ${tier.period}</span>` : ""}
+            <div class="pricing-card${isFeatured ? ' pricing-card--featured' : ''}">
+                ${isFeatured ? '<div class="pricing-card__badge">Paling Laris</div>' : ''}
+                <div class="pricing-card__header">
+                    <h2 class="pricing-card__name">${tier.name}</h2>
+                    <div class="pricing-card__price-row">
+                        <span class="pricing-card__price${isFree ? '--free' : ''}">${isFree ? 'Gratis' : `Rp ${this._formatPrice(price)}`}</span>
+                        ${tier.period ? `<span class="pricing-card__period">/ ${period}</span>` : ''}
+                        ${showOriginal ? `<span class="pricing-card__price-original">Rp ${this._formatPrice(tier.price * 12)}</span>` : ''}
                     </div>
-                    <p class="pricing-tier__description">${tier.description}</p>
+                    <p class="pricing-card__desc">${tier.description}</p>
                 </div>
-                <div class="pricing-tier__features">
-                    ${tier.features.map(f => `
-                        <div class="pricing-tier__feature">
-                            <i data-feather="check-circle"></i>
+                <div class="pricing-card__features">
+                    ${tier.features.map((f) => `
+                        <div class="pricing-card__feature${f.toLowerCase().includes('iklan') && !f.toLowerCase().includes('bebas') ? ' pricing-card__feature--muted' : ''}">
+                            <i data-feather="${f.toLowerCase().includes('iklan') && !f.toLowerCase().includes('bebas') ? 'x-circle' : 'check-circle'}"></i>
                             <span>${f}</span>
                         </div>
-                    `).join("")}
+                    `).join('')}
                 </div>
-                <div class="pricing-tier__action">
+                <div class="pricing-card__action">
                     ${isFree
-                        ? `<div class="pricing-tier__current-badge"><i data-feather="check"></i> Paket Anda Saat Ini</div>`
-                        : `<a href="/frontend/pages/main/register.html" class="btn btn-primary btn-lg">
-                            <i data-feather="shopping-cart"></i> Langganan ${tier.name}
+                        ? `<a href="/frontend/pages/main/register.html" class="btn btn-ghost">Daftar Gratis</a>`
+                        : `<a href="/frontend/pages/user/payment.html?tier=${tier.id}" class="btn btn-primary">
+                            <i data-feather="shopping-cart"></i> Berlangganan
                         </a>`
                     }
                 </div>
-            </section>
+            </div>
         `;
+    }
+
+    /* ── Helpers ──────────────────────────────── */
+
+    _reloadPrices() {
+        const container = document.getElementById("pricingGrid");
+        if (!container) return;
+        container.innerHTML = this._tiers.map((t) => this._cardHTML(t)).join("");
+        feather.replace();
     }
 
     _formatPrice(price) {

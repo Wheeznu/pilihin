@@ -107,7 +107,7 @@ class HomePage {
         const DURATION = 15000;
         let current = 0;
         let paused = false;
-        let timer = null;
+        let tick = 0;
 
         const carousel = document.getElementById('heroCarousel');
         const progressBar = document.getElementById('heroProgress');
@@ -126,18 +126,18 @@ class HomePage {
 
         const animateProgress = () => {
             if (!progressBar) return;
+            tick++;
+            const id = tick;
             progressBar.style.transition = 'none';
             progressBar.style.width = '0%';
-            // Force reflow
             void progressBar.offsetWidth;
             progressBar.style.transition = `width ${DURATION}ms linear`;
             progressBar.style.width = '100%';
-        };
 
-        const startTimer = () => {
-            clearInterval(timer);
-            timer = setInterval(() => {
-                if (!paused) goTo(current + 1);
+            setTimeout(() => {
+                if (id !== tick) return;
+                if (paused || total <= 1) return;
+                goTo(current + 1);
             }, DURATION);
         };
 
@@ -145,24 +145,17 @@ class HomePage {
         carousel.addEventListener('click', (e) => {
             const dot = e.target.closest('.hero-dot');
             if (!dot) return;
-            const index = parseInt(dot.dataset.index, 10);
-            goTo(index);
-            startTimer();
+            goTo(parseInt(dot.dataset.index, 10));
         });
 
         // Pause on hover
-        carousel.addEventListener('mouseenter', () => {
-            paused = true;
-            if (progressBar) progressBar.style.animationPlayState = 'paused';
-        });
+        carousel.addEventListener('mouseenter', () => { paused = true; });
         carousel.addEventListener('mouseleave', () => {
             paused = false;
-            if (progressBar) progressBar.style.animationPlayState = 'running';
+            if (tick > 0) animateProgress();
         });
 
-        // Kick off
         animateProgress();
-        startTimer();
     }
 
     _renderTrending(films) {

@@ -18,109 +18,153 @@
         <link rel="stylesheet" href="../../css/pages/auth.css" />
     </head>
     <body>
-        <div class="auth-page">
-            <div class="auth-card">
-                <div class="auth-brand">
-                    <a href="../../index.html" class="auth-brand__logo">
+        <div class="auth-split">
+            <div class="auth-split__deco auth-split__deco--1"></div>
+            <div class="auth-split__deco auth-split__deco--2"></div>
+            <div class="auth-split__deco auth-split__deco--3"></div>
+
+            <div class="auth-split__hero">
+                <div class="auth-split__hero-content">
+                    <a href="../../index.html" class="auth-split__brand">
                         Pilih<span class="text-primary">.in</span>
                     </a>
-                    <p class="auth-brand__tagline">
-                        Buat akun untuk menikmati ribuan film Indonesia
+                    <h1 class="auth-split__hero-title">Bergabunglah <span class="text-primary">Sekarang</span></h1>
+                    <p class="auth-split__hero-text">
+                        Buat akun dan nikmati ribuan film Indonesia berkualitas tinggi kapan saja
+                        dan di mana saja.
                     </p>
+
+                    <div class="auth-split__features">
+                        <div class="auth-split__feature">
+                            <i data-feather="film"></i>
+                            <span>Ribuan film & series</span>
+                        </div>
+                        <div class="auth-split__feature">
+                            <i data-feather="monitor"></i>
+                            <span>Kualitas HD & 4K</span>
+                        </div>
+                        <div class="auth-split__feature">
+                            <i data-feather="refresh-cw"></i>
+                            <span>Update tiap minggu</span>
+                        </div>
+                    </div>
                 </div>
+            </div>
 
-                <div class="auth-alert" id="registerAlert" hidden>
-                    <span id="registerAlertText"></span>
-                </div>
+            <div class="auth-split__form">
+                <div class="auth-form-container">
+                    <div class="auth-form-header">
+                        <a href="../../index.html" class="auth-form-logo">
+                            Pilih<span class="text-primary">.in</span>
+                        </a>
+                        <p class="auth-form-tagline">Buat akun baru Anda</p>
+                    </div>
 
-                <form class="auth-form" id="registerForm" novalidate>
-                    <div class="form-group">
-                        <label class="form-label" for="username">Username</label>
-                        <div class="form-input-wrapper">
-                            <i data-feather="at-sign" class="form-input-icon"></i>
-                            <input
-                                type="text"
-                                id="username"
-                                name="username"
-                                class="form-input"
-                                placeholder="pilih_username"
-                                autocomplete="username"
-                                required
-                            />
+                    <div class="auth-alert" id="registerAlert" hidden>
+                        <span id="registerAlertText"></span>
+                    </div>
+
+                    <form class="auth-form" id="registerForm" novalidate>
+                        <div class="form-group">
+                            <label class="form-label" for="username">Username</label>
+                            <div class="form-input-wrapper">
+                                <i data-feather="at-sign" class="form-input-icon"></i>
+                                <input
+                                    type="text"
+                                    id="username"
+                                    name="username"
+                                    class="form-input"
+                                    placeholder="username"
+                                    autocomplete="username"
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="email">Email</label>
+                            <div class="form-input-wrapper">
+                                <i data-feather="mail" class="form-input-icon"></i>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    class="form-input"
+                                    placeholder="contoh@email.com"
+                                    autocomplete="email"
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="password">Password</label>
+                            <div class="form-input-wrapper">
+                                <i data-feather="lock" class="form-input-icon"></i>
+                                <input
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    class="form-input"
+                                    placeholder="Minimal 6 karakter"
+                                    autocomplete="new-password"
+                                    required
+                                />
+                                <button
+                                    type="button"
+                                    class="password-toggle"
+                                    id="togglePassword"
+                                    aria-label="Tampilkan password"
+                                >
+                                    <i data-feather="eye"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="confirmPassword">Konfirmasi Password</label>
+                            <div class="form-input-wrapper">
+                                <i data-feather="lock" class="form-input-icon"></i>
+                                <input
+                                    type="password"
+                                    id="confirmPassword"
+                                    name="confirmPassword"
+                                    class="form-input"
+                                    placeholder="Ulangi password"
+                                    autocomplete="new-password"
+                                    required
+                                />
+                                <button
+                                    type="button"
+                                    class="password-toggle"
+                                    id="toggleConfirmPassword"
+                                    aria-label="Tampilkan konfirmasi password"
+                                >
+                                    <i data-feather="eye"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary auth-submit" id="registerSubmit">
+                            <i data-feather="user-plus"></i> Daftar
+                        </button>
+                    </form>
+
+                    <div class="auth-social">
+                        <p class="auth-social__label">Atau daftar dengan</p>
+                        <div class="auth-social__buttons">
+                            <a href="404.html" class="btn btn-ghost auth-social__btn">
+                                Google
+                            </a>
+                            <a href="404.html" class="btn btn-ghost auth-social__btn">
+                                Facebook
+                            </a>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="form-label" for="email">Email</label>
-                        <div class="form-input-wrapper">
-                            <i data-feather="mail" class="form-input-icon"></i>
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                class="form-input"
-                                placeholder="contoh@email.com"
-                                autocomplete="email"
-                                required
-                            />
-                        </div>
+                    <div class="auth-footer">
+                        <p>Sudah punya akun? <a href="login.html">Masuk</a></p>
                     </div>
-
-                    <div class="form-group">
-                        <label class="form-label" for="password">Password</label>
-                        <div class="form-input-wrapper">
-                            <i data-feather="lock" class="form-input-icon"></i>
-                            <input
-                                type="password"
-                                id="password"
-                                name="password"
-                                class="form-input"
-                                placeholder="Minimal 6 karakter"
-                                autocomplete="new-password"
-                                required
-                            />
-                            <button
-                                type="button"
-                                class="password-toggle"
-                                id="togglePassword"
-                                aria-label="Tampilkan password"
-                            >
-                                <i data-feather="eye"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label" for="confirmPassword">Konfirmasi Password</label>
-                        <div class="form-input-wrapper">
-                            <i data-feather="lock" class="form-input-icon"></i>
-                            <input
-                                type="password"
-                                id="confirmPassword"
-                                name="confirmPassword"
-                                class="form-input"
-                                placeholder="Ulangi password"
-                                autocomplete="new-password"
-                                required
-                            />
-                            <button
-                                type="button"
-                                class="password-toggle"
-                                id="toggleConfirmPassword"
-                                aria-label="Tampilkan konfirmasi password"
-                            >
-                                <i data-feather="eye"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary auth-submit" id="registerSubmit">
-                        <i data-feather="user-plus"></i> Daftar
-                    </button>
-                </form>
-
-                <div class="auth-footer">
-                    <p>Sudah punya akun? <a href="login.html">Masuk</a></p>
                 </div>
             </div>
         </div>
@@ -129,6 +173,7 @@
 
         <script type="module">
             import RegisterPage from "../../js/logic-pages/register.js";
+            feather.replace();
             new RegisterPage();
         </script>
     </body>

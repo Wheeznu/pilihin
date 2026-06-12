@@ -23,12 +23,19 @@
         <div id="navbar-container"></div>
 
         <main class="promo-page">
-            <section class="promo-hero">
-                <h1 class="promo-hero__title">Promo <span class="text-primary">Spesial</span></h1>
-                <p class="promo-hero__subtitle">Jangan lewatkan penawaran terbaik dari Pilih.in. Hemat lebih banyak dengan promo-promo menarik!</p>
-            </section>
+            <div class="promo-carousel" id="promoCarousel"></div>
 
-            <div class="promo-grid" id="promoGrid"></div>
+            <div class="promo-section-header">
+                <h2 class="promo-section-header__title">Semua <span class="text-primary">Promo</span></h2>
+                <p class="promo-section-header__subtitle">Jangan lewatkan penawaran terbaik dari Pilih.in. Hemat lebih banyak dengan promo-promo menarik!</p>
+            </div>
+
+            <div class="promo-grid" id="promoGrid">
+                <div class="promo-loading">
+                    <i data-feather="loader"></i>
+                    <p>Memuat promo...</p>
+                </div>
+            </div>
         </main>
 
         <div id="footer-container"></div>

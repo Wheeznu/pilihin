@@ -161,7 +161,10 @@
 }
 
 
-/* USER DASHBOARD SIDEBAR — sidebar kiri permanen di halaman user */
+/* ═══════════════════════════════════════════
+   USER DASHBOARD SIDEBAR
+   (halaman /user/ — profile, settings, dll)
+═══════════════════════════════════════════ */
 
 .user-sidebar {
     width: var(--sidebar-width);

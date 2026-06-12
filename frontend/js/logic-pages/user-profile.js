@@ -33,12 +33,11 @@ class UserProfilePage {
             { href: "/frontend/pages/user/settings.html",      icon: "settings",      label: "Pengaturan" },
             { section: "Konten" },
             { href: "/frontend/pages/user/history.html",         icon: "clock",         label: "Riwayat Tonton" },
-            { href: "/frontend/pages/user/favorites-film.html",  icon: "heart",         label: "Favorit Film" },
-            { href: "/frontend/pages/user/favorites-aktor.html", icon: "users",         label: "Favorit Aktor" },
-            { href: "/frontend/pages/user/favorites-sutradara.html", icon: "camera",    label: "Favorit Sutradara" },
+            { href: "/frontend/pages/user/favorites-film.html",  icon: "heart",         label: "Favorit" },
             { href: "/frontend/pages/user/watchlist.html",       icon: "bookmark",      label: "Daftar Tonton" },
             { section: "Langganan" },
-            { href: "/frontend/pages/user/subscription.html",   icon: "star",          label: "Langganan" },
+            { href: "/frontend/pages/user/subscription.html",   icon: "star",          label: "Status Langganan" },
+            { href: "/frontend/pages/user/payment.html",             icon: "gift",         label: "Pembayaran & Poin" },
             { href: "/frontend/pages/user/transactions.html",   icon: "credit-card",   label: "Transaksi" },
             { href: "/frontend/pages/user/notifications.html",  icon: "bell",          label: "Notifikasi" },
         ];
@@ -193,7 +192,7 @@ class UserProfilePage {
                             <label for="fieldUsername">Username <span class="required">*</span></label>
                             <input type="text" id="fieldUsername" value="${u.username}"
                                    placeholder="Nama pengguna" autocomplete="off">
-                            <span class="field-hint">Tampil di profil publik, min. 3 karakter</span>
+                            <span class="field-hint">min. 3 karakter</span>
                         </div>
                         <div class="form-field">
                             <label>Email</label>

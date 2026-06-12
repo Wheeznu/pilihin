@@ -1,0 +1,115 @@
+{
+  "points": [
+    {
+      "userId": "user-1781147710240-58691f",
+      "totalPoints": 350,
+      "lifetimePoints": 350,
+      "level": "bronze",
+      "history": [
+        {
+          "type": "earn",
+          "desc": "Berlangganan paket Standard",
+          "pts": 50,
+          "date": "2026-06-12T04:40:01.509Z"
+        },
+        {
+          "type": "earn",
+          "desc": "Berlangganan paket Standard",
+          "pts": 50,
+          "date": "2026-06-12T04:05:01.378Z"
+        },
+        {
+          "type": "earn",
+          "desc": "Berlangganan paket Premium",
+          "pts": 100,
+          "date": "2026-06-12T04:04:21.531Z"
+        },
+        {
+          "type": "earn",
+          "desc": "Berlangganan paket Premium",
+          "pts": 100,
+          "date": "2026-06-12T04:03:27.281Z"
+        },
+        {
+          "type": "earn",
+          "desc": "Berlangganan paket Standard",
+          "pts": 50,
+          "date": "2026-06-12T04:01:39.208Z"
+        }
+      ],
+      "lastUpdated": "2026-06-12T04:40:01.509Z"
+    },
+    {
+      "userId": "user-1780080993352-9c7ccd",
+      "totalPoints": 50,
+      "lifetimePoints": 50,
+      "level": "bronze",
+      "history": [
+        {
+          "type": "earn",
+          "desc": "Berlangganan paket Standard",
+          "pts": 50,
+          "date": "2026-06-12T04:51:07.249Z"
+        }
+      ],
+      "lastUpdated": "2026-06-12T04:51:07.249Z"
+    },
+    {
+      "userId": "user-1781245407334-55498c",
+      "totalPoints": 100,
+      "lifetimePoints": 600,
+      "level": "bronze",
+      "history": [
+        {
+          "type": "earn",
+          "desc": "Berlangganan paket Premium",
+          "pts": 100,
+          "date": "2026-06-12T06:57:11.138Z"
+        },
+        {
+          "type": "spend",
+          "desc": "Ditukar: Diskon Rp 5.000",
+          "pts": -500,
+          "date": "2026-06-12T06:56:53.370Z"
+        },
+        {
+          "type": "earn",
+          "desc": "Berlangganan paket Premium",
+          "pts": 100,
+          "date": "2026-06-12T06:56:11.482Z"
+        },
+        {
+          "type": "earn",
+          "desc": "Berlangganan paket Standard",
+          "pts": 50,
+          "date": "2026-06-12T06:55:53.137Z"
+        },
+        {
+          "type": "earn",
+          "desc": "Berlangganan paket Standard",
+          "pts": 50,
+          "date": "2026-06-12T06:55:43.663Z"
+        },
+        {
+          "type": "earn",
+          "desc": "Berlangganan paket Premium",
+          "pts": 100,
+          "date": "2026-06-12T06:54:47.083Z"
+        },
+        {
+          "type": "earn",
+          "desc": "Berlangganan paket Premium",
+          "pts": 100,
+          "date": "2026-06-12T06:54:31.835Z"
+        },
+        {
+          "type": "earn",
+          "desc": "Berlangganan paket Premium",
+          "pts": 100,
+          "date": "2026-06-12T06:27:43.477Z"
+        }
+      ],
+      "lastUpdated": "2026-06-12T06:57:11.138Z"
+    }
+  ]
+}

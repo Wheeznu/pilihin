@@ -3,7 +3,7 @@ class AuthService {
 
     async _loadUsers() {
         try {
-            const res = await fetch("/data/account.json");
+            const res = await fetch("/data/account.json?_=" + Date.now());
             const data = await res.json();
             return data.users || [];
         } catch {

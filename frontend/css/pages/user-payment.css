@@ -1,0 +1,310 @@
+/* ============================================================
+   USER PAYMENT PAGE
+   ============================================================ */
+
+/* ── Order Summary card ─── */
+.pay-summary-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    margin-bottom: var(--space-lg);
+}
+.pay-summary-card__header {
+    padding: var(--space-lg) var(--space-xl);
+    background: linear-gradient(135deg, rgba(29,185,84,0.1) 0%, transparent 100%);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+.pay-summary-card__icon {
+    width: 44px; height: 44px;
+    border-radius: var(--radius-full);
+    background: rgba(29,185,84,0.15);
+    color: var(--accent-primary);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+}
+.pay-summary-card__icon .feather { width: 22px; height: 22px; }
+.pay-summary-card__tier { font-size: var(--font-xl); font-weight: var(--fw-bold); color: var(--text-primary); margin: 0 0 2px; }
+.pay-summary-card__desc { font-size: var(--font-sm); color: var(--text-secondary); margin: 0; }
+
+.pay-summary-card__body { padding: var(--space-xl); }
+
+.pay-line {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: var(--space-sm) 0;
+    font-size: var(--font-sm); color: var(--text-secondary);
+}
+.pay-line + .pay-line { border-top: 1px solid var(--border-color); }
+.pay-line__label {}
+.pay-line__value { font-weight: var(--fw-semibold); color: var(--text-primary); }
+.pay-line--total {
+    padding-top: var(--space-md); margin-top: var(--space-sm);
+    border-top: 2px solid var(--border-color) !important;
+}
+.pay-line--total .pay-line__label { font-size: var(--font-md); font-weight: var(--fw-bold); color: var(--text-primary); }
+.pay-line--total .pay-line__value { font-size: var(--font-xl); font-weight: var(--fw-bold); color: var(--accent-primary); }
+.pay-line--discount .pay-line__value { color: var(--success); }
+
+/* ── Promo input ─── */
+.pay-promo-row {
+    display: flex; gap: var(--space-sm);
+    margin: var(--space-md) 0 0;
+}
+.pay-promo-input {
+    flex: 1;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: var(--space-sm) var(--space-md);
+    color: var(--text-primary);
+    font-family: var(--font-family);
+    font-size: var(--font-sm);
+    outline: none;
+    transition: border-color var(--transition-fast);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+.pay-promo-input::placeholder { text-transform: none; letter-spacing: 0; }
+.pay-promo-input:focus { border-color: var(--accent-primary); }
+.pay-promo-msg {
+    font-size: var(--font-xs); margin-top: var(--space-xs); padding: 0 var(--space-xs);
+    display: none;
+}
+.pay-promo-msg--ok    { display: block; color: var(--success); }
+.pay-promo-msg--error { display: block; color: var(--danger); }
+
+/* ── Method grid ─── */
+.pay-section-title {
+    font-size: var(--font-md); font-weight: var(--fw-semibold);
+    color: var(--text-primary); margin: 0 0 var(--space-md);
+    display: flex; align-items: center; gap: var(--space-sm);
+}
+.pay-section-title .feather { width: 18px; height: 18px; color: var(--accent-primary); }
+
+.pay-method-group { margin-bottom: var(--space-lg); }
+.pay-method-group__label {
+    font-size: var(--font-xs); font-weight: var(--fw-semibold);
+    text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--text-muted); margin-bottom: var(--space-sm);
+}
+.pay-method-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: var(--space-sm);
+}
+.pay-method-tile {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: var(--space-xs);
+    padding: var(--space-md) var(--space-sm);
+    background: var(--bg-tertiary);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    font-family: var(--font-family);
+    text-align: center; min-height: 72px;
+}
+.pay-method-tile:hover { border-color: var(--accent-primary); background: rgba(29,185,84,0.06); }
+.pay-method-tile--active { border-color: var(--accent-primary); background: rgba(29,185,84,0.12); }
+.pay-method-tile__icon {
+    width: 32px; height: 32px; border-radius: var(--radius-sm);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; line-height: 1;
+}
+.pay-method-tile__name { font-size: var(--font-xs); font-weight: var(--fw-semibold); color: var(--text-primary); }
+.pay-method-tile--active .pay-method-tile__name { color: var(--accent-primary); }
+
+/* ── Bank detail box ─── */
+.pay-bank-detail {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    margin-top: var(--space-md);
+    display: none;
+}
+.pay-bank-detail.active { display: block; }
+.pay-bank-detail__title { font-size: var(--font-sm); font-weight: var(--fw-semibold); color: var(--text-primary); margin-bottom: var(--space-md); }
+.pay-bank-row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); margin-bottom: var(--space-sm); flex-wrap: wrap; }
+.pay-bank-row__label { font-size: var(--font-xs); color: var(--text-muted); }
+.pay-bank-row__value { font-size: var(--font-md); font-weight: var(--fw-bold); color: var(--text-primary); font-family: monospace; letter-spacing: 0.08em; }
+.pay-bank-row .btn-copy { background: transparent; border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 3px var(--space-sm); font-size: var(--font-xs); color: var(--text-secondary); cursor: pointer; font-family: var(--font-family); transition: all var(--transition-fast); display: flex; align-items: center; gap: 4px; }
+.pay-bank-row .btn-copy:hover { border-color: var(--accent-primary); color: var(--accent-primary); }
+.pay-bank-row .btn-copy .feather { width: 12px; height: 12px; }
+
+/* ── CTA confirm ─── */
+.pay-confirm-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    padding: var(--space-xl);
+    display: flex; align-items: center; gap: var(--space-lg); flex-wrap: wrap;
+}
+.pay-confirm-card__info { flex: 1; min-width: 0; }
+.pay-confirm-card__total-label { font-size: var(--font-xs); color: var(--text-muted); margin-bottom: 2px; }
+.pay-confirm-card__total { font-size: var(--font-2xl); font-weight: var(--fw-bold); color: var(--accent-primary); }
+.pay-confirm-card__note { font-size: var(--font-xs); color: var(--text-muted); margin-top: 4px; }
+.pay-confirm-card__actions { display: flex; gap: var(--space-sm); flex-wrap: wrap; align-items: center; }
+
+/* ── Success state ─── */
+.pay-success {
+    text-align: center;
+    padding: var(--space-xl) 0;
+}
+.pay-success__icon {
+    width: 72px; height: 72px; border-radius: var(--radius-full);
+    background: rgba(29,185,84,0.15); color: var(--accent-primary);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto var(--space-lg);
+}
+.pay-success__icon .feather { width: 36px; height: 36px; }
+.pay-success__title { font-size: var(--font-2xl); font-weight: var(--fw-bold); color: var(--text-primary); margin: 0 0 var(--space-sm); }
+.pay-success__desc  { font-size: var(--font-sm); color: var(--text-secondary); margin: 0 0 var(--space-xl); line-height: 1.6; }
+.pay-success__actions { display: flex; gap: var(--space-sm); justify-content: center; flex-wrap: wrap; }
+
+/* ── Toast ─── */
+.toast { position:fixed; bottom:var(--space-xl); right:var(--space-xl); background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius-lg); padding:var(--space-md) var(--space-lg); display:flex; align-items:center; gap:var(--space-md); box-shadow:var(--shadow-xl); z-index:var(--z-toast); transform:translateY(20px); opacity:0; transition:all var(--transition-base); max-width:360px; font-size:var(--font-sm); color:var(--text-primary); }
+.toast--visible { transform:translateY(0); opacity:1; }
+.toast--success { border-left:3px solid var(--success); }
+.toast--error   { border-left:3px solid var(--danger); }
+.toast--warning { border-left:3px solid var(--warning); }
+.toast .feather { width:20px; height:20px; flex-shrink:0; }
+.toast--success .feather { color:var(--success); }
+.toast--error   .feather { color:var(--danger); }
+.toast--warning .feather { color:var(--warning); }
+
+@media (max-width: 768px) {
+    .pay-method-grid { grid-template-columns: repeat(3, 1fr); }
+    .pay-confirm-card { flex-direction: column; align-items: flex-start; }
+}
+
+/* ── Tabs ─── */
+.pay-tabs {
+    display: flex;
+    gap: var(--space-xs);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    padding: var(--space-xs);
+    margin-bottom: var(--space-lg);
+}
+.pay-tab {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    border: none;
+    border-radius: var(--radius-lg);
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: var(--font-family);
+    font-size: var(--font-sm);
+    font-weight: var(--fw-semibold);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+.pay-tab:hover { color: var(--text-primary); background: var(--bg-hover); }
+.pay-tab--active { background: var(--accent-primary); color: var(--bg-primary); }
+.pay-tab--active:hover { background: var(--accent-secondary); }
+.pay-tab .feather { width: 16px; height: 16px; }
+.pay-tab__badge {
+    background: rgba(255,255,255,0.25);
+    color: inherit;
+    font-size: var(--font-xs);
+    font-weight: var(--fw-bold);
+    padding: 1px 7px;
+    border-radius: var(--radius-full);
+    min-width: 28px;
+    text-align: center;
+}
+.pay-tab:not(.pay-tab--active) .pay-tab__badge {
+    background: var(--bg-hover);
+    color: var(--accent-primary);
+}
+
+/* ── Bonus poin notice ─── */
+.pay-bonus-notice {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(29,185,84,0.08);
+    border: 1px solid rgba(29,185,84,0.2);
+    border-radius: var(--radius-md);
+    font-size: var(--font-xs);
+    color: var(--accent-primary);
+    line-height: 1.5;
+}
+.pay-bonus-notice .feather { width: 15px; height: 15px; flex-shrink: 0; }
+.pay-bonus-notice strong { font-weight: var(--fw-bold); }
+
+/* ── Utility ─── */
+.is-hidden { display: none !important; }
+
+/* ── Referral Card ─── */
+.pay-referral-card {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    padding: var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+.pay-referral-card__title {
+    font-size: var(--font-md);
+    font-weight: var(--fw-semibold);
+    color: var(--text-primary);
+    margin: 0 0 4px;
+}
+.pay-referral-card__desc {
+    font-size: var(--font-sm);
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.6;
+}
+.pay-referral-card__code-row,
+.pay-referral-card__link-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+.pay-referral-code {
+    font-family: monospace;
+    font-size: var(--font-xl);
+    font-weight: var(--fw-bold);
+    color: var(--accent-primary);
+    letter-spacing: 0.12em;
+    background: rgba(29,185,84,0.08);
+    border: 1px dashed rgba(29,185,84,0.3);
+    border-radius: var(--radius-md);
+    padding: var(--space-sm) var(--space-lg);
+    flex: 1;
+    text-align: center;
+}
+.pay-referral-card__link-row .pay-promo-input {
+    flex: 1;
+    font-size: var(--font-xs);
+    color: var(--text-muted);
+    cursor: default;
+}
+.pay-referral-card__stats {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--font-sm);
+    color: var(--text-secondary);
+    padding: var(--space-sm) 0;
+    border-top: 1px solid var(--border-color);
+}
+.pay-referral-card__stats .feather { width: 16px; height: 16px; color: var(--accent-primary); }
+.pay-referral-card__stats strong { color: var(--text-primary); margin: 0 4px; }
+
+/* ── method tile icon size ─── */
+.pay-method-tile__icon .feather { width: 22px; height: 22px; color: var(--accent-primary); }

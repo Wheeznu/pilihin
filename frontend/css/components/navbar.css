@@ -39,6 +39,7 @@ body {
     align-items: center;
     gap: var(--space-md);
     flex-shrink: 0;
+    height: 100%;
 }
 
 .navbar__brand {
@@ -59,6 +60,7 @@ body {
     align-items: center;
     gap: var(--space-md);
     margin-left: var(--space-md);
+    height: 100%;
 }
 
 .navbar__link {
@@ -67,8 +69,11 @@ body {
     font-weight: var(--fw-medium);
     transition: color var(--transition-fast);
     text-decoration: none;
-    padding: var(--space-sm) var(--space-xs);
+    padding: 0 var(--space-xs);
     position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
 
 .navbar__link:hover {
@@ -95,6 +100,9 @@ body {
 /* ── Dropdown Styles ─────────────────────────────────── */
 .navbar__dropdown {
     position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
 
 .navbar__dropdown-trigger {
@@ -107,13 +115,32 @@ body {
     background: none;
     border: none;
     cursor: pointer;
-    padding: var(--space-sm) 0;
+    padding: 0 var(--space-xs);
+    height: 100%;
+    position: relative;
     transition: color var(--transition-fast);
     font-family: var(--font-family);
 }
 
 .navbar__dropdown-trigger:hover {
     color: var(--accent-primary);
+}
+
+/* Underline effect matching navbar__link */
+.navbar__dropdown-trigger::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: var(--space-xs);
+    right: var(--space-xs);
+    height: 2px;
+    background: var(--accent-primary);
+    transform: scaleX(0);
+    transition: transform var(--transition-fast);
+}
+
+.navbar__dropdown-trigger:hover::before {
+    transform: scaleX(1);
 }
 
 .navbar__dropdown-trigger .feather {
@@ -128,37 +155,60 @@ body {
 
 .navbar__dropdown-menu {
     position: absolute;
-    top: calc(100% + 8px);
-    left: -16px;
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
-    padding: var(--space-xs);
-    min-width: 200px;
+    top: 100%;
+    left: -24px;
+    background: rgba(24, 24, 24, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: none;
+    border-radius: 0;
+    padding: var(--space-xs) 0 var(--space-sm);
+    min-width: 220px;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-8px) scale(0.95);
-    transform-origin: top left;
-    transition: all var(--transition-base);
-    box-shadow: var(--shadow-xl);
+    transform: translateY(-6px);
+    transition: opacity var(--transition-base), transform var(--transition-base), visibility var(--transition-base);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+:root[data-theme="light"] .navbar__dropdown-menu {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-top: none;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
 .navbar__dropdown--open .navbar__dropdown-menu {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
+}
+
+/* Bridge: erase navbar bottom border under open trigger */
+.navbar__dropdown--open .navbar__dropdown-trigger::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(24, 24, 24, 0.9);
+    z-index: calc(var(--z-sticky) + 1);
+}
+
+:root[data-theme="light"] .navbar__dropdown--open .navbar__dropdown-trigger::after {
+    background: rgba(255, 255, 255, 0.9);
 }
 
 .navbar__dropdown-menu a {
     display: flex;
     align-items: center;
     gap: var(--space-sm);
-    padding: var(--space-sm);
+    padding: var(--space-sm) 0 var(--space-sm) var(--space-lg);
     color: var(--text-secondary);
     font-size: var(--font-sm);
     font-weight: var(--fw-medium);
-    border-radius: var(--radius-md);
-    transition: all var(--transition-fast);
+    border-radius: 0;
+    transition: color var(--transition-fast), background var(--transition-fast);
     text-decoration: none;
     white-space: nowrap;
 }
@@ -166,12 +216,12 @@ body {
 .navbar__dropdown-menu a:hover {
     background: var(--bg-hover);
     color: var(--accent-primary);
-    transform: translateX(4px);
 }
 
 .navbar__dropdown-menu a .feather {
     width: 16px;
     height: 16px;
+    flex-shrink: 0;
 }
 
 /* ── Center Section & Search ─────────────────────────── */
@@ -321,5 +371,13 @@ body {
 
     .navbar__right .btn span {
         display: none;
+    }
+
+    .navbar__right .btn {
+        padding: 0;
+        width: 36px;
+        height: 36px;
+        justify-content: center;
+        border-radius: var(--radius-full);
     }
 }
