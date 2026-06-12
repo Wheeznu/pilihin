@@ -10,17 +10,28 @@
         <link rel="stylesheet" href="../../css/reset.css" />
         <link rel="stylesheet" href="../../css/design-system.css" />
         <link rel="stylesheet" href="../../css/components/navbar.css" />
+        <link rel="stylesheet" href="../../css/components/footer.css" />
         <link rel="stylesheet" href="../../css/components/button.css" />
+        <link rel="stylesheet" href="../../css/pages/notifikasi.css" />
     </head>
     <body>
-        <div id="navbar-container"></div>
-        <main class="notifications-page" id="notificationsPage"></main>
+        <div class="app-layout">
+            <div class="app-main">
+                <div id="navbar-container"></div>
+                <main class="notifikasi-page" id="notifikasiPage"></main>
+                <div id="footer-container"></div>
+            </div>
+        </div>
         <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
         <script type="module">
             import Navbar from "../../js/components/navbar.js";
+            import Footer from "../../js/components/footer.js";
+            import NotifikasiPage from "../../js/logic-pages/notifikasi.js";
             document.addEventListener("DOMContentLoaded", async () => {
                 await Navbar.load("navbar-container");
+                await Footer.load("footer-container");
                 feather.replace();
+                new NotifikasiPage();
             });
         </script>
     </body>
