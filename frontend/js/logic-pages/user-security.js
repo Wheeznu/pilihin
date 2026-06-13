@@ -1,4 +1,5 @@
 import authService from "../../../backend/services/AuthService.js";
+import { loadNotifBadge } from "../utils/notif-badge.js";
 
 class UserSecurityPage {
     constructor() {
@@ -14,6 +15,7 @@ class UserSecurityPage {
             return;
         }
         this._renderSidebar();
+        loadNotifBadge(this._user);
         this._renderPage();
         this._initPasswordInfoMode();
         this._bindEvents();
@@ -34,7 +36,7 @@ class UserSecurityPage {
             { href: "/frontend/pages/user/settings.html",            icon: "settings",    label: "Pengaturan" },
             { section: "Konten" },
             { href: "/frontend/pages/user/history.html",             icon: "clock",       label: "Riwayat Tonton" },
-            { href: "/frontend/pages/user/favorites-film.html",      icon: "heart",       label: "Favorit" },
+            { href: "/frontend/pages/user/favorites.html",      icon: "heart",       label: "Favorit" },
             { href: "/frontend/pages/user/watchlist.html",           icon: "bookmark",    label: "Daftar Tonton" },
             { section: "Langganan" },
             { href: "/frontend/pages/user/subscription.html",        icon: "star",        label: "Status Langganan" },

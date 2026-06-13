@@ -1,8 +1,9 @@
 import authService from "../../../backend/services/AuthService.js";
+import { loadNotifBadge } from "../utils/notif-badge.js";
 
-/* ══════════════════ KONSTANTA ══════════════════ */
 const API = "http://localhost:3000";
 
+/* ─── Metode Pembayaran ─── */
 const METHODS = {
   ewallet: [
     { id: "gopay",   name: "GoPay",   icon: "smartphone" },
@@ -21,22 +22,19 @@ const METHODS = {
   ],
 };
 
-// Diskon poin: 100 poin = Rp 1.000
-const POINTS_RATE = 10; // 1 poin = Rp 10
-
-// Reward yang bisa ditukar (hanya diskon harga langganan)
+/* ─── Reward poin (hanya diskon langganan) ─── */
 const REWARDS = [
-  { id: "rwd-d5",   name: "Diskon Rp 5.000",   desc: "Dipakai saat pembayaran paket apapun",   cost: 500,  discountAmount: 5000  },
-  { id: "rwd-d10",  name: "Diskon Rp 10.000",  desc: "Dipakai saat pembayaran paket apapun",   cost: 1000, discountAmount: 10000 },
-  { id: "rwd-d25",  name: "Diskon Rp 25.000",  desc: "Dipakai saat pembayaran paket apapun",   cost: 2500, discountAmount: 25000 },
-  { id: "rwd-d50",  name: "Diskon Rp 50.000",  desc: "Dipakai saat pembayaran paket apapun",   cost: 5000, discountAmount: 50000 },
+  { id: "rwd-d5",  name: "Diskon Rp 5.000",  desc: "Diterapkan langsung saat pembayaran", cost: 500,  discountAmount: 5000  },
+  { id: "rwd-d10", name: "Diskon Rp 10.000", desc: "Diterapkan langsung saat pembayaran", cost: 1000, discountAmount: 10000 },
+  { id: "rwd-d25", name: "Diskon Rp 25.000", desc: "Diterapkan langsung saat pembayaran", cost: 2500, discountAmount: 25000 },
+  { id: "rwd-d50", name: "Diskon Rp 50.000", desc: "Diterapkan langsung saat pembayaran", cost: 5000, discountAmount: 50000 },
 ];
 
 const EARN_WAYS = [
-  { icon: "edit-3",     color: "green",  pts: "+10 poin", title: "Tulis Ulasan",         desc: "Setiap ulasan atau rating yang kamu tulis pada film" },
-  { icon: "user-plus",  color: "blue",   pts: "+20 poin", title: "Ajak Teman",           desc: "Per teman yang berhasil mendaftar lewat link referral kamu" },
-  { icon: "zap",        color: "info",   pts: "+50 poin", title: "Langganan Standard",   desc: "Bonus poin setiap kali berlangganan atau perpanjang paket Standard" },
-  { icon: "award",      color: "yellow", pts: "+100 poin",title: "Langganan Premium",    desc: "Bonus poin lebih besar setiap kali berlangganan atau perpanjang paket Premium" },
+  { icon: "edit-3",    color: "green",  pts: "+10 poin",  title: "Tulis Ulasan",       desc: "Setiap ulasan atau rating yang kamu tulis pada film" },
+  { icon: "user-plus", color: "blue",   pts: "+20 poin",  title: "Ajak Teman",         desc: "Per teman yang berhasil mendaftar lewat link referral kamu" },
+  { icon: "zap",       color: "info",   pts: "+50 poin",  title: "Langganan Standard", desc: "Bonus poin setiap berlangganan atau perpanjang paket Standard" },
+  { icon: "award",     color: "yellow", pts: "+100 poin", title: "Langganan Premium",  desc: "Bonus poin lebih besar setiap berlangganan atau perpanjang paket Premium" },
 ];
 
 const LEVEL_CONFIG = {
@@ -46,20 +44,36 @@ const LEVEL_CONFIG = {
   platinum: { label: "Platinum", min: 5000, max: 5000, next: null       },
 };
 
-/* ══════════════════ CLASS ══════════════════ */
+/* ══════════════════════════════════════════════════
+   CLASS
+══════════════════════════════════════════════════ */
 class PaymentPage {
   constructor() {
     this._user           = null;
     this._tiers          = [];
-    this._tier           = null;   // tier yang akan dibeli
-    this._pts            = null;   // { totalPoints, level, history[] }
+    this._promos         = [];
+
+    // Sumber pembayaran: "tier" | "promo"
+    this._sourceType     = "tier";
+    this._tier           = null;   // diisi jika sourceType = "tier"
+    this._promo          = null;   // diisi jika sourceType = "promo"
+
+    this._pts            = null;
     this._selectedMethod = null;
-    this._promoDiscount  = 0;      // diskon dari kode promo
-    this._promoCode      = null;
-    this._pointsDiscount = 0;      // diskon dari poin (dipilih saat redeem)
-    this._pointsUsed     = 0;      // jumlah poin yang dipakai
+
+    // Diskon kode promo (% dari harga)
+    this._promoCodeDiscount = 0;
+    this._promoCode         = null;
+
+    // Voucher dari tukar poin — poin belum dikurangi, baru dikurangi saat bayar
+    this._voucherDiscount   = 0;   // Rp
+    this._voucherPointsCost = 0;   // jumlah poin yang akan dipotong saat bayar
+    this._voucherName       = "";
+    this._paymentSuccess   = false; // flag agar re-render tidak menimpa success page
+
     this._pendingReward  = null;
     this._activeTab      = "payment";
+    this._billingPeriod  = "bulanan"; // "bulanan" | "tahunan"
     this._overlay        = null;
     this._init();
   }
@@ -69,27 +83,45 @@ class PaymentPage {
     this._user = await authService.getCurrentUser();
     if (!this._user) { window.location.href = "/frontend/pages/main/login.html"; return; }
 
-    // Load tiers
+    // Load tiers & promotions
     try {
-      const r = await fetch("/data/pricing-tiers.json");
-      this._tiers = (await r.json()).tiers || [];
+      const [tr, pr] = await Promise.all([
+        fetch("/data/pricing-tiers.json").then(r => r.json()),
+        fetch("/data/promotions.json").then(r => r.json()),
+      ]);
+      this._tiers  = tr.tiers  || [];
+      this._promos = pr.promotions || [];
     } catch { /**/ }
 
-    // Query params
-    const p    = new URLSearchParams(window.location.search);
-    const tid  = p.get("tier") || "standard";
+    // Query params: ?tier=standard  ATAU  ?promo=promo-001
+    const p      = new URLSearchParams(window.location.search);
+    const promoId = p.get("promo");
+    const tierId  = p.get("tier");
     this._activeTab = p.get("tab") === "poin" ? "poin" : "payment";
-    this._tier = this._tiers.find(t => t.id === tid) || this._tiers[1] || this._tiers[0];
+    this._billingPeriod = p.get("period") === "tahunan" ? "tahunan" : "bulanan";
 
-    // Load poin dari server
+    if (promoId) {
+      this._sourceType = "promo";
+      this._promo      = this._promos.find(pr => pr.id === promoId) || null;
+      if (!this._promo) {
+        // Promo tidak ditemukan, fallback ke pilih paket
+        this._sourceType = "none";
+      }
+    } else {
+      this._sourceType = "tier";
+      this._tier = this._tiers.find(t => t.id === (tierId || "standard"))
+                   || this._tiers.find(t => t.id === "standard")
+                   || this._tiers[1]
+                   || this._tiers[0];
+    }
+
     await this._loadPoints();
-
     this._renderSidebar();
+        loadNotifBadge(this._user);
     this._renderPage();
     feather.replace();
   }
 
-  /* ── Load poin dari API ── */
   async _loadPoints() {
     try {
       const r = await fetch(`${API}/api/points?userId=${this._user.id}`);
@@ -99,7 +131,54 @@ class PaymentPage {
     if (!this._pts) this._pts = { totalPoints: 0, lifetimePoints: 0, level: "bronze", history: [] };
   }
 
-  /* ── SIDEBAR ── */
+  /* ── Harga yang akan dibayar ── */
+  _isYearly() {
+    return this._sourceType === "tier" && this._billingPeriod === "tahunan"
+      && this._tier?.priceYearly != null && this._tier?.price > 0;
+  }
+
+  _tierPrice(tier, period = this._billingPeriod) {
+    if (!tier) return 0;
+    if (period === "tahunan" && tier.priceYearly != null) return tier.priceYearly;
+    return tier.price ?? 0;
+  }
+
+  _basePrice() {
+    if (this._sourceType === "promo" && this._promo) return this._promo.promoPrice ?? 0;
+    if (this._sourceType === "tier"  && this._tier)  return this._tierPrice(this._tier);
+    return 0;
+  }
+
+  _originalPrice() {
+    if (this._sourceType === "promo" && this._promo) return this._promo.originalPrice ?? this._promo.promoPrice ?? 0;
+    if (this._sourceType === "tier"  && this._tier)  return this._tierPrice(this._tier);
+    return 0;
+  }
+
+  _grandTotal() {
+    return Math.max(0, this._basePrice() - this._promoCodeDiscount - this._voucherDiscount);
+  }
+
+  /* ── Nama paket untuk ditampilkan ── */
+  _itemName() {
+    if (this._sourceType === "promo") return this._promo?.title || "Paket Promo";
+    return `Paket ${this._tier?.name || ""}`;
+  }
+
+  /* ── Tier id untuk dikirim ke server ── */
+  _tierId() {
+    if (this._sourceType === "promo") {
+      // Promo selalu berbasis premium (atau bisa dipetakan dari subtitle)
+      const sub = this._promo?.subtitle?.toLowerCase() || "";
+      if (sub.includes("standard")) return "standard";
+      return "premium"; // default promo = premium
+    }
+    return this._tier?.id || "standard";
+  }
+
+  /* ─────────────────────────────────────────────────
+     SIDEBAR
+  ───────────────────────────────────────────────── */
   _NAV() {
     return [
       { section: "Akun Saya" },
@@ -108,7 +187,7 @@ class PaymentPage {
       { href: "/frontend/pages/user/settings.html",            icon: "settings",    label: "Pengaturan" },
       { section: "Konten" },
       { href: "/frontend/pages/user/history.html",             icon: "clock",       label: "Riwayat Tonton" },
-      { href: "/frontend/pages/user/favorites-film.html",      icon: "heart",       label: "Favorit" },
+      { href: "/frontend/pages/user/favorites.html",      icon: "heart",       label: "Favorit" },
       { href: "/frontend/pages/user/watchlist.html",           icon: "bookmark",    label: "Daftar Tonton" },
       { section: "Langganan" },
       { href: "/frontend/pages/user/subscription.html",        icon: "star",        label: "Status Langganan" },
@@ -148,7 +227,9 @@ class PaymentPage {
     });
   }
 
-  /* ════════ RENDER PAGE ════════ */
+  /* ─────────────────────────────────────────────────
+     RENDER PAGE
+  ───────────────────────────────────────────────── */
   _renderPage() {
     const main = document.getElementById("paymentMain");
     if (!main) return;
@@ -164,7 +245,6 @@ class PaymentPage {
           </div>
         </div>
 
-        <!-- Tabs -->
         <div class="pay-tabs">
           <button class="pay-tab ${this._activeTab === "payment" ? "pay-tab--active" : ""}" data-tab="payment">
             <i data-feather="shopping-cart"></i> Pembayaran
@@ -175,8 +255,8 @@ class PaymentPage {
           </button>
         </div>
 
-        <div id="tabPayment"  class="${this._activeTab === "payment" ? "" : "is-hidden"}">${this._paymentHTML()}</div>
-        <div id="tabPoin"     class="${this._activeTab === "poin"    ? "" : "is-hidden"}">${this._poinHTML()}</div>
+        <div id="tabPayment" class="${this._activeTab === "payment" ? "" : "is-hidden"}">${this._paymentHTML()}</div>
+        <div id="tabPoin"    class="${this._activeTab === "poin"    ? "" : "is-hidden"}">${this._poinHTML()}</div>
       </div>
 
       <!-- Modal konfirmasi tukar poin -->
@@ -187,8 +267,8 @@ class PaymentPage {
           <h2 class="modal-title" id="modalTitle">Tukar Poin</h2>
           <div class="modal-body" id="modalBody"></div>
           <div class="modal-footer">
-            <button class="btn btn-ghost" id="modalCancel">Batal</button>
-            <button class="btn btn-primary" id="modalConfirm"><i data-feather="check"></i> Konfirmasi</button>
+            <button class="btn btn-ghost"   id="modalCancel">Batal</button>
+            <button class="btn btn-primary" id="modalConfirm"><i data-feather="check"></i> Terapkan Voucher</button>
           </div>
         </div>
       </div>`;
@@ -197,68 +277,137 @@ class PaymentPage {
     this._bindBurger();
   }
 
-  /* ════════ TAB PEMBAYARAN ════════ */
+  /* ─────────────────────────────────────────────────
+     TAB PEMBAYARAN
+  ───────────────────────────────────────────────── */
   _paymentHTML() {
-    const t = this._tier;
-    if (!t || t.price === 0) {
-      return `<div class="sub-cta-card" style="margin-top:var(--space-lg)">
-        <div class="sub-cta-card__icon"><i data-feather="info"></i></div>
-        <div class="sub-cta-card__body">
-          <h3 class="sub-cta-card__title">Pilih paket berbayar untuk melanjutkan</h3>
-          <p class="sub-cta-card__desc">Paket Basic gratis — tidak perlu pembayaran.</p>
-        </div>
-        <a href="/frontend/pages/main/pricing.html" class="btn btn-primary"><i data-feather="layers"></i> Lihat Paket</a>
-      </div>`;
+    // Tidak ada sumber yang valid
+    if (this._sourceType === "none" || (!this._tier && !this._promo)) {
+      return `
+        <div class="sub-cta-card" style="margin-top:var(--space-lg)">
+          <div class="sub-cta-card__icon"><i data-feather="info"></i></div>
+          <div class="sub-cta-card__body">
+            <h3 class="sub-cta-card__title">Pilih paket atau promo untuk melanjutkan pembayaran</h3>
+            <p class="sub-cta-card__desc">Kamu bisa memilih dari halaman Paket atau Promo.</p>
+          </div>
+          <div style="display:flex;gap:var(--space-sm);flex-wrap:wrap">
+            <a href="/frontend/pages/main/pricing.html" class="btn btn-primary"><i data-feather="layers"></i> Lihat Paket</a>
+            <a href="/frontend/pages/main/promo.html"   class="btn btn-ghost"><i data-feather="tag"></i> Lihat Promo</a>
+          </div>
+        </div>`;
     }
 
-    const total = t.price;
+    // Paket Basic / promo gratis → tidak perlu bayar
+    const base = this._basePrice();
+    if (base === 0 && this._sourceType === "tier" && this._tier?.price === 0) {
+      return `
+        <div class="sub-cta-card" style="margin-top:var(--space-lg)">
+          <div class="sub-cta-card__icon"><i data-feather="info"></i></div>
+          <div class="sub-cta-card__body">
+            <h3 class="sub-cta-card__title">Paket Basic gratis — tidak perlu pembayaran</h3>
+            <p class="sub-cta-card__desc">Upgrade ke Standard atau Premium untuk menikmati lebih banyak fitur.</p>
+          </div>
+          <a href="/frontend/pages/main/pricing.html" class="btn btn-primary"><i data-feather="layers"></i> Lihat Paket</a>
+        </div>`;
+    }
+
+    const isPromo      = this._sourceType === "promo";
+    const origPrice    = this._originalPrice();
+    const promoSaving  = isPromo ? origPrice - base : 0;
+    const total        = this._grandTotal();
+    const pts          = this._pts?.totalPoints ?? 0;
+
+    // Header card bergantung sumber
+    const summaryHeader = isPromo
+      ? `<div class="pay-promo-badge">
+           <i data-feather="${this._promo.icon || "tag"}"></i>
+           <span class="pay-promo-badge__label">${this._promo.badge || "Promo"}</span>
+         </div>
+         <div>
+           <p class="pay-summary-card__tier">${this._promo.title}</p>
+           <p class="pay-summary-card__desc">${this._promo.subtitle}</p>
+         </div>
+         <a href="/frontend/pages/main/promo.html" class="btn btn-ghost btn-sm" style="margin-left:auto">
+           <i data-feather="refresh-cw"></i> Ganti
+         </a>`
+      : `<div class="pay-summary-card__icon"><i data-feather="package"></i></div>
+         <div>
+           <p class="pay-summary-card__tier">Paket ${this._tier.name}</p>
+           <p class="pay-summary-card__desc">${this._tier.description}</p>
+         </div>
+         <a href="/frontend/pages/main/pricing.html" class="btn btn-ghost btn-sm" style="margin-left:auto">
+           <i data-feather="refresh-cw"></i> Ganti
+         </a>`;
+
     return `
-      <!-- Ringkasan paket -->
+      <!-- Ringkasan -->
       <div class="pay-summary-card">
-        <div class="pay-summary-card__header">
-          <div class="pay-summary-card__icon"><i data-feather="package"></i></div>
-          <div>
-            <p class="pay-summary-card__tier">Paket ${t.name}</p>
-            <p class="pay-summary-card__desc">${t.description}</p>
-          </div>
-          <a href="/frontend/pages/main/pricing.html" class="btn btn-ghost btn-sm" style="margin-left:auto">
-            <i data-feather="refresh-cw"></i> Ganti
-          </a>
-        </div>
+        <div class="pay-summary-card__header">${summaryHeader}</div>
         <div class="pay-summary-card__body">
+
+          ${!isPromo && this._tier?.priceYearly != null && this._tier?.price > 0 ? `
+          <div class="pay-period-toggle" id="periodToggle">
+            <button class="pay-period-btn ${this._billingPeriod === "bulanan" ? "pay-period-btn--active" : ""}" data-period="bulanan">
+              Bulanan
+            </button>
+            <button class="pay-period-btn ${this._billingPeriod === "tahunan" ? "pay-period-btn--active" : ""}" data-period="tahunan">
+              Tahunan
+              ${this._tier.price > 0 ? `<span class="pay-period-btn__save">Hemat ${this._yearlySavingPercent(this._tier)}%</span>` : ""}
+            </button>
+          </div>` : ""}
+
+          ${isPromo && promoSaving > 0 ? `
+          <div class="pay-line pay-line--striked">
+            <span class="pay-line__label">Harga normal</span>
+            <span class="pay-line__value pay-line__value--strike">Rp ${this._fmt(origPrice)}</span>
+          </div>
+          <div class="pay-line pay-line--discount">
+            <span class="pay-line__label">Harga promo</span>
+            <span class="pay-line__value">Rp ${this._fmt(base)}</span>
+          </div>
+          <div class="pay-line pay-line--saving">
+            <span class="pay-line__label">Kamu hemat</span>
+            <span class="pay-line__value pay-line__value--saving">- Rp ${this._fmt(promoSaving)}</span>
+          </div>` : `
           <div class="pay-line">
-            <span class="pay-line__label">Harga paket</span>
-            <span class="pay-line__value">Rp ${this._fmt(t.price)}</span>
+            <span class="pay-line__label">Harga paket${!isPromo ? ` (${this._billingPeriod === "tahunan" ? "tahunan" : "bulanan"})` : ""}</span>
+            <span class="pay-line__value">Rp ${this._fmt(base)}</span>
+          </div>`}
+
+          <div class="pay-line pay-line--discount" id="promoCodeLine" style="display:none">
+            <span class="pay-line__label" id="promoCodeLabel">Diskon kode promo</span>
+            <span class="pay-line__value" id="promoCodeValue"></span>
           </div>
-          <div class="pay-line pay-line--discount" id="promoLine" style="display:none">
-            <span class="pay-line__label" id="promoLabel">Diskon promo</span>
-            <span class="pay-line__value" id="promoValue"></span>
+
+          <div class="pay-line pay-line--discount" id="voucherLine" style="${this._voucherDiscount > 0 ? "display:flex" : "display:none"}">
+            <span class="pay-line__label">Voucher poin</span>
+            <span class="pay-line__value" id="voucherValue">${this._voucherDiscount > 0 ? `- Rp ${this._fmt(this._voucherDiscount)} (${this._voucherPointsCost} poin)` : ""}</span>
           </div>
-          <div class="pay-line pay-line--discount" id="pointsLine" style="display:none">
-            <span class="pay-line__label">Diskon poin</span>
-            <span class="pay-line__value" id="pointsValue"></span>
-          </div>
+
           <div class="pay-line pay-line--total">
             <span class="pay-line__label">Total Bayar</span>
             <span class="pay-line__value" id="grandTotal">Rp ${this._fmt(total)}</span>
           </div>
 
-          <!-- Kode promo -->
+          <!-- Kode promo (hanya untuk sumber tier, bukan promo yang sudah punya harga sendiri) -->
+          ${!isPromo ? `
           <div class="pay-promo-row">
-            <input type="text" class="pay-promo-input" id="promoInput" placeholder="Kode promo (opsional)" maxlength="20">
+            <input type="text" class="pay-promo-input" id="promoInput" placeholder="Kode diskon (opsional)" maxlength="20">
             <button class="btn btn-ghost btn-sm" id="btnPromo"><i data-feather="tag"></i> Terapkan</button>
           </div>
-          <p class="pay-promo-msg" id="promoMsg"></p>
+          <p class="pay-promo-msg" id="promoMsg"></p>` : ""}
 
-          <!-- Gunakan poin sebagai diskon -->
-          ${this._pts?.totalPoints > 0 ? `
-          <div class="pay-bonus-notice" style="cursor:pointer" id="btnUsePoints">
+          <!-- Voucher poin aktif -->
+          ${this._voucherDiscount > 0 ? `
+          <div class="pay-bonus-notice">
+            <i data-feather="check-circle"></i>
+            <span>Voucher <strong>${this._voucherName}</strong> aktif — diskon Rp ${this._fmt(this._voucherDiscount)} akan dipotong saat bayar</span>
+            <button class="btn-inline" id="btnRemoveVoucher" style="margin-left:auto;color:var(--danger)">Hapus</button>
+          </div>` : pts > 0 ? `
+          <div class="pay-bonus-notice" style="cursor:pointer" id="btnGoToPoin">
             <i data-feather="zap"></i>
-            <span>Kamu punya <strong>${this._pts.totalPoints} poin</strong>.
-              <span id="usePointsLink" style="text-decoration:underline;font-weight:600">
-                ${this._pointsDiscount > 0 ? `Poin dipakai (diskon Rp ${this._fmt(this._pointsDiscount)})` : "Pakai poin sebagai diskon?"}
-              </span>
-            </span>
+            <span>Punya <strong>${pts} poin</strong> — tukar jadi diskon di tab <strong>Poin Saya</strong></span>
+            <i data-feather="arrow-right" style="margin-left:auto"></i>
           </div>` : ""}
         </div>
       </div>
@@ -296,7 +445,9 @@ class PaymentPage {
       </div>`;
   }
 
-  /* ════════ TAB POIN ════════ */
+  /* ─────────────────────────────────────────────────
+     TAB POIN
+  ───────────────────────────────────────────────── */
   _poinHTML() {
     const pts  = this._pts?.totalPoints ?? 0;
     const lv   = LEVEL_CONFIG[this._pts?.level || "bronze"];
@@ -304,7 +455,6 @@ class PaymentPage {
     const hist = this._pts?.history || [];
 
     return `
-      <!-- Hero saldo -->
       <div class="pts-hero">
         <div class="pts-hero__balance">
           <span class="pts-hero__balance-label">Saldo Poin Kamu</span>
@@ -343,11 +493,12 @@ class PaymentPage {
       <!-- Undang teman -->
       ${this._referralHTML()}
 
-      <!-- Tukar poin → diskon langganan -->
+      <!-- Tukar poin -->
       <div class="form-section">
-        <h3 class="form-section__title"><i data-feather="gift"></i> Tukar Poin — Diskon Langganan</h3>
-        <p style="font-size:var(--font-sm);color:var(--text-muted);margin:0 0 var(--space-md)">
-          Poin bisa ditukar menjadi diskon harga saat melakukan pembayaran langganan.
+        <h3 class="form-section__title"><i data-feather="gift"></i> Tukar Poin — Voucher Diskon</h3>
+        <p class="pts-section-note">
+          <i data-feather="info"></i>
+          Pilih voucher diskon di bawah. Poin hanya dipotong saat pembayaran berhasil — bukan saat memilih voucher.
         </p>
         <div class="pts-reward-grid" id="rewardGrid">${this._rewardCardsHTML()}</div>
       </div>
@@ -358,8 +509,8 @@ class PaymentPage {
         <div class="pts-history-list">
           ${hist.length === 0
             ? `<p style="color:var(--text-muted);font-size:var(--font-sm);padding:var(--space-md) 0">Belum ada riwayat poin.</p>`
-            : hist.map(h => {
-                const isEarn = h.type === "earn";
+            : hist.slice(0, 20).map(h => {
+                const isEarn  = h.type === "earn";
                 const dateStr = new Date(h.date).toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" });
                 return `<div class="pts-history-item">
                   <div class="pts-history-item__icon pts-history-item__icon--${h.type}">
@@ -379,7 +530,6 @@ class PaymentPage {
       </div>`;
   }
 
-  /* ── Referral section ── */
   _referralHTML() {
     const code = this._user.referralCode || "—";
     const link = `${window.location.origin}/frontend/pages/main/register.html?ref=${code}`;
@@ -390,21 +540,16 @@ class PaymentPage {
           <div class="pay-referral-card__body">
             <p class="pay-referral-card__title">Bagikan kode referral kamu</p>
             <p class="pay-referral-card__desc">
-              Setiap teman yang mendaftar menggunakan kode atau link kamu akan memberikan
-              <strong>+20 poin</strong> ke akunmu. Tidak ada batasan pengundangan!
+              Setiap teman yang mendaftar pakai kode atau link kamu memberikan <strong>+20 poin</strong> ke akunmu.
             </p>
           </div>
           <div class="pay-referral-card__code-row">
             <div class="pay-referral-code" id="refCode">${code}</div>
-            <button class="btn btn-ghost btn-sm" id="btnCopyCode">
-              <i data-feather="copy"></i> Salin Kode
-            </button>
+            <button class="btn btn-ghost btn-sm" id="btnCopyCode"><i data-feather="copy"></i> Salin Kode</button>
           </div>
           <div class="pay-referral-card__link-row">
             <input type="text" class="pay-promo-input" id="refLink" value="${link}" readonly>
-            <button class="btn btn-primary btn-sm" id="btnCopyLink">
-              <i data-feather="link"></i> Salin Link
-            </button>
+            <button class="btn btn-primary btn-sm" id="btnCopyLink"><i data-feather="link"></i> Salin Link</button>
           </div>
           <div class="pay-referral-card__stats" id="referralStats">
             <i data-feather="loader"></i> Memuat data referral...
@@ -416,22 +561,23 @@ class PaymentPage {
   _rewardCardsHTML() {
     const pts = this._pts?.totalPoints ?? 0;
     return REWARDS.map(r => {
-      const can = pts >= r.cost;
-      return `<div class="pts-reward-card ${!can ? "pts-reward-card--insufficient" : ""}">
+      const can     = pts >= r.cost;
+      const isActive = this._voucherDiscount === r.discountAmount && this._voucherPointsCost === r.cost;
+      return `<div class="pts-reward-card ${!can ? "pts-reward-card--insufficient" : ""} ${isActive ? "pts-reward-card--active" : ""}">
         <div class="pts-reward-card__top">
           <div class="pts-reward-card__icon" style="background:rgba(29,185,84,0.12)">
             <i data-feather="tag" style="width:24px;height:24px;color:var(--accent-primary)"></i>
           </div>
           <div>
             <div class="pts-reward-card__name">${r.name}</div>
-            <div class="pts-reward-card__sub">Diskon pembayaran</div>
+            <div class="pts-reward-card__sub">${isActive ? "✓ Voucher aktif" : "Voucher diskon"}</div>
           </div>
         </div>
         <div class="pts-reward-card__body"><p class="pts-reward-card__desc">${r.desc}</p></div>
         <div class="pts-reward-card__footer">
           <div class="pts-reward-card__cost"><i data-feather="zap"></i>${r.cost.toLocaleString("id-ID")} poin</div>
-          <button class="btn btn-primary btn-sm" data-reward="${r.id}" ${!can ? "disabled" : ""}>
-            ${can ? "Pakai" : "Kurang"}
+          <button class="btn ${isActive ? "btn-ghost" : "btn-primary"} btn-sm" data-reward="${r.id}" ${!can ? "disabled" : ""}>
+            ${isActive ? "Batalkan" : can ? "Pilih" : "Kurang"}
           </button>
         </div>
       </div>`;
@@ -445,29 +591,26 @@ class PaymentPage {
     </button>`;
   }
 
-  /* ════════ EVENTS ════════ */
+  /* ─────────────────────────────────────────────────
+     EVENTS
+  ───────────────────────────────────────────────── */
   _bindEvents() {
-    // Tab switch
     document.querySelectorAll(".pay-tab").forEach(btn => {
       btn.addEventListener("click", () => this._switchTab(btn.dataset.tab));
     });
-
-    // Metode bayar
     document.querySelectorAll(".pay-method-tile").forEach(tile => {
       tile.addEventListener("click", () => this._selectMethod(tile));
     });
-
-    // Promo
-    document.getElementById("btnPromo")?.addEventListener("click", () => this._applyPromo());
-    document.getElementById("promoInput")?.addEventListener("keydown", e => { if (e.key === "Enter") this._applyPromo(); });
-
-    // Gunakan poin
-    document.getElementById("btnUsePoints")?.addEventListener("click", () => this._toggleUsePoints());
-
-    // Bayar
+    document.getElementById("btnPromo")?.addEventListener("click", () => this._applyPromoCode());
+    document.getElementById("promoInput")?.addEventListener("keydown", e => { if (e.key === "Enter") this._applyPromoCode(); });
     document.getElementById("btnPay")?.addEventListener("click", () => this._processPayment());
+    document.getElementById("btnRemoveVoucher")?.addEventListener("click", () => this._removeVoucher());
+    document.getElementById("btnGoToPoin")?.addEventListener("click", () => this._switchTab("poin"));
+    document.querySelectorAll(".pay-period-btn").forEach(btn => {
+      btn.addEventListener("click", () => this._setBillingPeriod(btn.dataset.period));
+    });
 
-    // Reward grid (tukar poin)
+    // Reward grid
     document.getElementById("rewardGrid")?.addEventListener("click", e => {
       const btn = e.target.closest("[data-reward]");
       if (!btn || btn.disabled) return;
@@ -479,18 +622,18 @@ class PaymentPage {
     ["modalClose", "modalOverlay", "modalCancel"].forEach(id => {
       document.getElementById(id)?.addEventListener("click", () => this._closeModal());
     });
-    document.getElementById("modalConfirm")?.addEventListener("click", () => this._confirmRedeem());
+    document.getElementById("modalConfirm")?.addEventListener("click", () => this._applyVoucher());
     document.addEventListener("keydown", e => { if (e.key === "Escape") this._closeModal(); });
 
     // Referral
     this._loadReferralStats();
     document.getElementById("btnCopyCode")?.addEventListener("click", () => {
-      const code = document.getElementById("refCode")?.textContent;
-      navigator.clipboard?.writeText(code).then(() => this._toast("Kode referral disalin!", "success"));
+      navigator.clipboard?.writeText(document.getElementById("refCode")?.textContent)
+        .then(() => this._toast("Kode referral disalin!", "success"));
     });
     document.getElementById("btnCopyLink")?.addEventListener("click", () => {
-      const link = document.getElementById("refLink")?.value;
-      navigator.clipboard?.writeText(link).then(() => this._toast("Link referral disalin!", "success"));
+      navigator.clipboard?.writeText(document.getElementById("refLink")?.value)
+        .then(() => this._toast("Link referral disalin!", "success"));
     });
   }
 
@@ -511,23 +654,41 @@ class PaymentPage {
     });
   }
 
+  _setBillingPeriod(period) {
+    if (period !== "bulanan" && period !== "tahunan") return;
+    if (this._billingPeriod === period) return;
+    this._billingPeriod = period;
+    // reset diskon kode promo karena basis harga berubah
+    this._promoCodeDiscount = 0;
+    this._promoCode = null;
+    if (!this._paymentSuccess) {
+      const url = new URL(window.location.href);
+      url.searchParams.set("period", period);
+      history.replaceState(null, "", url.toString());
+    }
+    this._reRenderPaymentTab();
+  }
+
   _switchTab(tab) {
     this._activeTab = tab;
     document.querySelectorAll(".pay-tab").forEach(b => b.classList.toggle("pay-tab--active", b.dataset.tab === tab));
     document.getElementById("tabPayment")?.classList.toggle("is-hidden", tab !== "payment");
-    document.getElementById("tabPoin")?.classList.toggle("is-hidden", tab !== "poin");
-    const url = new URL(window.location.href);
-    url.searchParams.set("tab", tab);
-    history.replaceState(null, "", url.toString());
+    document.getElementById("tabPoin")?.classList.toggle("is-hidden",    tab !== "poin");
+    // Jangan ubah URL jika success page sedang tampil
+    if (!this._paymentSuccess) {
+      const url = new URL(window.location.href);
+      url.searchParams.set("tab", tab);
+      history.replaceState(null, "", url.toString());
+    }
   }
 
-  /* ════════ PEMBAYARAN ════════ */
+  /* ─────────────────────────────────────────────────
+     PEMBAYARAN
+  ───────────────────────────────────────────────── */
   _selectMethod(tile) {
     document.querySelectorAll(".pay-method-tile").forEach(t => t.classList.remove("pay-method-tile--active"));
     tile.classList.add("pay-method-tile--active");
     this._selectedMethod = tile.dataset.method;
-
-    // Detail bank
     const bd   = document.getElementById("bankDetail");
     const info = METHODS.transfer.find(m => m.id === this._selectedMethod);
     if (info && bd) {
@@ -546,76 +707,81 @@ class PaymentPage {
         navigator.clipboard?.writeText(info.norek).then(() => this._toast("Nomor rekening disalin!", "success"));
       });
     } else if (bd) { bd.classList.remove("active"); bd.innerHTML = ""; }
-
     document.getElementById("btnPay").disabled = false;
     feather.replace();
   }
 
-  _applyPromo() {
-    const code  = document.getElementById("promoInput")?.value.trim().toUpperCase();
-    const msg   = document.getElementById("promoMsg");
+  _applyPromoCode() {
+    const code = document.getElementById("promoInput")?.value.trim().toUpperCase();
+    const msg  = document.getElementById("promoMsg");
     if (!code) return;
-
-    // Cocokkan dengan promotions.json (in-memory simple check)
-    // Untuk prod: POST ke backend. Di sini kita pakai hardcode valid codes sesuai promotions.json
-    const PROMO_MAP = {
-      "HEMAT10":   { type: "percent", value: 10 },
-      "NEWUSER20": { type: "percent", value: 20 },
-    };
-    const promo = PROMO_MAP[code];
-    if (!promo) {
-      msg.textContent = "Kode promo tidak valid atau sudah kedaluwarsa.";
+    // Kode diskon sederhana (bisa diperluas ke API)
+    const MAP = { "HEMAT10": { pct: 10 }, "NEWUSER20": { pct: 20 } };
+    const rule = MAP[code];
+    if (!rule) {
+      msg.textContent = "Kode tidak valid atau sudah kedaluwarsa.";
       msg.className   = "pay-promo-msg pay-promo-msg--error";
-      this._promoDiscount = 0; this._promoCode = null;
+      this._promoCodeDiscount = 0; this._promoCode = null;
     } else {
-      const base = this._tier?.price || 0;
-      this._promoDiscount = promo.type === "percent" ? Math.round(base * promo.value / 100) : promo.value;
-      this._promoCode     = code;
-      msg.textContent = `Diskon ${promo.value}% berhasil diterapkan!`;
+      this._promoCodeDiscount = Math.round(this._basePrice() * rule.pct / 100);
+      this._promoCode         = code;
+      msg.textContent = `Diskon ${rule.pct}% berhasil diterapkan!`;
       msg.className   = "pay-promo-msg pay-promo-msg--ok";
     }
-    this._updateTotal();
+    this._refreshTotal();
   }
 
-  _toggleUsePoints() {
-    const pts     = this._pts?.totalPoints ?? 0;
-    const maxDisc = this._tier?.price || 0;
-    if (this._pointsDiscount > 0) {
-      // batalkan
-      this._pointsDiscount = 0; this._pointsUsed = 0;
-      document.getElementById("usePointsLink").textContent = "Pakai poin sebagai diskon?";
-    } else {
-      // hitung diskon maksimal dari semua poin (1 poin = Rp 10), maks = harga tier
-      const maxFromPts      = pts * POINTS_RATE;
-      this._pointsDiscount  = Math.min(maxFromPts, maxDisc);
-      this._pointsUsed      = Math.ceil(this._pointsDiscount / POINTS_RATE);
-      document.getElementById("usePointsLink").textContent = `Poin dipakai (diskon Rp ${this._fmt(this._pointsDiscount)})`;
+  _removeVoucher() {
+    this._voucherDiscount   = 0;
+    this._voucherPointsCost = 0;
+    this._voucherName       = "";
+    this._paymentSuccess   = false; // flag agar re-render tidak menimpa success page
+    // Re-render tab pembayaran
+    this._reRenderPaymentTab();
+  }
+
+  _refreshTotal() {
+    const total = this._grandTotal();
+    const str   = `Rp ${this._fmt(total)}`;
+    const el1   = document.getElementById("grandTotal");
+    const el2   = document.getElementById("confirmTotal");
+    if (el1) el1.textContent = str;
+    if (el2) el2.textContent = str;
+
+    const pl = document.getElementById("promoCodeLine");
+    if (pl) {
+      if (this._promoCodeDiscount > 0) {
+        pl.style.display = "flex";
+        document.getElementById("promoCodeLabel").textContent = `Diskon kode (${this._promoCode})`;
+        document.getElementById("promoCodeValue").textContent = `- Rp ${this._fmt(this._promoCodeDiscount)}`;
+      } else pl.style.display = "none";
     }
-    this._updateTotal();
+    const vl = document.getElementById("voucherLine");
+    if (vl) {
+      if (this._voucherDiscount > 0) {
+        vl.style.display = "flex";
+        document.getElementById("voucherValue").textContent = `- Rp ${this._fmt(this._voucherDiscount)} (${this._voucherPointsCost} poin)`;
+      } else vl.style.display = "none";
+    }
   }
 
-  _updateTotal() {
-    const base  = this._tier?.price || 0;
-    const total = Math.max(0, base - this._promoDiscount - this._pointsDiscount);
-
-    // Baris promo
-    const pl = document.getElementById("promoLine");
-    if (this._promoDiscount > 0 && pl) {
-      pl.style.display = "flex";
-      document.getElementById("promoLabel").textContent = `Diskon promo (${this._promoCode})`;
-      document.getElementById("promoValue").textContent = `- Rp ${this._fmt(this._promoDiscount)}`;
-    } else if (pl) pl.style.display = "none";
-
-    // Baris poin
-    const ptl = document.getElementById("pointsLine");
-    if (this._pointsDiscount > 0 && ptl) {
-      ptl.style.display = "flex";
-      document.getElementById("pointsValue").textContent = `- Rp ${this._fmt(this._pointsDiscount)} (${this._pointsUsed} poin)`;
-    } else if (ptl) ptl.style.display = "none";
-
-    const str = `Rp ${this._fmt(total)}`;
-    document.getElementById("grandTotal").textContent   = str;
-    document.getElementById("confirmTotal").textContent = str;
+  _reRenderPaymentTab() {
+    const tab = document.getElementById("tabPayment");
+    if (!tab) return;
+    tab.innerHTML = this._paymentHTML();
+    // Re-bind events untuk tab payment
+    document.querySelectorAll(".pay-method-tile").forEach(tile => {
+      tile.addEventListener("click", () => this._selectMethod(tile));
+    });
+    document.getElementById("btnPromo")?.addEventListener("click", () => this._applyPromoCode());
+    document.getElementById("promoInput")?.addEventListener("keydown", e => { if (e.key === "Enter") this._applyPromoCode(); });
+    document.getElementById("btnPay")?.addEventListener("click", () => this._processPayment());
+    document.getElementById("btnRemoveVoucher")?.addEventListener("click", () => this._removeVoucher());
+    document.getElementById("btnGoToPoin")?.addEventListener("click", () => this._switchTab("poin"));
+    document.querySelectorAll(".pay-period-btn").forEach(btn => {
+      btn.addEventListener("click", () => this._setBillingPeriod(btn.dataset.period));
+    });
+    feather.replace();
   }
 
   async _processPayment() {
@@ -623,36 +789,41 @@ class PaymentPage {
     btn.disabled  = true;
     btn.innerHTML = `<i data-feather="loader"></i> Memproses...`;
     feather.replace();
-
-    await new Promise(r => setTimeout(r, 1500)); // simulasi network
-
+    await new Promise(r => setTimeout(r, 1500));
     try {
+      const totalDiscount = this._promoCodeDiscount + this._voucherDiscount;
       const res = await fetch(`${API}/api/payment/process`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           userId:         this._user.id,
-          tierId:         this._tier.id,
+          tierId:         this._tierId(),
           paymentMethod:  this._selectedMethod,
+          sourceType:     this._sourceType,
+          promoId:        this._sourceType === "promo" ? this._promo?.id : null,
           promoCode:      this._promoCode,
-          discountAmount: this._promoDiscount + this._pointsDiscount,
-          pointsUsed:     this._pointsUsed,
+          discountAmount: totalDiscount,
+          pointsUsed:     this._voucherPointsCost,   // poin baru dikurangi di sini
+          voucherName:    this._voucherName || null,
+          billingPeriod:  this._sourceType === "tier" ? this._billingPeriod : undefined,
         }),
       });
       const data = await res.json();
       if (!data.success) throw new Error(data.error);
 
-      // Update local state
       this._pts  = data.points;
       this._user = data.user;
 
-      const bonus    = (data.points.history[0]?.type === "earn") ? data.points.history[0].pts : 0;
-      const tierName = this._tier.name;
-      const main     = document.getElementById("paymentMain");
-      if (!main) return;
+      // Reset voucher setelah bayar berhasil
+      this._voucherDiscount   = 0;
+      this._voucherPointsCost = 0;
+      this._voucherName       = "";
+    this._paymentSuccess   = false; // flag agar re-render tidak menimpa success page
 
-      // Hapus semua listener agar tidak ada re-render tersembunyi
-      this._paymentDone = true;
+      this._paymentSuccess = true; // tandai agar tidak ada yang timpa success page
+      const bonus = data.bonusPoints || 0;
+      const now    = new Date().toLocaleString("id-ID", { day:"numeric", month:"long", year:"numeric", hour:"2-digit", minute:"2-digit" });
+      const main   = document.getElementById("paymentMain");
 
       main.innerHTML = `
         <div class="user-page">
@@ -660,9 +831,9 @@ class PaymentPage {
             <div class="pay-success__icon"><i data-feather="check-circle"></i></div>
             <h1 class="pay-success__title">Pembayaran Berhasil!</h1>
             <p class="pay-success__desc">
-              Paket <strong>${tierName}</strong> sekarang aktif.<br>
+              <strong>${this._itemName()}</strong> sekarang aktif.<br>
               Konfirmasi dikirim ke <strong>${this._user.email}</strong>.
-              ${bonus > 0 ? `<br><br>Kamu mendapat <strong>+${bonus} poin</strong> bonus!` : ""}
+              ${bonus > 0 ? `<br><br>Kamu mendapat <strong>+${bonus} poin</strong> bonus berlangganan!` : ""}
             </p>
             <div class="pay-success__actions">
               <a href="/frontend/pages/user/subscription.html" class="btn btn-primary">
@@ -671,13 +842,25 @@ class PaymentPage {
               <a href="/frontend/pages/user/transactions.html" class="btn btn-ghost">
                 <i data-feather="credit-card"></i> Riwayat Transaksi
               </a>
+              <button class="btn btn-ghost" id="btnSuccessClose">
+                <i data-feather="x"></i> Tutup
+              </button>
             </div>
           </div>
         </div>`;
-      feather.replace();
-      window.scrollTo({ top: 0, behavior: "smooth" });
+
+      requestAnimationFrame(() => {
+        feather.replace();
+        document.querySelector(".user-main")?.scrollTo({ top: 0, behavior: "smooth" });
+        document.getElementById("btnSuccessClose")?.addEventListener("click", () => {
+          this._paymentSuccess = false;
+          window.location.href = window.location.pathname; // reload tanpa query params
+        });
+      });
     } catch (err) {
-      const msg = err.message === "Failed to fetch" ? "Server tidak terhubung. Jalankan: node backend/server.js" : err.message;
+      const msg = err.message === "Failed to fetch"
+        ? "Server tidak terhubung. Jalankan: node backend/server.js"
+        : err.message;
       this._toast(msg, "error");
       btn.disabled  = false;
       btn.innerHTML = `<i data-feather="lock"></i> Bayar Sekarang`;
@@ -685,15 +868,24 @@ class PaymentPage {
     }
   }
 
-  /* ════════ TUKAR POIN ════════ */
+  /* ─────────────────────────────────────────────────
+     TUKAR POIN → VOUCHER
+     Poin BELUM dikurangi di sini — hanya disimpan sebagai
+     pending voucher. Poin baru dikurangi saat _processPayment.
+  ───────────────────────────────────────────────── */
   _openRedeemModal(reward) {
     this._pendingReward = reward;
-    document.getElementById("modalTitle").textContent = `Tukar: ${reward.name}`;
-    document.getElementById("modalBody").innerHTML = `
-      Kamu akan menukar <strong>${reward.cost.toLocaleString("id-ID")} poin</strong>
-      dan mendapatkan voucher <strong>${reward.name}</strong>.<br><br>
-      Voucher ini akan otomatis diterapkan saat kamu melakukan pembayaran langganan berikutnya.<br><br>
-      Saldo setelah penukaran: <strong>${(this._pts.totalPoints - reward.cost).toLocaleString("id-ID")} poin</strong>.`;
+    const isActive = this._voucherDiscount === reward.discountAmount && this._voucherPointsCost === reward.cost;
+
+    document.getElementById("modalTitle").textContent = isActive ? "Batalkan Voucher" : `Pilih Voucher: ${reward.name}`;
+    document.getElementById("modalBody").innerHTML = isActive
+      ? `Voucher <strong>${reward.name}</strong> akan dibatalkan. Poin kamu <strong>tidak berkurang</strong> karena poin belum dipotong.<br><br>
+         Kamu bisa memilih voucher lain atau bayar tanpa diskon.`
+      : `Kamu akan menggunakan <strong>${reward.cost.toLocaleString("id-ID")} poin</strong> untuk mendapat diskon <strong>Rp ${this._fmt(reward.discountAmount)}</strong> saat pembayaran.<br><br>
+         <i style="color:var(--text-muted);font-size:var(--font-xs)">Catatan: poin baru akan dipotong setelah pembayaran berhasil dilakukan.</i><br><br>
+         Saldo poin kamu sekarang: <strong>${this._pts.totalPoints.toLocaleString("id-ID")} poin</strong>`;
+
+    document.getElementById("modalConfirm").textContent = isActive ? "Batalkan Voucher" : "Terapkan Voucher";
     document.getElementById("redeemModal").classList.add("active");
     document.body.style.overflow = "hidden";
     feather.replace();
@@ -705,45 +897,41 @@ class PaymentPage {
     this._pendingReward = null;
   }
 
-  async _confirmRedeem() {
+  _applyVoucher() {
     if (!this._pendingReward) return;
-    const reward = this._pendingReward;
+    const reward   = this._pendingReward;
+    const isActive = this._voucherDiscount === reward.discountAmount && this._voucherPointsCost === reward.cost;
     this._closeModal();
 
-    try {
-      const res = await fetch(`${API}/api/points/redeem`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userId: this._user.id, rewardName: reward.name, cost: reward.cost }),
-      });
-      const data = await res.json();
-      if (!data.success) throw new Error(data.error);
-
-      this._pts = data.points;
-
-      // Aktifkan diskon di tab pembayaran
-      this._pointsDiscount = reward.discountAmount;
-      this._pointsUsed     = reward.cost;
-
-      // Re-render tab poin
-      document.getElementById("tabPoin").innerHTML = this._poinHTML();
-      document.getElementById("tabPtsBadge").textContent = this._pts.totalPoints;
-
-      // Bind event referral lagi
-      this._bindReferralEvents();
-      feather.replace();
-
-      this._toast(`${reward.name} ditukar! Diskon akan aktif saat pembayaran.`, "success");
-
-      // Switch ke tab payment agar user lihat diskon
-      setTimeout(() => { this._switchTab("payment"); this._updateTotal(); }, 1500);
-    } catch (err) {
-      const msg = err.message === "Failed to fetch" ? "Server tidak terhubung. Jalankan: node backend/server.js" : err.message;
-      this._toast(msg, "error");
+    if (isActive) {
+      // Batalkan voucher
+      this._voucherDiscount   = 0;
+      this._voucherPointsCost = 0;
+      this._voucherName       = "";
+    this._paymentSuccess   = false; // flag agar re-render tidak menimpa success page
+      this._toast("Voucher dibatalkan.", "warning");
+    } else {
+      // Terapkan voucher baru
+      this._voucherDiscount   = reward.discountAmount;
+      this._voucherPointsCost = reward.cost;
+      this._voucherName       = reward.name;
+      this._toast(`Voucher ${reward.name} diterapkan! Poin dipotong saat pembayaran berhasil.`, "success");
     }
+
+    // Update reward grid
+    document.getElementById("rewardGrid").innerHTML = this._rewardCardsHTML();
+    feather.replace();
+
+    // Switch ke tab pembayaran supaya user lihat diskon
+    setTimeout(() => {
+      this._switchTab("payment");
+      this._reRenderPaymentTab();
+    }, 800);
   }
 
-  /* ════════ REFERRAL ════════ */
+  /* ─────────────────────────────────────────────────
+     REFERRAL
+  ───────────────────────────────────────────────── */
   async _loadReferralStats() {
     const el = document.getElementById("referralStats");
     if (!el) return;
@@ -751,21 +939,17 @@ class PaymentPage {
       const res = await fetch(`${API}/api/referral?userId=${this._user.id}`);
       const d   = await res.json();
       if (!d.success) throw new Error();
-
-      // Update referral code di user jika baru dibuat server
       if (d.referralCode && !this._user.referralCode) {
         this._user.referralCode = d.referralCode;
-        // Update link input
         const link = `${window.location.origin}/frontend/pages/main/register.html?ref=${d.referralCode}`;
         const inp  = document.getElementById("refLink");
         const cd   = document.getElementById("refCode");
         if (inp) inp.value = link;
         if (cd)  cd.textContent = d.referralCode;
       }
-
       el.innerHTML = `<i data-feather="users"></i>
-        <strong>${d.friendCount}</strong> teman sudah bergabung via referralmu
-        ${d.friendCount > 0 ? `<span style="color:var(--accent-primary);font-weight:600">+${d.friendCount * 20} poin diterima</span>` : ""}`;
+        <strong>${d.friendCount}</strong> teman bergabung via referralmu
+        ${d.friendCount > 0 ? `<span style="color:var(--accent-primary);font-weight:600;margin-left:4px">+${d.friendCount * 20} poin diterima</span>` : ""}`;
       feather.replace();
     } catch {
       el.innerHTML = `<i data-feather="wifi-off"></i> Tidak terhubung ke server`;
@@ -773,21 +957,17 @@ class PaymentPage {
     }
   }
 
-  _bindReferralEvents() {
-    document.getElementById("btnCopyCode")?.addEventListener("click", () => {
-      const code = document.getElementById("refCode")?.textContent;
-      navigator.clipboard?.writeText(code).then(() => this._toast("Kode referral disalin!", "success"));
-    });
-    document.getElementById("btnCopyLink")?.addEventListener("click", () => {
-      const link = document.getElementById("refLink")?.value;
-      navigator.clipboard?.writeText(link).then(() => this._toast("Link referral disalin!", "success"));
-    });
-    this._loadReferralStats();
-  }
-
-  /* ════════ HELPERS ════════ */
+  /* ─────────────────────────────────────────────────
+     HELPERS
+  ───────────────────────────────────────────────── */
   _fmt(n)       { return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); }
   _avatar(name) { return `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=1db954&color=fff`; }
+  _yearlySavingPercent(tier) {
+    if (!tier?.price || tier.priceYearly == null) return 0;
+    const fullYear = tier.price * 12;
+    if (fullYear <= 0) return 0;
+    return Math.round(((fullYear - tier.priceYearly) / fullYear) * 100);
+  }
 
   _toast(msg, type = "success") {
     document.querySelector(".toast")?.remove();

@@ -10,19 +10,98 @@
         <link rel="stylesheet" href="../../css/reset.css" />
         <link rel="stylesheet" href="../../css/design-system.css" />
         <link rel="stylesheet" href="../../css/components/navbar.css" />
+        <link rel="stylesheet" href="../../css/components/footer.css" />
         <link rel="stylesheet" href="../../css/components/button.css" />
-        <link rel="stylesheet" href="../../css/components/video-player.css" />
         <link rel="stylesheet" href="../../css/pages/film-detail.css" />
     </head>
     <body>
         <div id="navbar-container"></div>
-        <main class="detail-page" id="detailPage"></main>
+
+        <main class="page-content detail-page">
+            <section class="video-section" id="videoSection">
+                <div class="video-wrapper" id="videoWrapper">
+                    <video controls width="100%" id="filmVideo" poster="">
+                        <source src="" type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-login-overlay" id="videoLoginOverlay" style="display:none">
+                        <div class="video-login-overlay__content">
+                            <i data-feather="lock"></i>
+                            <h3>Login untuk Menonton</h3>
+                            <p>Silakan login terlebih dahulu untuk menikmati streaming film.</p>
+                            <a href="/frontend/pages/main/login.html" class="btn btn-primary">Login Sekarang</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="film-header-info">
+                <div class="film-poster-container">
+                    <img id="filmPoster" src="" alt="Poster" />
+                </div>
+                <div class="film-meta-container">
+                    <h1 id="filmTitle">Title</h1>
+                    <p class="film-stats">
+                        <span id="filmYear"></span> &bull;
+                        <span id="filmDuration"></span> &bull;
+                        <span id="filmRating"></span>
+                    </p>
+                    <div class="film-badges" id="filmBadges"></div>
+
+                    <div class="action-buttons">
+                        <button class="btn btn-secondary" id="btnTrailer"><i data-feather="play-circle"></i> Trailer</button>
+                        <button class="btn btn-secondary" id="btnWatchlist"><i data-feather="bookmark"></i> Watchlist</button>
+                        <button class="btn btn-secondary" id="btnFavorit"><i data-feather="heart"></i> Favorit</button>
+                        <button class="btn btn-secondary" id="btnShare"><i data-feather="share-2"></i> Share</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="film-tabs-section">
+                <div class="tabs-header">
+                    <button class="tab-btn active" data-target="tab-sinopsis">Sinopsis</button>
+                    <button class="tab-btn" data-target="tab-detail">Detail</button>
+                    <button class="tab-btn" data-target="tab-ulasan">Ulasan</button>
+                </div>
+
+                <div class="tabs-content">
+                    <div id="tab-sinopsis" class="tab-pane active">
+                        <p id="filmSynopsis"></p>
+                    </div>
+                    <div id="tab-detail" class="tab-pane">
+                        <div class="detail-grid" id="filmDetailGrid"></div>
+                    </div>
+                    <div id="tab-ulasan" class="tab-pane"></div>
+                </div>
+            </section>
+        </main>
+
+        <div class="modal-overlay" id="trailerModal" style="display:none">
+            <div class="modal-content">
+                <button class="modal-close" id="trailerModalClose" aria-label="Tutup">
+                    <i data-feather="x"></i>
+                </button>
+                <div class="modal-video-wrapper">
+                    <video controls width="100%" id="trailerVideo">
+                        <source src="" type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer-container"></div>
+
         <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
         <script type="module">
             import Navbar from "../../js/components/navbar.js";
+            import Footer from "../../js/components/footer.js";
+            import DetailPage from "../../js/logic-pages/film-detail.js";
             document.addEventListener("DOMContentLoaded", async () => {
                 await Navbar.load("navbar-container");
+                await Footer.load("footer-container");
                 feather.replace();
+                new DetailPage();
             });
         </script>
     </body>

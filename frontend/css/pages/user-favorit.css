@@ -1,0 +1,278 @@
+.favorit-page {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: var(--space-2xl) var(--space-xl) var(--space-3xl);
+}
+
+.favorit-page .page-hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-2xl);
+    flex-wrap: wrap;
+}
+
+.favorit-page .page-hero h1 {
+    font-size: var(--font-3xl);
+    font-weight: var(--fw-bold);
+}
+
+.favorit-page .page-hero p {
+    color: var(--text-secondary);
+    font-size: var(--font-sm);
+    margin-top: var(--space-xs);
+}
+
+.favorit-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--space-xl);
+}
+
+.favorit-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    min-height: 40vh;
+    padding: var(--space-3xl);
+    color: var(--text-muted);
+}
+
+.favorit-empty .feather {
+    width: 64px;
+    height: 64px;
+    margin-bottom: var(--space-lg);
+    opacity: 0.2;
+}
+
+.favorit-empty h3 {
+    font-size: var(--font-xl);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-sm);
+}
+
+.favorit-empty p {
+    font-size: var(--font-md);
+    margin-bottom: var(--space-xl);
+}
+
+.favorit-empty .btn {
+    display: inline-flex;
+}
+
+.btn-remove-favorit {
+    position: absolute;
+    top: var(--space-sm);
+    right: var(--space-sm);
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-full);
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity var(--transition-fast), color var(--transition-fast), background var(--transition-fast);
+    backdrop-filter: blur(4px);
+}
+
+.film-card:hover .btn-remove-favorit {
+    opacity: 1;
+}
+
+.btn-remove-favorit:hover {
+    color: #e74c3c;
+    background: rgba(231, 76, 60, 0.25);
+}
+
+.btn-remove-favorit .feather {
+    width: 15px;
+    height: 15px;
+}
+
+@media (max-width: 768px) {
+    .favorit-page {
+        padding: var(--space-lg) var(--space-md) var(--space-2xl);
+    }
+
+    .favorit-page .page-hero h1 {
+        font-size: var(--font-2xl);
+    }
+
+    .favorit-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: var(--space-md);
+    }
+}
+
+/* ══════════════════════════════════════
+   USER DASHBOARD — FAVORIT PAGES
+   (tambahan di atas CSS favorit restu)
+══════════════════════════════════════ */
+
+/* Grid film favorit — sesuai card.css restu */
+.fav-film-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: var(--space-lg);
+    margin-top: var(--space-lg);
+}
+
+.fav-film-card {
+    cursor: pointer;
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--glass-bg, var(--bg-card));
+    border: 1px solid var(--glass-border, var(--border-color));
+    transition: all var(--transition-base);
+    display: flex;
+    flex-direction: column;
+}
+.fav-film-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--accent-primary);
+    z-index: 5;
+}
+.fav-film-card .film-card__poster {
+    position: relative;
+    aspect-ratio: 2/3;
+    overflow: hidden;
+    background: var(--bg-tertiary);
+}
+.fav-film-card .film-card__poster img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform var(--transition-slow);
+}
+.fav-film-card:hover .film-card__poster img { transform: scale(1.1); }
+.fav-film-card .film-card__overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 55%);
+    display: flex; align-items: flex-end; justify-content: center;
+    padding-bottom: var(--space-lg);
+    opacity: 0; transition: opacity var(--transition-base);
+}
+.fav-film-card:hover .film-card__overlay { opacity: 1; }
+.fav-film-card .film-card__play-btn {
+    width: 44px; height: 44px; border-radius: var(--radius-full);
+    background: var(--accent-primary);
+    display: flex; align-items: center; justify-content: center;
+    color: #000;
+}
+.fav-film-card .film-card__play-btn .feather { width: 20px; height: 20px; }
+.fav-film-card .film-card__rating {
+    position: absolute; top: var(--space-sm); left: var(--space-sm);
+    background: var(--accent-primary); color: #000;
+    font-size: var(--font-xs); font-weight: var(--fw-bold);
+    padding: 2px 8px; border-radius: var(--radius-sm);
+    display: flex; align-items: center; gap: 4px; z-index: 2;
+}
+.fav-film-card .film-card__quality {
+    position: absolute; top: var(--space-sm); right: 40px;
+    background: rgba(0,0,0,0.75); color: #fff;
+    font-size: 10px; font-weight: var(--fw-bold);
+    padding: 2px 6px; border-radius: var(--radius-sm); z-index: 2;
+}
+.fav-film-card .film-card__info {
+    padding: var(--space-sm) var(--space-md) var(--space-md);
+}
+.fav-film-card .film-card__title {
+    font-size: var(--font-sm); font-weight: var(--fw-semibold);
+    color: var(--text-primary); margin: 0 0 4px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.fav-film-card .film-card__meta {
+    display: flex; gap: var(--space-sm);
+    font-size: var(--font-xs); color: var(--text-muted); margin-bottom: 2px;
+}
+.fav-film-card .film-card__genre {
+    font-size: var(--font-xs); color: var(--text-muted);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin: 0;
+}
+
+/* ── Grid orang (aktor & sutradara) ── */
+.fav-people-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: var(--space-lg);
+    margin-top: var(--space-lg);
+}
+
+.fav-people-card {
+    position: relative;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    text-align: center;
+}
+.fav-people-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-lg);
+}
+.fav-people-card__photo {
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    background: var(--bg-tertiary);
+}
+.fav-people-card__photo img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform var(--transition-slow);
+}
+.fav-people-card:hover .fav-people-card__photo img { transform: scale(1.08); }
+.fav-people-card__info {
+    padding: var(--space-sm) var(--space-md) var(--space-md);
+}
+.fav-people-card__name {
+    font-size: var(--font-sm); font-weight: var(--fw-semibold);
+    color: var(--text-primary); margin: 0 0 2px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.fav-people-card__sub {
+    font-size: var(--font-xs); color: var(--text-muted); margin: 0;
+}
+
+/* ── Tombol hapus favorit (heart merah) ── */
+.btn-remove-fav {
+    position: absolute; top: var(--space-sm); right: var(--space-sm);
+    z-index: 5; width: 30px; height: 30px; border-radius: var(--radius-full);
+    background: var(--bg-card); border: 1px solid var(--border-color);
+    color: var(--accent-primary);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; opacity: 0;
+    transition: opacity var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
+    backdrop-filter: blur(4px);
+}
+.fav-film-card:hover .btn-remove-fav,
+.fav-people-card:hover .btn-remove-fav { opacity: 1; }
+.btn-remove-fav:hover { background: rgba(231,76,60,0.3); color: #e74c3c; }
+.btn-remove-fav .feather { width: 14px; height: 14px; }
+
+/* ── Empty state ── */
+.fav-empty {
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; text-align: center;
+    min-height: 50vh; padding: var(--space-3xl);
+    color: var(--text-muted); gap: var(--space-md);
+}
+.fav-empty .feather { width: 64px; height: 64px; opacity: 0.15; }
+.fav-empty h3 { font-size: var(--font-xl); color: var(--text-secondary); margin: 0; }
+.fav-empty p  { font-size: var(--font-sm); margin: 0; }
+
+@media (max-width: 768px) {
+    .fav-film-grid    { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: var(--space-md); }
+    .fav-people-grid  { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: var(--space-md); }
+}

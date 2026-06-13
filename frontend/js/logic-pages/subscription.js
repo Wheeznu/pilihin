@@ -1,4 +1,5 @@
 import authService from "../../../backend/services/AuthService.js";
+import { loadNotifBadge } from "../utils/notif-badge.js";
 
 class SubscriptionPage {
     constructor() {
@@ -24,6 +25,7 @@ class SubscriptionPage {
         }
 
         this._renderSidebar();
+        loadNotifBadge(this._user);
         this._renderPage();
         feather.replace();
     }
@@ -42,7 +44,7 @@ class SubscriptionPage {
             { href: "/frontend/pages/user/settings.html",                 icon: "settings",    label: "Pengaturan" },
             { section: "Konten" },
             { href: "/frontend/pages/user/history.html",                  icon: "clock",       label: "Riwayat Tonton" },
-            { href: "/frontend/pages/user/favorites-film.html",           icon: "heart",       label: "Favorit" },
+            { href: "/frontend/pages/user/favorites.html",           icon: "heart",       label: "Favorit" },
             { href: "/frontend/pages/user/watchlist.html",                icon: "bookmark",    label: "Daftar Tonton" },
             { section: "Langganan" },
             { href: "/frontend/pages/user/subscription.html",             icon: "star",        label: "Status Langganan" },
@@ -233,16 +235,13 @@ class SubscriptionPage {
                 { icon: "tv",           title: "HD 720p & Full HD 1080p",  desc: "Nikmati gambar jernih di layar besar maupun kecil." },
                 { icon: "copy",         title: "2 Perangkat Bersamaan",    desc: "Tonton di dua perangkat sekaligus — bagikan dengan keluarga." },
                 { icon: "grid",         title: "Semua Konten",             desc: "Akses seluruh katalog film dan serial tanpa terkecuali." },
-                { icon: "download",     title: "Download 30 Film/Bulan",   desc: "Simpan film untuk ditonton secara offline kapan saja." },
-                { icon: "wifi-off",     title: "Mode Offline",             desc: "Tonton tanpa koneksi internet dari konten yang sudah diunduh." },
+                { icon: "calender",     title: "Update Tiap Minggu",       desc: "Menonton Konten Terupdate Tiap Minggunya" },
                 { icon: "slash",        title: "Bebas Iklan",              desc: "Pengalaman menonton tanpa gangguan iklan." },
             ],
             premium: [
                 { icon: "tv",           title: "HD, 4K & HDR",             desc: "Kualitas visual terbaik yang tersedia di pilih.in." },
                 { icon: "copy",         title: "4 Perangkat Bersamaan",    desc: "Cocok untuk seluruh anggota keluarga sekaligus." },
                 { icon: "star",         title: "Konten Premium & Eksklusif", desc: "Akses penuh ke konten eksklusif yang hanya ada di paket Premium." },
-                { icon: "download",     title: "Download Unlimited",       desc: "Unduh sebanyak yang kamu mau tanpa batasan." },
-                { icon: "wifi-off",     title: "Mode Offline",             desc: "Tonton tanpa koneksi internet dari konten yang sudah diunduh." },
                 { icon: "volume-2",     title: "Suara Surround 5.1",       desc: "Audio imersif untuk pengalaman bioskop di rumah." },
                 { icon: "slash",        title: "Bebas Iklan",              desc: "Tidak ada iklan sama sekali." },
                 { icon: "headphones",   title: "Dukungan Pelanggan 24/7",  desc: "Tim kami siap membantu kapan pun kamu butuhkan." },

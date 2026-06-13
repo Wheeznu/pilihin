@@ -246,15 +246,29 @@ async function handleDeleteAccount(req, res) {
 }
 
 /* ── POST /api/payment/process ──
-   body: { userId, tierId, paymentMethod, promoCode?, discountAmount?, pointsUsed? }
-   - simpan transaksi
-   - update subscriptionTier & expiry di user
-   - tambah poin bonus
-   - kurangi poin jika dipakai
+   body: {
+     userId, tierId, paymentMethod,
+     sourceType: "tier" | "promo",
+     promoId?,        // jika sourceType = "promo"
+     promoCode?,      // kode diskon teks
+     discountAmount?, // total diskon Rp (promo kode + voucher poin)
+     pointsUsed?,     // poin yang dipotong (dari voucher)
+     voucherName?,
+   }
 */
 async function handlePayment(req, res) {
   const body = await parseBody(req);
-  const { userId, tierId, paymentMethod, promoCode, discountAmount = 0, pointsUsed = 0 } = body || {};
+  const {
+    userId, tierId, paymentMethod,
+    sourceType = "tier",
+    promoId    = null,
+    promoCode  = null,
+    discountAmount = 0,
+    pointsUsed     = 0,
+    voucherName    = null,
+    billingPeriod  = "bulanan",
+  } = body || {};
+
   if (!userId || !tierId || !paymentMethod)
     return sendJSON(res, 400, { success: false, error: "userId, tierId, paymentMethod wajib diisi" });
 
@@ -263,33 +277,64 @@ async function handlePayment(req, res) {
   const user = adb.users.find(u => u.id === userId);
   if (!user) return sendJSON(res, 404, { success: false, error: "User tidak ditemukan" });
 
-  // Harga dari pricing-tiers
-  const ptiers = readJSON(path.join(DATA_DIR, "pricing-tiers.json"));
-  const tier   = ptiers?.tiers?.find(t => t.id === tierId);
-  if (!tier) return sendJSON(res, 404, { success: false, error: "Paket tidak ditemukan" });
+  // Harga dasar — dari tier atau dari promo
+  let basePrice    = 0;
+  let itemLabel    = "";
+  let durationDays = 30; // default 1 bulan
 
-  const basePrice   = tier.price;
+  if (sourceType === "promo" && promoId) {
+    const pfile = readJSON(path.join(DATA_DIR, "promotions.json"));
+    const promo = pfile?.promotions?.find(p => p.id === promoId);
+    if (!promo) return sendJSON(res, 404, { success: false, error: "Promo tidak ditemukan" });
+    basePrice  = promo.promoPrice ?? 0;
+    itemLabel  = promo.title;
+    // Estimasi durasi berdasarkan subtitle promo
+    const sub  = (promo.subtitle || "").toLowerCase();
+    if      (sub.includes("tahun"))  durationDays = 365;
+    else if (sub.includes("3 bulan")) durationDays = 90;
+    else if (sub.includes("7 hari")) durationDays = 7;
+    else if (sub.includes("2 hari")) durationDays = 2;
+    else                              durationDays = 30;
+  } else {
+    const ptiers = readJSON(path.join(DATA_DIR, "pricing-tiers.json"));
+    const tier   = ptiers?.tiers?.find(t => t.id === tierId);
+    if (!tier) return sendJSON(res, 404, { success: false, error: "Paket tidak ditemukan" });
+    if (billingPeriod === "tahunan" && tier.priceYearly != null) {
+      basePrice    = tier.priceYearly;
+      durationDays = 365;
+      itemLabel    = `Paket ${tier.name} (Tahunan)`;
+    } else {
+      basePrice  = tier.price;
+      itemLabel  = `Paket ${tier.name}`;
+    }
+  }
+
   const totalAmount = Math.max(0, basePrice - discountAmount);
   const now         = new Date().toISOString();
+  const expiresAt   = new Date(Date.now() + durationDays * 24 * 60 * 60 * 1000).toISOString();
 
   // Simpan transaksi
   const tdb = readJSON(TRANS_FILE) || { transactions: [] };
   const trans = {
     id: genId("trans"),
     userId, tierId,
+    sourceType,
+    promoId,
+    itemLabel,
     amount: basePrice,
     currency: "IDR",
     paymentMethod,
     status: "completed",
-    promoCode: promoCode || null,
+    promoCode:      promoCode  || null,
+    voucherName:    voucherName || null,
     discountAmount,
     pointsUsed,
     totalAmount,
-    billingPeriod: "bulanan",
+    durationDays,
+    billingPeriod: sourceType === "tier" ? billingPeriod : (durationDays === 365 ? "tahunan" : "bulanan"),
     invoiceUrl: null,
     paidAt: now,
-    // masa berlaku 30 hari
-    expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+    expiresAt,
     createdAt: now,
     updatedAt: now,
   };
@@ -297,31 +342,34 @@ async function handlePayment(req, res) {
   writeJSON(TRANS_FILE, tdb);
 
   // Update user: tier & expiry
-  // map tier id (basic/standard/premium) → tier-00x
   const tierCodeMap = { basic: "tier-002", standard: "tier-003", premium: "tier-004" };
   user.subscriptionTier   = tierCodeMap[tierId] || user.subscriptionTier;
-  user.subscriptionExpiry = trans.expiresAt;
+  user.subscriptionExpiry = expiresAt;
   user.updatedAt          = now;
   writeJSON(ACCOUNT_FILE, adb);
 
-  // Poin: kurangi jika dipakai, lalu bonus
+  // Poin: kurangi dulu (voucher), lalu bonus
   const pdb = readJSON(POINTS_FILE) || { points: [] };
 
   if (pointsUsed > 0) {
-    try { spendPoints(pdb, userId, pointsUsed, `Diskon poin untuk paket ${tier.name}`); }
-    catch (e) { return sendJSON(res, 400, { success: false, error: e.message }); }
+    try {
+      const desc = voucherName ? `Voucher diskon: ${voucherName}` : `Diskon poin untuk ${itemLabel}`;
+      spendPoints(pdb, userId, pointsUsed, desc);
+    } catch (e) {
+      return sendJSON(res, 400, { success: false, error: e.message });
+    }
   }
 
-  const bonus = TIER_BONUS[tierId] || 0;
-  let pointRec = null;
+  const bonus    = TIER_BONUS[tierId] || 0;
+  let pointRec   = null;
   if (bonus > 0) {
-    pointRec = addPoints(pdb, userId, bonus, `Berlangganan paket ${tier.name}`);
+    pointRec = addPoints(pdb, userId, bonus, `Berlangganan ${itemLabel}`);
   } else {
     pointRec = getOrCreatePoints(pdb, userId);
   }
   writeJSON(POINTS_FILE, pdb);
 
-  sendJSON(res, 200, { success: true, transaction: trans, user, points: pointRec });
+  sendJSON(res, 200, { success: true, transaction: trans, user, points: pointRec, bonusPoints: bonus });
 }
 
 /* ── GET /api/points?userId=xxx ── */
@@ -392,23 +440,24 @@ async function handleGetReferral(req, res, url) {
 /* ════════════════════════ ROUTER ════════════════════════ */
 const server = http.createServer(async (req, res) => {
   if (handleCORS(req, res)) return;
-  const url      = new URL(req.url, `http://${req.headers.host}`);
-  const pathname = url.pathname;
+  const url = new URL(req.url, `http://${req.headers.host}`);
+  const p = url.pathname;
+  const m = req.method;
 
-  if      (req.method === "POST" && pathname === "/api/auth/register")          await handleRegister(req, res);
-  else if (req.method === "POST" && pathname === "/api/auth/forgot-password")   await handleForgotPassword(req, res);
-  else if (req.method === "POST" && pathname === "/api/auth/update-profile")    await handleUpdateProfile(req, res);
-    else if (req.method === "POST" && pathname === "/api/auth/change-password")   await handleChangePassword(req, res);
-  else if (req.method === "POST" && pathname === "/api/auth/change-email")        await handleChangeEmail(req, res);
-  else if (req.method === "POST" && pathname === "/api/auth/reactivate-account")  await handleReactivateAccount(req, res);
-  else if (req.method === "POST" && pathname === "/api/auth/delete-account")      await handleDeleteAccount(req, res);
-  else if (req.method === "POST" && pathname === "/api/contact")                await handleContact(req, res);
-  else if (req.method === "POST" && pathname === "/api/payment/process")        await handlePayment(req, res);
-  else if (req.method === "POST" && pathname === "/api/points/review")          await handleReviewPoints(req, res);
-  else if (req.method === "POST" && pathname === "/api/points/redeem")          await handleRedeemPoints(req, res);
-  else if (req.method === "GET"  && pathname === "/api/points")                 await handleGetPoints(req, res, url);
-  else if (req.method === "GET"  && pathname === "/api/transactions")           await handleGetTransactions(req, res, url);
-  else if (req.method === "GET"  && pathname === "/api/referral")               await handleGetReferral(req, res, url);
+  if      (m === "POST" && p === "/api/auth/register")           await handleRegister(req, res);
+  else if (m === "POST" && p === "/api/auth/forgot-password")    await handleForgotPassword(req, res);
+  else if (m === "POST" && p === "/api/auth/update-profile")     await handleUpdateProfile(req, res);
+  else if (m === "POST" && p === "/api/auth/change-password")    await handleChangePassword(req, res);
+  else if (m === "POST" && p === "/api/auth/change-email")       await handleChangeEmail(req, res);
+  else if (m === "POST" && p === "/api/auth/reactivate-account") await handleReactivateAccount(req, res);
+  else if (m === "POST" && p === "/api/auth/delete-account")     await handleDeleteAccount(req, res);
+  else if (m === "POST" && p === "/api/contact")                 await handleContact(req, res);
+  else if (m === "POST" && p === "/api/payment/process")         await handlePayment(req, res);
+  else if (m === "POST" && p === "/api/points/review")           await handleReviewPoints(req, res);
+  else if (m === "POST" && p === "/api/points/redeem")           await handleRedeemPoints(req, res);
+  else if (m === "GET"  && p === "/api/points")                  await handleGetPoints(req, res, url);
+  else if (m === "GET"  && p === "/api/transactions")            await handleGetTransactions(req, res, url);
+  else if (m === "GET"  && p === "/api/referral")                await handleGetReferral(req, res, url);
   else sendJSON(res, 404, { success: false, error: "Endpoint tidak ditemukan" });
 });
 

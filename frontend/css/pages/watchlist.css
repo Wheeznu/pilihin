@@ -1,0 +1,114 @@
+.watchlist-page {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: var(--space-2xl) var(--space-xl) var(--space-3xl);
+}
+
+.watchlist-page .page-hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-2xl);
+    flex-wrap: wrap;
+}
+
+.watchlist-page .page-hero h1 {
+    font-size: var(--font-3xl);
+    font-weight: var(--fw-bold);
+}
+
+.watchlist-page .page-hero p {
+    color: var(--text-secondary);
+    font-size: var(--font-sm);
+    margin-top: var(--space-xs);
+}
+
+.watchlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--space-xl);
+}
+
+.btn-remove-watchlist {
+    position: absolute;
+    top: var(--space-sm);
+    right: var(--space-sm);
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-full);
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity var(--transition-fast), color var(--transition-fast), background var(--transition-fast);
+    backdrop-filter: blur(4px);
+}
+
+.film-card:hover .btn-remove-watchlist {
+    opacity: 1;
+}
+
+.btn-remove-watchlist:hover {
+    color: #e74c3c;
+    background: rgba(231, 76, 60, 0.25);
+}
+
+.btn-remove-watchlist .feather {
+    width: 15px;
+    height: 15px;
+}
+
+.watchlist-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    min-height: 40vh;
+    padding: var(--space-3xl);
+    color: var(--text-muted);
+}
+
+.watchlist-empty .feather {
+    width: 64px;
+    height: 64px;
+    margin-bottom: var(--space-lg);
+    opacity: 0.2;
+}
+
+.watchlist-empty h3 {
+    font-size: var(--font-xl);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-sm);
+}
+
+.watchlist-empty p {
+    font-size: var(--font-md);
+    margin-bottom: var(--space-xl);
+}
+
+.watchlist-empty .btn {
+    display: inline-flex;
+}
+
+@media (max-width: 768px) {
+    .watchlist-page {
+        padding: var(--space-lg) var(--space-md) var(--space-2xl);
+    }
+
+    .watchlist-page .page-hero h1 {
+        font-size: var(--font-2xl);
+    }
+
+    .watchlist-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: var(--space-md);
+    }
+}

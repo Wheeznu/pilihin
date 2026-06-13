@@ -1,4 +1,5 @@
 import authService from "../../../backend/services/AuthService.js";
+import { loadNotifBadge } from "../utils/notif-badge.js";
 
 class UserProfilePage {
     constructor() {
@@ -15,6 +16,7 @@ class UserProfilePage {
             return;
         }
         this._renderSidebar();
+        loadNotifBadge(this._user);
         this._renderPage();
         feather.replace();
     }
@@ -33,7 +35,7 @@ class UserProfilePage {
             { href: "/frontend/pages/user/settings.html",      icon: "settings",      label: "Pengaturan" },
             { section: "Konten" },
             { href: "/frontend/pages/user/history.html",         icon: "clock",         label: "Riwayat Tonton" },
-            { href: "/frontend/pages/user/favorites-film.html",  icon: "heart",         label: "Favorit" },
+            { href: "/frontend/pages/user/favorites.html",  icon: "heart",         label: "Favorit" },
             { href: "/frontend/pages/user/watchlist.html",       icon: "bookmark",      label: "Daftar Tonton" },
             { section: "Langganan" },
             { href: "/frontend/pages/user/subscription.html",   icon: "star",          label: "Status Langganan" },

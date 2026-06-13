@@ -1,4 +1,5 @@
 import authService from "../../../backend/services/AuthService.js";
+import { loadNotifBadge } from "../utils/notif-badge.js";
 
 const API = "http://localhost:3000";
 
@@ -53,6 +54,7 @@ class TransactionsPage {
         }
 
         this._renderSidebar();
+        loadNotifBadge(this._user);
         this._renderPage();
         feather.replace();
 
@@ -73,7 +75,7 @@ class TransactionsPage {
             { href: "/frontend/pages/user/settings.html",      icon: "settings",    label: "Pengaturan" },
             { section: "Konten" },
             { href: "/frontend/pages/user/history.html",       icon: "clock",       label: "Riwayat Tonton" },
-            { href: "/frontend/pages/user/favorites-film.html",icon: "heart",       label: "Favorit" },
+            { href: "/frontend/pages/user/favorites.html",icon: "heart",       label: "Favorit" },
             { href: "/frontend/pages/user/watchlist.html",     icon: "bookmark",    label: "Daftar Tonton" },
             { section: "Langganan" },
             { href: "/frontend/pages/user/subscription.html",  icon: "star",        label: "Status Langganan" },

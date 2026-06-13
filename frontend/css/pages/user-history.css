@@ -1,0 +1,211 @@
+.history-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.history-card {
+    display: flex;
+    gap: var(--space-lg);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    padding: var(--space-md);
+    cursor: pointer;
+    transition: border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.history-card:hover {
+    border-color: var(--accent-primary);
+}
+
+.history-card__poster {
+    position: relative;
+    flex: 0 0 140px;
+    width: 140px;
+    aspect-ratio: 2 / 3;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--bg-secondary, #2a2a2a);
+}
+
+.history-card__poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.btn-remove-history {
+    position: absolute;
+    top: var(--space-sm);
+    right: var(--space-sm);
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-full);
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity var(--transition-fast), color var(--transition-fast), background var(--transition-fast);
+    backdrop-filter: blur(4px);
+}
+
+.history-card:hover .btn-remove-history {
+    opacity: 1;
+}
+
+.btn-remove-history:hover {
+    color: #e74c3c;
+    background: rgba(231, 76, 60, 0.25);
+}
+
+.btn-remove-history i {
+    width: 16px;
+    height: 16px;
+}
+
+.history-card__progress {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    z-index: 4;
+}
+
+.history-card__progress-bar {
+    height: 100%;
+    background: var(--accent-primary);
+}
+
+.history-card__info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.history-card__info .film-card__title {
+    font-size: var(--font-lg);
+    font-weight: var(--fw-semibold);
+    margin: 0;
+}
+
+.history-card__info .film-card__meta {
+    display: flex;
+    gap: var(--space-sm);
+    font-size: var(--font-xs);
+    color: var(--text-muted);
+}
+
+.history-card__info .film-card__genre {
+    font-size: var(--font-sm);
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.history-card__status {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--font-sm);
+    font-weight: var(--fw-medium);
+    margin: var(--space-xs) 0 0;
+}
+
+.history-card__status i {
+    width: 16px;
+    height: 16px;
+}
+
+.history-card__status.is-completed {
+    color: var(--accent-primary);
+}
+
+.history-card__status.is-progress {
+    color: #e0a000;
+}
+
+.history-card__date {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--font-xs);
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.history-card__date i {
+    width: 14px;
+    height: 14px;
+}
+
+.btn-history-action {
+    margin-top: var(--space-sm);
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    text-decoration: none;
+}
+
+.btn-history-action i {
+    width: 16px;
+    height: 16px;
+}
+
+/* ─── Empty state ─── */
+.history-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: var(--space-sm);
+    padding: var(--space-3xl) var(--space-xl);
+    color: var(--text-secondary);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+}
+
+.history-empty i {
+    width: 48px;
+    height: 48px;
+    color: var(--text-muted);
+}
+
+.history-empty h3 {
+    font-size: var(--font-xl);
+    font-weight: var(--fw-semibold);
+    color: var(--text-primary);
+}
+
+.history-empty .btn {
+    margin-top: var(--space-md);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 640px) {
+    .history-card {
+        flex-direction: column;
+    }
+
+    .history-card__poster {
+        width: 100%;
+        flex-basis: auto;
+        aspect-ratio: 16 / 9;
+    }
+
+    .btn-remove-history {
+        opacity: 1;
+    }
+}

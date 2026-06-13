@@ -1,15 +1,13 @@
 import authService from "../../../backend/services/AuthService.js";
+import { loadNotifBadge } from "../utils/notif-badge.js";
 
 // Genre sinkron dengan film-genre.js & data film
 const GENRES = [
-    { id: "genre-001", name: "Action",    icon: "zap"           },
-    { id: "genre-002", name: "Drama",     icon: "film"          },
-    { id: "genre-003", name: "Thriller",  icon: "eye"           },
-    { id: "genre-004", name: "Romance",   icon: "heart"         },
-    { id: "genre-005", name: "Comedy",    icon: "smile"         },
-    { id: "genre-006", name: "Animation", icon: "play-circle"   },
-    { id: "genre-007", name: "Horror",    icon: "alert-triangle"},
-    { id: "genre-008", name: "Sci-Fi",    icon: "cpu"           },
+    { id: "genre-001", name: "Comedy",    icon: "smile"           },
+    { id: "genre-002", name: "Drama",     icon: "camera"          },
+    { id: "genre-003", name: "Romance",  icon: "heart"           },
+    { id: "genre-004", name: "Horror",   icon: "alert-triangle"         },
+    { id: "genre-005", name: "Action",    icon: "zap"         }
 ];
 
 // Kualitas per paket langganan
@@ -67,6 +65,7 @@ class UserSettingsPage {
         }
 
         this._renderSidebar();
+        loadNotifBadge(this._user);
         this._renderPage();
         this._bindEvents();
         feather.replace();
@@ -93,7 +92,7 @@ class UserSettingsPage {
             { href: "/frontend/pages/user/settings.html",            icon: "settings",    label: "Pengaturan" },
             { section: "Konten" },
             { href: "/frontend/pages/user/history.html",             icon: "clock",       label: "Riwayat Tonton" },
-            { href: "/frontend/pages/user/favorites-film.html",      icon: "heart",       label: "Favorit" },
+            { href: "/frontend/pages/user/favorites.html",      icon: "heart",       label: "Favorit" },
             { href: "/frontend/pages/user/watchlist.html",           icon: "bookmark",    label: "Daftar Tonton" },
             { section: "Langganan" },
             { href: "/frontend/pages/user/subscription.html",        icon: "star",        label: "Status Langganan" },
