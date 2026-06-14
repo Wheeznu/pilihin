@@ -80,6 +80,7 @@ const ADMIN_LINKS = [
 ];
 
 const MANAGER_LINKS = [
+<<<<<<< HEAD
   {
     href: "/frontend/pages/manager/earnings.html",
     icon: "dollar-sign",
@@ -140,6 +141,14 @@ const MANAGER_LINKS = [
     label: "Profil",
     isActive: (path) => path.includes("/manager/profile.html")
   }
+=======
+  { href: "/frontend/pages/manager/dashboard.html", icon: "bar-chart-2", label: "Dashboard" },
+  { href: "/frontend/pages/manager/earnings.html", icon: "dollar-sign", label: "Pendapatan" },
+  { href: "/frontend/pages/manager/traffic-stats.html", icon: "trending-up", label: "Statistik Traffic" },
+  { href: "/frontend/pages/manager/top-films.html", icon: "award", label: "Film Terpopuler" },
+  { href: "/frontend/pages/manager/approvals.html", icon: "check-circle", label: "Persetujuan" },
+  { href: "/frontend/pages/manager/exports.html", icon: "download", label: "Ekspor Laporan" },
+>>>>>>> 5d3a398462c302da157ed8001104cb76aa7a440f
 ];
 
 class Sidebar {

@@ -141,14 +141,12 @@ class HomePage {
             }, DURATION);
         };
 
-        // Dot click
         carousel.addEventListener('click', (e) => {
             const dot = e.target.closest('.hero-dot');
             if (!dot) return;
             goTo(parseInt(dot.dataset.index, 10));
         });
 
-        // Pause on hover
         carousel.addEventListener('mouseenter', () => { paused = true; });
         carousel.addEventListener('mouseleave', () => {
             paused = false;
@@ -162,8 +160,9 @@ class HomePage {
         const grid = DOM.$("#trendingGrid");
         if (!grid) return;
 
-        const trending = films
-            .sort((a, b) => b.watchCount - a.watchCount);
+        const trending = [...films]
+            .sort((a, b) => b.watchCount - a.watchCount)
+            .slice(0, 8);
 
         grid.innerHTML = trending.map((f) => this._filmCardHTML(f)).join("");
         feather.replace();
@@ -173,8 +172,9 @@ class HomePage {
         const grid = DOM.$("#latestGrid");
         if (!grid) return;
 
-        const latest = films
-            .sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate));
+        const latest = [...films]
+            .sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate))
+            .slice(0, 8);
 
         grid.innerHTML = latest.map((f) => this._filmCardHTML(f)).join("");
         feather.replace();
