@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Laporan Ulasan - Pilih.in</title>
+    <title>Kelola Akun - Pilih.in</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,21 +15,22 @@
     <link rel="stylesheet" href="../../css/design-system.css" />
     <link rel="stylesheet" href="../../css/components/navbar.css" />
     <link rel="stylesheet" href="../../css/components/button.css" />
-    <link rel="stylesheet" href="../../css/pages/manager-reviews.css" />
+    <link rel="stylesheet" href="../../css/components/modal.css" />
+    <link rel="stylesheet" href="../../css/pages/manager-kelola-akun.css" />
 </head>
 
 <body>
     <div id="navbar-container"></div>
-    <main class="manager-reviews-page" id="managerReviewsPage"></main>
+    <main class="manager-account-page" id="managerAccountPage"></main>
 
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <script type="module">
         import Navbar from "../../js/components/navbar.js";
-        import ManagerReviewsPage from "../../js/logic-pages/manager-reviews.js";
+        import ManagerKelolaAkunPage from "../../js/logic-pages/manager-kelola-akun.js";
 
         document.addEventListener("DOMContentLoaded", async () => {
             await Navbar.load("navbar-container");
-            new ManagerReviewsPage();
+            new ManagerKelolaAkunPage();
             feather.replace();
         });
     </script>

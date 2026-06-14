@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Laporan Ulasan - Pilih.in</title>
+    <title>Kirim Notifikasi - Pilih.in</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,21 +15,22 @@
     <link rel="stylesheet" href="../../css/design-system.css" />
     <link rel="stylesheet" href="../../css/components/navbar.css" />
     <link rel="stylesheet" href="../../css/components/button.css" />
-    <link rel="stylesheet" href="../../css/pages/manager-reviews.css" />
+    <link rel="stylesheet" href="../../css/components/form.css" />
+    <link rel="stylesheet" href="../../css/pages/manager-kirim-notifikasi.css" />
 </head>
 
 <body>
     <div id="navbar-container"></div>
-    <main class="manager-reviews-page" id="managerReviewsPage"></main>
+    <main class="manager-notif-page" id="managerNotifPage"></main>
 
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <script type="module">
         import Navbar from "../../js/components/navbar.js";
-        import ManagerReviewsPage from "../../js/logic-pages/manager-reviews.js";
+        import ManagerKirimNotifikasiPage from "../../js/logic-pages/manager-kirim-notifikasi.js";
 
         document.addEventListener("DOMContentLoaded", async () => {
             await Navbar.load("navbar-container");
-            new ManagerReviewsPage();
+            new ManagerKirimNotifikasiPage();
             feather.replace();
         });
     </script>

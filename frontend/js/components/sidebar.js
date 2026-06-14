@@ -115,6 +115,30 @@ const MANAGER_LINKS = [
     icon: "message-square",
     label: "Ulasan Film",
     isActive: (path) => path.includes("/manager/reviews.html")
+  },
+  {
+    href: "/frontend/pages/manager/balas-ulasan-user.html",
+    icon: "message-circle",
+    label: "Balas Ulasan User",
+    isActive: (path) => path.includes("/manager/balas-ulasan-user.html")
+  },
+  {
+    href: "/frontend/pages/manager/kirim-notifikasi.html",
+    icon: "bell",
+    label: "Kirim Notifikasi",
+    isActive: (path) => path.includes("/manager/kirim-notifikasi.html")
+  },
+  {
+    href: "/frontend/pages/manager/kelola-akun.html",
+    icon: "users",
+    label: "Kelola Akun",
+    isActive: (path) => path.includes("/manager/kelola-akun.html")
+  },
+  {
+    href: "/frontend/pages/manager/profile.html",
+    icon: "user",
+    label: "Profil",
+    isActive: (path) => path.includes("/manager/profile.html")
   }
 ];
 

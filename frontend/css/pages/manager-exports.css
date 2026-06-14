@@ -1,0 +1,313 @@
+.manager-exports-page {
+    padding: var(--space-xl);
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    width: 100%;
+}
+
+.exports-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-xl);
+}
+
+.exports-header__title {
+    font-size: var(--font-2xl);
+    font-weight: var(--fw-bold);
+}
+
+.exports-header__subtitle {
+    color: var(--text-secondary);
+    font-size: var(--font-sm);
+    margin-top: var(--space-xs);
+}
+
+.exports-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xl);
+    margin-bottom: var(--space-xl);
+}
+
+.exports-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.exports-card__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.exports-card__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.exports-card__icon .feather {
+    width: 22px;
+    height: 22px;
+}
+
+.exports-card__icon--revenue {
+    background: rgba(29, 185, 84, 0.15);
+    color: var(--success);
+}
+
+.exports-card__icon--users {
+    background: rgba(52, 152, 255, 0.15);
+    color: var(--info);
+}
+
+.exports-card__icon--films {
+    background: rgba(245, 197, 24, 0.15);
+    color: var(--warning);
+}
+
+.exports-card__icon--reviews {
+    background: rgba(226, 33, 52, 0.15);
+    color: var(--danger);
+}
+
+.exports-card__info {
+    flex: 1;
+}
+
+.exports-card__name {
+    font-size: var(--font-md);
+    font-weight: var(--fw-semibold);
+    margin-bottom: 2px;
+}
+
+.exports-card__desc {
+    font-size: var(--font-sm);
+    color: var(--text-secondary);
+}
+
+.exports-card__count {
+    font-size: var(--font-xl);
+    font-weight: var(--fw-bold);
+}
+
+.exports-card__body {
+    padding: var(--space-lg);
+}
+
+.exports-card__actions {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+}
+
+.exports-card__actions .btn {
+    flex: 1;
+    justify-content: center;
+    min-width: 100px;
+}
+
+.exports-card__format {
+    display: flex;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+.exports-card__format-btn {
+    flex: 1;
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--font-sm);
+    font-weight: var(--fw-medium);
+    color: var(--text-secondary);
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    text-align: center;
+    transition: all var(--transition-fast);
+    font-family: var(--font-family);
+}
+
+.exports-card__format-btn:hover {
+    border-color: var(--accent-primary);
+    color: var(--text-primary);
+}
+
+.exports-card__format-btn--active {
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+    color: var(--bg-primary);
+}
+
+.exports-card__preview {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    font-family: monospace;
+    font-size: var(--font-xs);
+    color: var(--text-secondary);
+    max-height: 200px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    margin-bottom: var(--space-md);
+    line-height: 1.5;
+}
+
+.exports-card__row-count {
+    font-size: var(--font-sm);
+    color: var(--text-muted);
+    margin-bottom: var(--space-md);
+}
+
+.exports-success {
+    display: none;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(29, 185, 84, 0.15);
+    color: var(--success);
+    border-radius: var(--radius-md);
+    font-size: var(--font-sm);
+    margin-top: var(--space-md);
+}
+
+.exports-success .feather {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+.exports-success--visible {
+    display: flex;
+}
+
+.exports-history {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.exports-history__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-lg);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.exports-history__title {
+    font-size: var(--font-md);
+    font-weight: var(--fw-semibold);
+}
+
+.exports-history__list {
+    padding: 0;
+}
+
+.exports-history__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md) var(--space-lg);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.exports-history__item:last-child {
+    border-bottom: none;
+}
+
+.exports-history__info {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.exports-history__icon {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
+}
+
+.exports-history__icon .feather {
+    width: 18px;
+    height: 18px;
+}
+
+.exports-history__name {
+    font-size: var(--font-sm);
+    font-weight: var(--fw-medium);
+}
+
+.exports-history__meta {
+    font-size: var(--font-xs);
+    color: var(--text-muted);
+}
+
+.exports-history__download {
+    font-size: var(--font-xs);
+    font-weight: var(--fw-semibold);
+    color: var(--accent-primary);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+}
+
+.exports-history__download:hover {
+    color: var(--accent-secondary);
+}
+
+.exports-history__download .feather {
+    width: 14px;
+    height: 14px;
+}
+
+.exports-empty {
+    text-align: center;
+    padding: var(--space-3xl) var(--space-xl);
+    color: var(--text-muted);
+}
+
+.exports-empty .feather {
+    width: 48px;
+    height: 48px;
+    margin-bottom: var(--space-lg);
+    stroke: var(--text-muted);
+}
+
+.exports-empty__title {
+    font-size: var(--font-lg);
+    font-weight: var(--fw-semibold);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-sm);
+}
+
+.exports-empty__desc {
+    font-size: var(--font-sm);
+}
+
+@media (max-width: 768px) {
+    .manager-exports-page {
+        padding: var(--space-md);
+    }
+
+    .exports-grid {
+        grid-template-columns: 1fr;
+    }
+}
