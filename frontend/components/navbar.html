@@ -4,19 +4,53 @@
             Pilih<span class="text-primary">.in</span>
         </a>
         <nav class="navbar__nav">
-                    <a href="/frontend/pages/main/about.html" class="navbar__link">About Us</a>
+            <a href="/frontend/pages/main/about.html" class="navbar__link"
+                >About Us</a
+            >
             <div class="navbar__dropdown">
                 <button class="navbar__dropdown-trigger">
                     Informasi <i data-feather="chevron-down"></i>
                 </button>
                 <div class="navbar__dropdown-menu">
-                    <a href="#"><i data-feather="file-text"></i> Artikel</a>
-                    <a href="#"><i data-feather="clock"></i> Berita</a>
-                    <a href="/frontend/pages/main/pricing.html"><i data-feather="star"></i> Langganan</a>
-                    <a href="/frontend/pages/main/promo.html"><i data-feather="tag"></i> Promo</a>
+                    <a href="/frontend/pages/main/artikel.html"
+                        ><i data-feather="file-text"></i> Artikel</a
+                    >
+                    <a href="/frontend/pages/main/artikel.html"
+                        ><i data-feather="clock"></i> Berita</a
+                    >
+                    <a href="/frontend/pages/main/pricing.html"
+                        ><i data-feather="star"></i> Langganan</a
+                    >
+                    <a href="/frontend/pages/main/promo.html"
+                        ><i data-feather="tag"></i> Promo</a
+                    >
                 </div>
             </div>
-            <a href="/frontend/pages/film/katalog.html" class="navbar__link">Katalog</a>
+            <a href="/frontend/pages/film/katalog.html" class="navbar__link"
+                >Katalog</a
+            >
+            <div class="navbar__dropdown">
+                <button class="navbar__dropdown-trigger">
+                    Genre <i data-feather="chevron-down"></i>
+                </button>
+                <div class="navbar__dropdown-menu" style="left: -40px">
+                    <a href="/frontend/pages/film/katalog.html?genre=genre-001"
+                        ><i data-feather="thumbs-up"></i> Comedy</a
+                    >
+                    <a href="/frontend/pages/film/katalog.html?genre=genre-002"
+                        ><i data-feather="film"></i> Drama</a
+                    >
+                    <a href="/frontend/pages/film/katalog.html?genre=genre-003"
+                        ><i data-feather="heart"></i> Romance</a
+                    >
+                    <a href="/frontend/pages/film/katalog.html?genre=genre-004"
+                        ><i data-feather="alert-triangle"></i> Horror</a
+                    >
+                    <a href="/frontend/pages/film/katalog.html?genre=genre-005"
+                        ><i data-feather="zap"></i> Action</a
+                    >
+                </div>
+            </div>
         </nav>
     </div>
     <div class="navbar__center">
@@ -25,11 +59,19 @@
             <input type="text" placeholder="Cari film..." />
         </div>
     </div>
+    <div class="navbar__actions">
+        <button class="btn btn-ghost btn-sm" id="themeToggle" title="Ganti tema">
+            <i data-feather="moon"></i>
+        </button>
+    </div>
     <div class="navbar__right">
         <a href="/frontend/pages/main/login.html" class="btn btn-ghost btn-sm">
             <i data-feather="log-in"></i> <span>Masuk</span>
         </a>
-        <a href="/frontend/pages/main/register.html" class="btn btn-primary btn-sm">
+        <a
+            href="/frontend/pages/main/register.html"
+            class="btn btn-primary btn-sm"
+        >
             <i data-feather="user-plus"></i> <span>Daftar</span>
         </a>
     </div>

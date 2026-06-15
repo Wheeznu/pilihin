@@ -133,6 +133,40 @@
     box-shadow: 0 0 8px var(--accent-primary);
 }
 
+/* ── Logout Footer ───────────────────────────────────── */
+.sidebar-panel__footer {
+    margin-top: auto;
+    padding: var(--space-sm) var(--space-md) var(--space-md);
+}
+
+.sidebar-panel__logout {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: var(--font-sm);
+    font-weight: var(--fw-medium);
+    font-family: var(--font-family);
+    cursor: pointer;
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+}
+
+.sidebar-panel__logout:hover {
+    background: rgba(226, 33, 52, 0.08);
+    color: var(--danger);
+}
+
+.sidebar-panel__logout .feather {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
 /* ── Responsive rules ────────────────────────────────── */
 @media (min-width: 769px) {
     body {

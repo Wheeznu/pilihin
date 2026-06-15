@@ -12,15 +12,24 @@ class HomePage {
             const articles = repositories.articles.findLatest(6);
             const news = repositories.news.findLatest(6);
             this._renderHero(films);
-            this._renderPromoBanner();
             this._renderTrending(films);
             this._renderLatest(films);
             this._renderArticles(articles);
             this._renderNews(news);
+            this._bindCardClicks();
         } catch (err) {
             console.warn("HomePage: data belum siap, retrying...", err);
             setTimeout(() => this._init(), 500);
         }
+    }
+
+    _bindCardClicks() {
+        document.addEventListener("click", (e) => {
+            const card = e.target.closest(".film-card[data-film-id]");
+            if (!card) return;
+            const filmId = card.dataset.filmId;
+            window.location.href = `/frontend/pages/film/detail.html#${filmId}`;
+        });
     }
 
     _getGenres() {
@@ -62,7 +71,7 @@ class HomePage {
     _heroSlideHTML(film, index) {
         const genreNames = this._genreNames(film.genres);
         const year = new Date(film.releaseDate).getFullYear();
-        const quality = film.videoQuality?.[0] || 'HD';
+        const qArr = film.videoQuality || []; const quality = qArr.length > 2 ? qArr[2 + Math.floor(Math.random() * (qArr.length - 2))] : qArr[qArr.length - 1] || 'HD';
 
         return `
             <div class="hero-slide ${index === 0 ? '--active' : ''}" data-slide="${index}">
@@ -91,10 +100,10 @@ class HomePage {
                     </div>
                     <p class="hero__description">${film.description || ''}</p>
                     <div class="hero__actions">
-                        <a href="#" class="btn btn-primary btn-lg">
+                        <a href="${film.streamingUrl || `/frontend/pages/film/detail.html#${film.id}`}" class="btn btn-primary btn-lg">
                             <i data-feather="play-circle"></i> Tonton Sekarang
                         </a>
-                        <a href="#" class="btn btn-ghost btn-lg">
+                        <a href="/frontend/pages/film/detail.html#${film.id}" class="btn btn-ghost btn-lg">
                             <i data-feather="info"></i> Selengkapnya
                         </a>
                     </div>
@@ -107,12 +116,25 @@ class HomePage {
         const DURATION = 15000;
         let current = 0;
         let paused = false;
-        let tick = 0;
+        let timer = null;
 
         const carousel = document.getElementById('heroCarousel');
-        const progressBar = document.getElementById('heroProgress');
         const dots = () => document.querySelectorAll('.hero-dot');
         const slides = () => document.querySelectorAll('.hero-slide');
+
+        const startTimer = () => {
+            if (timer) clearTimeout(timer);
+            if (total <= 1) return;
+            timer = setTimeout(() => {
+                if (paused) return;
+                goTo(current + 1);
+            }, DURATION);
+        };
+
+        const stopTimer = () => {
+            if (timer) clearTimeout(timer);
+            timer = null;
+        };
 
         const goTo = (index) => {
             slides()[current].classList.remove('--active');
@@ -121,24 +143,7 @@ class HomePage {
             slides()[current].classList.add('--active');
             dots()[current].classList.add('--active');
             feather.replace();
-            animateProgress();
-        };
-
-        const animateProgress = () => {
-            if (!progressBar) return;
-            tick++;
-            const id = tick;
-            progressBar.style.transition = 'none';
-            progressBar.style.width = '0%';
-            void progressBar.offsetWidth;
-            progressBar.style.transition = `width ${DURATION}ms linear`;
-            progressBar.style.width = '100%';
-
-            setTimeout(() => {
-                if (id !== tick) return;
-                if (paused || total <= 1) return;
-                goTo(current + 1);
-            }, DURATION);
+            startTimer();
         };
 
         // Dot click
@@ -149,13 +154,13 @@ class HomePage {
         });
 
         // Pause on hover
-        carousel.addEventListener('mouseenter', () => { paused = true; });
+        carousel.addEventListener('mouseenter', () => { paused = true; stopTimer(); });
         carousel.addEventListener('mouseleave', () => {
             paused = false;
-            if (tick > 0) animateProgress();
+            startTimer();
         });
 
-        animateProgress();
+        startTimer();
     }
 
     _renderTrending(films) {
@@ -182,7 +187,7 @@ class HomePage {
 
     _filmCardHTML(film) {
         const genreNames = this._genreNames(film.genres);
-        const quality = film.videoQuality?.[0] || "HD";
+        const qArr = film.videoQuality || []; const quality = qArr.length > 2 ? qArr[2 + Math.floor(Math.random() * (qArr.length - 2))] : qArr[qArr.length - 1] || "HD";
 
         return `
             <div class="film-card" data-film-id="${film.id}">
@@ -212,29 +217,6 @@ class HomePage {
             </div>
         `;
     }
-    _renderPromoBanner() {
-        const container = document.getElementById('promo-banner-container');
-        if (!container) return;
-        container.innerHTML = `
-            <div class="promo-banner">
-                <div>
-                    <div class="promo-banner__badge">
-                        <i data-feather="tag"></i>
-                        Penawaran Spesial
-                    </div>
-                    <h2 class="promo-banner__title">Akses 500+ Film Premium<br>Mulai Rp 15.000/bulan</h2>
-                    <p class="promo-banner__subtitle">Daftar sekarang dan nikmati 7 hari gratis tanpa syarat</p>
-                </div>
-                <div class="promo-banner__action">
-                    <a href="/frontend/pages/main/pricing.html" class="btn btn-primary btn-lg">
-                        <i data-feather="arrow-right"></i> Mulai Sekarang
-                    </a>
-                </div>
-            </div>
-        `;
-        feather.replace();
-    }
-
     _renderArticles(articles) {
         const grid = document.getElementById('articleGrid');
         if (!grid) return;

@@ -19,7 +19,10 @@ body {
     right: 0;
     z-index: var(--z-sticky);
     gap: var(--space-lg);
-    transition: left var(--transition-base), background var(--transition-base), border-color var(--transition-base);
+    transition:
+        left var(--transition-base),
+        background var(--transition-base),
+        border-color var(--transition-base);
 }
 
 :root[data-theme="light"] .navbar {
@@ -82,7 +85,7 @@ body {
 
 /* Underline link effect */
 .navbar__link::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: var(--space-xs);
@@ -128,7 +131,7 @@ body {
 
 /* Underline effect matching navbar__link */
 .navbar__dropdown-trigger::before {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: var(--space-xs);
@@ -162,11 +165,14 @@ body {
     border-top: none;
     border-radius: 0;
     padding: var(--space-xs) 0 var(--space-sm);
-    min-width: 220px;
+    min-width: 145px;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-6px);
-    transition: opacity var(--transition-base), transform var(--transition-base), visibility var(--transition-base);
+    transition:
+        opacity var(--transition-base),
+        transform var(--transition-base),
+        visibility var(--transition-base);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
@@ -185,7 +191,7 @@ body {
 
 /* Bridge: erase navbar bottom border under open trigger */
 .navbar__dropdown--open .navbar__dropdown-trigger::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -1px;
     left: 0;
@@ -195,7 +201,9 @@ body {
     z-index: calc(var(--z-sticky) + 1);
 }
 
-:root[data-theme="light"] .navbar__dropdown--open .navbar__dropdown-trigger::after {
+:root[data-theme="light"]
+    .navbar__dropdown--open
+    .navbar__dropdown-trigger::after {
     background: rgba(255, 255, 255, 0.9);
 }
 
@@ -208,7 +216,9 @@ body {
     font-size: var(--font-sm);
     font-weight: var(--fw-medium);
     border-radius: 0;
-    transition: color var(--transition-fast), background var(--transition-fast);
+    transition:
+        color var(--transition-fast),
+        background var(--transition-fast);
     text-decoration: none;
     white-space: nowrap;
 }
@@ -331,6 +341,45 @@ body {
     transform: scale(1.05);
 }
 
+/* ── Profile Button ──────────────────────────────────── */
+.navbar__profile-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-xs) var(--space-md);
+    border: none;
+    border-radius: var(--radius-md);
+    font-family: var(--font-family);
+    font-size: var(--font-sm);
+    font-weight: var(--fw-semibold);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    text-decoration: none;
+    white-space: nowrap;
+    background: transparent;
+    color: var(--text-primary);
+}
+
+.navbar__profile-btn:hover {
+    background: var(--bg-hover);
+}
+
+/* ── Profile Avatar ──────────────────────────────────── */
+.navbar__avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+/* ── Actions Section (theme toggle etc) ──────────────── */
+.navbar__actions {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
 /* ── Right Section ───────────────────────────────────── */
 .navbar__right {
     display: flex;
@@ -374,6 +423,26 @@ body {
     }
 
     .navbar__right .btn {
+        padding: 0;
+        width: 36px;
+        height: 36px;
+        justify-content: center;
+        border-radius: var(--radius-full);
+    }
+
+    .navbar__profile-btn span {
+        display: none;
+    }
+
+    .navbar__profile-btn {
+        padding: 0;
+        width: 36px;
+        height: 36px;
+        justify-content: center;
+        border-radius: var(--radius-full);
+    }
+
+    .navbar__actions .btn {
         padding: 0;
         width: 36px;
         height: 36px;

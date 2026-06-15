@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="id" data-theme="dark">
+<html lang="id">
     <head>
+<script>document.documentElement.setAttribute("data-theme",localStorage.getItem("pilih-in-theme")||"dark")</script>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Artikel & Berita - Pilih.in</title>
@@ -10,21 +11,41 @@
         <link rel="stylesheet" href="../../css/reset.css" />
         <link rel="stylesheet" href="../../css/design-system.css" />
         <link rel="stylesheet" href="../../css/components/navbar.css" />
+        <link rel="stylesheet" href="../../css/components/footer.css" />
         <link rel="stylesheet" href="../../css/components/button.css" />
+        <link rel="stylesheet" href="../../css/pages/artikel.css" />
     </head>
     <body>
-        <div id="navbar-container"></div>
-        <main class="artikel-page">
-            <section class="page-hero">
-                <h1>Artikel & Berita</h1>
-            </section>
-        </main>
+        <div class="app-layout">
+            <div class="app-main">
+                <div id="navbar-container"></div>
+                <main class="artikel-page">
+                    <section class="page-hero">
+                        <h1>Artikel & Berita</h1>
+                        <p>Baca artikel menarik dan berita terbaru seputar film Indonesia</p>
+                    </section>
+
+                    <div class="artikel-filters" id="filterBtns">
+                        <button class="artikel-filter-btn artikel-filter-btn--active" data-filter="all">Semua</button>
+                        <button class="artikel-filter-btn" data-filter="artikel">Artikel</button>
+                        <button class="artikel-filter-btn" data-filter="berita">Berita</button>
+                    </div>
+
+                    <div class="artikel-grid" id="artikelGrid"></div>
+                </main>
+                <div id="footer-container"></div>
+            </div>
+        </div>
         <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
         <script type="module">
             import Navbar from "../../js/components/navbar.js";
+            import Footer from "../../js/components/footer.js";
+            import ArtikelPage from "../../js/logic-pages/artikel.js";
             document.addEventListener("DOMContentLoaded", async () => {
                 await Navbar.load("navbar-container");
+                await Footer.load("footer-container");
                 feather.replace();
+                new ArtikelPage();
             });
         </script>
     </body>

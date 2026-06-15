@@ -1,7 +1,8 @@
 <!-- Version: 2.4 - Navbar: opacity adjusted to 0.9 -->
 <!doctype html>
-<html lang="id" data-theme="dark">
+<html lang="id">
     <head>
+<script>document.documentElement.setAttribute("data-theme",localStorage.getItem("pilih-in-theme")||"dark")</script>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Pilih.in — Streaming Film Indonesia</title>
@@ -33,12 +34,8 @@
                         <div class="hero-carousel__track" id="heroTrack">
                             <!-- Slides populated by JS -->
                         </div>
-                        <div class="hero-carousel__progress" id="heroProgress"></div>
                         <div class="hero-carousel__dots" id="heroDots"></div>
                     </section>
-
-                    <!-- Promo Banner -->
-                    <div id="promo-banner-container"></div>
 
                     <!-- Trending Section -->
                     <section class="section">

@@ -1,9 +1,19 @@
 import Sidebar from "./sidebar.js";
+import { Theme } from "../utils/theme.js";
 
 class Navbar {
     constructor(element) {
         this.el = element;
+        this._updateToggleIcon();
         this._bindEvents();
+    }
+
+    _updateToggleIcon() {
+        const btn = this.el.querySelector("#themeToggle i");
+        if (!btn) return;
+        const theme = Theme.getCurrent();
+        btn.setAttribute("data-feather", theme === "dark" ? "moon" : "sun");
+        feather.replace();
     }
 
     _bindEvents() {
@@ -16,6 +26,14 @@ class Navbar {
                         window.location.href = `/frontend/pages/film/search.html?q=${encodeURIComponent(query)}`;
                     }
                 }
+            });
+        }
+
+        const themeToggle = this.el.querySelector("#themeToggle");
+        if (themeToggle) {
+            themeToggle.addEventListener("click", () => {
+                Theme.toggle();
+                this._updateToggleIcon();
             });
         }
 
@@ -65,13 +83,27 @@ class Navbar {
         if (!right) return;
 
         if (session) {
+            const profilePage = {
+                user: "/frontend/pages/user/profile.html",
+                admin: "/frontend/pages/admin/profile.html",
+                manager: "/frontend/pages/manager/profile.html",
+            }[session.role] || "/frontend/pages/user/profile.html";
+
+            const hasSidebar = session.role === "admin" || session.role === "manager";
+
+            const avatarHtml = session.profilePhoto
+                ? `<img src="${session.profilePhoto}" alt="${session.username}" class="navbar__avatar" />`
+                : `<i data-feather="user"></i>`;
+
             right.innerHTML = `
-                <a href="/frontend/pages/user/profile.html" class="btn btn-ghost btn-sm">
-                    <i data-feather="user"></i> <span>Profil</span>
+                <a href="${profilePage}" class="navbar__profile-btn">
+                    ${avatarHtml}
+                    <span>${session.username || "Profil"}</span>
                 </a>
+                ${hasSidebar ? "" : `
                 <button class="btn btn-danger btn-sm" id="logoutBtn">
                     <i data-feather="log-out"></i> <span>Keluar</span>
-                </button>
+                </button>`}
             `;
             const logoutBtn = right.querySelector("#logoutBtn");
             if (logoutBtn) {
@@ -81,7 +113,7 @@ class Navbar {
                 });
             }
 
-            if (session.role === "admin" || session.role === "manager") {
+            if (hasSidebar) {
                 Sidebar.init();
             }
         }

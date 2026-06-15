@@ -169,19 +169,6 @@
     gap: var(--space-md);
 }
 
-/* ── Progress Bar ─────────────────────────────────────── */
-.hero-carousel__progress {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 3px;
-    width: 0%;
-    background: var(--accent-primary);
-    z-index: 10;
-    box-shadow: 0 0 10px rgba(29, 185, 84, 0.7);
-    border-radius: 0 2px 2px 0;
-}
-
 /* ── Dot Indicators ───────────────────────────────────── */
 .hero-carousel__dots {
     position: absolute;
@@ -223,12 +210,6 @@
 
 :root[data-theme="light"] .hero-dot:hover:not(.--active) {
     background: rgba(0, 0, 0, 0.5);
-}
-
-/* ── Pause indicator on hover ─────────────────────────── */
-.hero-carousel:hover .hero-carousel__progress {
-    box-shadow: 0 0 10px rgba(29, 185, 84, 0.3);
-    opacity: 0.6;
 }
 
 /* ── Promo Banner ─────────────────────────────────────── */
@@ -466,7 +447,7 @@
 }
 
 .section {
-    padding: var(--space-xs) var(--space-2xl) var(--space-xl);
+    padding: var(--space-xl) var(--space-2xl) var(--space-xl);
     width: 100%;
     box-sizing: border-box;
 }

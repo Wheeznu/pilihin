@@ -1,0 +1,183 @@
+.watchlist-page {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: var(--space-2xl) var(--space-xl) var(--space-3xl);
+}
+
+.watchlist-page .page-hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-2xl);
+    flex-wrap: wrap;
+}
+
+.watchlist-page .page-hero h1 {
+    font-size: var(--font-3xl);
+    font-weight: var(--fw-bold);
+}
+
+.watchlist-page .page-hero p {
+    color: var(--text-secondary);
+    font-size: var(--font-sm);
+    margin-top: var(--space-xs);
+}
+
+.watchlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--space-xl);
+}
+
+.btn-remove-watchlist {
+    position: absolute;
+    top: var(--space-sm);
+    right: var(--space-sm);
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-full);
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity var(--transition-fast), color var(--transition-fast), background var(--transition-fast);
+    backdrop-filter: blur(4px);
+}
+
+.film-card:hover .btn-remove-watchlist {
+    opacity: 1;
+}
+
+.btn-remove-watchlist:hover {
+    color: #e74c3c;
+    background: rgba(231, 76, 60, 0.25);
+}
+
+.btn-remove-watchlist .feather {
+    width: 15px;
+    height: 15px;
+}
+
+.watchlist-empty-section {
+    padding: var(--space-3xl) 0;
+}
+
+.watchlist-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    padding: var(--space-3xl);
+    color: var(--text-muted);
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+}
+
+.watchlist-empty .feather {
+    width: 48px;
+    height: 48px;
+    margin-bottom: var(--space-lg);
+    opacity: 0.3;
+    color: var(--accent-primary);
+}
+
+.watchlist-empty h3 {
+    font-size: var(--font-2xl);
+    color: var(--text-primary);
+    margin-bottom: var(--space-xs);
+}
+
+.watchlist-empty p {
+    font-size: var(--font-md);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-lg);
+}
+
+.watchlist-steps {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto var(--space-xl);
+    text-align: left;
+    max-width: 400px;
+}
+
+.watchlist-steps li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md) 0;
+    font-size: var(--font-sm);
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.watchlist-steps li:last-child {
+    border-bottom: none;
+}
+
+.watchlist-steps li .feather {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    opacity: 0.6;
+    color: var(--accent-primary);
+    flex-shrink: 0;
+}
+
+.watchlist-steps li a {
+    color: var(--accent-primary);
+    text-decoration: none;
+    font-weight: var(--fw-medium);
+}
+
+.watchlist-steps li a:hover {
+    text-decoration: underline;
+}
+
+
+
+.watchlist-recommendation {
+    margin-top: var(--space-3xl);
+}
+
+.recommendation-header {
+    margin-bottom: var(--space-lg);
+}
+
+.recommendation-header h2 {
+    font-size: var(--font-xl);
+    font-weight: var(--fw-bold);
+    color: var(--text-primary);
+}
+
+.recommendation-header p {
+    font-size: var(--font-sm);
+    color: var(--text-secondary);
+    margin-top: var(--space-xs);
+}
+
+@media (max-width: 768px) {
+    .watchlist-page {
+        padding: var(--space-lg) var(--space-md) var(--space-2xl);
+    }
+
+    .watchlist-page .page-hero h1 {
+        font-size: var(--font-2xl);
+    }
+
+    .watchlist-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: var(--space-md);
+    }
+}

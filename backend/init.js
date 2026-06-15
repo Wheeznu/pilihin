@@ -15,9 +15,12 @@ const DATA_SOURCES = [
   { path: "/data/faq.json", key: "faqs" },
 ];
 
+const DB_VERSION = "2.1";
+
 async function _loadInitialData() {
   const initialized = localStorage.getItem("pilih-in-initialized");
-  if (initialized) return;
+  const existing = dbManager.getDatabase();
+  if (initialized && existing?.metadata?.version === DB_VERSION) return;
 
   const db = dbManager.getDatabase();
 
@@ -33,7 +36,7 @@ async function _loadInitialData() {
 
   db.metadata = {
     ...db.metadata,
-    version: "2.0",
+    version: DB_VERSION,
     lastInitialized: new Date().toISOString(),
     totalUsers: db.users?.length || 0,
     totalFilms: db.films?.length || 0,

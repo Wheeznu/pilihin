@@ -7,16 +7,42 @@ class PromoPage {
         this._init();
     }
 
-    async _init() {
+    async     _init() {
         try {
             const res = await fetch("/data/promotions.json");
             const data = await res.json();
             this._all = data.promotions;
             this._featured = this._all.filter((p) => p.featured);
             this._render();
+            this._bindActions();
         } catch (err) {
             console.warn("PromoPage: gagal load data", err);
         }
+    }
+
+    _isLoggedIn() {
+        return !!localStorage.getItem("pilih-in-session");
+    }
+
+    _requireLogin() {
+        if (!this._isLoggedIn()) {
+            if (confirm("Anda harus login terlebih dahulu. Ingin login sekarang?")) {
+                window.location.href = "/frontend/pages/main/login.html";
+            }
+            return false;
+        }
+        return true;
+    }
+
+    _bindActions() {
+        document.addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-trx]");
+            if (!btn) return;
+            e.preventDefault();
+            if (this._requireLogin()) {
+                window.location.href = btn.getAttribute("href");
+            }
+        });
     }
 
     _render() {
@@ -66,7 +92,7 @@ class PromoPage {
                         <span class="promo-carousel__discount">-${promo.discount}%</span>
                     </div>
                     <div class="promo-carousel__actions">
-                        <a href="/frontend/pages/main/register.html" class="btn btn-primary">
+                        <a href="/frontend/pages/main/register.html" class="btn btn-primary" data-trx>
                             <i data-feather="shopping-cart"></i> Ambil Promo
                         </a>
                     </div>
@@ -167,7 +193,7 @@ class PromoPage {
                     <span class="promo-card__discount">-${promo.discount}%</span>
                 </div>
                 <div class="promo-card__actions">
-                    <a href="/frontend/pages/main/register.html" class="btn btn-primary">
+                    <a href="/frontend/pages/main/register.html" class="btn btn-primary" data-trx>
                         <i data-feather="shopping-cart"></i> Ambil Promo
                     </a>
                     <a href="/frontend/pages/main/pricing.html" class="btn btn-ghost">

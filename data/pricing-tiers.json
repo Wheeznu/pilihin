@@ -1,64 +1,55 @@
 {
-  "tiers": [
-    {
-      "id": "basic",
-      "name": "Basic",
-      "price": 0,
-      "priceYearly": 0,
-      "period": "bulan",
-      "description": "Coba gratis, nikmati streaming dengan fitur dasar",
-      "features": [
-        "Kualitas SD 480p",
-        "Streaming di 1 perangkat",
-        "Akses konten standar",
-        "Iklan saat menonton"
-      ],
-      "highlighted": false,
-      "badge": "Gratis",
-      "maxDevices": 1,
-      "maxQuality": "480p",
-      "hasAds": true
-    },
-    {
-      "id": "standard",
-      "name": "Standard",
-      "price": 49000,
-      "priceYearly": 470000,
-      "period": "bulan",
-      "description": "Pilihan terbaik untuk pengalaman menonton HD premium",
-      "features": [
-        "Kualitas HD 720p & Full HD 1080p",
-        "Streaming di 2 perangkat bersamaan",
-        "Akses semua konten",
-        "Update tiap minggu",
-        "Bebas iklan"
-      ],
-      "highlighted": true,
-      "badge": "Paling Laris",
-      "maxDevices": 2,
-      "maxQuality": "1080p",
-      "hasAds": false
-    },
-    {
-      "id": "premium",
-      "name": "Premium",
-      "price": 79000,
-      "priceYearly": 790000,
-      "period": "bulan",
-      "description": "Pengalaman streaming maksimal dengan kualitas terbaik",
-      "features": [
-        "Kualitas HD, 4K, & HDR",
-        "Streaming di 4 perangkat bersamaan",
-        "Akses semua konten premium & eksklusif",
-        "Suara surround 5.1",
-        "Bebas iklan",
-        "Prioritas pelanggan (customer support 24/7)"
-      ],
-      "highlighted": false,
-      "badge": "4K + HDR",
-      "maxDevices": 4,
-      "maxQuality": "4K",
-      "hasAds": false
-    }
-  ]
+    "tiers": [
+        {
+            "id": "basic",
+            "name": "Basic",
+            "price": 0,
+            "priceYearly": 0,
+            "period": "bulan",
+            "description": "Coba gratis, nikmati streaming dengan fitur dasar",
+            "qual": "SD 480p",
+            "devices": "1 perangkat",
+            "content": "Konten standar",
+            "noAds": true,
+            "updates": false,
+            "surround": false,
+            "support": false,
+            "highlighted": false,
+            "badge": "Gratis"
+        },
+        {
+            "id": "standard",
+            "name": "Standard",
+            "price": 49000,
+            "priceYearly": 470000,
+            "period": "bulan",
+            "description": "Pilihan terbaik untuk pengalaman menonton HD premium",
+            "qual": "HD 720p & Full HD 1080p",
+            "devices": "2 perangkat",
+            "content": "Semua konten",
+            "noAds": "Bebas iklan",
+            "updates": "Update mingguan",
+            "surround": false,
+            "support": false,
+            "highlighted": false,
+            "badge": "Paling Laris"
+        },
+        {
+            "id": "premium",
+            "name": "Premium",
+            "price": 79000,
+            "priceYearly": 790000,
+            "period": "bulan",
+            "description": "Pengalaman streaming maksimal dengan kualitas terbaik",
+            "qual": "HD, 4K, & HDR",
+            "devices": "4 perangkat",
+            "content": "Konten premium & eksklusif",
+            "noAds": "Bebas iklan",
+            "updates": "Update mingguan",
+            "surround": "Suara surround 5.1",
+            "support": "24/7 prioritas",
+            "highlighted": false,
+            "badge": "4K + HDR"
+        }
+    ]
 }

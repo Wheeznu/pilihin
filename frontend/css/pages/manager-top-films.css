@@ -1,0 +1,228 @@
+.manager-top-films-page {
+    padding: var(--space-xl);
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    width: 100%;
+}
+
+.topfilms-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+}
+
+.topfilms-header__title {
+    font-size: var(--font-2xl);
+    font-weight: var(--fw-bold);
+}
+
+.topfilms-header__subtitle {
+    color: var(--text-secondary);
+    font-size: var(--font-sm);
+    margin-top: var(--space-xs);
+}
+
+.topfilms-tabs {
+    display: flex;
+    gap: var(--space-xs);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 2px;
+}
+
+.topfilms-tab {
+    padding: var(--space-xs) var(--space-lg);
+    font-size: var(--font-sm);
+    font-weight: var(--fw-medium);
+    color: var(--text-secondary);
+    background: none;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    font-family: var(--font-family);
+    white-space: nowrap;
+}
+
+.topfilms-tab:hover {
+    color: var(--text-primary);
+}
+
+.topfilms-tab--active {
+    background: var(--accent-primary);
+    color: var(--bg-primary);
+}
+
+.topfilms-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.topfilms-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md) var(--space-lg);
+    transition: border-color var(--transition-fast);
+}
+
+.topfilms-item:hover {
+    border-color: var(--accent-primary);
+}
+
+.topfilms-item__rank {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-md);
+    font-weight: var(--fw-bold);
+    flex-shrink: 0;
+}
+
+.topfilms-item__rank--1 {
+    background: linear-gradient(135deg, #ffd700, #ffb800);
+    color: #7a5800;
+}
+
+.topfilms-item__rank--2 {
+    background: linear-gradient(135deg, #e0e0e0, #c0c0c0);
+    color: #555;
+}
+
+.topfilms-item__rank--3 {
+    background: linear-gradient(135deg, #cd7f32, #b8860b);
+    color: #fff;
+}
+
+.topfilms-item__rank--default {
+    background: var(--bg-tertiary);
+    color: var(--text-muted);
+}
+
+.topfilms-item__poster {
+    width: 48px;
+    height: 68px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    flex-shrink: 0;
+}
+
+.topfilms-item__info {
+    flex: 1;
+    min-width: 0;
+}
+
+.topfilms-item__title {
+    font-size: var(--font-md);
+    font-weight: var(--fw-semibold);
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.topfilms-item__meta {
+    font-size: var(--font-xs);
+    color: var(--text-muted);
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+}
+
+.topfilms-item__meta span {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.topfilms-item__meta .feather {
+    width: 12px;
+    height: 12px;
+}
+
+.topfilms-item__stats {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xl);
+    flex-shrink: 0;
+}
+
+.topfilms-item__stat {
+    text-align: center;
+}
+
+.topfilms-item__stat-value {
+    font-size: var(--font-sm);
+    font-weight: var(--fw-bold);
+}
+
+.topfilms-item__stat-value--rating {
+    color: var(--warning);
+}
+
+.topfilms-item__stat-value--watches {
+    color: var(--info);
+}
+
+.topfilms-item__stat-value--reviews {
+    color: var(--accent-primary);
+}
+
+.topfilms-item__stat-label {
+    font-size: var(--font-xs);
+    color: var(--text-muted);
+}
+
+.topfilms-empty {
+    text-align: center;
+    padding: var(--space-3xl) var(--space-xl);
+    color: var(--text-muted);
+}
+
+.topfilms-empty .feather {
+    width: 48px;
+    height: 48px;
+    margin-bottom: var(--space-lg);
+    stroke: var(--text-muted);
+}
+
+.topfilms-empty__title {
+    font-size: var(--font-lg);
+    font-weight: var(--fw-semibold);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-sm);
+}
+
+@media (max-width: 768px) {
+    .manager-top-films-page {
+        padding: var(--space-md);
+    }
+
+    .topfilms-item {
+        flex-wrap: wrap;
+        gap: var(--space-md);
+    }
+
+    .topfilms-item__stats {
+        width: 100%;
+        justify-content: space-around;
+        padding-top: var(--space-sm);
+        border-top: 1px solid var(--border-color);
+    }
+
+    .topfilms-item__poster {
+        width: 40px;
+        height: 56px;
+    }
+}

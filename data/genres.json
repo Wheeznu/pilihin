@@ -1,7 +1,7 @@
-[
+{ "genres": [
   { "id": "genre-001", "name": "Comedy", "slug": "comedy", "description": "Film komedi yang menghibur dan mengocok perut" },
   { "id": "genre-002", "name": "Drama", "slug": "drama", "description": "Film drama penuh emosi dan cerita mendalam" },
   { "id": "genre-003", "name": "Romance", "slug": "romance", "description": "Film roman tentang cinta dan hubungan" },
   { "id": "genre-004", "name": "Horror", "slug": "horror", "description": "Film horor yang menegangkan dan menakutkan" },
   { "id": "genre-005", "name": "Action", "slug": "action", "description": "Film aksi penuh adrenalin dan pertarungan" }
-]
+] }

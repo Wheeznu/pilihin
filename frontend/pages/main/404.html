@@ -1,40 +1,59 @@
 <!DOCTYPE html>
-<html lang="id" data-theme="dark">
+<html lang="id">
     <head>
+<script>document.documentElement.setAttribute("data-theme",localStorage.getItem("pilih-in-theme")||"dark")</script>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>404 - Halaman Tidak Ditemukan | Pilih.in</title>
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100..900&display=swap"
-            rel="stylesheet"
-        />
+        <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100..900&display=swap" rel="stylesheet" />
 
         <link rel="stylesheet" href="../../css/reset.css" />
         <link rel="stylesheet" href="../../css/design-system.css" />
         <link rel="stylesheet" href="../../css/components/button.css" />
-        <link rel="stylesheet" href="../../css/pages/auth.css" />
+        <link rel="stylesheet" href="../../css/components/navbar.css" />
+        <link rel="stylesheet" href="../../css/components/footer.css" />
+        <link rel="stylesheet" href="../../css/pages/404.css" />
     </head>
     <body>
-        <div class="auth-page" style="flex-direction: column; gap: var(--space-xl); text-align: center; padding: var(--space-3xl);">
-            <div style="font-size: 8rem; font-weight: var(--fw-bold); line-height: 1; color: var(--accent-primary); opacity: 0.3;">
-                404
+        <div class="app-layout">
+            <div class="app-main">
+                <div id="navbar-container"></div>
+                <div class="_404-page">
+                    <div class="_404-content">
+                        <div class="_404-code">404</div>
+                        <div class="_404-icon">
+                            <i data-feather="film"></i>
+                        </div>
+                        <h1 class="_404-title">Halaman Tidak Ditemukan</h1>
+                        <p class="_404-desc">
+                            Halaman yang Anda cari mungkin telah dipindahkan, dihapus, atau tidak tersedia.
+                        </p>
+                        <div class="_404-actions">
+                            <a href="../../index.html" class="btn btn-primary btn-lg">
+                                <i data-feather="home"></i> Kembali ke Beranda
+                            </a>
+                            <a href="../film/katalog.html" class="btn btn-ghost btn-lg" style="border-color: var(--accent-primary); color: var(--accent-primary);">
+                                <i data-feather="film"></i> Jelajahi Katalog
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div id="footer-container"></div>
             </div>
-            <div style="width: 80px; height: 80px; border-radius: var(--radius-full); background: rgba(29, 185, 84, 0.1); color: var(--accent-primary); display: flex; align-items: center; justify-content: center; margin: 0 auto;">
-                <i data-feather="film" style="width: 40px; height: 40px;"></i>
-            </div>
-            <h1 style="font-size: var(--font-2xl); font-weight: var(--fw-bold);">Halaman Tidak Ditemukan</h1>
-            <p style="color: var(--text-secondary); font-size: var(--font-md); max-width: 400px; line-height: 1.7;">
-                Halaman yang Anda cari mungkin telah dipindahkan, dihapus, atau tidak tersedia.
-            </p>
-            <a href="../../index.html" class="btn btn-primary btn-lg">
-                <i data-feather="home"></i> Kembali ke Beranda
-            </a>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-        <script>feather.replace();</script>
+        <script type="module">
+            import Navbar from "../../js/components/navbar.js";
+            import Footer from "../../js/components/footer.js";
+            document.addEventListener("DOMContentLoaded", async () => {
+                await Navbar.load("navbar-container");
+                await Footer.load("footer-container");
+                feather.replace();
+            });
+        </script>
     </body>
 </html>

@@ -7,6 +7,7 @@ const PORT = 3000;
 const DATA_DIR = path.join(__dirname, "..", "data");
 const ACCOUNT_FILE = path.join(DATA_DIR, "account.json");
 const CONTACT_FILE = path.join(DATA_DIR, "contact-messages.json");
+const USERDATA_FILE = path.join(DATA_DIR, "user-data.json");
 
 const CORS_ORIGINS = [
   "http://127.0.0.1:5500",
@@ -56,7 +57,7 @@ function handleCORS(req, res) {
   if (origin && CORS_ORIGINS.includes(origin)) {
     res.setHeader("Access-Control-Allow-Origin", origin);
     res.setHeader("Access-Control-Allow-Credentials", "true");
-    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   }
 
@@ -195,6 +196,83 @@ async function handleContact(req, res) {
   });
 }
 
+/* ── User Data ─────────────────────────────────────────── */
+
+function readUserData() {
+  try {
+    return JSON.parse(fs.readFileSync(USERDATA_FILE, "utf-8"));
+  } catch {
+    return {};
+  }
+}
+
+function writeUserData(data) {
+  fs.writeFileSync(USERDATA_FILE, JSON.stringify(data, null, 2), "utf-8");
+}
+
+async function handleGetUserCollection(req, res, userId, collection) {
+  const VALID_COLLECTIONS = ["reviews", "watchLists", "favorites", "watchHistory", "notifications", "actorFavorites", "directorFavorites", "theme"];
+  if (!VALID_COLLECTIONS.includes(collection)) {
+    return sendJSON(res, 400, { success: false, error: "Koleksi tidak valid" });
+  }
+
+  const allData = readUserData();
+  const userData = allData[userId] || {};
+  let data = userData[collection] ?? null;
+  if (data === null) {
+    data = collection === "theme" ? "dark" : [];
+  }
+
+  sendJSON(res, 200, { success: true, data });
+}
+
+async function handlePutUserCollection(req, res, userId, collection) {
+  const VALID_COLLECTIONS = ["reviews", "watchLists", "favorites", "watchHistory", "notifications", "actorFavorites", "directorFavorites", "theme"];
+  if (!VALID_COLLECTIONS.includes(collection)) {
+    return sendJSON(res, 400, { success: false, error: "Koleksi tidak valid" });
+  }
+
+  const body = await parseBody(req);
+  if (collection === "theme") {
+    if (typeof body !== "string" || !["dark", "light"].includes(body)) {
+      return sendJSON(res, 400, { success: false, error: "Theme harus 'dark' atau 'light'" });
+    }
+  } else if (!Array.isArray(body)) {
+    return sendJSON(res, 400, { success: false, error: "Body harus berupa array" });
+  }
+
+  const allData = readUserData();
+  if (!allData[userId]) allData[userId] = {};
+  allData[userId][collection] = body;
+  writeUserData(allData);
+
+  sendJSON(res, 200, { success: true });
+}
+
+async function handleDeleteUserCollectionItem(req, res, userId, collection, itemId) {
+  const VALID_COLLECTIONS = ["reviews", "watchLists", "favorites", "watchHistory", "notifications", "actorFavorites", "directorFavorites", "theme"];
+  if (!VALID_COLLECTIONS.includes(collection)) {
+    return sendJSON(res, 400, { success: false, error: "Koleksi tidak valid" });
+  }
+
+  if (collection === "theme") {
+    return sendJSON(res, 400, { success: false, error: "Theme tidak bisa dihapus" });
+  }
+
+  const allData = readUserData();
+  const userData = allData[userId] || {};
+  const items = userData[collection] || [];
+  const filtered = items.filter((item) => item.id !== itemId);
+  allData[userId][collection] = filtered;
+  writeUserData(allData);
+
+  sendJSON(res, 200, { success: true });
+}
+
+/* ── Router ────────────────────────────────────────────── */
+
+const USER_DATA_RE = /^\/api\/user-data\/([^/]+)\/([^/]+)(?:\/([^/]+))?$/;
+
 const server = http.createServer(async (req, res) => {
   if (handleCORS(req, res)) return;
 
@@ -208,7 +286,24 @@ const server = http.createServer(async (req, res) => {
   } else if (req.method === "POST" && pathname === "/api/contact") {
     await handleContact(req, res);
   } else {
-    sendJSON(res, 404, { success: false, error: "Endpoint tidak ditemukan" });
+    const m = pathname.match(USER_DATA_RE);
+    if (m) {
+      const userId = m[1];
+      const collection = m[2];
+      const itemId = m[3];
+
+      if (req.method === "GET") {
+        await handleGetUserCollection(req, res, userId, collection);
+      } else if (req.method === "PUT") {
+        await handlePutUserCollection(req, res, userId, collection);
+      } else if (req.method === "DELETE" && itemId) {
+        await handleDeleteUserCollectionItem(req, res, userId, collection, itemId);
+      } else {
+        sendJSON(res, 405, { success: false, error: "Method tidak diizinkan" });
+      }
+    } else {
+      sendJSON(res, 404, { success: false, error: "Endpoint tidak ditemukan" });
+    }
   }
 });
 

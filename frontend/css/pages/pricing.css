@@ -72,7 +72,7 @@
     gap: var(--space-xl);
     max-width: var(--content-max-width);
     margin: 0 auto;
-    align-items: start;
+    align-items: stretch;
 }
 
 .pricing-card {
@@ -87,6 +87,7 @@
     transition: all var(--transition-base);
     position: relative;
     overflow: visible;
+    height: 100%;
 }
 
 .pricing-card:hover {

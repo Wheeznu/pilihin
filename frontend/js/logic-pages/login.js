@@ -1,5 +1,6 @@
 import { validateLogin, clearFormErrors } from "../utils/validation.js";
 import authService from "../../../backend/services/AuthService.js";
+import { Theme } from "../utils/theme.js";
 import { DOM } from "../utils/dom.js";
 
 class LoginPage {
@@ -60,6 +61,7 @@ class LoginPage {
 
         try {
             const user = await authService.login(data.email, data.password);
+            await Theme.syncFromServer();
             this._showAlert("success", `Selamat datang, ${user.username}!`);
             setTimeout(() => {
                 window.location.href = "../../index.html";

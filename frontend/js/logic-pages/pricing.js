@@ -5,15 +5,41 @@ class PricingPage {
         this._init();
     }
 
-    async _init() {
+    async     _init() {
         try {
             const res = await fetch("/data/pricing-tiers.json");
             const data = await res.json();
             this._tiers = data.tiers;
             this._render();
+            this._bindActions();
         } catch (err) {
             console.warn("PricingPage: gagal load data", err);
         }
+    }
+
+    _isLoggedIn() {
+        return !!localStorage.getItem("pilih-in-session");
+    }
+
+    _requireLogin() {
+        if (!this._isLoggedIn()) {
+            if (confirm("Anda harus login terlebih dahulu. Ingin login sekarang?")) {
+                window.location.href = "/frontend/pages/main/login.html";
+            }
+            return false;
+        }
+        return true;
+    }
+
+    _bindActions() {
+        document.addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-trx]");
+            if (!btn) return;
+            e.preventDefault();
+            if (this._requireLogin()) {
+                window.location.href = btn.getAttribute("href");
+            }
+        });
     }
 
     _render() {
@@ -56,6 +82,16 @@ class PricingPage {
         const period = this._isYearly ? "tahun" : tier.period;
         const showOriginal = this._isYearly && tier.priceYearly < tier.price * 12;
 
+        const FEATURES = [
+            { label: "Kualitas Video", val: tier.qual },
+            { label: "Perangkat Streaming", val: tier.devices },
+            { label: "Akses Konten", val: tier.content },
+            { label: "Bebas Iklan", val: tier.noAds },
+            { label: "Update Konten", val: tier.updates },
+            { label: "Suara Surround", val: tier.surround },
+            { label: "Customer Support", val: tier.support },
+        ];
+
         return `
             <div class="pricing-card${isFeatured ? ' pricing-card--featured' : ''}">
                 ${isFeatured ? '<div class="pricing-card__badge">Paling Laris</div>' : ''}
@@ -69,17 +105,20 @@ class PricingPage {
                     <p class="pricing-card__desc">${tier.description}</p>
                 </div>
                 <div class="pricing-card__features">
-                    ${tier.features.map((f) => `
-                        <div class="pricing-card__feature${f.toLowerCase().includes('iklan') && !f.toLowerCase().includes('bebas') ? ' pricing-card__feature--muted' : ''}">
-                            <i data-feather="${f.toLowerCase().includes('iklan') && !f.toLowerCase().includes('bebas') ? 'x-circle' : 'check-circle'}"></i>
-                            <span>${f}</span>
-                        </div>
-                    `).join('')}
+                    ${FEATURES.map((f) => {
+                        const has = f.val !== false && f.val !== null;
+                        return `
+                            <div class="pricing-card__feature${!has ? ' pricing-card__feature--muted' : ''}">
+                                <i data-feather="${has ? 'check-circle' : 'x-circle'}"></i>
+                                <span>${has ? f.val : f.label}</span>
+                            </div>
+                        `;
+                    }).join('')}
                 </div>
                 <div class="pricing-card__action">
                     ${isFree
-                        ? `<a href="/frontend/pages/main/register.html" class="btn btn-ghost">Daftar Gratis</a>`
-                        : `<a href="/frontend/pages/main/register.html" class="btn btn-primary">
+                        ? `<a href="/frontend/pages/main/register.html" class="btn btn-ghost" data-trx>Daftar Gratis</a>`
+                        : `<a href="/frontend/pages/main/register.html" class="btn btn-primary" data-trx>
                             <i data-feather="shopping-cart"></i> Langganan
                         </a>`
                     }

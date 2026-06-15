@@ -1,16 +1,17 @@
+import { DOM } from "../utils/dom.js";
+
 class FaqPage {
     constructor() {
-        this.faqs = [];
-        this.activeCategory = "all";
-        this.searchQuery = "";
+        this._faqs = [];
+        this._activeCategory = "all";
+        this._searchQuery = "";
         this._init();
     }
 
     async _init() {
         try {
             await this._loadFaqs();
-            this._cacheElements();
-            if (!this.container) return;
+            if (!this._cacheElements()) return;
             this._bindEvents();
             this._render();
         } catch (err) {
@@ -22,31 +23,55 @@ class FaqPage {
     async _loadFaqs() {
         const db = JSON.parse(localStorage.getItem("pilih-in-db"));
         if (db?.faqs?.length) {
-            this.faqs = db.faqs;
+            this._faqs = db.faqs;
             return;
         }
         const res = await fetch("/data/faq.json");
         const data = await res.json();
-        this.faqs = data.faqs || [];
+        this._faqs = data.faqs || [];
     }
 
     _cacheElements() {
-        this.container = document.getElementById("faqList");
-        this.searchInput = document.getElementById("faqSearch");
-        this.categoriesEl = document.getElementById("faqCategories");
+        this._container = DOM.$("#faqList");
+        this._searchInput = DOM.$("#faqSearch");
+        this._categoriesEl = DOM.$("#faqCategories");
+        return this._container && this._categoriesEl;
     }
 
     _bindEvents() {
-        if (this.searchInput) {
-            this.searchInput.addEventListener("input", (e) => {
-                this.searchQuery = e.target.value.toLowerCase();
+        if (this._searchInput) {
+            this._searchInput.addEventListener("input", (e) => {
+                this._searchQuery = e.target.value.toLowerCase();
                 this._render();
             });
         }
+
+        this._categoriesEl.addEventListener("click", (e) => {
+            const btn = e.target.closest(".faq-category-btn");
+            if (!btn) return;
+            const cat = btn.dataset.category;
+            if (cat === this._activeCategory) return;
+            this._activeCategory = cat;
+            this._render();
+        });
+
+        this._container.addEventListener("click", (e) => {
+            const btn = e.target.closest(".faq-item__question");
+            if (!btn) return;
+            const item = btn.closest(".faq-item");
+            if (!item) return;
+            const isOpen = item.classList.contains("faq-item--open");
+
+            DOM.$$(".faq-item--open", this._container).forEach((el) => {
+                if (el !== item) el.classList.remove("faq-item--open");
+            });
+
+            item.classList.toggle("faq-item--open");
+        });
     }
 
     _getCategories() {
-        const cats = [...new Set(this.faqs.map((f) => f.category))];
+        const cats = [...new Set(this._faqs.map((f) => f.category))];
         return ["all", ...cats];
     }
 
@@ -62,13 +87,13 @@ class FaqPage {
     }
 
     _getFiltered() {
-        return this.faqs.filter((f) => {
+        return this._faqs.filter((f) => {
             const matchCategory =
-                this.activeCategory === "all" || f.category === this.activeCategory;
+                this._activeCategory === "all" || f.category === this._activeCategory;
             const matchSearch =
-                !this.searchQuery ||
-                f.question.toLowerCase().includes(this.searchQuery) ||
-                f.answer.toLowerCase().includes(this.searchQuery);
+                !this._searchQuery ||
+                f.question.toLowerCase().includes(this._searchQuery) ||
+                f.answer.toLowerCase().includes(this._searchQuery);
             return matchCategory && matchSearch;
         });
     }
@@ -79,33 +104,24 @@ class FaqPage {
     }
 
     _renderCategories() {
-        if (!this.categoriesEl) return;
         const categories = this._getCategories();
 
-        this.categoriesEl.innerHTML = categories
+        this._categoriesEl.innerHTML = categories
             .map(
                 (cat) => `
-                <button class="faq-category-btn${cat === this.activeCategory ? " faq-category-btn--active" : ""}" data-category="${cat}">
+                <button class="faq-category-btn${cat === this._activeCategory ? " faq-category-btn--active" : ""}" data-category="${cat}">
                     ${this._getCategoryLabel(cat)}
                 </button>
             `
             )
             .join("");
-
-        this.categoriesEl.querySelectorAll(".faq-category-btn").forEach((btn) => {
-            btn.addEventListener("click", () => {
-                this.activeCategory = btn.dataset.category;
-                this._render();
-            });
-        });
     }
 
     _renderList() {
-        if (!this.container) return;
         const filtered = this._getFiltered();
 
-        if (filtered.length === 0) {
-            this.container.innerHTML = `
+        if (!filtered.length) {
+            this._container.innerHTML = `
                 <div class="faq-empty">
                     <i data-feather="search"></i>
                     <p>Tidak ditemukan hasil untuk pencarian Anda</p>
@@ -115,7 +131,7 @@ class FaqPage {
             return;
         }
 
-        this.container.innerHTML = filtered
+        this._container.innerHTML = filtered
             .map(
                 (faq) => `
                 <div class="faq-item" data-faq-id="${faq.id}">
@@ -132,22 +148,6 @@ class FaqPage {
             .join("");
 
         feather.replace();
-        this._bindAccordion();
-    }
-
-    _bindAccordion() {
-        this.container.querySelectorAll(".faq-item__question").forEach((btn) => {
-            btn.addEventListener("click", () => {
-                const item = btn.closest(".faq-item");
-                const isOpen = item.classList.contains("faq-item--open");
-
-                this.container.querySelectorAll(".faq-item--open").forEach((el) => {
-                    if (el !== item) el.classList.remove("faq-item--open");
-                });
-
-                item.classList.toggle("faq-item--open");
-            });
-        });
     }
 }
 

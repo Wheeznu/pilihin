@@ -1,0 +1,85 @@
+._404-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-primary);
+    padding: var(--space-md) var(--space-2xl);
+}
+
+._404-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xl);
+    text-align: center;
+    max-width: 480px;
+}
+
+._404-code {
+    font-size: 8rem;
+    font-weight: var(--fw-bold);
+    line-height: 1;
+    color: var(--accent-primary);
+    opacity: 0.15;
+    user-select: none;
+}
+
+._404-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: var(--radius-full);
+    background: rgba(29, 185, 84, 0.1);
+    color: var(--accent-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: -var(--space-xl) auto 0;
+}
+
+._404-icon .feather {
+    width: 40px;
+    height: 40px;
+}
+
+._404-title {
+    font-size: var(--font-2xl);
+    font-weight: var(--fw-bold);
+    color: var(--text-primary);
+    margin: 0;
+}
+
+._404-desc {
+    color: var(--text-secondary);
+    font-size: var(--font-md);
+    max-width: 400px;
+    line-height: 1.7;
+    margin: 0;
+}
+
+._404-actions {
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    ._404-page {
+        padding: var(--space-lg) var(--space-md);
+    }
+
+    ._404-code {
+        font-size: 5rem;
+    }
+
+    ._404-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    ._404-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}

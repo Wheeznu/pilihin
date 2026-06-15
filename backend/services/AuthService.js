@@ -25,6 +25,8 @@ class AuthService {
 
         const session = {
             userId: user.id,
+            username: user.username,
+            profilePhoto: user.profilePhoto,
             role: user.role,
             loginAt: new Date().toISOString(),
         };

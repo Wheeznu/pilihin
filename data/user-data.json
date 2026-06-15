@@ -1,0 +1,23 @@
+{
+  "user-1780821109229-036bf4": {
+    "favorites": [],
+    "watchLists": [
+      {
+        "userId": "user-1780821109229-036bf4",
+        "filmId": "film-013"
+      },
+      {
+        "userId": "user-1780821109229-036bf4",
+        "filmId": "film-011"
+      }
+    ]
+  },
+  "user-1781441057369-55c950": {
+    "favorites": [
+      {
+        "userId": "user-1781441057369-55c950",
+        "filmId": "film-033"
+      }
+    ]
+  }
+}

@@ -43,14 +43,14 @@ const ADMIN_LINKS = [
   },
   {
     href: "/frontend/pages/admin/users.html",
-    icon: "users",
-    label: "Kelola Pengguna",
+    icon: "shield",
+    label: "Kelola Akun",
     isActive: (path) => path.includes("/admin/users.html")
   },
   {
     href: "/frontend/pages/admin/reviews.html",
     icon: "message-square",
-    label: "Kelola Ulasan",
+    label: "Balas Ulasan",
     isActive: (path) => path.includes("/admin/reviews.html")
   },
   {
@@ -73,13 +73,19 @@ const ADMIN_LINKS = [
   },
   {
     href: "/frontend/pages/admin/notifications.html",
-    icon: "bell",
-    label: "Notifikasi",
+    icon: "send",
+    label: "Kirim Notifikasi",
     isActive: (path) => path.includes("/admin/notifications.html")
   }
 ];
 
 const MANAGER_LINKS = [
+  {
+    href: "/frontend/pages/manager/profile.html",
+    icon: "user",
+    label: "Profil Manager",
+    isActive: (path) => path.includes("/manager/profile.html")
+  },
   {
     href: "/frontend/pages/manager/earnings.html",
     icon: "dollar-sign",
@@ -191,6 +197,12 @@ class Sidebar {
           </a>
         `).join("")}
       </nav>
+      <div class="sidebar-panel__footer">
+        <button class="sidebar-panel__logout" id="sidebarLogoutBtn">
+          <i data-feather="log-out"></i>
+          <span>Keluar</span>
+        </button>
+      </div>
     `;
 
     document.body.appendChild(panel);
@@ -211,6 +223,12 @@ class Sidebar {
     const toggle = document.getElementById(Sidebar.TOGGLE_ID);
     const panel = document.getElementById(Sidebar.PANEL_ID);
     const overlay = document.getElementById(Sidebar.OVERLAY_ID);
+
+    const logoutBtn = document.getElementById("sidebarLogoutBtn");
+    logoutBtn?.addEventListener("click", () => {
+      localStorage.removeItem("pilih-in-session");
+      window.location.href = "/frontend/index.html";
+    });
 
     toggle?.addEventListener("click", () => {
       const isOpen = panel?.classList.toggle("sidebar-panel--open");
