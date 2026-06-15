@@ -1,4 +1,5 @@
 import { DOM } from "../utils/dom.js";
+import { getDbReady } from "../../../backend/init.js";
 
 const GENRE_MAP = {
     "genre-001": "Comedy",
@@ -17,6 +18,7 @@ class SearchPage {
 
     async _init() {
         try {
+            await getDbReady();
             this._query = this._getQueryFromURL();
             this._loadFilms();
             this._render();

@@ -1,4 +1,5 @@
 import { DOM } from "../utils/dom.js";
+import { getDbReady } from "../../../backend/init.js";
 
 class ArtikelPage {
     constructor() {
@@ -9,6 +10,7 @@ class ArtikelPage {
 
     async _init() {
         try {
+            await getDbReady();
             this._loadItems();
             this._bindFilters();
             this._render();
@@ -28,19 +30,23 @@ class ArtikelPage {
         const db = this._getDb();
         if (!db) throw new Error("Database not ready");
 
-        const articles = (db.articles || []).map((a) => ({
-            ...a,
-            _type: "artikel",
-            publishedDate: a.createdAt,
-            thumbnail: a.coverImage,
-        }));
+        const articles = (db.articles || [])
+            .filter((a) => a.status === "published")
+            .map((a) => ({
+                ...a,
+                _type: "artikel",
+                publishedDate: a.createdAt,
+                thumbnail: a.coverImage,
+            }));
 
-        const news = (db.news || []).map((n) => ({
-            ...n,
-            _type: "berita",
-            publishedDate: n.publishedAt || n.createdAt,
-            thumbnail: n.coverImage,
-        }));
+        const news = (db.news || [])
+            .filter((n) => n.status === "published")
+            .map((n) => ({
+                ...n,
+                _type: "berita",
+                publishedDate: n.publishedAt || n.createdAt,
+                thumbnail: n.coverImage,
+            }));
 
         this._items = [...articles, ...news].sort(
             (a, b) => new Date(b.publishedDate) - new Date(a.publishedDate)

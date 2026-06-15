@@ -1,5 +1,6 @@
 import { DOM } from "../utils/dom.js";
 import { UserData } from "../utils/user-data.js";
+import { getDbReady } from "../../../backend/init.js";
 
 const GENRE_MAP = {
     "genre-001": "Comedy",
@@ -18,6 +19,7 @@ class FavoritPage {
 
     async _init() {
         try {
+            await getDbReady();
             await this._loadFavorites();
             this._render();
             this._bindCardClicks();

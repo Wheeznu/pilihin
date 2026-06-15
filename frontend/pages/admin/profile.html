@@ -1,30 +1,371 @@
 <!DOCTYPE html>
 <html lang="id">
-    <head>
+  <head>
 <script>document.documentElement.setAttribute("data-theme",localStorage.getItem("pilih-in-theme")||"dark")</script>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Profil Admin - Pilih.in</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100..900&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href="../../css/reset.css" />
-        <link rel="stylesheet" href="../../css/design-system.css" />
-        <link rel="stylesheet" href="../../css/components/navbar.css" />
-        <link rel="stylesheet" href="../../css/components/sidebar.css" />
-        <link rel="stylesheet" href="../../css/components/button.css" />
-        <link rel="stylesheet" href="../../css/pages/admin-panel.css" />
-    </head>
-    <body>
-        <div id="navbar-container"></div>
-        <main class="admin-profile-page" id="adminProfilePage"></main>
-        <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-        <script type="module">
-            import Navbar from "../../js/components/navbar.js";
-            document.addEventListener("DOMContentLoaded", async () => {
-                await Navbar.load("navbar-container");
-                feather.replace();
-            });
-        </script>
-    </body>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profil Admin - Pilih.in</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS Core -->
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/design-system.css" />
+
+    <!-- CSS Components -->
+    <link rel="stylesheet" href="../../css/components/navbar.css" />
+    <link rel="stylesheet" href="../../css/components/sidebar.css" />
+    <link rel="stylesheet" href="../../css/components/button.css" />
+
+    <!-- CSS Pages -->
+    <link rel="stylesheet" href="../../css/pages/profile.css" />
+
+    <!-- Feather Icons -->
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  </head>
+  <body>
+    <!-- Navbar Container -->
+    <div id="navbar-container"></div>
+
+    <main class="ap-page">
+      <div class="ap-container">
+        <!-- HERO -->
+        <div class="ap-hero">
+          <div class="ap-hero__bg"></div>
+          <div class="ap-hero__content">
+            <!-- Avatar -->
+            <div class="ap-avatar-wrap">
+              <div class="ap-avatar-ring">
+                <div class="ap-avatar-ring-inner">
+                  <img
+                    id="avatarImg"
+                    src="https://ui-avatars.com/api/?name=Admin&background=1db954&color=000&size=120&bold=true"
+                    alt="Foto Profil"
+                  />
+                </div>
+              </div>
+              <button
+                class="ap-avatar-edit"
+                id="editPhotoBtn"
+                title="Ubah foto"
+              >
+                <i data-feather="camera"></i>
+              </button>
+            </div>
+
+            <!-- Identity -->
+            <div class="ap-hero__identity">
+              <h1 class="ap-hero__name" id="displayName">Admin Pilih.in</h1>
+              <div class="ap-hero__badges">
+                <span class="badge badge--admin">
+                  <i data-feather="shield"></i>
+                  Administrator
+                </span>
+              </div>
+              <div class="ap-hero__email">
+                <i data-feather="mail"></i>
+                <span id="userEmail">admin@pilih.in</span>
+              </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="ap-hero__stats">
+              <div class="ap-stat">
+                <div class="ap-stat__label">ID Admin</div>
+                <div class="ap-stat__value" id="adminId">ADM-001</div>
+              </div>
+              <div class="ap-stat">
+                <div class="ap-stat__label">Bergabung</div>
+                <div class="ap-stat__value" id="adminSince">—</div>
+              </div>
+              <div class="ap-stat">
+                <div class="ap-stat__label">Login Terakhir</div>
+                <div class="ap-stat__value" id="lastLogin">—</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BODY -->
+        <div class="ap-body">
+          <!-- LEFT: Edit Form -->
+          <div class="ap-card">
+            <div class="ap-card__head">
+              <div class="ap-card__head-icon">
+                <i data-feather="edit-3"></i>
+              </div>
+              <h2>Edit Profil</h2>
+            </div>
+            <div class="ap-card__body">
+              <!-- Info tiles -->
+              <div class="info-grid">
+                <div class="info-tile">
+                  <div class="info-tile__label">
+                    <i data-feather="hash"></i>
+                    <span>ID Admin</span>
+                  </div>
+                  <div class="info-tile__value" id="tileAdminId">ADM-001</div>
+                </div>
+                <div class="info-tile">
+                  <div class="info-tile__label">
+                    <i data-feather="calendar"></i>
+                    <span>Bergabung</span>
+                  </div>
+                  <div class="info-tile__value" id="tileAdminSince">—</div>
+                </div>
+                <div class="info-tile">
+                  <div class="info-tile__label">
+                    <i data-feather="clock"></i>
+                    <span>Aktif Terakhir</span>
+                  </div>
+                  <div class="info-tile__value" id="tileLastLogin">—</div>
+                </div>
+                <div class="info-tile">
+                  <div class="info-tile__label">
+                    <i data-feather="layers"></i>
+                    <span>Level Akses</span>
+                  </div>
+                  <div class="info-tile__value" id="tileRole">
+                    Administrator
+                  </div>
+                </div>
+              </div>
+
+              <!-- Form fields -->
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="username">Username</label>
+                  <div class="input-field">
+                    <i data-feather="user"></i>
+                    <input
+                      type="text"
+                      id="username"
+                      placeholder="username_admin"
+                    />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="fullname">Nama Lengkap</label>
+                  <div class="input-field">
+                    <i data-feather="user-check"></i>
+                    <input
+                      type="text"
+                      id="fullname"
+                      placeholder="Nama lengkap"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <div class="input-field">
+                    <i data-feather="mail"></i>
+                    <input
+                      type="email"
+                      id="email"
+                      placeholder="email@pilih.in"
+                    />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="phone">Nomor Telepon</label>
+                  <div class="input-field">
+                    <i data-feather="phone"></i>
+                    <input
+                      type="tel"
+                      id="phone"
+                      placeholder="+62 8xx xxxx xxxx"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row full">
+                <div class="form-group">
+                  <label for="bio">Bio</label>
+                  <div class="input-field">
+                    <textarea
+                      id="bio"
+                      rows="3"
+                      placeholder="Tuliskan bio singkat tentang diri Anda..."
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button class="btn-ap btn-ap--ghost" id="cancelBtn">
+                  <i data-feather="x"></i> Batal
+                </button>
+                <button class="btn-ap btn-ap--primary" id="saveProfileBtn">
+                  <i data-feather="save"></i> Simpan Perubahan
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT COLUMN -->
+          <div class="ap-right">
+            <!-- Quick Stats -->
+            <div class="ap-quick-stats">
+              <div class="qs-tile">
+                <div class="qs-tile__icon"><i data-feather="film"></i></div>
+                <div class="qs-tile__num">142</div>
+                <div class="qs-tile__label">Film Ditambah</div>
+              </div>
+              <div class="qs-tile">
+                <div class="qs-tile__icon"><i data-feather="users"></i></div>
+                <div class="qs-tile__num">2.4k</div>
+                <div class="qs-tile__label">Total User</div>
+              </div>
+              <div class="qs-tile">
+                <div class="qs-tile__icon">
+                  <i data-feather="message-circle"></i>
+                </div>
+                <div class="qs-tile__num">38</div>
+                <div class="qs-tile__label">Review Baru</div>
+              </div>
+              <div class="qs-tile">
+                <div class="qs-tile__icon">
+                  <i data-feather="trending-up"></i>
+                </div>
+                <div class="qs-tile__num">94%</div>
+                <div class="qs-tile__label">Uptime</div>
+              </div>
+            </div>
+
+            <!-- Settings -->
+            <div class="ap-card">
+              <div class="ap-card__head">
+                <div class="ap-card__head-icon">
+                  <i data-feather="settings"></i>
+                </div>
+                <h3>Pengaturan</h3>
+              </div>
+              <div class="ap-card__body">
+                <div class="settings-row">
+                  <div class="settings-row__info">
+                    <div class="settings-row__label">Tema Gelap</div>
+                    <div class="settings-row__desc">Gunakan tema gelap di seluruh platform</div>
+                  </div>
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="profileTheme" />
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Activity -->
+            <div class="ap-card">
+              <div class="ap-card__head">
+                <div class="ap-card__head-icon">
+                  <i data-feather="activity"></i>
+                </div>
+                <h3>Aktivitas Terbaru</h3>
+              </div>
+              <div class="activity-list">
+                <div class="activity-item">
+                  <div class="activity-icon"><i data-feather="log-in"></i></div>
+                  <div class="activity-text">
+                    <div class="activity-title">Login ke Dashboard Admin</div>
+                    <div class="activity-time">Hari ini, 09:30 WIB</div>
+                  </div>
+                </div>
+                <div class="activity-item">
+                  <div class="activity-icon"><i data-feather="film"></i></div>
+                  <div class="activity-text">
+                    <div class="activity-title">
+                      Menambahkan film "Gundala 2"
+                    </div>
+                    <div class="activity-time">Kemarin, 14:20 WIB</div>
+                  </div>
+                </div>
+                <div class="activity-item">
+                  <div class="activity-icon">
+                    <i data-feather="user-plus"></i>
+                  </div>
+                  <div class="activity-text">
+                    <div class="activity-title">
+                      Menambahkan 3 pengguna baru
+                    </div>
+                    <div class="activity-time">2 hari lalu, 10:15 WIB</div>
+                  </div>
+                </div>
+                <div class="activity-item">
+                  <div class="activity-icon">
+                    <i data-feather="settings"></i>
+                  </div>
+                  <div class="activity-text">
+                    <div class="activity-title">
+                      Memperbarui pengaturan sistem
+                    </div>
+                    <div class="activity-time">3 hari lalu, 16:45 WIB</div>
+                  </div>
+                </div>
+                <div class="activity-item">
+                  <div class="activity-icon"><i data-feather="star"></i></div>
+                  <div class="activity-text">
+                    <div class="activity-title">Memoderasi 12 ulasan film</div>
+                    <div class="activity-time">4 hari lalu, 11:00 WIB</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Modal Upload Foto -->
+    <div class="modal-overlay" id="photoModal">
+      <div class="modal-box">
+        <h2>Ubah Foto Profil</h2>
+        <div class="photo-preview-circle">
+          <img id="photoPreview" src="" alt="" />
+        </div>
+        <p class="modal-hint">Format JPG atau PNG, maks. 2 MB</p>
+        <input
+          type="file"
+          id="photoUpload"
+          accept="image/jpeg,image/png,image/jpg"
+          style="display: none"
+        />
+        <button
+          class="btn-ap btn-ap--ghost"
+          id="choosePhotoBtn"
+          style="width: 100%; justify-content: center; margin-bottom: 12px"
+        >
+          <i data-feather="image"></i> Pilih Foto
+        </button>
+        <div class="modal-footer">
+          <button class="btn-ap btn-ap--ghost" id="closeModalBtn">Batal</button>
+          <button class="btn-ap btn-ap--primary" id="savePhotoBtn">
+            <i data-feather="save"></i> Simpan
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      import Navbar from "../../js/components/navbar.js";
+      import ProfilePage from "../../js/logic-pages/profile.js";
+      import { getDbReady } from "../../../backend/init.js";
+
+      document.addEventListener("DOMContentLoaded", async () => {
+        await Navbar.load("navbar-container");
+        await getDbReady();
+        new ProfilePage();
+        if (typeof feather !== "undefined") feather.replace();
+      });
+    </script>
+  </body>
 </html>

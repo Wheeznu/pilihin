@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+<script>document.documentElement.setAttribute("data-theme",localStorage.getItem("pilih-in-theme")||"dark")</script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Laporan Konten - Pilih.in</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS Core -->
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/design-system.css" />
+
+    <!-- CSS Components -->
+    <link rel="stylesheet" href="../../css/components/navbar.css" />
+    <link rel="stylesheet" href="../../css/components/sidebar.css" />
+    <link rel="stylesheet" href="../../css/components/button.css" />
+
+    <!-- CSS Pages -->
+    <link rel="stylesheet" href="../../css/pages/manager-laporan.css" />
+
+    <!-- Feather Icons -->
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  </head>
+  <body>
+    <!-- Navbar Container -->
+    <div id="navbar-container"></div>
+
+    <main class="laporan-page">
+      <div class="laporan-container">
+        <!-- Page Header -->
+        <div class="page-header">
+          <h1>
+            <i data-feather="bar-chart-2"></i>
+            Laporan Konten
+          </h1>
+          <p>Statistik dan laporan lengkap platform Pilih.in</p>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="filter-bar">
+          <div class="filter-group">
+            <label>Periode</label>
+            <select id="periodSelect">
+              <option value="all">Semua Waktu</option>
+              <option value="week">7 Hari Terakhir</option>
+              <option value="month">30 Hari Terakhir</option>
+              <option value="quarter">3 Bulan Terakhir</option>
+              <option value="year">1 Tahun Terakhir</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label>Tanggal Mulai</label>
+            <input type="date" id="startDate" />
+          </div>
+          <div class="filter-group">
+            <label>Tanggal Akhir</label>
+            <input type="date" id="endDate" />
+          </div>
+          <button class="btn-filter" id="applyFilter">
+            <i data-feather="filter"></i> Terapkan Filter
+          </button>
+          <button class="btn-filter btn-export" id="exportBtn">
+            <i data-feather="download"></i> Ekspor Data
+          </button>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-card__icon"><i data-feather="film"></i></div>
+            <div class="stat-card__value" id="totalFilms">0</div>
+            <div class="stat-card__label">Total Film</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__icon"><i data-feather="users"></i></div>
+            <div class="stat-card__value" id="totalUsers">0</div>
+            <div class="stat-card__label">Total Pengguna</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__icon">
+              <i data-feather="message-square"></i>
+            </div>
+            <div class="stat-card__value" id="totalReviews">0</div>
+            <div class="stat-card__label">Total Ulasan</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__icon"><i data-feather="eye"></i></div>
+            <div class="stat-card__value" id="totalViews">0</div>
+            <div class="stat-card__label">Total Tayangan</div>
+          </div>
+        </div>
+
+        <!-- Charts Grid -->
+        <div class="chart-grid">
+          <!-- Top Films Chart -->
+          <div class="chart-card">
+            <div class="chart-header">
+              <h3>
+                <i data-feather="trending-up"></i>
+                Film Paling Banyak Ditonton
+              </h3>
+            </div>
+            <div class="chart-body">
+              <div class="chart-bars" id="topFilmsChart">
+                <div
+                  style="
+                    text-align: center;
+                    padding: 40px;
+                    color: var(--text-muted);
+                  "
+                >
+                  Memuat data...
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Rating Distribution -->
+          <div class="chart-card">
+            <div class="chart-header">
+              <h3>
+                <i data-feather="star"></i>
+                Distribusi Rating
+              </h3>
+            </div>
+            <div class="chart-body">
+              <div class="rating-chart" id="ratingChart">
+                <div
+                  style="
+                    text-align: center;
+                    padding: 40px;
+                    color: var(--text-muted);
+                  "
+                >
+                  Memuat data...
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category Stats -->
+        <div class="stats-grid" style="margin-top: 0">
+          <div class="stat-card">
+            <div class="stat-card__icon"><i data-feather="users"></i></div>
+            <div class="stat-card__value" id="totalActors">0</div>
+            <div class="stat-card__label">Total Aktor</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__icon"><i data-feather="camera"></i></div>
+            <div class="stat-card__value" id="totalDirectors">0</div>
+            <div class="stat-card__label">Total Sutradara</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__icon"><i data-feather="package"></i></div>
+            <div class="stat-card__value" id="totalContent">0</div>
+            <div class="stat-card__label">Total Konten</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__icon"><i data-feather="star"></i></div>
+            <div class="stat-card__value" id="avgRating">0</div>
+            <div class="stat-card__label">Rata-rata Rating</div>
+          </div>
+        </div>
+
+        <!-- Recent Content Table -->
+        <div class="table-card">
+          <div class="table-header">
+            <h3>
+              <i data-feather="clock"></i>
+              Konten Terbaru
+            </h3>
+          </div>
+          <div class="table-wrap">
+            <table class="laporan-table">
+              <thead>
+                <tr>
+                  <th>Judul</th>
+                  <th>Tipe</th>
+                  <th>Tanggal Ditambahkan</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="recentContentTable">
+                <tr>
+                  <td colspan="4" style="text-align: center; padding: 40px">
+                    Memuat data...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script type="module">
+      import Navbar from "../../js/components/navbar.js";
+
+      // Initialize Navbar & Sidebar
+      document.addEventListener("DOMContentLoaded", async () => {
+        await Navbar.load("navbar-container");
+          if (typeof feather !== "undefined") feather.replace();
+      });
+    </script>
+
+    <script type="module" src="../../js/logic-pages/manager-laporan.js"></script>
+  </body>
+</html>

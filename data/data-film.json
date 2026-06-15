@@ -9,15 +9,29 @@
       "releaseDate": "2009-06-05",
       "duration": 100,
       "rating": "R",
-      "genres": ["genre-001"],
+      "genres": [
+        "genre-001"
+      ],
       "director": "Todd Phillips",
-      "actors": ["Bradley Cooper", "Ed Helms", "Zach Galifianakis"],
+      "actors": [
+        "Bradley Cooper",
+        "Ed Helms",
+        "Zach Galifianakis"
+      ],
       "averageRating": 7.7,
       "reviewCount": 4520,
       "watchCount": 125000,
       "streamingUrl": "https://example.com/stream/hangover",
-      "videoQuality": ["360p", "480p", "720p", "1080p"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -32,15 +46,31 @@
       "releaseDate": "2016-02-12",
       "duration": 108,
       "rating": "R",
-      "genres": ["genre-001", "genre-005"],
+      "genres": [
+        "genre-001",
+        "genre-005"
+      ],
       "director": "Tim Miller",
-      "actors": ["Ryan Reynolds", "Morena Baccarin", "Ed Skrein"],
-      "averageRating": 8.0,
+      "actors": [
+        "Ryan Reynolds",
+        "Morena Baccarin",
+        "Ed Skrein"
+      ],
+      "averageRating": 8,
       "reviewCount": 8900,
       "watchCount": 210000,
       "streamingUrl": "https://example.com/stream/deadpool",
-      "videoQuality": ["360p", "480p", "720p", "1080p", "4K"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p",
+        "4K"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -55,15 +85,29 @@
       "releaseDate": "2007-08-17",
       "duration": 113,
       "rating": "R",
-      "genres": ["genre-001"],
+      "genres": [
+        "genre-001"
+      ],
       "director": "Greg Mottola",
-      "actors": ["Jonah Hill", "Michael Cera", "Christopher Mintz-Plasse"],
+      "actors": [
+        "Jonah Hill",
+        "Michael Cera",
+        "Christopher Mintz-Plasse"
+      ],
       "averageRating": 7.6,
       "reviewCount": 3400,
       "watchCount": 98000,
       "streamingUrl": "https://example.com/stream/superbad",
-      "videoQuality": ["360p", "480p", "720p", "1080p"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -78,15 +122,31 @@
       "releaseDate": "2014-03-28",
       "duration": 99,
       "rating": "R",
-      "genres": ["genre-001", "genre-002"],
+      "genres": [
+        "genre-001",
+        "genre-002"
+      ],
       "director": "Wes Anderson",
-      "actors": ["Ralph Fiennes", "F. Murray Abraham", "Mathieu Amalric"],
+      "actors": [
+        "Ralph Fiennes",
+        "F. Murray Abraham",
+        "Mathieu Amalric"
+      ],
       "averageRating": 8.1,
       "reviewCount": 5100,
       "watchCount": 145000,
       "streamingUrl": "https://example.com/stream/grand-budapest",
-      "videoQuality": ["360p", "480p", "720p", "1080p", "4K"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p",
+        "4K"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -101,15 +161,30 @@
       "releaseDate": "1993-02-12",
       "duration": 101,
       "rating": "PG",
-      "genres": ["genre-001", "genre-003"],
+      "genres": [
+        "genre-001",
+        "genre-003"
+      ],
       "director": "Harold Ramis",
-      "actors": ["Bill Murray", "Andie MacDowell", "Chris Elliott"],
-      "averageRating": 8.0,
+      "actors": [
+        "Bill Murray",
+        "Andie MacDowell",
+        "Chris Elliott"
+      ],
+      "averageRating": 8,
       "reviewCount": 3700,
       "watchCount": 88000,
       "streamingUrl": "https://example.com/stream/groundhog-day",
-      "videoQuality": ["360p", "480p", "720p", "1080p"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -124,15 +199,29 @@
       "releaseDate": "1990-11-16",
       "duration": 103,
       "rating": "PG",
-      "genres": ["genre-001"],
+      "genres": [
+        "genre-001"
+      ],
       "director": "Chris Columbus",
-      "actors": ["Macaulay Culkin", "Joe Pesci", "Daniel Stern"],
+      "actors": [
+        "Macaulay Culkin",
+        "Joe Pesci",
+        "Daniel Stern"
+      ],
       "averageRating": 7.7,
       "reviewCount": 4200,
       "watchCount": 156000,
       "streamingUrl": "https://example.com/stream/home-alone",
-      "videoQuality": ["360p", "480p", "720p", "1080p"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -147,15 +236,30 @@
       "releaseDate": "1998-06-05",
       "duration": 103,
       "rating": "PG",
-      "genres": ["genre-001", "genre-002"],
+      "genres": [
+        "genre-001",
+        "genre-002"
+      ],
       "director": "Peter Weir",
-      "actors": ["Jim Carrey", "Laura Linney", "Ed Harris"],
+      "actors": [
+        "Jim Carrey",
+        "Laura Linney",
+        "Ed Harris"
+      ],
       "averageRating": 8.2,
       "reviewCount": 4800,
       "watchCount": 132000,
       "streamingUrl": "https://example.com/stream/truman-show",
-      "videoQuality": ["360p", "480p", "720p", "1080p"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -170,15 +274,29 @@
       "releaseDate": "2011-04-28",
       "duration": 125,
       "rating": "R",
-      "genres": ["genre-001"],
+      "genres": [
+        "genre-001"
+      ],
       "director": "Paul Feig",
-      "actors": ["Kristen Wiig", "Maya Rudolph", "Rose Byrne"],
+      "actors": [
+        "Kristen Wiig",
+        "Maya Rudolph",
+        "Rose Byrne"
+      ],
       "averageRating": 7.4,
       "reviewCount": 2900,
       "watchCount": 76000,
       "streamingUrl": "https://example.com/stream/bridesmaids",
-      "videoQuality": ["360p", "480p", "720p", "1080p"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -193,15 +311,30 @@
       "releaseDate": "2004-09-24",
       "duration": 99,
       "rating": "R",
-      "genres": ["genre-001", "genre-004"],
+      "genres": [
+        "genre-001",
+        "genre-004"
+      ],
       "director": "Edgar Wright",
-      "actors": ["Simon Pegg", "Nick Frost", "Kate Ashfield"],
+      "actors": [
+        "Simon Pegg",
+        "Nick Frost",
+        "Kate Ashfield"
+      ],
       "averageRating": 7.9,
       "reviewCount": 3100,
       "watchCount": 89000,
       "streamingUrl": "https://example.com/stream/shaun-of-dead",
-      "videoQuality": ["360p", "480p", "720p", "1080p"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -216,15 +349,30 @@
       "releaseDate": "2012-03-16",
       "duration": 109,
       "rating": "R",
-      "genres": ["genre-001", "genre-005"],
+      "genres": [
+        "genre-001",
+        "genre-005"
+      ],
       "director": "Phil Lord",
-      "actors": ["Jonah Hill", "Channing Tatum", "Brie Larson"],
+      "actors": [
+        "Jonah Hill",
+        "Channing Tatum",
+        "Brie Larson"
+      ],
       "averageRating": 7.2,
       "reviewCount": 3500,
       "watchCount": 102000,
       "streamingUrl": "https://example.com/stream/21-jump-street",
-      "videoQuality": ["360p", "480p", "720p", "1080p"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -239,15 +387,30 @@
       "releaseDate": "1994-10-14",
       "duration": 142,
       "rating": "R",
-      "genres": ["genre-002"],
+      "genres": [
+        "genre-002"
+      ],
       "director": "Frank Darabont",
-      "actors": ["Tim Robbins", "Morgan Freeman", "Bob Gunton"],
+      "actors": [
+        "Tim Robbins",
+        "Morgan Freeman",
+        "Bob Gunton"
+      ],
       "averageRating": 9.3,
       "reviewCount": 12500,
       "watchCount": 380000,
       "streamingUrl": "https://example.com/stream/shawshank",
-      "videoQuality": ["360p", "480p", "720p", "1080p", "4K"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p",
+        "4K"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -262,15 +425,31 @@
       "releaseDate": "1994-07-06",
       "duration": 142,
       "rating": "PG-13",
-      "genres": ["genre-002", "genre-003"],
+      "genres": [
+        "genre-002",
+        "genre-003"
+      ],
       "director": "Robert Zemeckis",
-      "actors": ["Tom Hanks", "Robin Wright", "Gary Sinise"],
+      "actors": [
+        "Tom Hanks",
+        "Robin Wright",
+        "Gary Sinise"
+      ],
       "averageRating": 8.8,
       "reviewCount": 9800,
       "watchCount": 295000,
       "streamingUrl": "https://example.com/stream/forrest-gump",
-      "videoQuality": ["360p", "480p", "720p", "1080p", "4K"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p",
+        "4K"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -285,15 +464,30 @@
       "releaseDate": "1972-03-24",
       "duration": 175,
       "rating": "R",
-      "genres": ["genre-002"],
+      "genres": [
+        "genre-002"
+      ],
       "director": "Francis Ford Coppola",
-      "actors": ["Marlon Brando", "Al Pacino", "James Caan"],
+      "actors": [
+        "Marlon Brando",
+        "Al Pacino",
+        "James Caan"
+      ],
       "averageRating": 9.2,
       "reviewCount": 11000,
       "watchCount": 340000,
       "streamingUrl": "https://example.com/stream/godfather",
-      "videoQuality": ["360p", "480p", "720p", "1080p", "4K"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p",
+        "4K"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -308,15 +502,30 @@
       "releaseDate": "1993-12-15",
       "duration": 195,
       "rating": "R",
-      "genres": ["genre-002"],
+      "genres": [
+        "genre-002"
+      ],
       "director": "Steven Spielberg",
-      "actors": ["Liam Neeson", "Ben Kingsley", "Ralph Fiennes"],
-      "averageRating": 9.0,
+      "actors": [
+        "Liam Neeson",
+        "Ben Kingsley",
+        "Ralph Fiennes"
+      ],
+      "averageRating": 9,
       "reviewCount": 8700,
       "watchCount": 220000,
       "streamingUrl": "https://example.com/stream/schindlers-list",
-      "videoQuality": ["360p", "480p", "720p", "1080p", "4K"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p",
+        "4K"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -331,15 +540,31 @@
       "releaseDate": "2019-05-30",
       "duration": 132,
       "rating": "R",
-      "genres": ["genre-002", "genre-004"],
+      "genres": [
+        "genre-002",
+        "genre-004"
+      ],
       "director": "Bong Joon-ho",
-      "actors": ["Song Kang-ho", "Lee Sun-kyun", "Cho Yeo-jeong"],
+      "actors": [
+        "Song Kang-ho",
+        "Lee Sun-kyun",
+        "Cho Yeo-jeong"
+      ],
       "averageRating": 8.5,
       "reviewCount": 7200,
       "watchCount": 198000,
       "streamingUrl": "https://example.com/stream/parasite",
-      "videoQuality": ["360p", "480p", "720p", "1080p", "4K"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p",
+        "4K"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -354,15 +579,30 @@
       "releaseDate": "1999-12-10",
       "duration": 189,
       "rating": "R",
-      "genres": ["genre-002"],
+      "genres": [
+        "genre-002"
+      ],
       "director": "Frank Darabont",
-      "actors": ["Tom Hanks", "Michael Clarke Duncan", "David Morse"],
+      "actors": [
+        "Tom Hanks",
+        "Michael Clarke Duncan",
+        "David Morse"
+      ],
       "averageRating": 8.6,
       "reviewCount": 5600,
       "watchCount": 165000,
       "streamingUrl": "https://example.com/stream/green-mile",
-      "videoQuality": ["360p", "480p", "720p", "1080p", "4K"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p",
+        "4K"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -377,15 +617,30 @@
       "releaseDate": "1999-10-15",
       "duration": 139,
       "rating": "R",
-      "genres": ["genre-002"],
+      "genres": [
+        "genre-002"
+      ],
       "director": "David Fincher",
-      "actors": ["Brad Pitt", "Edward Norton", "Helena Bonham Carter"],
+      "actors": [
+        "Brad Pitt",
+        "Edward Norton",
+        "Helena Bonham Carter"
+      ],
       "averageRating": 8.8,
       "reviewCount": 8200,
       "watchCount": 250000,
       "streamingUrl": "https://example.com/stream/fight-club",
-      "videoQuality": ["360p", "480p", "720p", "1080p", "4K"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p",
+        "4K"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -400,15 +655,30 @@
       "releaseDate": "1997-12-05",
       "duration": 126,
       "rating": "R",
-      "genres": ["genre-002", "genre-003"],
+      "genres": [
+        "genre-002",
+        "genre-003"
+      ],
       "director": "Gus Van Sant",
-      "actors": ["Matt Damon", "Robin Williams", "Ben Affleck"],
+      "actors": [
+        "Matt Damon",
+        "Robin Williams",
+        "Ben Affleck"
+      ],
       "averageRating": 8.3,
       "reviewCount": 4300,
       "watchCount": 138000,
       "streamingUrl": "https://example.com/stream/good-will-hunting",
-      "videoQuality": ["360p", "480p", "720p", "1080p"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -423,15 +693,29 @@
       "releaseDate": "2010-10-01",
       "duration": 120,
       "rating": "PG-13",
-      "genres": ["genre-002"],
+      "genres": [
+        "genre-002"
+      ],
       "director": "David Fincher",
-      "actors": ["Jesse Eisenberg", "Andrew Garfield", "Justin Timberlake"],
+      "actors": [
+        "Jesse Eisenberg",
+        "Andrew Garfield",
+        "Justin Timberlake"
+      ],
       "averageRating": 7.8,
       "reviewCount": 3800,
       "watchCount": 115000,
       "streamingUrl": "https://example.com/stream/social-network",
-      "videoQuality": ["360p", "480p", "720p", "1080p"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -446,15 +730,29 @@
       "releaseDate": "2006-12-15",
       "duration": 117,
       "rating": "PG-13",
-      "genres": ["genre-002"],
+      "genres": [
+        "genre-002"
+      ],
       "director": "Gabriele Muccino",
-      "actors": ["Will Smith", "Jaden Smith", "Thandiwe Newton"],
-      "averageRating": 8.0,
+      "actors": [
+        "Will Smith",
+        "Jaden Smith",
+        "Thandiwe Newton"
+      ],
+      "averageRating": 8,
       "reviewCount": 4900,
       "watchCount": 142000,
       "streamingUrl": "https://example.com/stream/pursuit-happyness",
-      "videoQuality": ["360p", "480p", "720p", "1080p"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -469,15 +767,30 @@
       "releaseDate": "2004-06-25",
       "duration": 123,
       "rating": "PG-13",
-      "genres": ["genre-003", "genre-002"],
+      "genres": [
+        "genre-003",
+        "genre-002"
+      ],
       "director": "Nick Cassavetes",
-      "actors": ["Ryan Gosling", "Rachel McAdams", "James Garner"],
+      "actors": [
+        "Ryan Gosling",
+        "Rachel McAdams",
+        "James Garner"
+      ],
       "averageRating": 7.8,
       "reviewCount": 5400,
       "watchCount": 178000,
       "streamingUrl": "https://example.com/stream/notebook",
-      "videoQuality": ["360p", "480p", "720p", "1080p"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -492,15 +805,31 @@
       "releaseDate": "2016-12-09",
       "duration": 128,
       "rating": "PG-13",
-      "genres": ["genre-003", "genre-002"],
+      "genres": [
+        "genre-003",
+        "genre-002"
+      ],
       "director": "Damien Chazelle",
-      "actors": ["Ryan Gosling", "Emma Stone", "John Legend"],
+      "actors": [
+        "Ryan Gosling",
+        "Emma Stone",
+        "John Legend"
+      ],
       "averageRating": 8.3,
       "reviewCount": 6200,
       "watchCount": 210000,
       "streamingUrl": "https://example.com/stream/la-la-land",
-      "videoQuality": ["360p", "480p", "720p", "1080p", "4K"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p",
+        "4K"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -515,15 +844,31 @@
       "releaseDate": "1997-12-19",
       "duration": 194,
       "rating": "PG-13",
-      "genres": ["genre-003", "genre-002"],
+      "genres": [
+        "genre-003",
+        "genre-002"
+      ],
       "director": "James Cameron",
-      "actors": ["Leonardo DiCaprio", "Kate Winslet", "Billy Zane"],
+      "actors": [
+        "Leonardo DiCaprio",
+        "Kate Winslet",
+        "Billy Zane"
+      ],
       "averageRating": 7.9,
       "reviewCount": 9100,
       "watchCount": 320000,
       "streamingUrl": "https://example.com/stream/titanic",
-      "videoQuality": ["360p", "480p", "720p", "1080p", "4K"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p",
+        "4K"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -538,15 +883,30 @@
       "releaseDate": "2005-09-16",
       "duration": 129,
       "rating": "PG",
-      "genres": ["genre-003", "genre-002"],
+      "genres": [
+        "genre-003",
+        "genre-002"
+      ],
       "director": "Joe Wright",
-      "actors": ["Keira Knightley", "Matthew Macfadyen", "Rosamund Pike"],
+      "actors": [
+        "Keira Knightley",
+        "Matthew Macfadyen",
+        "Rosamund Pike"
+      ],
       "averageRating": 7.8,
       "reviewCount": 3600,
       "watchCount": 95000,
       "streamingUrl": "https://example.com/stream/pride-prejudice",
-      "videoQuality": ["360p", "480p", "720p", "1080p"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -561,15 +921,29 @@
       "releaseDate": "1995-01-27",
       "duration": 101,
       "rating": "R",
-      "genres": ["genre-003", "genre-002"],
+      "genres": [
+        "genre-003",
+        "genre-002"
+      ],
       "director": "Richard Linklater",
-      "actors": ["Ethan Hawke", "Julie Delpy"],
+      "actors": [
+        "Ethan Hawke",
+        "Julie Delpy"
+      ],
       "averageRating": 8.1,
       "reviewCount": 2500,
       "watchCount": 72000,
       "streamingUrl": "https://example.com/stream/before-sunrise",
-      "videoQuality": ["360p", "480p", "720p", "1080p"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -584,15 +958,31 @@
       "releaseDate": "2018-08-15",
       "duration": 120,
       "rating": "PG-13",
-      "genres": ["genre-003", "genre-001"],
+      "genres": [
+        "genre-003",
+        "genre-001"
+      ],
       "director": "Jon M. Chu",
-      "actors": ["Constance Wu", "Henry Golding", "Michelle Yeoh"],
+      "actors": [
+        "Constance Wu",
+        "Henry Golding",
+        "Michelle Yeoh"
+      ],
       "averageRating": 7.4,
       "reviewCount": 3400,
       "watchCount": 112000,
       "streamingUrl": "https://example.com/stream/crazy-rich-asians",
-      "videoQuality": ["360p", "480p", "720p", "1080p", "4K"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p",
+        "4K"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -607,15 +997,31 @@
       "releaseDate": "2018-10-05",
       "duration": 136,
       "rating": "R",
-      "genres": ["genre-003", "genre-002"],
+      "genres": [
+        "genre-003",
+        "genre-002"
+      ],
       "director": "Bradley Cooper",
-      "actors": ["Bradley Cooper", "Lady Gaga", "Sam Elliott"],
+      "actors": [
+        "Bradley Cooper",
+        "Lady Gaga",
+        "Sam Elliott"
+      ],
       "averageRating": 7.6,
       "reviewCount": 4500,
       "watchCount": 135000,
       "streamingUrl": "https://example.com/stream/star-is-born",
-      "videoQuality": ["360p", "480p", "720p", "1080p", "4K"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p",
+        "4K"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -630,15 +1036,30 @@
       "releaseDate": "2009-01-17",
       "duration": 95,
       "rating": "PG-13",
-      "genres": ["genre-003", "genre-001"],
+      "genres": [
+        "genre-003",
+        "genre-001"
+      ],
       "director": "Marc Webb",
-      "actors": ["Joseph Gordon-Levitt", "Zooey Deschanel", "Geoffrey Arend"],
+      "actors": [
+        "Joseph Gordon-Levitt",
+        "Zooey Deschanel",
+        "Geoffrey Arend"
+      ],
       "averageRating": 7.7,
       "reviewCount": 3100,
       "watchCount": 88000,
       "streamingUrl": "https://example.com/stream/500-days-summer",
-      "videoQuality": ["360p", "480p", "720p", "1080p"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -653,15 +1074,30 @@
       "releaseDate": "2014-06-06",
       "duration": 126,
       "rating": "PG-13",
-      "genres": ["genre-003", "genre-002"],
+      "genres": [
+        "genre-003",
+        "genre-002"
+      ],
       "director": "Josh Boone",
-      "actors": ["Shailene Woodley", "Ansel Elgort", "Laura Dern"],
+      "actors": [
+        "Shailene Woodley",
+        "Ansel Elgort",
+        "Laura Dern"
+      ],
       "averageRating": 7.7,
       "reviewCount": 3800,
       "watchCount": 125000,
       "streamingUrl": "https://example.com/stream/fault-in-our-stars",
-      "videoQuality": ["360p", "480p", "720p", "1080p"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -676,15 +1112,30 @@
       "releaseDate": "2004-03-19",
       "duration": 108,
       "rating": "R",
-      "genres": ["genre-003", "genre-002"],
+      "genres": [
+        "genre-003",
+        "genre-002"
+      ],
       "director": "Michel Gondry",
-      "actors": ["Jim Carrey", "Kate Winslet", "Kirsten Dunst"],
+      "actors": [
+        "Jim Carrey",
+        "Kate Winslet",
+        "Kirsten Dunst"
+      ],
       "averageRating": 8.3,
       "reviewCount": 4200,
       "watchCount": 108000,
       "streamingUrl": "https://example.com/stream/eternal-sunshine",
-      "videoQuality": ["360p", "480p", "720p", "1080p"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -699,15 +1150,30 @@
       "releaseDate": "2013-07-19",
       "duration": 112,
       "rating": "R",
-      "genres": ["genre-004"],
+      "genres": [
+        "genre-004"
+      ],
       "director": "James Wan",
-      "actors": ["Vera Farmiga", "Patrick Wilson", "Lili Taylor"],
+      "actors": [
+        "Vera Farmiga",
+        "Patrick Wilson",
+        "Lili Taylor"
+      ],
       "averageRating": 7.5,
       "reviewCount": 4600,
       "watchCount": 155000,
       "streamingUrl": "https://example.com/stream/conjuring",
-      "videoQuality": ["360p", "480p", "720p", "1080p", "4K"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p",
+        "4K"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -722,15 +1188,31 @@
       "releaseDate": "2017-02-24",
       "duration": 104,
       "rating": "R",
-      "genres": ["genre-004", "genre-002"],
+      "genres": [
+        "genre-004",
+        "genre-002"
+      ],
       "director": "Jordan Peele",
-      "actors": ["Daniel Kaluuya", "Allison Williams", "Bradley Whitford"],
+      "actors": [
+        "Daniel Kaluuya",
+        "Allison Williams",
+        "Bradley Whitford"
+      ],
       "averageRating": 7.7,
       "reviewCount": 5100,
       "watchCount": 168000,
       "streamingUrl": "https://example.com/stream/get-out",
-      "videoQuality": ["360p", "480p", "720p", "1080p", "4K"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p",
+        "4K"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -745,15 +1227,31 @@
       "releaseDate": "2018-04-06",
       "duration": 90,
       "rating": "PG-13",
-      "genres": ["genre-004", "genre-002"],
+      "genres": [
+        "genre-004",
+        "genre-002"
+      ],
       "director": "John Krasinski",
-      "actors": ["Emily Blunt", "John Krasinski", "Millicent Simmonds"],
+      "actors": [
+        "Emily Blunt",
+        "John Krasinski",
+        "Millicent Simmonds"
+      ],
       "averageRating": 7.5,
       "reviewCount": 4200,
       "watchCount": 145000,
       "streamingUrl": "https://example.com/stream/quiet-place",
-      "videoQuality": ["360p", "480p", "720p", "1080p", "4K"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p",
+        "4K"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -768,15 +1266,31 @@
       "releaseDate": "2018-06-08",
       "duration": 127,
       "rating": "R",
-      "genres": ["genre-004", "genre-002"],
+      "genres": [
+        "genre-004",
+        "genre-002"
+      ],
       "director": "Ari Aster",
-      "actors": ["Toni Collette", "Alex Wolff", "Milly Shapiro"],
+      "actors": [
+        "Toni Collette",
+        "Alex Wolff",
+        "Milly Shapiro"
+      ],
       "averageRating": 7.3,
       "reviewCount": 3500,
       "watchCount": 98000,
       "streamingUrl": "https://example.com/stream/hereditary",
-      "videoQuality": ["360p", "480p", "720p", "1080p", "4K"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p",
+        "4K"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -791,15 +1305,30 @@
       "releaseDate": "1973-12-26",
       "duration": 122,
       "rating": "R",
-      "genres": ["genre-004"],
+      "genres": [
+        "genre-004"
+      ],
       "director": "William Friedkin",
-      "actors": ["Ellen Burstyn", "Max von Sydow", "Linda Blair"],
-      "averageRating": 8.0,
+      "actors": [
+        "Ellen Burstyn",
+        "Max von Sydow",
+        "Linda Blair"
+      ],
+      "averageRating": 8,
       "reviewCount": 5800,
       "watchCount": 185000,
       "streamingUrl": "https://example.com/stream/exorcist",
-      "videoQuality": ["360p", "480p", "720p", "1080p", "4K"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p",
+        "4K"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -814,15 +1343,30 @@
       "releaseDate": "1980-05-23",
       "duration": 146,
       "rating": "R",
-      "genres": ["genre-004"],
+      "genres": [
+        "genre-004"
+      ],
       "director": "Stanley Kubrick",
-      "actors": ["Jack Nicholson", "Shelley Duvall", "Danny Lloyd"],
+      "actors": [
+        "Jack Nicholson",
+        "Shelley Duvall",
+        "Danny Lloyd"
+      ],
       "averageRating": 8.4,
       "reviewCount": 7500,
       "watchCount": 230000,
       "streamingUrl": "https://example.com/stream/shining",
-      "videoQuality": ["360p", "480p", "720p", "1080p", "4K"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p",
+        "4K"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -837,15 +1381,30 @@
       "releaseDate": "2017-09-08",
       "duration": 135,
       "rating": "R",
-      "genres": ["genre-004"],
+      "genres": [
+        "genre-004"
+      ],
       "director": "Andy Muschietti",
-      "actors": ["Bill Skarsgård", "Finn Wolfhard", "Jaeden Martell"],
+      "actors": [
+        "Bill Skarsgård",
+        "Finn Wolfhard",
+        "Jaeden Martell"
+      ],
       "averageRating": 7.3,
       "reviewCount": 4800,
       "watchCount": 175000,
       "streamingUrl": "https://example.com/stream/it",
-      "videoQuality": ["360p", "480p", "720p", "1080p", "4K"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p",
+        "4K"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -860,15 +1419,29 @@
       "releaseDate": "2002-10-18",
       "duration": 115,
       "rating": "PG-13",
-      "genres": ["genre-004"],
+      "genres": [
+        "genre-004"
+      ],
       "director": "Gore Verbinski",
-      "actors": ["Naomi Watts", "Martin Henderson", "Brian Cox"],
+      "actors": [
+        "Naomi Watts",
+        "Martin Henderson",
+        "Brian Cox"
+      ],
       "averageRating": 7.1,
       "reviewCount": 3200,
       "watchCount": 92000,
       "streamingUrl": "https://example.com/stream/ring",
-      "videoQuality": ["360p", "480p", "720p", "1080p"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -883,15 +1456,29 @@
       "releaseDate": "2010-09-14",
       "duration": 103,
       "rating": "PG-13",
-      "genres": ["genre-004"],
+      "genres": [
+        "genre-004"
+      ],
       "director": "James Wan",
-      "actors": ["Patrick Wilson", "Rose Byrne", "Lin Shaye"],
-      "averageRating": 7.0,
+      "actors": [
+        "Patrick Wilson",
+        "Rose Byrne",
+        "Lin Shaye"
+      ],
+      "averageRating": 7,
       "reviewCount": 2900,
       "watchCount": 85000,
       "streamingUrl": "https://example.com/stream/insidious",
-      "videoQuality": ["360p", "480p", "720p", "1080p"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -906,15 +1493,30 @@
       "releaseDate": "2015-01-23",
       "duration": 92,
       "rating": "R",
-      "genres": ["genre-004", "genre-002"],
+      "genres": [
+        "genre-004",
+        "genre-002"
+      ],
       "director": "Robert Eggers",
-      "actors": ["Anya Taylor-Joy", "Ralph Ineson", "Kate Dickie"],
-      "averageRating": 7.0,
+      "actors": [
+        "Anya Taylor-Joy",
+        "Ralph Ineson",
+        "Kate Dickie"
+      ],
+      "averageRating": 7,
       "reviewCount": 2600,
       "watchCount": 72000,
       "streamingUrl": "https://example.com/stream/witch",
-      "videoQuality": ["360p", "480p", "720p", "1080p"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -929,15 +1531,31 @@
       "releaseDate": "2008-07-18",
       "duration": 152,
       "rating": "PG-13",
-      "genres": ["genre-005", "genre-002"],
+      "genres": [
+        "genre-005",
+        "genre-002"
+      ],
       "director": "Christopher Nolan",
-      "actors": ["Christian Bale", "Heath Ledger", "Aaron Eckhart"],
-      "averageRating": 9.0,
+      "actors": [
+        "Christian Bale",
+        "Heath Ledger",
+        "Aaron Eckhart"
+      ],
+      "averageRating": 9,
       "reviewCount": 11500,
       "watchCount": 380000,
       "streamingUrl": "https://example.com/stream/dark-knight",
-      "videoQuality": ["360p", "480p", "720p", "1080p", "4K"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p",
+        "4K"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -952,15 +1570,30 @@
       "releaseDate": "2015-05-15",
       "duration": 120,
       "rating": "R",
-      "genres": ["genre-005"],
+      "genres": [
+        "genre-005"
+      ],
       "director": "George Miller",
-      "actors": ["Tom Hardy", "Charlize Theron", "Nicholas Hoult"],
+      "actors": [
+        "Tom Hardy",
+        "Charlize Theron",
+        "Nicholas Hoult"
+      ],
       "averageRating": 8.1,
       "reviewCount": 5800,
       "watchCount": 195000,
       "streamingUrl": "https://example.com/stream/mad-max",
-      "videoQuality": ["360p", "480p", "720p", "1080p", "4K"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p",
+        "4K"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -975,15 +1608,30 @@
       "releaseDate": "2014-10-24",
       "duration": 101,
       "rating": "R",
-      "genres": ["genre-005"],
+      "genres": [
+        "genre-005"
+      ],
       "director": "Chad Stahelski",
-      "actors": ["Keanu Reeves", "Michael Nyqvist", "Alfie Allen"],
+      "actors": [
+        "Keanu Reeves",
+        "Michael Nyqvist",
+        "Alfie Allen"
+      ],
       "averageRating": 7.4,
       "reviewCount": 5200,
       "watchCount": 160000,
       "streamingUrl": "https://example.com/stream/john-wick",
-      "videoQuality": ["360p", "480p", "720p", "1080p", "4K"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p",
+        "4K"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -998,15 +1646,30 @@
       "releaseDate": "1988-07-20",
       "duration": 132,
       "rating": "R",
-      "genres": ["genre-005"],
+      "genres": [
+        "genre-005"
+      ],
       "director": "John McTiernan",
-      "actors": ["Bruce Willis", "Alan Rickman", "Bonnie Bedelia"],
+      "actors": [
+        "Bruce Willis",
+        "Alan Rickman",
+        "Bonnie Bedelia"
+      ],
       "averageRating": 8.2,
       "reviewCount": 6200,
       "watchCount": 210000,
       "streamingUrl": "https://example.com/stream/die-hard",
-      "videoQuality": ["360p", "480p", "720p", "1080p", "4K"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p",
+        "4K"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -1021,15 +1684,31 @@
       "releaseDate": "2000-05-05",
       "duration": 155,
       "rating": "R",
-      "genres": ["genre-005", "genre-002"],
+      "genres": [
+        "genre-005",
+        "genre-002"
+      ],
       "director": "Ridley Scott",
-      "actors": ["Russell Crowe", "Joaquin Phoenix", "Connie Nielsen"],
+      "actors": [
+        "Russell Crowe",
+        "Joaquin Phoenix",
+        "Connie Nielsen"
+      ],
       "averageRating": 8.5,
       "reviewCount": 7800,
       "watchCount": 265000,
       "streamingUrl": "https://example.com/stream/gladiator",
-      "videoQuality": ["360p", "480p", "720p", "1080p", "4K"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p",
+        "4K"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -1044,15 +1723,31 @@
       "releaseDate": "2010-07-16",
       "duration": 148,
       "rating": "PG-13",
-      "genres": ["genre-005", "genre-002"],
+      "genres": [
+        "genre-005",
+        "genre-002"
+      ],
       "director": "Christopher Nolan",
-      "actors": ["Leonardo DiCaprio", "Joseph Gordon-Levitt", "Elliot Page"],
+      "actors": [
+        "Leonardo DiCaprio",
+        "Joseph Gordon-Levitt",
+        "Elliot Page"
+      ],
       "averageRating": 8.8,
       "reviewCount": 9500,
       "watchCount": 310000,
       "streamingUrl": "https://example.com/stream/inception",
-      "videoQuality": ["360p", "480p", "720p", "1080p", "4K"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p",
+        "4K"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -1067,15 +1762,30 @@
       "releaseDate": "1999-03-31",
       "duration": 136,
       "rating": "R",
-      "genres": ["genre-005"],
+      "genres": [
+        "genre-005"
+      ],
       "director": "Lana Wachowski",
-      "actors": ["Keanu Reeves", "Laurence Fishburne", "Carrie-Anne Moss"],
+      "actors": [
+        "Keanu Reeves",
+        "Laurence Fishburne",
+        "Carrie-Anne Moss"
+      ],
       "averageRating": 8.7,
       "reviewCount": 8500,
       "watchCount": 290000,
       "streamingUrl": "https://example.com/stream/matrix",
-      "videoQuality": ["360p", "480p", "720p", "1080p", "4K"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p",
+        "4K"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -1090,15 +1800,30 @@
       "releaseDate": "2019-04-26",
       "duration": 181,
       "rating": "PG-13",
-      "genres": ["genre-005"],
+      "genres": [
+        "genre-005"
+      ],
       "director": "Anthony Russo",
-      "actors": ["Robert Downey Jr.", "Chris Evans", "Scarlett Johansson"],
+      "actors": [
+        "Robert Downey Jr.",
+        "Chris Evans",
+        "Scarlett Johansson"
+      ],
       "averageRating": 8.4,
       "reviewCount": 10200,
       "watchCount": 420000,
       "streamingUrl": "https://example.com/stream/avengers-endgame",
-      "videoQuality": ["360p", "480p", "720p", "1080p", "4K"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p",
+        "4K"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -1113,15 +1838,30 @@
       "releaseDate": "2018-07-27",
       "duration": 147,
       "rating": "PG-13",
-      "genres": ["genre-005"],
+      "genres": [
+        "genre-005"
+      ],
       "director": "Christopher McQuarrie",
-      "actors": ["Tom Cruise", "Henry Cavill", "Ving Rhames"],
+      "actors": [
+        "Tom Cruise",
+        "Henry Cavill",
+        "Ving Rhames"
+      ],
       "averageRating": 7.7,
       "reviewCount": 4300,
       "watchCount": 148000,
       "streamingUrl": "https://example.com/stream/mi-fallout",
-      "videoQuality": ["360p", "480p", "720p", "1080p", "4K"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p",
+        "4K"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",
@@ -1136,15 +1876,30 @@
       "releaseDate": "1993-06-11",
       "duration": 127,
       "rating": "PG-13",
-      "genres": ["genre-005"],
+      "genres": [
+        "genre-005"
+      ],
       "director": "Steven Spielberg",
-      "actors": ["Sam Neill", "Laura Dern", "Jeff Goldblum"],
+      "actors": [
+        "Sam Neill",
+        "Laura Dern",
+        "Jeff Goldblum"
+      ],
       "averageRating": 8.2,
       "reviewCount": 6900,
       "watchCount": 250000,
       "streamingUrl": "https://example.com/stream/jurassic-park",
-      "videoQuality": ["360p", "480p", "720p", "1080p", "4K"],
-      "subtitles": ["id", "en"],
+      "videoQuality": [
+        "360p",
+        "480p",
+        "720p",
+        "1080p",
+        "4K"
+      ],
+      "subtitles": [
+        "id",
+        "en"
+      ],
       "status": "published",
       "createdAt": "2024-01-15T00:00:00.000Z",
       "updatedAt": "2024-03-10T00:00:00.000Z",

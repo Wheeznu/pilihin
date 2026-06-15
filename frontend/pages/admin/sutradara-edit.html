@@ -1,31 +1,123 @@
 <!DOCTYPE html>
 <html lang="id">
-    <head>
+  <head>
 <script>document.documentElement.setAttribute("data-theme",localStorage.getItem("pilih-in-theme")||"dark")</script>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Edit & Hapus Sutradara - Pilih.in</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100..900&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href="../../css/reset.css" />
-        <link rel="stylesheet" href="../../css/design-system.css" />
-        <link rel="stylesheet" href="../../css/components/navbar.css" />
-        <link rel="stylesheet" href="../../css/components/sidebar.css" />
-        <link rel="stylesheet" href="../../css/components/button.css" />
-        <link rel="stylesheet" href="../../css/components/form.css" />
-        <link rel="stylesheet" href="../../css/pages/admin-panel.css" />
-    </head>
-    <body>
-        <div id="navbar-container"></div>
-        <main class="admin-sutradara-edit-page" id="sutradaraEditPage"></main>
-        <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-        <script type="module">
-            import Navbar from "../../js/components/navbar.js";
-            document.addEventListener("DOMContentLoaded", async () => {
-                await Navbar.load("navbar-container");
-                feather.replace();
-            });
-        </script>
-    </body>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Sutradara - Pilih.in</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/design-system.css" />
+    <link rel="stylesheet" href="../../css/components/navbar.css" />
+    <link rel="stylesheet" href="../../css/components/sidebar.css" />
+    <link rel="stylesheet" href="../../css/components/button.css" />
+    <link rel="stylesheet" href="../../css/pages/aktor-edit.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  </head>
+  <body>
+    <div id="navbar-container"></div>
+
+    <main class="aktor-edit-page">
+      <div class="aktor-edit__container">
+        <div class="page-header">
+          <div>
+            <h1><i data-feather="user"></i> Edit Sutradara</h1>
+            <p>Edit data sutradara yang sudah tersimpan di database</p>
+          </div>
+        </div>
+
+        <div class="search-bar" id="idLoaderSection">
+          <div class="search-input-wrapper">
+            <i data-feather="search"></i>
+            <input type="text" id="sutradaraIdInput" placeholder="Masukkan ID Sutradara..." />
+          </div>
+          <button class="btn-add" id="loadSutradaraBtn">
+            <i data-feather="search"></i> Load Data
+          </button>
+        </div>
+
+        <form id="sutradaraForm">
+          <input type="hidden" id="sutradaraId" />
+
+          <div class="table-container" style="padding: 28px;">
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+              <div>
+                <label style="display: block; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 6px;">Nama Sutradara</label>
+                <input type="text" id="name" placeholder="Nama lengkap sutradara" style="width: 100%; padding: 10px 14px; background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--radius-lg); color: var(--text-primary); font-size: 14px; outline: none; box-sizing: border-box;" />
+              </div>
+
+              <div>
+                <label style="display: block; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 6px;">Tanggal Lahir</label>
+                <input type="date" id="birthDate" style="width: 100%; padding: 10px 14px; background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--radius-lg); color: var(--text-primary); font-size: 14px; outline: none; box-sizing: border-box;" />
+              </div>
+
+              <div>
+                <label style="display: block; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 6px;">Foto URL</label>
+                <input type="url" id="photo" placeholder="https://example.com/photo.jpg" style="width: 100%; padding: 10px 14px; background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--radius-lg); color: var(--text-primary); font-size: 14px; outline: none; box-sizing: border-box;" />
+              </div>
+
+              <div>
+                <label style="display: block; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 6px;">Film</label>
+                <div style="display: flex; gap: 8px; margin-bottom: 10px;">
+                  <select id="filmSelect" style="flex: 1; padding: 10px 14px; background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--radius-lg); color: var(--text-primary); font-size: 14px; outline: none;">
+                    <option value="">— Pilih Film —</option>
+                  </select>
+                  <button type="button" class="btn btn-secondary" id="addFilmBtn" style="white-space: nowrap;">
+                    <i data-feather="plus"></i> Tambah Film
+                  </button>
+                </div>
+                <div id="selectedFilmsList" class="film-tags-container" style="display: flex; flex-wrap: wrap; gap: 8px;"></div>
+              </div>
+
+              <div style="display: flex; gap: 12px; padding-top: 12px; border-top: 1px solid var(--border-color);">
+                <button type="submit" class="btn btn-primary" id="saveSutradaraBtn" style="background: var(--accent-primary); color: var(--bg-primary); border: none; padding: 10px 24px; border-radius: var(--radius-full); font-size: 14px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 7px;">
+                  <i data-feather="save"></i> Simpan
+                </button>
+                <button type="button" class="btn btn-danger" id="deleteSutradaraBtn">
+                  <i data-feather="trash-2"></i> Hapus
+                </button>
+                <button type="button" class="btn btn-secondary" id="cancelBtn">
+                  <i data-feather="x"></i> Batal
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <div class="modal" id="deleteModal">
+      <div class="modal-content">
+        <i data-feather="alert-triangle"></i>
+        <h2>Hapus Sutradara?</h2>
+        <p>
+          Apakah Anda yakin ingin menghapus sutradara
+          <strong id="deleteDirectorName"></strong>? Data yang dihapus tidak dapat
+          dikembalikan.
+        </p>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" id="cancelDeleteBtn">
+            <i data-feather="x"></i> Batal
+          </button>
+          <button class="btn btn-danger" id="confirmDeleteBtn">
+            <i data-feather="trash-2"></i> Ya, Hapus
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      import Navbar from "../../js/components/navbar.js";
+      document.addEventListener("DOMContentLoaded", async () => {
+        await Navbar.load("navbar-container");
+        if (typeof feather !== "undefined") feather.replace();
+      });
+    </script>
+    <script type="module" src="../../js/logic-pages/sutradara-edit.js"></script>
+  </body>
 </html>

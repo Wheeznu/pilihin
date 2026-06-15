@@ -1,27 +1,17 @@
-import { repositories, getDbReady } from "../../../backend/init.js";
+import { repositories, getDbReady, dbManager, apiRequest } from "../../../backend/init.js";
 import { DOM } from "../utils/dom.js";
 import authService from "../../../backend/services/AuthService.js";
 
-const DB_KEY = "pilih-in-db";
 const FILM_CACHE = {};
 
-function _getCollection(name) {
-    try {
-        const db = JSON.parse(localStorage.getItem(DB_KEY));
-        return db?.[name] || [];
-    } catch {
-        return [];
-    }
-}
-
-function _saveCollection(name, data) {
-    try {
-        const db = JSON.parse(localStorage.getItem(DB_KEY)) || {};
-        db[name] = data;
-        localStorage.setItem(DB_KEY, JSON.stringify(db));
-    } catch (err) {
-        console.warn("Gagal menyimpan koleksi:", err);
-    }
+function showToast(msg, type) {
+  const existing = document.querySelector(".toast");
+  if (existing) existing.remove();
+  const t = document.createElement("div");
+  t.className = "toast" + (type === "error" ? " error" : "");
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 3000);
 }
 
 function _getFilmTitle(filmId) {
@@ -32,7 +22,7 @@ function _getFilmTitle(filmId) {
 }
 
 function _getUserDisplay(userId) {
-    const users = _getCollection("users");
+    const users = dbManager.getCollection("users");
     const user = users.find((u) => u.id === userId);
     return user ? { username: user.username, photo: user.profilePhoto } : { username: "Pengguna tidak dikenal", photo: null };
 }
@@ -42,7 +32,7 @@ function _getInitials(name) {
 }
 
 function _seedSampleReviews() {
-    const existing = _getCollection("reviews");
+    const existing = dbManager.getCollection("reviews");
     if (existing.length > 0) return;
 
     const films = repositories.films.findPublished();
@@ -63,7 +53,7 @@ function _seedSampleReviews() {
         { filmIdx: 3, rating: 9, title: "Jurnalisme investigasi yang menegangkan", content: "Film ini berhasil menggambarkan realita jurnalisme di Indonesia dengan sangat baik." },
     ];
 
-    const users = _getCollection("users");
+    const users = dbManager.getCollection("users");
     const reviewers = users.filter((u) => u.role === "user");
     if (reviewers.length === 0) return;
 
@@ -86,12 +76,19 @@ function _seedSampleReviews() {
         };
     });
 
-    _saveCollection("reviews", reviews);
+    dbManager.saveCollection("reviews", reviews);
 }
+
+const CONTENT_TYPES = [
+    { id: "film", label: "Film", icon: "film", dbKey: "films" },
+    { id: "aktor", label: "Aktor", icon: "users", dbKey: "actors" },
+    { id: "sutradara", label: "Sutradara", icon: "user", dbKey: "directors" },
+    { id: "artikel", label: "Artikel", icon: "file-text", dbKey: "articles" },
+];
 
 class ManagerApprovalsPage {
     constructor() {
-        this.currentTab = "pending";
+        this.currentType = "film";
         this._init();
     }
 
@@ -105,28 +102,50 @@ class ManagerApprovalsPage {
         this._bindEvents();
     }
 
+    _getPendingContent(type) {
+        const cfg = CONTENT_TYPES.find((c) => c.id === type);
+        if (!cfg) return [];
+
+        const dbItems = dbManager.getCollection(cfg.dbKey).filter((i) => i.status === "pending");
+
+        if (type === "artikel") {
+            const news = dbManager.getCollection("news").filter((i) => i.status === "pending").map((n) => ({ ...n, _subtype: "berita" }));
+            const articles = dbItems.map((a) => ({ ...a, _subtype: "artikel" }));
+            return [...articles, ...news].sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
+        }
+
+        return dbItems;
+    }
+
+    _getContentStats() {
+        const stats = {};
+        for (const cfg of CONTENT_TYPES) {
+            stats[cfg.id] = this._getPendingContent(cfg.id).length;
+        }
+        return stats;
+    }
+
     _getReviews() {
-        return _getCollection("reviews");
+        return dbManager.getCollection("reviews");
     }
 
     _saveReviews(reviews) {
-        _saveCollection("reviews", reviews);
+        dbManager.saveCollection("reviews", reviews);
     }
 
     _getFilteredReviews() {
-        const all = this._getReviews();
-        if (this.currentTab === "all") return all;
-        return all.filter((r) => r.status === this.currentTab);
+        return this._getReviews().filter((r) => r.status === "pending");
     }
+
+    // --- Render ---
 
     _render() {
         const container = DOM.$("#managerApprovalsPage");
         if (!container) return;
 
-        const all = this._getReviews();
-        const pending = all.filter((r) => r.status === "pending").length;
-        const approved = all.filter((r) => r.status === "approved").length;
-        const rejected = all.filter((r) => r.status === "rejected").length;
+        const contentStats = this._getContentStats();
+        let totalPending = 0;
+        for (const cfg of CONTENT_TYPES) totalPending += contentStats[cfg.id];
 
         container.innerHTML = `
             <div class="approvals-header">
@@ -134,52 +153,189 @@ class ManagerApprovalsPage {
                     <h1 class="approvals-header__title">
                         <i data-feather="check-circle"></i> Persetujuan Konten
                     </h1>
-                    <p class="approvals-header__subtitle">Moderasi ulasan dan rating film dari pengguna</p>
+                    <p class="approvals-header__subtitle">Setujui atau tolak konten yang diajukan oleh admin</p>
                 </div>
             </div>
 
             <div class="approvals-stats">
                 <div class="approvals-stat approvals-stat--pending">
-                    <div class="approvals-stat__value">${pending}</div>
-                    <div class="approvals-stat__label">Menunggu</div>
-                </div>
-                <div class="approvals-stat approvals-stat--approved">
-                    <div class="approvals-stat__value">${approved}</div>
-                    <div class="approvals-stat__label">Disetujui</div>
-                </div>
-                <div class="approvals-stat approvals-stat--rejected">
-                    <div class="approvals-stat__value">${rejected}</div>
-                    <div class="approvals-stat__label">Ditolak</div>
+                    <div class="approvals-stat__value">${totalPending}</div>
+                    <div class="approvals-stat__label">Konten Menunggu</div>
                 </div>
             </div>
 
-            <div class="approvals-tabs">
-                <button class="approvals-tab ${this.currentTab === "pending" ? "approvals-tab--active" : ""}" data-tab="pending">Menunggu</button>
-                <button class="approvals-tab ${this.currentTab === "approved" ? "approvals-tab--active" : ""}" data-tab="approved">Disetujui</button>
-                <button class="approvals-tab ${this.currentTab === "rejected" ? "approvals-tab--active" : ""}" data-tab="rejected">Ditolak</button>
-                <button class="approvals-tab ${this.currentTab === "all" ? "approvals-tab--active" : ""}" data-tab="all">Semua</button>
+            <div class="approvals-content-tabs">
+                ${this._renderTypeTabs()}
             </div>
 
-            ${this._renderTable()}
+            ${this.currentType === "ulasan" ? this._renderReviewsSection() : this._renderContentSection()}
         `;
 
         feather.replace();
     }
 
-    _renderTable() {
-        const reviews = this._getFilteredReviews();
+    _renderTypeTabs() {
+        const tabHtml = CONTENT_TYPES.map((cfg) => `
+            <button class="approvals-tab ${this.currentType === cfg.id ? "approvals-tab--active" : ""}" data-type="${cfg.id}">
+                <i data-feather="${cfg.icon}"></i> ${cfg.label}
+            </button>
+        `).join("");
 
-        if (reviews.length === 0) {
-            const messages = {
-                pending: "Tidak ada ulasan yang menunggu persetujuan",
-                approved: "Belum ada ulasan yang disetujui",
-                rejected: "Belum ada ulasan yang ditolak",
-                all: "Belum ada ulasan",
-            };
+        return tabHtml + `
+            <button class="approvals-tab ${this.currentType === "ulasan" ? "approvals-tab--active" : ""}" data-type="ulasan">
+                <i data-feather="message-square"></i> Ulasan
+            </button>
+        `;
+    }
+
+    _renderContentSection() {
+        const items = this._getPendingContent(this.currentType);
+        const cfg = CONTENT_TYPES.find((c) => c.id === this.currentType);
+
+        if (items.length === 0) {
             return `
                 <div class="approvals-empty">
                     <i data-feather="inbox"></i>
-                    <div class="approvals-empty__title">${messages[this.currentTab] || messages.all}</div>
+                    <div class="approvals-empty__title">Tidak ada ${cfg.label.toLowerCase()} menunggu persetujuan</div>
+                    <div class="approvals-empty__desc">Konten baru akan muncul di sini setelah admin mengajukan perubahan.</div>
+                </div>
+            `;
+        }
+
+        return `
+            <table class="approvals-table">
+                <thead>
+                    <tr>${this._contentTableHeaders()}</tr>
+                </thead>
+                <tbody>
+                    ${items.map((item) => this._contentRow(item)).join("")}
+                </tbody>
+            </table>
+        `;
+    }
+
+    _contentTableHeaders() {
+        switch (this.currentType) {
+            case "film":
+                return "<th>Poster</th><th>Judul Film</th><th>Rating</th><th>Rilis</th><th>Diajukan</th><th>Aksi</th>";
+            case "aktor":
+                return "<th>Foto</th><th>Nama Aktor</th><th>Tgl Lahir</th><th>Film</th><th>Diajukan</th><th>Aksi</th>";
+            case "sutradara":
+                return "<th>Foto</th><th>Nama Sutradara</th><th>Tgl Lahir</th><th>Film</th><th>Diajukan</th><th>Aksi</th>";
+            case "artikel":
+                return "<th>Thumbnail</th><th>Judul</th><th>Tipe</th><th>Kategori</th><th>Diajukan</th><th>Aksi</th>";
+            default:
+                return "<th>Judul</th><th>Diajukan</th><th>Aksi</th>";
+        }
+    }
+
+    _contentRow(item) {
+        const id = item.id;
+        const ts = item.updatedAt || item.createdAt || "";
+        const dateStr = ts ? new Date(ts).toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" }) : "—";
+
+        const base = `
+            <td>
+                <span class="approvals-status" style="font-size:var(--font-xs);color:var(--text-muted)">${dateStr}</span>
+            </td>
+            <td>
+                <div class="approvals-actions">
+                    <button class="btn btn-primary btn-sm" data-action="approve-content" data-id="${id}">
+                        <i data-feather="check"></i> Setujui
+                    </button>
+                    <button class="btn btn-danger btn-sm" data-action="reject-content" data-id="${id}">
+                        <i data-feather="x"></i> Tolak
+                    </button>
+                </div>
+            </td>
+        `;
+
+        switch (this.currentType) {
+            case "film":
+                return `
+                    <tr data-content-id="${id}">
+                        <td>
+                            <div class="approvals-film">
+                                <img class="approvals-film__poster" src="${item.poster || `https://picsum.photos/seed/${id}/80/112`}" alt="${item.title}" onerror="this.style.display='none'" />
+                                <div>
+                                    <div class="approvals-film__title">${item.title || "—"}</div>
+                                    <div class="approvals-film__meta">ID: ${id}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="approvals-film__title">${item.title || "—"}</td>
+                        <td><div class="approvals-rating"><i data-feather="star"></i> ${(item.averageRating || item.rating || 0)}/10</div></td>
+                        <td>${item.releaseDate ? new Date(item.releaseDate).toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" }) : "—"}</td>
+                        ${base}
+                    </tr>
+                `;
+            case "aktor":
+                return `
+                    <tr data-content-id="${id}">
+                        <td>
+                            <div class="approvals-user">
+                                <img class="approvals-user__avatar" src="${item.photo || `https://ui-avatars.com/api/?name=${encodeURIComponent(item.name || "A")}&background=1db954&color=000&size=64`}" alt="${item.name}" onerror="this.style.display='none'" />
+                            </div>
+                        </td>
+                        <td><span class="approvals-film__title">${item.name || "—"}</span></td>
+                        <td>${item.birthDate ? new Date(item.birthDate).toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" }) : "—"}</td>
+                        <td><span class="films-count">${item.films?.length || 0} film</span></td>
+                        ${base}
+                    </tr>
+                `;
+            case "sutradara":
+                return `
+                    <tr data-content-id="${id}">
+                        <td>
+                            <div class="approvals-user">
+                                <img class="approvals-user__avatar" src="${item.photo || `https://ui-avatars.com/api/?name=${encodeURIComponent(item.name || "S")}&background=1db954&color=000&size=64`}" alt="${item.name}" onerror="this.style.display='none'" />
+                            </div>
+                        </td>
+                        <td><span class="approvals-film__title">${item.name || "—"}</span></td>
+                        <td>${item.birthDate ? new Date(item.birthDate).toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" }) : "—"}</td>
+                        <td><span class="films-count">${item.films?.length || 0} film</span></td>
+                        ${base}
+                    </tr>
+                `;
+            case "artikel":
+                return `
+                    <tr data-content-id="${id}">
+                        <td>
+                            <div class="approvals-film">
+                                <img class="approvals-film__poster" src="${item.coverImage || `https://picsum.photos/seed/${id}/80/112`}" alt="${item.title}" onerror="this.style.display='none'" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="approvals-film__title">${item.title || "—"}</div>
+                            <div class="approvals-film__meta">${item.slug || id}</div>
+                        </td>
+                        <td><span class="approvals-status approvals-status--pending" style="background:rgba(29,185,84,0.12);color:var(--accent-primary);padding:2px 8px">${item._subtype === "berita" ? "Berita" : "Artikel"}</span></td>
+                        <td>${item.category || "—"}</td>
+                        ${base}
+                    </tr>
+                `;
+            default:
+                return `
+                    <tr data-content-id="${id}">
+                        <td>${item.title || item.name || id}</td>
+                        ${base}
+                    </tr>
+                `;
+        }
+    }
+
+    _renderReviewsSection() {
+        return this._renderReviewTable();
+    }
+
+    _renderReviewTable() {
+        const reviews = this._getFilteredReviews();
+
+        if (reviews.length === 0) {
+            return `
+                <div class="approvals-empty">
+                    <i data-feather="inbox"></i>
+                    <div class="approvals-empty__title">Tidak ada ulasan yang menunggu persetujuan</div>
                     <div class="approvals-empty__desc">Ulasan akan muncul di sini setelah pengguna memberikan rating.</div>
                 </div>
             `;
@@ -193,7 +349,6 @@ class ManagerApprovalsPage {
                         <th>Pengguna</th>
                         <th>Rating</th>
                         <th>Ulasan</th>
-                        <th>Status</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -212,12 +367,7 @@ class ManagerApprovalsPage {
             <tr data-review-id="${review.id}">
                 <td>
                     <div class="approvals-film">
-                        <img
-                            class="approvals-film__poster"
-                            src="https://picsum.photos/seed/${review.id}/80/112"
-                            alt="${filmTitle}"
-                            onerror="this.style.display='none'"
-                        />
+                        <img class="approvals-film__poster" src="https://picsum.photos/seed/${review.id}/80/112" alt="${filmTitle}" onerror="this.style.display='none'" />
                         <div>
                             <div class="approvals-film__title">${filmTitle}</div>
                             <div class="approvals-film__meta">ID: ${review.filmId}</div>
@@ -226,12 +376,7 @@ class ManagerApprovalsPage {
                 </td>
                 <td>
                     <div class="approvals-user">
-                        <img
-                            class="approvals-user__avatar"
-                            src="${user.photo || ""}"
-                            alt="${user.username}"
-                            onerror="this.style.display='none'"
-                        />
+                        <img class="approvals-user__avatar" src="${user.photo || ""}" alt="${user.username}" onerror="this.style.display='none'" />
                         <span class="approvals-user__name">${user.username}</span>
                     </div>
                 </td>
@@ -248,51 +393,73 @@ class ManagerApprovalsPage {
                     </div>
                 </td>
                 <td>
-                    <span class="approvals-status approvals-status--${review.status}">
-                        <i data-feather="${review.status === "approved" ? "check-circle" : review.status === "rejected" ? "x-circle" : "clock"}"></i>
-                        ${review.status === "pending" ? "Menunggu" : review.status === "approved" ? "Disetujui" : "Ditolak"}
-                    </span>
-                </td>
-                <td>
-                    ${review.status === "pending" ? `
-                        <div class="approvals-actions">
-                            <button class="btn btn-primary btn-sm" data-action="approve" data-id="${review.id}">
-                                <i data-feather="check"></i> Setujui
-                            </button>
-                            <button class="btn btn-danger btn-sm" data-action="reject" data-id="${review.id}">
-                                <i data-feather="x"></i> Tolak
-                            </button>
-                        </div>
-                    ` : `
-                        <span class="approvals-status" style="font-size:var(--font-xs);color:var(--text-muted)">
-                            ${new Date(review.updatedAt).toLocaleDateString("id-ID")}
-                        </span>
-                    `}
+                    <div class="approvals-actions">
+                        <button class="btn btn-primary btn-sm" data-action="approve-review" data-id="${review.id}">
+                            <i data-feather="check"></i> Setujui
+                        </button>
+                        <button class="btn btn-danger btn-sm" data-action="reject-review" data-id="${review.id}">
+                            <i data-feather="x"></i> Tolak
+                        </button>
+                    </div>
                 </td>
             </tr>
         `;
     }
 
-    _bindEvents() {
-        DOM.$("#managerApprovalsPage")?.addEventListener("click", (e) => {
-            const tabBtn = e.target.closest(".approvals-tab");
-            if (tabBtn) {
-                this.currentTab = tabBtn.dataset.tab;
-                this._render();
-                this._bindEvents();
-                return;
+    // --- Actions ---
+
+    _approveContent(id) {
+        const cfg = CONTENT_TYPES.find((c) => c.id === this.currentType);
+        if (!cfg) return;
+
+        let items, item, collection;
+
+        if (cfg.id === "artikel") {
+            items = dbManager.getCollection("articles");
+            item = items.find((i) => i.id === id);
+            if (!item) {
+                items = dbManager.getCollection("news");
+                item = items.find((i) => i.id === id);
             }
+            if (!item) return;
+            collection = items === dbManager.getCollection("news") ? "news" : "articles";
+            const idx = items.findIndex((i) => i.id === id);
+            items[idx] = { ...item, status: "published", updatedAt: new Date().toISOString() };
+            dbManager.saveCollection(collection, items);
+            apiRequest("PUT", "/api/content/" + collection + "/" + id, { status: "published" });
+            showToast("Konten berhasil disetujui", "success");
+            this._render();
+            return;
+        }
 
-            const actionBtn = e.target.closest("[data-action]");
-            if (!actionBtn) return;
+        items = dbManager.getCollection(cfg.dbKey);
+        item = items.find((i) => i.id === id);
+        if (!item) return;
 
-            const action = actionBtn.dataset.action;
-            const reviewId = actionBtn.dataset.id;
-            if (!reviewId) return;
+        const idx = items.findIndex((i) => i.id === id);
+        items[idx] = { ...item, status: "published", updatedAt: new Date().toISOString() };
+        dbManager.saveCollection(cfg.dbKey, items);
+        apiRequest("PUT", "/api/content/" + cfg.dbKey + "/" + id, { status: "published" });
+        showToast("Konten berhasil disetujui", "success");
+        this._render();
+    }
 
-            if (action === "approve") this._approveReview(reviewId);
-            else if (action === "reject") this._rejectReview(reviewId);
-        });
+    _rejectContent(id) {
+        const cfg = CONTENT_TYPES.find((c) => c.id === this.currentType);
+        if (!cfg) return;
+
+        if (cfg.id === "artikel") {
+            dbManager.saveCollection("articles", dbManager.getCollection("articles").filter((i) => i.id !== id));
+            dbManager.saveCollection("news", dbManager.getCollection("news").filter((i) => i.id !== id));
+            apiRequest("DELETE", "/api/content/articles/" + id);
+            apiRequest("DELETE", "/api/content/news/" + id);
+        } else {
+            dbManager.saveCollection(cfg.dbKey, dbManager.getCollection(cfg.dbKey).filter((i) => i.id !== id));
+            apiRequest("DELETE", "/api/content/" + cfg.dbKey + "/" + id);
+        }
+
+        showToast("Konten ditolak dan dihapus", "error");
+        this._render();
     }
 
     _approveReview(reviewId) {
@@ -303,9 +470,8 @@ class ManagerApprovalsPage {
         review.status = "approved";
         review.updatedAt = new Date().toISOString();
         this._saveReviews(reviews);
-        DOM.showToast("Ulasan berhasil disetujui", "success");
+        showToast("Ulasan berhasil disetujui", "success");
         this._render();
-        this._bindEvents();
     }
 
     _rejectReview(reviewId) {
@@ -316,9 +482,42 @@ class ManagerApprovalsPage {
         review.status = "rejected";
         review.updatedAt = new Date().toISOString();
         this._saveReviews(reviews);
-        DOM.showToast("Ulasan ditolak", "error");
+        showToast("Ulasan ditolak", "error");
         this._render();
-        this._bindEvents();
+    }
+
+    // --- Events ---
+
+    _bindEvents() {
+        const container = DOM.$("#managerApprovalsPage");
+        if (!container) return;
+        container.removeEventListener("click", this._clickHandler);
+        this._clickHandler = (e) => {
+            const typeTab = e.target.closest("[data-type]");
+            if (typeTab) {
+                const type = typeTab.dataset.type;
+                if (type === "ulasan") {
+                    this.currentType = "ulasan";
+                } else if (CONTENT_TYPES.some((c) => c.id === type)) {
+                    this.currentType = type;
+                }
+                this._render();
+                return;
+            }
+
+            const actionBtn = e.target.closest("[data-action]");
+            if (!actionBtn) return;
+
+            const action = actionBtn.dataset.action;
+            const id = actionBtn.dataset.id;
+            if (!id) return;
+
+            if (action === "approve-content") this._approveContent(id);
+            else if (action === "reject-content") this._rejectContent(id);
+            else if (action === "approve-review") this._approveReview(id);
+            else if (action === "reject-review") this._rejectReview(id);
+        };
+        container.addEventListener("click", this._clickHandler);
     }
 }
 

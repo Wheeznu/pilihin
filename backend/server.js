@@ -8,6 +8,19 @@ const DATA_DIR = path.join(__dirname, "..", "data");
 const ACCOUNT_FILE = path.join(DATA_DIR, "account.json");
 const CONTACT_FILE = path.join(DATA_DIR, "contact-messages.json");
 const USERDATA_FILE = path.join(DATA_DIR, "user-data.json");
+const CONTENT_FILE = path.join(DATA_DIR, "content.json");
+
+const SEED_SOURCES = {
+  films: path.join(DATA_DIR, "data-film.json"),
+  actors: path.join(DATA_DIR, "data-actor.json"),
+  directors: path.join(DATA_DIR, "data-director.json"),
+  genres: path.join(DATA_DIR, "genres.json"),
+  articles: path.join(DATA_DIR, "data-artikel.json"),
+  news: path.join(DATA_DIR, "data-berita.json"),
+  faqs: path.join(DATA_DIR, "faq.json"),
+};
+
+const CONTENT_COLLECTIONS = ["films", "actors", "directors", "articles", "news"];
 
 const CORS_ORIGINS = [
   "http://127.0.0.1:5500",
@@ -269,6 +282,165 @@ async function handleDeleteUserCollectionItem(req, res, userId, collection, item
   sendJSON(res, 200, { success: true });
 }
 
+/* ── Content CRUD ─────────────────────────────────────── */
+
+function readContent() {
+  return readJSON(CONTENT_FILE) || Object.fromEntries(CONTENT_COLLECTIONS.map((c) => [c, []]));
+}
+
+function writeContent(data) {
+  writeJSON(CONTENT_FILE, data);
+}
+
+function readSeed(key) {
+  const filePath = SEED_SOURCES[key];
+  if (!filePath) return [];
+  const data = readJSON(filePath);
+  return data?.[key] || [];
+}
+
+function mergeById(base, extra) {
+  const map = new Map();
+  base.forEach((item) => map.set(item.id, item));
+  extra.forEach((item) => map.set(item.id, item));
+  return Array.from(map.values());
+}
+
+const CONTENT_COL_RE = /^\/api\/content\/(films|actors|directors|articles|news)$/;
+const CONTENT_ITEM_RE = /^\/api\/content\/(films|actors|directors|articles|news)\/([^/]+)$/;
+
+async function handleGetSeedData(req, res) {
+  const content = readContent();
+  const result = {};
+  for (const key of [...CONTENT_COLLECTIONS, "genres", "faqs"]) {
+    const seed = readSeed(key);
+    const userContent = content[key] || [];
+    let items = mergeById(seed, userContent);
+    if (key !== "genres" && key !== "faqs") {
+      items = items.map((item) => {
+        if (!item.status) item.status = "published";
+        return item;
+      });
+    }
+    result[key] = items;
+  }
+  sendJSON(res, 200, { success: true, data: result });
+}
+
+async function handleGetContent(req, res, collection) {
+  const url = new URL(req.url, `http://${req.headers.host}`);
+  const status = url.searchParams.get("status");
+  const content = readContent();
+  let items = content[collection] || [];
+
+  if (status === "published" || status === "all") {
+    const seed = readSeed(collection);
+    items = mergeById(items, seed);
+  }
+
+  if (status && status !== "all") {
+    items = items.filter((item) => item.status === status);
+  }
+
+  sendJSON(res, 200, { success: true, data: items });
+}
+
+async function handleCreateContent(req, res, collection) {
+  const body = await parseBody(req);
+  if (!body) {
+    return sendJSON(res, 400, { success: false, error: "Body tidak valid" });
+  }
+  const now = new Date().toISOString();
+  const item = {
+    id: generateId(collection.slice(0, -1)),
+    ...body,
+    createdAt: body.createdAt || now,
+    updatedAt: now,
+  };
+  const content = readContent();
+  content[collection] = content[collection] || [];
+  content[collection].push(item);
+  writeContent(content);
+  sendJSON(res, 201, { success: true, data: item });
+}
+
+async function handleUpdateContent(req, res, collection, itemId) {
+  const body = await parseBody(req);
+  if (!body) {
+    return sendJSON(res, 400, { success: false, error: "Body tidak valid" });
+  }
+  const now = new Date().toISOString();
+  const content = readContent();
+  const items = content[collection] || [];
+  const idx = items.findIndex((i) => i.id === itemId);
+
+  if (idx !== -1) {
+    const item = { ...items[idx], ...body, updatedAt: now };
+
+    if (body.status === "published") {
+      const seedFile = SEED_SOURCES[collection];
+      if (seedFile) {
+        const seedData = readJSON(seedFile);
+        if (seedData) {
+          seedData[collection] = seedData[collection] || [];
+          seedData[collection].push(item);
+          writeJSON(seedFile, seedData);
+        }
+      }
+      content[collection] = items.filter((_, i) => i !== idx);
+      writeContent(content);
+    } else {
+      items[idx] = item;
+      writeContent(content);
+    }
+
+    return sendJSON(res, 200, { success: true, data: item });
+  }
+
+  const seedFile = SEED_SOURCES[collection];
+  if (seedFile) {
+    const seedData = readJSON(seedFile);
+    if (seedData) {
+      const seedItems = seedData[collection] || [];
+      const seedIdx = seedItems.findIndex((i) => i.id === itemId);
+      if (seedIdx !== -1) {
+        seedItems[seedIdx] = { ...seedItems[seedIdx], ...body, updatedAt: now };
+        writeJSON(seedFile, seedData);
+        return sendJSON(res, 200, { success: true, data: seedItems[seedIdx] });
+      }
+    }
+  }
+
+  sendJSON(res, 404, { success: false, error: "Item tidak ditemukan" });
+}
+
+async function handleDeleteContent(req, res, collection, itemId) {
+  const content = readContent();
+  const items = content[collection] || [];
+  const filtered = items.filter((i) => i.id !== itemId);
+  if (filtered.length !== items.length) {
+    content[collection] = filtered;
+    writeContent(content);
+    return sendJSON(res, 200, { success: true });
+  }
+
+  const seedFile = SEED_SOURCES[collection];
+  if (seedFile) {
+    const seedData = readJSON(seedFile);
+    if (seedData) {
+      const seedItems = seedData[collection] || [];
+      const seedFiltered = seedItems.filter((i) => i.id !== itemId);
+      if (seedFiltered.length !== seedItems.length) {
+        seedData[collection] = seedFiltered;
+        writeJSON(seedFile, seedData);
+        return sendJSON(res, 200, { success: true });
+      }
+    }
+  }
+
+  sendJSON(res, 404, { success: false, error: "Item tidak ditemukan" });
+}
+
 /* ── Router ────────────────────────────────────────────── */
 
 const USER_DATA_RE = /^\/api\/user-data\/([^/]+)\/([^/]+)(?:\/([^/]+))?$/;
@@ -279,14 +451,41 @@ const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host}`);
   const pathname = url.pathname;
 
-  if (req.method === "POST" && pathname === "/api/auth/register") {
+  if (req.method === "GET" && pathname === "/api/seed-data") {
+    await handleGetSeedData(req, res);
+  } else if (req.method === "POST" && pathname === "/api/auth/register") {
     await handleRegister(req, res);
   } else if (req.method === "POST" && pathname === "/api/auth/forgot-password") {
     await handleForgotPassword(req, res);
   } else if (req.method === "POST" && pathname === "/api/contact") {
     await handleContact(req, res);
   } else {
-    const m = pathname.match(USER_DATA_RE);
+    let m = pathname.match(CONTENT_COL_RE);
+    if (m) {
+      const collection = m[1];
+      if (req.method === "GET") {
+        await handleGetContent(req, res, collection);
+      } else if (req.method === "POST") {
+        await handleCreateContent(req, res, collection);
+      } else {
+        sendJSON(res, 405, { success: false, error: "Method tidak diizinkan" });
+      }
+      return;
+    }
+    m = pathname.match(CONTENT_ITEM_RE);
+    if (m) {
+      const collection = m[1];
+      const itemId = m[2];
+      if (req.method === "PUT") {
+        await handleUpdateContent(req, res, collection, itemId);
+      } else if (req.method === "DELETE") {
+        await handleDeleteContent(req, res, collection, itemId);
+      } else {
+        sendJSON(res, 405, { success: false, error: "Method tidak diizinkan" });
+      }
+      return;
+    }
+    m = pathname.match(USER_DATA_RE);
     if (m) {
       const userId = m[1];
       const collection = m[2];

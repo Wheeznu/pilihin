@@ -108,12 +108,15 @@ class Navbar {
             const logoutBtn = right.querySelector("#logoutBtn");
             if (logoutBtn) {
                 logoutBtn.addEventListener("click", () => {
+                    if (!confirm("Anda yakin ingin keluar?")) return;
                     localStorage.removeItem("pilih-in-session");
                     window.location.href = "/frontend/index.html";
                 });
             }
 
             if (hasSidebar) {
+                const actions = navbar?.querySelector(".navbar__actions");
+                if (actions) actions.remove();
                 Sidebar.init();
             }
         }

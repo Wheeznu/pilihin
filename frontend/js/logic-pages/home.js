@@ -1,4 +1,4 @@
-import { repositories } from "../../../backend/init.js";
+import { repositories, getDbReady } from "../../../backend/init.js";
 import { DOM } from "../utils/dom.js";
 
 class HomePage {
@@ -6,8 +6,9 @@ class HomePage {
         this._init();
     }
 
-    async _init() {
+    async _init(retries = 0) {
         try {
+            await getDbReady();
             const films = repositories.films.findPublished();
             const articles = repositories.articles.findLatest(6);
             const news = repositories.news.findLatest(6);
@@ -18,8 +19,12 @@ class HomePage {
             this._renderNews(news);
             this._bindCardClicks();
         } catch (err) {
-            console.warn("HomePage: data belum siap, retrying...", err);
-            setTimeout(() => this._init(), 500);
+            if (retries < 5) {
+                console.warn("HomePage: data belum siap, retrying...", err);
+                setTimeout(() => this._init(retries + 1), 500);
+            } else {
+                console.error("HomePage: gagal setelah 5 percobaan", err);
+            }
         }
     }
 
@@ -38,6 +43,7 @@ class HomePage {
     }
 
     _genreNames(genreIds) {
+        if (!genreIds) return "";
         const genres = this._getGenres();
         return genreIds
             .map((id) => genres.find((g) => g.id === id)?.name)
@@ -51,7 +57,7 @@ class HomePage {
 
         // Ambil top 5 film terbaik
         const featured = [...films]
-            .sort((a, b) => b.averageRating * 10 + b.watchCount - (a.averageRating * 10 + a.watchCount))
+            .sort((a, b) => (b.averageRating || 0) * 10 + (b.watchCount || 0) - ((a.averageRating || 0) * 10 + (a.watchCount || 0)))
             .slice(0, 5);
 
         if (!featured.length) return;
@@ -70,7 +76,7 @@ class HomePage {
 
     _heroSlideHTML(film, index) {
         const genreNames = this._genreNames(film.genres);
-        const year = new Date(film.releaseDate).getFullYear();
+        const year = film.releaseDate ? new Date(film.releaseDate).getFullYear() : "—";
         const qArr = film.videoQuality || []; const quality = qArr.length > 2 ? qArr[2 + Math.floor(Math.random() * (qArr.length - 2))] : qArr[qArr.length - 1] || 'HD';
 
         return `
@@ -93,7 +99,7 @@ class HomePage {
                     <div class="hero__meta">
                         <span>${year}</span>
                         <span>&bull;</span>
-                        <span>${film.duration} mnt</span>
+                        <span>${film.duration || "—"} mnt</span>
                         <span>&bull;</span>
                         <span>${quality}</span>
                         ${genreNames ? `<span>&bull;</span><span>${genreNames}</span>` : ''}
@@ -188,6 +194,8 @@ class HomePage {
     _filmCardHTML(film) {
         const genreNames = this._genreNames(film.genres);
         const qArr = film.videoQuality || []; const quality = qArr.length > 2 ? qArr[2 + Math.floor(Math.random() * (qArr.length - 2))] : qArr[qArr.length - 1] || "HD";
+        const year = film.releaseDate ? new Date(film.releaseDate).getFullYear() : "—";
+        const rating = film.averageRating || film.rating || "—";
 
         return `
             <div class="film-card" data-film-id="${film.id}">
@@ -195,7 +203,7 @@ class HomePage {
                     <img src="${film.poster}" alt="${film.title}" loading="lazy" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(film.title)}&background=1db954&color=fff&size=400'" />
                     
                     <span class="film-card__rating">
-                        <i data-feather="star" style="width:12px;height:12px;fill:currentColor"></i> ${film.averageRating}
+                        <i data-feather="star" style="width:12px;height:12px;fill:currentColor"></i> ${rating}
                     </span>
                     
                     <span class="film-card__quality">${quality}</span>
@@ -209,8 +217,8 @@ class HomePage {
                 <div class="film-card__info">
                     <h3 class="film-card__title">${film.title}</h3>
                     <div class="film-card__meta">
-                        <span>${new Date(film.releaseDate).getFullYear()}</span>
-                        <span>${film.duration} mnt</span>
+                        <span>${year}</span>
+                        <span>${film.duration || "—"} mnt</span>
                     </div>
                     <p class="film-card__genre">${genreNames}</p>
                 </div>
@@ -243,9 +251,7 @@ class HomePage {
         const date = new Date(item.publishedAt || item.createdAt);
         const dateStr = date.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
         const views = (item.views || 0).toLocaleString('id-ID');
-        const href = type === 'article'
-            ? `/frontend/pages/main/artikel.html#${item.slug || item.id}`
-            : `/frontend/pages/main/berita.html#${item.slug || item.id}`;
+        const href = `/frontend/pages/main/artikel-detail.html?id=${item.slug || item.id}`;
         const fallbackImg = `https://picsum.photos/seed/${item.id}/800/400`;
 
         return `

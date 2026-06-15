@@ -1,31 +1,211 @@
 <!DOCTYPE html>
 <html lang="id">
-    <head>
+  <head>
 <script>document.documentElement.setAttribute("data-theme",localStorage.getItem("pilih-in-theme")||"dark")</script>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Tambah Aktor - Pilih.in</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100..900&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href="../../css/reset.css" />
-        <link rel="stylesheet" href="../../css/design-system.css" />
-        <link rel="stylesheet" href="../../css/components/navbar.css" />
-        <link rel="stylesheet" href="../../css/components/sidebar.css" />
-        <link rel="stylesheet" href="../../css/components/button.css" />
-        <link rel="stylesheet" href="../../css/components/form.css" />
-        <link rel="stylesheet" href="../../css/pages/admin-panel.css" />
-    </head>
-    <body>
-        <div id="navbar-container"></div>
-        <main class="admin-aktor-create-page" id="aktorCreatePage"></main>
-        <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-        <script type="module">
-            import Navbar from "../../js/components/navbar.js";
-            document.addEventListener("DOMContentLoaded", async () => {
-                await Navbar.load("navbar-container");
-                feather.replace();
-            });
-        </script>
-    </body>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tambah Aktor - Pilih.in</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS Core -->
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/design-system.css" />
+
+    <!-- CSS Components -->
+    <link rel="stylesheet" href="../../css/components/navbar.css" />
+    <link rel="stylesheet" href="../../css/components/sidebar.css" />
+    <link rel="stylesheet" href="../../css/components/button.css" />
+
+    <!-- CSS Pages -->
+    <link rel="stylesheet" href="../../css/pages/aktor-create.css" />
+
+    <!-- Feather Icons -->
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  </head>
+  <body>
+    <!-- Navbar Container -->
+    <div id="navbar-container"></div>
+
+    <main class="ac-page">
+      <div class="ac-container">
+        <!-- PAGE HEADER -->
+        <div class="ac-header">
+          <div class="ac-header__eyebrow">
+            <i data-feather="user-plus"></i>
+            Admin Panel
+          </div>
+          <h1>Tambah Aktor Baru</h1>
+          <p>
+            Lengkapi informasi di bawah untuk menambahkan aktor ke database
+            Pilih.in
+          </p>
+        </div>
+
+        <!-- LAYOUT -->
+        <div class="ac-layout">
+          <!-- LEFT: MAIN FORM -->
+          <div>
+            <form id="aktorForm">
+              <!-- Card: Informasi Dasar -->
+              <div class="ac-card">
+                <div class="ac-card__head">
+                  <div class="ac-card__head-icon">
+                    <i data-feather="user"></i>
+                  </div>
+                  <h2>Informasi Dasar</h2>
+                </div>
+                <div class="ac-card__body">
+                  <div class="ac-row full">
+                    <div class="ac-group">
+                      <label>Nama Aktor <span class="req">*</span></label>
+                      <div class="ac-input-wrap">
+                        <i data-feather="user"></i>
+                        <input
+                          type="text"
+                          id="name"
+                          placeholder="Contoh: Joe Taslim, Iko Uwais"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="ac-row full">
+                    <div class="ac-group">
+                      <label>Bio <span class="req">*</span></label>
+                      <div class="ac-input-wrap no-icon">
+                        <textarea
+                          id="bio"
+                          rows="5"
+                          placeholder="Tuliskan biografi singkat aktor..."
+                        ></textarea>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="ac-row">
+                    <div class="ac-group">
+                      <label>Tanggal Lahir <span class="req">*</span></label>
+                      <div class="ac-input-wrap">
+                        <i data-feather="calendar"></i>
+                        <input type="date" id="birthDate" />
+                      </div>
+                    </div>
+                    <div class="ac-group">
+                      <label>Foto Aktor</label>
+                      <div class="ac-poster-drop" id="photoUpload">
+                        <i data-feather="camera"></i>
+                        <p>Klik untuk upload foto</p>
+                        <span>JPG, PNG · Maks. 2 MB</span>
+                      </div>
+                      <input
+                        type="file"
+                        id="photoInput"
+                        accept="image/jpeg,image/png,image/jpg"
+                        style="display: none"
+                      />
+                      <div class="ac-poster-preview" id="photoPreview">
+                        <img id="previewImg" src="" alt="Preview" />
+                        <span class="ac-poster-preview-label"
+                          >Foto berhasil diupload</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- RIGHT COLUMN -->
+          <div class="ac-right">
+            <!-- Tips Pengisian -->
+            <div class="ac-tips">
+              <div class="ac-tips__title">
+                <i data-feather="info"></i>
+                Tips Pengisian
+              </div>
+              <ul>
+                <li>Nama aktor harus sesuai dengan nama asli</li>
+                <li>Bio sebaiknya 2–4 kalimat yang informatif</li>
+                <li>Foto ideal berukuran 1:1 (persegi)</li>
+                <li>Pilih film yang sudah tersedia di database</li>
+              </ul>
+            </div>
+
+            <!-- Film yang Dibintangi + Tombol Batal & Simpan -->
+            <div class="ac-card">
+              <div class="ac-card__head">
+                <div class="ac-card__head-icon">
+                  <i data-feather="film"></i>
+                </div>
+                <h2>Film yang Dibintangi</h2>
+              </div>
+              <div class="ac-card__body">
+                <div class="ac-group">
+                  <label>Pilih Film</label>
+                  <div class="ac-films-box">
+                    <div class="ac-film-tags" id="selectedFilmsList">
+                      <span class="ac-film-empty"
+                        >Belum ada film yang dipilih</span
+                      >
+                    </div>
+                    <div class="ac-film-input-row">
+                      <select id="filmSelect">
+                        <option value="">— Pilih Film —</option>
+                      </select>
+                      <button
+                        type="button"
+                        class="btn-add-film"
+                        id="addFilmBtn"
+                      >
+                        <i data-feather="plus"></i> Tambah
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- TOMBOL BATAL & SIMPAN AKTOR -->
+                <div class="ac-form-actions">
+                  <button
+                    type="button"
+                    class="btn-ac btn-ac--ghost"
+                    id="cancelBtn"
+                  >
+                    <i data-feather="x"></i> Batal
+                  </button>
+                  <button
+                    type="submit"
+                    class="btn-ac btn-ac--primary"
+                    id="submitBtn"
+                    form="aktorForm"
+                  >
+                    <i data-feather="save"></i> Simpan Aktor
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script type="module">
+      import Navbar from "../../js/components/navbar.js";
+
+      // Initialize Navbar & Sidebar
+      document.addEventListener("DOMContentLoaded", async () => {
+        await Navbar.load("navbar-container");
+          if (typeof feather !== "undefined") feather.replace();
+      });
+    </script>
+
+    <script type="module" src="../../js/logic-pages/aktor-create.js"></script>
+  </body>
 </html>

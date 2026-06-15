@@ -1,5 +1,6 @@
 import { DOM } from "../utils/dom.js";
 import { UserData } from "../utils/user-data.js";
+import { getDbReady } from "../../../backend/init.js";
 
 const GENRE_MAP = {
     "genre-001": "Comedy",
@@ -22,6 +23,7 @@ class DetailPage {
 
     async _init() {
         try {
+            await getDbReady();
             this._db = this._getDb();
             this._film = this._getFilmFromHash();
             if (!this._film) {

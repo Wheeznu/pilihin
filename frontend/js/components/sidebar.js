@@ -1,9 +1,27 @@
 const ADMIN_LINKS = [
   {
+    href: "/frontend/pages/admin/profile.html",
+    icon: "user",
+    label: "Profil",
+    isActive: (path) => path.includes("/admin/profile.html")
+  },
+  {
     href: "/frontend/pages/admin/konten.html",
     icon: "film",
     label: "Kelola Konten",
     isActive: (path) => path.includes("/admin/konten.html")
+  },
+  {
+    href: "/frontend/pages/admin/artikel-create.html",
+    icon: "plus-circle",
+    label: "Tambah Artikel",
+    isActive: (path) => path.includes("/admin/artikel-create.html")
+  },
+  {
+    href: "/frontend/pages/admin/artikel-edit.html",
+    icon: "edit-3",
+    label: "Edit Artikel",
+    isActive: (path) => path.includes("/admin/artikel-edit.html")
   },
   {
     href: "/frontend/pages/admin/film-create.html",
@@ -66,12 +84,6 @@ const ADMIN_LINKS = [
     isActive: (path) => path.includes("/admin/faq.html")
   },
   {
-    href: "/frontend/pages/admin/laporan.html",
-    icon: "file-text",
-    label: "Laporan",
-    isActive: (path) => path.includes("/admin/laporan.html")
-  },
-  {
     href: "/frontend/pages/admin/notifications.html",
     icon: "send",
     label: "Kirim Notifikasi",
@@ -121,6 +133,12 @@ const MANAGER_LINKS = [
     icon: "message-square",
     label: "Ulasan Film",
     isActive: (path) => path.includes("/manager/reviews.html")
+  },
+  {
+    href: "/frontend/pages/manager/laporan.html",
+    icon: "bar-chart-2",
+    label: "Laporan",
+    isActive: (path) => path.includes("/manager/laporan.html")
   }
 ];
 
@@ -226,6 +244,7 @@ class Sidebar {
 
     const logoutBtn = document.getElementById("sidebarLogoutBtn");
     logoutBtn?.addEventListener("click", () => {
+      if (!confirm("Anda yakin ingin keluar?")) return;
       localStorage.removeItem("pilih-in-session");
       window.location.href = "/frontend/index.html";
     });

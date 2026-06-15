@@ -1,31 +1,130 @@
 <!DOCTYPE html>
 <html lang="id">
-    <head>
+  <head>
 <script>document.documentElement.setAttribute("data-theme",localStorage.getItem("pilih-in-theme")||"dark")</script>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Kelola Konten - Pilih.in</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100..900&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href="../../css/reset.css" />
-        <link rel="stylesheet" href="../../css/design-system.css" />
-        <link rel="stylesheet" href="../../css/components/navbar.css" />
-        <link rel="stylesheet" href="../../css/components/sidebar.css" />
-        <link rel="stylesheet" href="../../css/components/button.css" />
-        <link rel="stylesheet" href="../../css/components/form.css" />
-        <link rel="stylesheet" href="../../css/pages/admin-panel.css" />
-    </head>
-    <body>
-        <div id="navbar-container"></div>
-        <main class="admin-konten-page" id="kontenPage"></main>
-        <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-        <script type="module">
-            import Navbar from "../../js/components/navbar.js";
-            document.addEventListener("DOMContentLoaded", async () => {
-                await Navbar.load("navbar-container");
-                feather.replace();
-            });
-        </script>
-    </body>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kelola Konten - Pilih.in</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/design-system.css" />
+    <link rel="stylesheet" href="../../css/components/navbar.css" />
+    <link rel="stylesheet" href="../../css/components/sidebar.css" />
+    <link rel="stylesheet" href="../../css/components/button.css" />
+    <link rel="stylesheet" href="../../css/pages/konten.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  </head>
+  <body>
+    <div id="navbar-container"></div>
+
+    <main class="ak-page">
+      <div class="ak-container">
+        <!-- HEADER -->
+        <div class="ak-header">
+          <div class="ak-header__left">
+            <div class="ak-header__eyebrow">
+              <i data-feather="layers"></i>
+              Admin Panel
+            </div>
+            <h1>Kelola Konten</h1>
+            <p>Kelola semua konten yang ada di platform Pilih.in</p>
+          </div>
+        </div>
+
+        <!-- STATS OVERVIEW -->
+        <div class="ak-stats" id="statsContainer"></div>
+
+        <!-- TAB FILTERS -->
+        <div class="ak-tabs" id="tabFilters">
+          <button class="ak-tab ak-tab--active" data-type="film">
+            <i data-feather="film"></i> Film
+          </button>
+          <button class="ak-tab" data-type="aktor">
+            <i data-feather="users"></i> Aktor
+          </button>
+          <button class="ak-tab" data-type="sutradara">
+            <i data-feather="user"></i> Sutradara
+          </button>
+          <button class="ak-tab" data-type="artikel">
+            <i data-feather="file-text"></i> Artikel &amp; Berita
+          </button>
+        </div>
+
+        <!-- SEARCH BAR -->
+        <div class="ak-searchbar" id="searchBar">
+          <div class="ak-search-wrap">
+            <i data-feather="search"></i>
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Cari berdasarkan judul atau ID..."
+            />
+          </div>
+          <button class="ak-reset-btn" id="resetBtn">
+            <i data-feather="refresh-cw"></i> Reset
+          </button>
+        </div>
+
+        <!-- TABLE -->
+        <div class="ak-table-wrap">
+          <div class="ak-table-scroll">
+            <table class="ak-table">
+              <thead id="tableHead"></thead>
+              <tbody id="tableBody">
+                <tr>
+                  <td colspan="8" style="padding: 60px; text-align: center; color: var(--text-3); font-size: 13px;">
+                    Memuat data...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- PAGINATION -->
+        <div class="ak-pagination" id="pagination"></div>
+      </div>
+    </main>
+
+    <!-- MODAL HAPUS -->
+    <div class="ak-modal-overlay" id="deleteModal">
+      <div class="ak-modal">
+        <div class="ak-modal__icon">
+          <i data-feather="alert-triangle"></i>
+        </div>
+        <h2>Hapus Konten?</h2>
+        <p>
+          Apakah Anda yakin ingin menghapus
+          <strong id="deleteItemTitle"></strong>?<br />Data yang dihapus tidak
+          dapat dikembalikan.
+        </p>
+        <div class="ak-modal__footer">
+          <button class="btn-modal btn-modal--ghost" id="cancelDeleteBtn">
+            Batal
+          </button>
+          <button class="btn-modal btn-modal--danger" id="confirmDeleteBtn">
+            <i data-feather="trash-2"></i> Ya, Hapus
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      import Navbar from "../../js/components/navbar.js";
+
+      document.addEventListener("DOMContentLoaded", async () => {
+        await Navbar.load("navbar-container");
+        if (typeof feather !== "undefined") feather.replace();
+      });
+    </script>
+    <script type="module" src="../../js/logic-pages/konten.js"></script>
+  </body>
 </html>

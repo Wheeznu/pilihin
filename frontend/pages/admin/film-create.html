@@ -1,31 +1,326 @@
 <!DOCTYPE html>
 <html lang="id">
-    <head>
+  <head>
 <script>document.documentElement.setAttribute("data-theme",localStorage.getItem("pilih-in-theme")||"dark")</script>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Tambah Film - Pilih.in</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100..900&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href="../../css/reset.css" />
-        <link rel="stylesheet" href="../../css/design-system.css" />
-        <link rel="stylesheet" href="../../css/components/navbar.css" />
-        <link rel="stylesheet" href="../../css/components/sidebar.css" />
-        <link rel="stylesheet" href="../../css/components/button.css" />
-        <link rel="stylesheet" href="../../css/components/form.css" />
-        <link rel="stylesheet" href="../../css/pages/admin-panel.css" />
-    </head>
-    <body>
-        <div id="navbar-container"></div>
-        <main class="admin-film-create-page" id="filmCreatePage"></main>
-        <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-        <script type="module">
-            import Navbar from "../../js/components/navbar.js";
-            document.addEventListener("DOMContentLoaded", async () => {
-                await Navbar.load("navbar-container");
-                feather.replace();
-            });
-        </script>
-    </body>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tambah Film - Pilih.in</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS Core -->
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/design-system.css" />
+
+    <!-- CSS Components -->
+    <link rel="stylesheet" href="../../css/components/navbar.css" />
+    <link rel="stylesheet" href="../../css/components/sidebar.css" />
+    <link rel="stylesheet" href="../../css/components/button.css" />
+
+    <!-- CSS Pages -->
+    <link rel="stylesheet" href="../../css/pages/film-create.css" />
+
+    <!-- Feather Icons -->
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  </head>
+  <body>
+    <!-- Navbar Container -->
+    <div id="navbar-container"></div>
+
+    <main class="tf-page">
+      <div class="tf-container">
+        <!-- PAGE HEADER -->
+        <div class="tf-header">
+          <div class="tf-header__eyebrow">
+            <i data-feather="video"></i>
+            Admin Panel
+          </div>
+          <h1>Tambah Film Baru</h1>
+          <p>
+            Lengkapi informasi di bawah untuk menambahkan film ke katalog
+            Pilih.in
+          </p>
+        </div>
+
+        <!-- LAYOUT -->
+        <div class="tf-layout">
+          <!-- LEFT: MAIN FORM -->
+          <div>
+            <form id="filmForm">
+              <!-- Card: Info Utama -->
+              <div class="tf-card tf-spacer">
+                <div class="tf-card__head">
+                  <div class="tf-card__head-icon">
+                    <i data-feather="film"></i>
+                  </div>
+                  <h2>Informasi Utama</h2>
+                </div>
+                <div class="tf-card__body">
+                  <div class="tf-row full">
+                    <div class="tf-group">
+                      <label>Judul Film <span class="req">*</span></label>
+                      <div class="tf-input-wrap">
+                        <i data-feather="film"></i>
+                        <input
+                          type="text"
+                          id="title"
+                          placeholder="Contoh: Gundala, KKN di Desa Penari..."
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="tf-row full">
+                    <div class="tf-group">
+                      <label>Sinopsis <span class="req">*</span></label>
+                      <div class="tf-input-wrap no-icon">
+                        <textarea
+                          id="sinopsis"
+                          rows="5"
+                          placeholder="Tuliskan sinopsis singkat yang menarik perhatian penonton..."
+                        ></textarea>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="tf-row">
+                    <div class="tf-group">
+                      <label>Release Date <span class="req">*</span></label>
+                      <div class="tf-input-wrap">
+                        <i data-feather="calendar"></i>
+                        <input type="date" id="releaseDate" />
+                      </div>
+                    </div>
+                    <div class="tf-group">
+                      <label>Rating <span class="req">*</span></label>
+                      <div class="tf-stars" id="starContainer">
+                        <i data-feather="star" class="star-btn"></i>
+                        <i data-feather="star" class="star-btn"></i>
+                        <i data-feather="star" class="star-btn"></i>
+                        <i data-feather="star" class="star-btn"></i>
+                        <i data-feather="star" class="star-btn"></i>
+                      </div>
+                      <div class="tf-rating-input-row">
+                        <input type="number" class="tf-rating-input" id="ratingInput" min="1" max="10" placeholder="1-10" />
+                        <span class="tf-rating-max">/ 10</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card: Link & Media -->
+              <div class="tf-card tf-spacer">
+                <div class="tf-card__head">
+                  <div class="tf-card__head-icon">
+                    <i data-feather="link"></i>
+                  </div>
+                  <h2>Link Media</h2>
+                </div>
+                <div class="tf-card__body">
+                  <div class="tf-row">
+                    <div class="tf-group">
+                      <label>Link Trailer <span class="req">*</span></label>
+                      <div class="tf-input-wrap">
+                        <i data-feather="youtube"></i>
+                        <input
+                          type="url"
+                          id="trailerLink"
+                          placeholder="https://youtube.com/..."
+                        />
+                      </div>
+                    </div>
+                    <div class="tf-group">
+                      <label>Link Video Film <span class="req">*</span></label>
+                      <div class="tf-input-wrap">
+                        <i data-feather="play-circle"></i>
+                        <input
+                          type="url"
+                          id="videoLink"
+                          placeholder="https://..."
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card: Pemeran -->
+              <div class="tf-card tf-spacer">
+                <div class="tf-card__head">
+                  <div class="tf-card__head-icon">
+                    <i data-feather="users"></i>
+                  </div>
+                  <h2>Pemeran</h2>
+                </div>
+                <div class="tf-card__body">
+                  <div class="tf-group">
+                    <label>Aktor / Pemeran</label>
+                    <div class="tf-actors-box">
+                      <div class="tf-actor-tags" id="actorsList">
+                        <span class="tf-actor-empty"
+                          >Belum ada pemeran ditambahkan</span
+                        >
+                      </div>
+                      <div class="tf-actor-input-row">
+                        <input
+                          type="text"
+                          id="actorInput"
+                          placeholder="Ketik nama aktor, tekan Enter atau klik Tambah..."
+                        />
+                        <button
+                          type="button"
+                          class="btn-add-actor"
+                          id="addActorBtn"
+                        >
+                          <i data-feather="plus"></i> Tambah
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Form Actions -->
+              <div class="tf-form-actions">
+                <button
+                  type="button"
+                  class="btn-tf btn-tf--ghost"
+                  id="cancelBtn"
+                >
+                  <i data-feather="x"></i> Batal
+                </button>
+                <button
+                  type="submit"
+                  class="btn-tf btn-tf--primary"
+                  id="submitBtn"
+                >
+                  <i data-feather="save"></i> Simpan Film
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- RIGHT COLUMN -->
+          <div class="tf-right">
+            <!-- Progress -->
+            <div class="tf-progress" id="progressCard">
+              <div class="tf-progress__label">
+                <span>Kelengkapan Form</span>
+                <span id="progressPct">0%</span>
+              </div>
+              <div class="tf-progress__bar-bg">
+                <div class="tf-progress__bar-fill" id="progressBar"></div>
+              </div>
+              <div class="tf-progress__fields">
+                <div class="tf-progress__field" id="pf-title">
+                  <div class="tf-progress__field-dot"></div>
+                  Judul Film
+                </div>
+                <div class="tf-progress__field" id="pf-sinopsis">
+                  <div class="tf-progress__field-dot"></div>
+                  Sinopsis
+                </div>
+                <div class="tf-progress__field" id="pf-releaseDate">
+                  <div class="tf-progress__field-dot"></div>
+                  Release Date
+                </div>
+                <div class="tf-progress__field" id="pf-rating">
+                  <div class="tf-progress__field-dot"></div>
+                  Rating
+                </div>
+                <div class="tf-progress__field" id="pf-trailerLink">
+                  <div class="tf-progress__field-dot"></div>
+                  Link Trailer
+                </div>
+                <div class="tf-progress__field" id="pf-videoLink">
+                  <div class="tf-progress__field-dot"></div>
+                  Link Video
+                </div>
+                <div class="tf-progress__field" id="pf-poster">
+                  <div class="tf-progress__field-dot"></div>
+                  Poster Film
+                </div>
+              </div>
+            </div>
+
+            <!-- Poster Upload -->
+            <div class="tf-card">
+              <div class="tf-card__head">
+                <div class="tf-card__head-icon">
+                  <i data-feather="image"></i>
+                </div>
+                <h2>Poster Film</h2>
+              </div>
+              <div class="tf-card__body">
+                <div class="ef-poster-toggle" id="posterToggle">
+                  <button type="button" class="ef-poster-toggle__btn ef-poster-toggle__btn--active" data-mode="link">Link URL</button>
+                  <button type="button" class="ef-poster-toggle__btn" data-mode="file">Upload File</button>
+                </div>
+                <div id="posterLinkMode">
+                  <div class="tf-input-wrap">
+                    <i data-feather="image"></i>
+                    <input type="url" id="posterUrl" placeholder="https://example.com/poster.jpg" />
+                  </div>
+                </div>
+                <div id="posterFileMode" style="display:none;">
+                  <div class="tf-poster-drop" id="posterDropArea">
+                    <i data-feather="upload-cloud"></i>
+                    <p>Klik atau drag & drop untuk upload poster</p>
+                    <span>JPG, PNG · Maks. 2 MB</span>
+                  </div>
+                  <input
+                    type="file"
+                    id="posterInput"
+                    accept="image/jpeg,image/png,image/jpg"
+                    style="display: none"
+                  />
+                  <div class="tf-poster-preview" id="posterPreview" style="display:none;">
+                    <img id="previewImg" src="" alt="Poster Preview" />
+                    <span class="tf-poster-preview-label">Poster berhasil diupload</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tips -->
+            <div class="tf-tips">
+              <div class="tf-tips__title">
+                <i data-feather="info"></i>
+                Tips Pengisian
+              </div>
+              <ul>
+                <li>
+                  Sinopsis sebaiknya 2–4 kalimat yang menarik minat penonton
+                </li>
+                <li>
+                  Gunakan link YouTube untuk trailer agar bisa diputar langsung
+                </li>
+                <li>Poster ideal berukuran 300×450px dengan rasio 2:3</li>
+                <li>Rating berdasarkan skala 1–5 bintang (×2 = skor /10)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script type="module">
+      import Navbar from "../../js/components/navbar.js";
+
+      // Initialize Navbar & Sidebar
+      document.addEventListener("DOMContentLoaded", async () => {
+        await Navbar.load("navbar-container");
+          if (typeof feather !== "undefined") feather.replace();
+      });
+    </script>
+
+    <script type="module" src="../../js/logic-pages/film-create.js"></script>
+  </body>
 </html>

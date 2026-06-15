@@ -1,34 +1,201 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
-    <head>
+  <head>
 <script>document.documentElement.setAttribute("data-theme",localStorage.getItem("pilih-in-theme")||"dark")</script>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Kelola FAQ - Pilih.in</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100..900&display=swap"
-            rel="stylesheet"
-        />
-        <link rel="stylesheet" href="../../css/reset.css" />
-        <link rel="stylesheet" href="../../css/design-system.css" />
-        <link rel="stylesheet" href="../../css/components/navbar.css" />
-        <link rel="stylesheet" href="../../css/components/sidebar.css" />
-        <link rel="stylesheet" href="../../css/components/button.css" />
-        <link rel="stylesheet" href="../../css/components/form.css" />
-        <link rel="stylesheet" href="../../css/pages/admin-panel.css" />
-    </head>
-    <body>
-        <div id="navbar-container"></div>
-        <main class="admin-faq-page" id="adminFaqPage"></main>
-        <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-        <script type="module">
-            import Navbar from "../../js/components/navbar.js";
-            document.addEventListener("DOMContentLoaded", async () => {
-                await Navbar.load("navbar-container");
-                feather.replace();
-            });
-        </script>
-    </body>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kelola FAQ - Pilih.in</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS Core -->
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/design-system.css" />
+
+    <!-- CSS Components -->
+    <link rel="stylesheet" href="../../css/components/navbar.css" />
+    <link rel="stylesheet" href="../../css/components/sidebar.css" />
+    <link rel="stylesheet" href="../../css/components/button.css" />
+
+    <!-- CSS Pages -->
+    <link rel="stylesheet" href="../../css/pages/faq.css" />
+
+    <!-- Feather Icons -->
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  </head>
+  <body>
+    <!-- Navbar Container -->
+    <div id="navbar-container"></div>
+
+    <main class="fq-page">
+      <div class="fq-container">
+        <!-- HEADER -->
+        <div class="fq-header">
+          <div>
+            <div class="fq-header__eyebrow">
+              <i data-feather="help-circle"></i>
+              Admin Panel
+            </div>
+            <h1>Kelola FAQ</h1>
+            <p>
+              Kelola semua pertanyaan yang sering diajukan di platform Pilih.in
+            </p>
+          </div>
+          <button class="btn-add-faq" id="addFaqBtn">
+            <i data-feather="plus"></i> Tambah FAQ
+          </button>
+        </div>
+
+        <!-- STATS -->
+        <div class="fq-stats">
+          <div class="fq-stat">
+            <div class="fq-stat__icon"><i data-feather="help-circle"></i></div>
+            <div>
+              <div class="fq-stat__label">Total FAQ</div>
+              <div class="fq-stat__num" id="totalFaqs">0</div>
+            </div>
+          </div>
+          <div class="fq-stat">
+            <div class="fq-stat__icon"><i data-feather="check-circle"></i></div>
+            <div>
+              <div class="fq-stat__label">Published</div>
+              <div class="fq-stat__num" id="publishedFaqs">0</div>
+            </div>
+          </div>
+          <div class="fq-stat">
+            <div class="fq-stat__icon"><i data-feather="calendar"></i></div>
+            <div>
+              <div class="fq-stat__label">Bulan Ini</div>
+              <div class="fq-stat__num" id="monthFaqs">0</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SEARCH BAR -->
+        <div class="fq-searchbar">
+          <div class="fq-search-wrap">
+            <i data-feather="search"></i>
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Cari berdasarkan pertanyaan atau jawaban..."
+            />
+          </div>
+          <button class="fq-reset-btn" id="resetBtn">
+            <i data-feather="refresh-cw"></i> Reset
+          </button>
+        </div>
+
+        <!-- TABLE -->
+        <div class="fq-table-wrap">
+          <div class="fq-table-scroll">
+            <table class="fq-table">
+              <thead>
+                <tr>
+                  <th class="td-num">#</th>
+                  <th>Pertanyaan</th>
+                  <th>Jawaban</th>
+                  <th>Dibuat</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="faqTableBody">
+                <tr>
+                  <td
+                    colspan="5"
+                    style="
+                      padding: 60px;
+                      text-align: center;
+                      color: var(--text-muted);
+                      font-size: 13px;
+                    "
+                  >
+                    Memuat data...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- FORM MODAL (Tambah / Edit) -->
+    <div class="fq-modal-overlay" id="formModal">
+      <div class="fq-form-modal">
+        <div class="fq-form-modal__head">
+          <div class="fq-form-modal__head-icon">
+            <i data-feather="edit-3"></i>
+          </div>
+          <h2 id="modalTitle">Tambah FAQ Baru</h2>
+        </div>
+        <div class="fq-form-modal__body">
+          <div class="fq-form-group">
+            <label>Pertanyaan <span class="req">*</span></label>
+            <input
+              type="text"
+              id="faqQuestion"
+              placeholder="Contoh: Bagaimana cara mendaftar di Pilih.in?"
+            />
+          </div>
+          <div class="fq-form-group">
+            <label>Jawaban <span class="req">*</span></label>
+            <textarea
+              id="faqAnswer"
+              rows="5"
+              placeholder="Tuliskan jawaban yang jelas dan informatif..."
+            ></textarea>
+          </div>
+        </div>
+        <div class="fq-form-modal__foot">
+          <button class="btn-modal btn-modal--ghost" id="closeModalBtn">
+            Batal
+          </button>
+          <button class="btn-modal btn-modal--primary" id="saveFaqBtn">
+            <i data-feather="save"></i> Simpan
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DELETE MODAL -->
+    <div class="fq-modal-overlay" id="deleteModal">
+      <div class="fq-delete-modal">
+        <div class="fq-delete-modal__icon">
+          <i data-feather="alert-triangle"></i>
+        </div>
+        <h2>Hapus FAQ?</h2>
+        <p>
+          Apakah Anda yakin ingin menghapus FAQ ini?<br />Data yang dihapus
+          tidak dapat dikembalikan.
+        </p>
+        <div class="fq-delete-modal__foot">
+          <button class="btn-modal btn-modal--ghost" id="cancelDeleteBtn">
+            Batal
+          </button>
+          <button class="btn-modal btn-modal--danger" id="confirmDeleteBtn">
+            <i data-feather="trash-2"></i> Ya, Hapus
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      import Navbar from "../../js/components/navbar.js";
+
+      // Initialize Navbar & Sidebar
+      document.addEventListener("DOMContentLoaded", async () => {
+        await Navbar.load("navbar-container");
+          if (typeof feather !== "undefined") feather.replace();
+      });
+    </script>
+
+    <script type="module" src="../../js/logic-pages/faq.js"></script>
+  </body>
 </html>

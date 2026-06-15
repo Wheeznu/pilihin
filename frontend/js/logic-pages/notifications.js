@@ -1,4 +1,5 @@
 import { DOM } from "../utils/dom.js";
+import { getDbReady } from "../../../backend/init.js";
 
 class NotifikasiPage {
     constructor() {
@@ -8,6 +9,7 @@ class NotifikasiPage {
 
     async _init() {
         try {
+            await getDbReady();
             this._loadNotifications();
             this._render();
         } catch (err) {

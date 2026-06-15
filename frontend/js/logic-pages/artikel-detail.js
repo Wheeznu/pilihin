@@ -1,4 +1,5 @@
 import { DOM } from "../utils/dom.js";
+import { getDbReady } from "../../../backend/init.js";
 
 class ArtikelDetail {
     constructor() {
@@ -8,6 +9,7 @@ class ArtikelDetail {
 
     async _init() {
         try {
+            await getDbReady();
             this._item = this._findItem();
             if (!this._item) {
                 this._renderError();
@@ -39,14 +41,14 @@ class ArtikelDetail {
         if (!db) return null;
 
         const article = (db.articles || []).find(
-            (a) => a.slug === id || a.id === id
+            (a) => (a.slug === id || a.id === id) && a.status === "published"
         );
         if (article) {
             return { ...article, _type: "artikel" };
         }
 
         const newsItem = (db.news || []).find(
-            (n) => n.slug === id || n.id === id
+            (n) => (n.slug === id || n.id === id) && n.status === "published"
         );
         if (newsItem) {
             return { ...newsItem, _type: "berita" };

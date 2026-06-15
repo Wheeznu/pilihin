@@ -1,4 +1,5 @@
 import { DOM } from "../utils/dom.js";
+import { getDbReady } from "../../../backend/init.js";
 
 const GENRE_MAP = {
     "genre-001": "Comedy",
@@ -17,6 +18,7 @@ class DirectorPage {
 
     async _init() {
         try {
+            await getDbReady();
             this._director = await this._findDirector();
             if (!this._director) {
                 this._renderError();

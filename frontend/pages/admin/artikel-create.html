@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+<script>document.documentElement.setAttribute("data-theme",localStorage.getItem("pilih-in-theme")||"dark")</script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tambah Artikel / Berita - Pilih.in</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/design-system.css" />
+    <link rel="stylesheet" href="../../css/components/navbar.css" />
+    <link rel="stylesheet" href="../../css/components/sidebar.css" />
+    <link rel="stylesheet" href="../../css/components/button.css" />
+    <link rel="stylesheet" href="../../css/pages/artikel-admin.css" />
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  </head>
+  <body>
+    <div id="navbar-container"></div>
+
+    <main class="ar-edit-page">
+      <div class="ar-edit-container">
+        <div class="ar-edit-header">
+          <div class="ar-edit-header__eyebrow"><i data-feather="plus-circle"></i> Admin Panel</div>
+          <h1>Tambah Artikel / Berita</h1>
+          <p>Buat artikel atau berita baru untuk platform Pilih.in</p>
+        </div>
+
+        <div class="ar-edit-layout">
+          <div>
+            <form id="artikelForm">
+              <div class="ar-edit-card">
+                <div class="ar-edit-card__head">
+                  <div class="ar-edit-card__head-icon"><i data-feather="file-text"></i></div>
+                  <h2>Informasi Konten</h2>
+                </div>
+                <div class="ar-edit-card__body">
+                  <div class="ar-edit-row">
+                    <div class="ar-edit-group">
+                      <label>Tipe Konten</label>
+                      <div class="ar-edit-input-wrap">
+                        <select id="itemType">
+                          <option value="artikel">Artikel</option>
+                          <option value="berita">Berita</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="ar-edit-row full">
+                    <div class="ar-edit-group">
+                      <label>Judul <span class="req">*</span></label>
+                      <div class="ar-edit-input-wrap">
+                        <input type="text" id="title" placeholder="Judul artikel / berita" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="ar-edit-row">
+                    <div class="ar-edit-group">
+                      <label>Slug</label>
+                      <div class="ar-edit-input-wrap">
+                        <input type="text" id="slug" placeholder="judul-artikel" />
+                      </div>
+                    </div>
+                    <div class="ar-edit-group">
+                      <label>Kategori</label>
+                      <div class="ar-edit-input-wrap">
+                        <input type="text" id="category" placeholder="Film, Review, dll" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="ar-edit-row full">
+                    <div class="ar-edit-group">
+                      <label>Cover Image URL</label>
+                      <div class="ar-edit-input-wrap">
+                        <input type="url" id="coverImage" placeholder="https://example.com/cover.jpg" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="ar-edit-row full">
+                    <div class="ar-edit-group">
+                      <label>Excerpt</label>
+                      <div class="ar-edit-input-wrap no-icon">
+                        <textarea id="excerpt" rows="3" placeholder="Ringkasan singkat konten..."></textarea>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="ar-edit-row full">
+                    <div class="ar-edit-group">
+                      <label>Konten <span class="req">*</span></label>
+                      <div class="ar-edit-input-wrap no-icon">
+                        <textarea id="content" rows="12" placeholder="Tulis konten di sini..."></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div class="ar-edit-right">
+            <div class="ar-edit-tips">
+              <div class="ar-edit-tips__title"><i data-feather="info"></i> Tips Pengisian</div>
+              <ul>
+                <li>Judul harus menarik dan informatif</li>
+                <li>Slug akan dibuat otomatis dari judul jika dikosongkan</li>
+                <li>Gunakan gambar cover dengan resolusi 1200x630 px</li>
+                <li>Excerpt sebaiknya 1-2 kalimat deskriptif</li>
+              </ul>
+            </div>
+
+            <div class="ar-edit-card">
+              <div class="ar-edit-card__body">
+                <div class="ar-edit-form-actions">
+                  <button type="button" class="btn-ar btn-ar--ghost" id="cancelBtn">
+                    <i data-feather="x"></i> Batal
+                  </button>
+                  <button type="submit" class="btn-ar btn-ar--primary" id="submitBtn" form="artikelForm">
+                    <i data-feather="save"></i> Simpan
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script type="module">
+      import Navbar from "../../js/components/navbar.js";
+      document.addEventListener("DOMContentLoaded", async () => {
+        await Navbar.load("navbar-container");
+        if (typeof feather !== "undefined") feather.replace();
+      });
+    </script>
+    <script type="module" src="../../js/logic-pages/artikel-admin-create.js"></script>
+  </body>
+</html>

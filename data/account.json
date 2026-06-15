@@ -1,144 +1,170 @@
 {
-  "users": [
-    {
-      "id": "user-001",
-      "username": "admin",
-      "email": "admin@pilih.in",
-      "password": "admin#1234",
-      "role": "admin",
-      "profilePhoto": "https://ui-avatars.com/api/?name=Admin&background=e50914&color=fff",
-      "status": "active",
-      "subscriptionTier": "tier-001",
-      "subscriptionExpiry": null,
-      "preferences": {
-        "theme": "dark",
-        "language": "id",
-        "notifications": true,
-        "privateProfile": false
-      },
-      "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2024-01-01T00:00:00.000Z",
-      "lastLogin": null
-    },
-    {
-      "id": "user-002",
-      "username": "manager",
-      "email": "manager@pilih.in",
-      "password": "manager123",
-      "role": "manager",
-      "profilePhoto": "https://ui-avatars.com/api/?name=Manager&background=ff6600&color=fff",
-      "status": "active",
-      "subscriptionTier": "tier-001",
-      "subscriptionExpiry": null,
-      "preferences": {
-        "theme": "dark",
-        "language": "id",
-        "notifications": true,
-        "privateProfile": false
-      },
-      "createdAt": "2024-01-01T00:00:00.000Z",
-      "updatedAt": "2024-01-01T00:00:00.000Z",
-      "lastLogin": null
-    },
-    {
-      "id": "user-1780080114623-d803fa",
-      "username": "hermawan",
-      "email": "hermawan@gmail.com",
-      "password": "admin#123",
-      "role": "user",
-      "status": "active",
-      "profilePhoto": "https://ui-avatars.com/api/?name=hermawan&background=1db954&color=fff",
-      "subscriptionTier": "tier-002",
-      "subscriptionExpiry": null,
-      "preferences": {
-        "theme": "dark",
-        "language": "id",
-        "notifications": true,
-        "privateProfile": false
-      },
-      "createdAt": "2026-05-29T18:41:54.623Z",
-      "updatedAt": "2026-05-29T18:41:54.623Z",
-      "lastLogin": null
-    },
-    {
-      "id": "user-1780080993352-9c7ccd",
-      "username": "siti",
-      "email": "siti@gmail.com",
-      "password": "111111",
-      "role": "user",
-      "status": "active",
-      "profilePhoto": "https://ui-avatars.com/api/?name=siti&background=1db954&color=fff",
-      "subscriptionTier": "tier-002",
-      "subscriptionExpiry": null,
-      "preferences": {
-        "theme": "dark",
-        "language": "id",
-        "notifications": true,
-        "privateProfile": false
-      },
-      "createdAt": "2026-05-29T18:56:33.352Z",
-      "updatedAt": "2026-05-29T18:56:33.352Z",
-      "lastLogin": null
-    },
-    {
-      "id": "user-1780821109229-036bf4",
-      "username": "budi_gaming",
-      "email": "budi@gmail.com",
-      "password": "111111",
-      "role": "user",
-      "status": "active",
-      "profilePhoto": "https://ui-avatars.com/api/?name=budi_gaming&background=1db954&color=fff",
-      "subscriptionTier": "tier-002",
-      "subscriptionExpiry": null,
-      "preferences": {
-        "theme": "dark",
-        "language": "id",
-        "notifications": true,
-        "privateProfile": false
-      },
-      "createdAt": "2026-06-07T08:31:49.229Z",
-      "updatedAt": "2026-06-07T08:31:49.229Z",
-      "lastLogin": null
-    },
-    {
-      "id": "user-1781441020822-92e154",
-      "username": "achsony1",
-      "email": "achsony@gmail.com",
-      "password": "111111",
-      "role": "user",
-      "status": "active",
-      "profilePhoto": "https://ui-avatars.com/api/?name=achsony1&background=1db954&color=fff",
-      "subscriptionTier": "tier-002",
-      "subscriptionExpiry": null,
-      "preferences": {
-        "theme": "dark",
-        "language": "id",
-        "notifications": true,
-        "privateProfile": false
-      },
-      "createdAt": "2026-06-14T12:43:40.822Z",
-      "updatedAt": "2026-06-14T12:43:40.822Z",
-      "lastLogin": null
-    },
-    {
-      "id": "user-1781441057369-55c950",
-      "username": "achsony1",
-      "email": "1@gmail.com",
-      "password": "1111111",
-      "role": "user",
-      "status": "active",
-      "profilePhoto": "https://ui-avatars.com/api/?name=achsony1&background=1db954&color=fff",
-      "subscriptionTier": "tier-002",
-      "subscriptionExpiry": null,
-      "preferences": {
-        "theme": "dark",
-        "language": "id",
-        "notifications": true,
-        "privateProfile": false
-      },
-      "createdAt": "2026-06-14T12:44:17.369Z",
-      "updatedAt": "2026-06-14T12:44:17.369Z",
-      "lastLogin": null
-    }
-  ]
+    "users": [
+        {
+            "id": "user-001",
+            "username": "admin",
+            "fullName": "Admin Pilih.in",
+            "email": "admin@pilih.in",
+            "password": "admin#1234",
+            "role": "admin",
+            "profilePhoto": "https://ui-avatars.com/api/?name=Admin&background=e50914&color=fff",
+            "phone": "+6289999999999",
+            "bio": "Administrator platform streaming Pilih.in",
+            "status": "active",
+            "subscriptionTier": "tier-001",
+            "subscriptionExpiry": null,
+            "preferences": {
+                "theme": "dark",
+                "language": "id",
+                "notifications": true,
+                "privateProfile": false
+            },
+            "createdAt": "2024-01-01T00:00:00.000Z",
+            "updatedAt": "2024-01-01T00:00:00.000Z",
+            "lastLogin": null
+        },
+        {
+            "id": "user-002",
+            "username": "manager",
+            "email": "manager@pilih.in",
+            "password": "manager123",
+            "role": "manager",
+            "profilePhoto": "https://ui-avatars.com/api/?name=Manager&background=ff6600&color=fff",
+            "status": "active",
+            "subscriptionTier": "tier-001",
+            "subscriptionExpiry": null,
+            "preferences": {
+                "theme": "dark",
+                "language": "id",
+                "notifications": true,
+                "privateProfile": false
+            },
+            "createdAt": "2024-01-01T00:00:00.000Z",
+            "updatedAt": "2024-01-01T00:00:00.000Z",
+            "lastLogin": null
+        },
+        {
+            "id": "user-003",
+            "username": "Wisnu",
+            "fullName": "Wisnu",
+            "email": "hacker404@pilih.in",
+            "password": "hacker404",
+            "role": "admin",
+            "profilePhoto": "https://i.pinimg.com/736x/82/17/cf/8217cf7a4015cde207eca1931a2db93d.jpg",
+            "phone": "+6289999999999",
+            "bio": "",
+            "status": "active",
+            "subscriptionTier": "tier-001",
+            "subscriptionExpiry": null,
+            "preferences": {
+                "theme": "dark",
+                "language": "id",
+                "notifications": true,
+                "privateProfile": false
+            },
+            "createdAt": "2024-01-01T00:00:00.000Z",
+            "updatedAt": "2024-01-01T00:00:00.000Z",
+            "lastLogin": null
+        },
+        {
+            "id": "user-1780080114623-d803fa",
+            "username": "hermawan",
+            "email": "hermawan@gmail.com",
+            "password": "admin#123",
+            "role": "user",
+            "status": "active",
+            "profilePhoto": "https://ui-avatars.com/api/?name=hermawan&background=1db954&color=fff",
+            "subscriptionTier": "tier-002",
+            "subscriptionExpiry": null,
+            "preferences": {
+                "theme": "dark",
+                "language": "id",
+                "notifications": true,
+                "privateProfile": false
+            },
+            "createdAt": "2026-05-29T18:41:54.623Z",
+            "updatedAt": "2026-05-29T18:41:54.623Z",
+            "lastLogin": null
+        },
+        {
+            "id": "user-1780080993352-9c7ccd",
+            "username": "siti",
+            "email": "siti@gmail.com",
+            "password": "111111",
+            "role": "user",
+            "status": "active",
+            "profilePhoto": "https://ui-avatars.com/api/?name=siti&background=1db954&color=fff",
+            "subscriptionTier": "tier-002",
+            "subscriptionExpiry": null,
+            "preferences": {
+                "theme": "dark",
+                "language": "id",
+                "notifications": true,
+                "privateProfile": false
+            },
+            "createdAt": "2026-05-29T18:56:33.352Z",
+            "updatedAt": "2026-05-29T18:56:33.352Z",
+            "lastLogin": null
+        },
+        {
+            "id": "user-1780821109229-036bf4",
+            "username": "budi_gaming",
+            "email": "budi@gmail.com",
+            "password": "111111",
+            "role": "user",
+            "status": "active",
+            "profilePhoto": "https://ui-avatars.com/api/?name=budi_gaming&background=1db954&color=fff",
+            "subscriptionTier": "tier-002",
+            "subscriptionExpiry": null,
+            "preferences": {
+                "theme": "dark",
+                "language": "id",
+                "notifications": true,
+                "privateProfile": false
+            },
+            "createdAt": "2026-06-07T08:31:49.229Z",
+            "updatedAt": "2026-06-07T08:31:49.229Z",
+            "lastLogin": null
+        },
+        {
+            "id": "user-1781441020822-92e154",
+            "username": "achsony1",
+            "email": "achsony@gmail.com",
+            "password": "111111",
+            "role": "user",
+            "status": "active",
+            "profilePhoto": "https://ui-avatars.com/api/?name=achsony1&background=1db954&color=fff",
+            "subscriptionTier": "tier-002",
+            "subscriptionExpiry": null,
+            "preferences": {
+                "theme": "dark",
+                "language": "id",
+                "notifications": true,
+                "privateProfile": false
+            },
+            "createdAt": "2026-06-14T12:43:40.822Z",
+            "updatedAt": "2026-06-14T12:43:40.822Z",
+            "lastLogin": null
+        },
+        {
+            "id": "user-1781441057369-55c950",
+            "username": "achsony1",
+            "email": "1@gmail.com",
+            "password": "1111111",
+            "role": "user",
+            "status": "active",
+            "profilePhoto": "https://ui-avatars.com/api/?name=achsony1&background=1db954&color=fff",
+            "subscriptionTier": "tier-002",
+            "subscriptionExpiry": null,
+            "preferences": {
+                "theme": "dark",
+                "language": "id",
+                "notifications": true,
+                "privateProfile": false
+            },
+            "createdAt": "2026-06-14T12:44:17.369Z",
+            "updatedAt": "2026-06-14T12:44:17.369Z",
+            "lastLogin": null
+        }
+    ]
 }

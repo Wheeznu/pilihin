@@ -1,4 +1,5 @@
 import { DOM } from "../utils/dom.js";
+import { getDbReady } from "../../../backend/init.js";
 
 const GENRE_MAP = {
     "genre-001": "Comedy",
@@ -19,6 +20,7 @@ class CatalogPage {
 
     async _init() {
         try {
+            await getDbReady();
             this._loadFilms();
             this._readGenreFilter();
             this._bindSort();

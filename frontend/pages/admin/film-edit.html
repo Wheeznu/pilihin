@@ -1,31 +1,226 @@
 <!DOCTYPE html>
 <html lang="id">
-    <head>
+  <head>
 <script>document.documentElement.setAttribute("data-theme",localStorage.getItem("pilih-in-theme")||"dark")</script>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Edit & Hapus Film - Pilih.in</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100..900&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href="../../css/reset.css" />
-        <link rel="stylesheet" href="../../css/design-system.css" />
-        <link rel="stylesheet" href="../../css/components/navbar.css" />
-        <link rel="stylesheet" href="../../css/components/sidebar.css" />
-        <link rel="stylesheet" href="../../css/components/button.css" />
-        <link rel="stylesheet" href="../../css/components/form.css" />
-        <link rel="stylesheet" href="../../css/pages/admin-panel.css" />
-    </head>
-    <body>
-        <div id="navbar-container"></div>
-        <main class="admin-film-edit-page" id="filmEditPage"></main>
-        <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-        <script type="module">
-            import Navbar from "../../js/components/navbar.js";
-            document.addEventListener("DOMContentLoaded", async () => {
-                await Navbar.load("navbar-container");
-                feather.replace();
-            });
-        </script>
-    </body>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Film - Pilih.in</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS Core -->
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/design-system.css" />
+
+    <!-- CSS Components -->
+    <link rel="stylesheet" href="../../css/components/navbar.css" />
+    <link rel="stylesheet" href="../../css/components/sidebar.css" />
+    <link rel="stylesheet" href="../../css/components/button.css" />
+
+    <!-- CSS Pages -->
+    <link rel="stylesheet" href="../../css/pages/film-edit.css" />
+
+    <!-- Feather Icons -->
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  </head>
+  <body>
+    <!-- Navbar Container -->
+    <div id="navbar-container"></div>
+
+    <main class="ef-page">
+      <div class="ef-container">
+        <div class="ef-header">
+          <div class="ef-header__eyebrow">
+            <i data-feather="edit-3"></i>
+            Admin Panel
+          </div>
+          <h1 id="pageTitle">Edit Film</h1>
+          <p>Edit atau perbarui data film yang sudah ada.</p>
+        </div>
+
+        <!-- ID Loader -->
+        <div class="ef-card" id="idLoaderSection">
+          <div class="ef-card__head">
+            <div class="ef-card__head-icon"><i data-feather="search"></i></div>
+            <h2>Muat Data Film</h2>
+          </div>
+          <div class="ef-card__body">
+            <p style="margin-bottom:16px;color:var(--text-secondary);font-size:13px;">
+              Masukkan ID film yang ingin diedit.
+            </p>
+            <div class="ef-row">
+              <div class="ef-group">
+                <label>ID Film</label>
+                <div class="ef-input-wrap no-icon">
+                  <input type="text" id="filmIdInput" placeholder="Masukkan ID film..." />
+                </div>
+              </div>
+            </div>
+            <button class="btn-ef btn-ef--primary" id="loadFilmBtn">
+              <i data-feather="download"></i> Load Data
+            </button>
+          </div>
+        </div>
+
+        <!-- Form Section -->
+        <div id="formSection" style="display:none;">
+          <div class="ef-layout">
+            <div class="ef-left">
+              <div class="ef-card">
+                <div class="ef-card__head">
+                  <div class="ef-card__head-icon"><i data-feather="info"></i></div>
+                  <h2>Informasi Film</h2>
+                </div>
+                <div class="ef-card__body">
+                  <div class="ef-row">
+                    <div class="ef-group">
+                      <label>Judul Film <span class="req">*</span></label>
+                      <div class="ef-input-wrap">
+                        <i data-feather="film"></i>
+                        <input type="text" id="title" placeholder="Masukkan judul film..." />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ef-row full">
+                    <div class="ef-group">
+                      <label>Sinopsis <span class="req">*</span></label>
+                      <div class="ef-input-wrap no-icon">
+                        <textarea id="sinopsis" placeholder="Tulis sinopsis film..." rows="5"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ef-row triple">
+                    <div class="ef-group">
+                      <label>Rating <span class="req">*</span></label>
+                      <div class="ef-stars" id="starDisplay">
+                        <i data-feather="star" class="star-btn"></i>
+                        <i data-feather="star" class="star-btn"></i>
+                        <i data-feather="star" class="star-btn"></i>
+                        <i data-feather="star" class="star-btn"></i>
+                        <i data-feather="star" class="star-btn"></i>
+                      </div>
+                      <div class="ef-rating-input-row">
+                        <input type="number" class="ef-rating-input" id="rating" min="1" max="10" placeholder="1-10" />
+                        <span class="ef-rating-max">/ 10</span>
+                      </div>
+                    </div>
+                    <div class="ef-group">
+                      <label>Tanggal Rilis <span class="req">*</span></label>
+                      <div class="ef-input-wrap">
+                        <i data-feather="calendar"></i>
+                        <input type="date" id="releaseDate" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ef-row full">
+                    <div class="ef-group">
+                      <label>Poster</label>
+                      <div class="ef-poster-toggle" id="posterToggle">
+                        <button type="button" class="ef-poster-toggle__btn ef-poster-toggle__btn--active" data-mode="link">Link URL</button>
+                        <button type="button" class="ef-poster-toggle__btn" data-mode="file">Upload File</button>
+                      </div>
+                      <div id="posterLinkMode">
+                        <div class="ef-input-wrap">
+                          <i data-feather="image"></i>
+                          <input type="url" id="posterUrl" placeholder="https://example.com/poster.jpg" />
+                        </div>
+                      </div>
+                      <div id="posterFileMode" style="display:none;">
+                        <div class="ef-poster-drop" id="posterDropArea">
+                          <i data-feather="upload-cloud"></i>
+                          <p>Klik atau tarik file ke sini untuk upload</p>
+                          <span>Format JPG/PNG, maks 2MB</span>
+                        </div>
+                        <input type="file" id="posterFileInput" accept="image/jpeg,image/png,image/jpg" style="display:none" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="ef-form-actions">
+                <button class="btn-ef btn-ef--ghost" id="cancelBtn">
+                  <i data-feather="x"></i> Batal
+                </button>
+                <button class="btn-ef btn-ef--primary" id="saveFilmBtn">
+                  <i data-feather="save"></i> Simpan
+                </button>
+              </div>
+
+              <div class="ef-delete-section" id="deleteSection">
+                <h3><i data-feather="trash-2"></i> Hapus Film</h3>
+                <p>Menghapus film akan menghilangkan data ini secara permanen.</p>
+                <button class="btn-ef btn-ef--danger" id="deleteFilmBtn">
+                  <i data-feather="trash-2"></i> Hapus Film
+                </button>
+              </div>
+            </div>
+
+            <div class="ef-right">
+              <div class="ef-card">
+                <div class="ef-card__head">
+                  <div class="ef-card__head-icon"><i data-feather="image"></i></div>
+                  <h2>Pratinjau Poster</h2>
+                </div>
+                <div class="ef-card__body">
+                  <div class="ef-poster-preview" id="posterPreview">
+                    <img id="previewImg" src="" alt="Poster preview" />
+                    <span class="ef-poster-preview-label">Poster</span>
+                  </div>
+                  <p id="posterHint" style="font-size:12px;color:var(--text-muted);text-align:center;">
+                    Masukkan URL atau upload poster untuk melihat pratinjau.
+                  </p>
+                </div>
+              </div>
+
+              <div class="ef-tips">
+                <div class="ef-tips__title">
+                  <i data-feather="info"></i> Tips
+                </div>
+                <ul>
+                  <li>Rating 1-10 — bintang terisi otomatis berdasarkan nilai.</li>
+                  <li>Poster bisa menggunakan link URL atau upload file gambar.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Modal Konfirmasi Hapus -->
+    <div class="modal" id="deleteModal">
+      <div class="modal-content">
+        <i data-feather="alert-triangle"></i>
+        <h2>Hapus Film?</h2>
+        <p>
+          Apakah Anda yakin ingin menghapus film
+          <strong id="deleteFilmTitle"></strong>? Data yang dihapus tidak dapat
+          dikembalikan.
+        </p>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" id="cancelDeleteBtn">Batal</button>
+          <button class="btn btn-danger" id="confirmDeleteBtn">
+            Ya, Hapus
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      import Navbar from "../../js/components/navbar.js";
+
+      document.addEventListener("DOMContentLoaded", async () => {
+        await Navbar.load("navbar-container");
+        if (typeof feather !== "undefined") feather.replace();
+      });
+    </script>
+    <script type="module" src="../../js/logic-pages/film-edit.js"></script>
+  </body>
 </html>

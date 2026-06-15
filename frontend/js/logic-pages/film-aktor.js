@@ -1,4 +1,5 @@
 import { DOM } from "../utils/dom.js";
+import { getDbReady } from "../../../backend/init.js";
 
 const GENRE_MAP = {
     "genre-001": "Comedy",
@@ -17,6 +18,7 @@ class ActorPage {
 
     async _init() {
         try {
+            await getDbReady();
             this._actor = await this._findActor();
             if (!this._actor) {
                 this._renderError();

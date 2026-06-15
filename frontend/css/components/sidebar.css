@@ -92,7 +92,6 @@
 .sidebar-panel__link:hover {
     background: rgba(255, 255, 255, 0.05);
     color: var(--accent-primary);
-    transform: translateX(4px);
 }
 
 :root[data-theme="light"] .sidebar-panel__link:hover {
@@ -110,27 +109,13 @@
     transform: scale(1.1);
 }
 
-/* Active State with vertical glow bar */
 .sidebar-panel__link--active {
-    background: rgba(29, 185, 84, 0.08);
+    background: rgba(255, 255, 255, 0.05);
     color: var(--accent-primary);
-    font-weight: var(--fw-semibold);
 }
 
 :root[data-theme="light"] .sidebar-panel__link--active {
-    background: rgba(29, 185, 84, 0.12);
-}
-
-.sidebar-panel__link--active::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 20%;
-    height: 60%;
-    width: 4px;
-    background: var(--accent-primary);
-    border-radius: 0 4px 4px 0;
-    box-shadow: 0 0 8px var(--accent-primary);
+    background: rgba(0, 0, 0, 0.03);
 }
 
 /* ── Logout Footer ───────────────────────────────────── */
