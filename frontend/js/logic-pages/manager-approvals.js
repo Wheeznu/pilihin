@@ -232,7 +232,7 @@ class ManagerApprovalsPage {
     _contentRow(item) {
         const id = item.id;
         const ts = item.updatedAt || item.createdAt || "";
-        const dateStr = ts ? new Date(ts).toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" }) : "—";
+        const dateStr = ts ? new Date(ts).toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" }) : "-";
 
         const base = `
             <td>
@@ -258,14 +258,14 @@ class ManagerApprovalsPage {
                             <div class="approvals-film">
                                 <img class="approvals-film__poster" src="${item.poster || `https://picsum.photos/seed/${id}/80/112`}" alt="${item.title}" onerror="this.style.display='none'" />
                                 <div>
-                                    <div class="approvals-film__title">${item.title || "—"}</div>
+                                    <div class="approvals-film__title">${item.title || "-"}</div>
                                     <div class="approvals-film__meta">ID: ${id}</div>
                                 </div>
                             </div>
                         </td>
-                        <td class="approvals-film__title">${item.title || "—"}</td>
+                        <td class="approvals-film__title">${item.title || "-"}</td>
                         <td><div class="approvals-rating"><i data-feather="star"></i> ${(item.averageRating || item.rating || 0)}/10</div></td>
-                        <td>${item.releaseDate ? new Date(item.releaseDate).toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" }) : "—"}</td>
+                        <td>${item.releaseDate ? new Date(item.releaseDate).toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" }) : "-"}</td>
                         ${base}
                     </tr>
                 `;
@@ -277,8 +277,8 @@ class ManagerApprovalsPage {
                                 <img class="approvals-user__avatar" src="${item.photo || `https://ui-avatars.com/api/?name=${encodeURIComponent(item.name || "A")}&background=1db954&color=000&size=64`}" alt="${item.name}" onerror="this.style.display='none'" />
                             </div>
                         </td>
-                        <td><span class="approvals-film__title">${item.name || "—"}</span></td>
-                        <td>${item.birthDate ? new Date(item.birthDate).toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" }) : "—"}</td>
+                        <td><span class="approvals-film__title">${item.name || "-"}</span></td>
+                        <td>${item.birthDate ? new Date(item.birthDate).toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" }) : "-"}</td>
                         <td><span class="films-count">${item.films?.length || 0} film</span></td>
                         ${base}
                     </tr>
@@ -291,8 +291,8 @@ class ManagerApprovalsPage {
                                 <img class="approvals-user__avatar" src="${item.photo || `https://ui-avatars.com/api/?name=${encodeURIComponent(item.name || "S")}&background=1db954&color=000&size=64`}" alt="${item.name}" onerror="this.style.display='none'" />
                             </div>
                         </td>
-                        <td><span class="approvals-film__title">${item.name || "—"}</span></td>
-                        <td>${item.birthDate ? new Date(item.birthDate).toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" }) : "—"}</td>
+                        <td><span class="approvals-film__title">${item.name || "-"}</span></td>
+                        <td>${item.birthDate ? new Date(item.birthDate).toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" }) : "-"}</td>
                         <td><span class="films-count">${item.films?.length || 0} film</span></td>
                         ${base}
                     </tr>
@@ -306,11 +306,11 @@ class ManagerApprovalsPage {
                             </div>
                         </td>
                         <td>
-                            <div class="approvals-film__title">${item.title || "—"}</div>
+                            <div class="approvals-film__title">${item.title || "-"}</div>
                             <div class="approvals-film__meta">${item.slug || id}</div>
                         </td>
                         <td><span class="approvals-status approvals-status--pending" style="background:rgba(29,185,84,0.12);color:var(--accent-primary);padding:2px 8px">${item._subtype === "berita" ? "Berita" : "Artikel"}</span></td>
-                        <td>${item.category || "—"}</td>
+                        <td>${item.category || "-"}</td>
                         ${base}
                     </tr>
                 `;

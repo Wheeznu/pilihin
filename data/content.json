@@ -1,5 +1,14 @@
 {
-  "films": [],
+  "films": [
+    {
+      "id": "film-1781580233706-bfcf1e",
+      "title": "Flow Test Film",
+      "year": 2025,
+      "status": "pending",
+      "createdAt": "2026-06-16T03:23:53.706Z",
+      "updatedAt": "2026-06-16T03:23:53.706Z"
+    }
+  ],
   "actors": [],
   "directors": [],
   "articles": [],

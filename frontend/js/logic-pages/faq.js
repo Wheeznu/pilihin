@@ -127,7 +127,7 @@ function initPage() {
   }
 
   function formatDate(iso) {
-    if (!iso) return "—";
+    if (!iso) return "-";
     return new Date(iso).toLocaleDateString("id-ID", {
       day: "numeric",
       month: "short",
@@ -167,11 +167,11 @@ function initPage() {
         <tr>
           <td class="td-num">${idx + 1}</td>
           <td class="td-question">
-            <div class="fq-question-text">${escHtml(faq.question || "—")}</div>
+            <div class="fq-question-text">${escHtml(faq.question || "-")}</div>
             <div class="fq-question-id">${escHtml(faq.id)}</div>
           </td>
           <td class="td-answer">
-            <div class="fq-answer-text">${escHtml(faq.answer || "—")}</div>
+            <div class="fq-answer-text">${escHtml(faq.answer || "-")}</div>
           </td>
           <td class="td-date">${formatDate(faq.createdAt)}</td>
           <td class="td-actions">

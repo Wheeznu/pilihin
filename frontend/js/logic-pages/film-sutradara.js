@@ -96,7 +96,7 @@ class DirectorPage {
                 <div class="film-card__info">
                     <h3 class="film-card__title">${film.title}</h3>
                     <div class="film-card__meta">
-                        <span>${film.releaseDate ? new Date(film.releaseDate).getFullYear() : "—"}</span>
+                        <span>${film.releaseDate ? new Date(film.releaseDate).getFullYear() : "-"}</span>
                         <span>${film.duration || "?"} mnt</span>
                     </div>
                     <p class="film-card__genre">${genreNames}</p>
@@ -138,8 +138,8 @@ class DirectorPage {
         const container = DOM.$("#directorPage");
         if (!container) return;
 
-        const birthYear = d.birthDate ? new Date(d.birthDate).getFullYear() : "—";
-        const age = d.birthDate ? new Date().getFullYear() - birthYear : "—";
+        const birthYear = d.birthDate ? new Date(d.birthDate).getFullYear() : "-";
+        const age = d.birthDate ? new Date().getFullYear() - birthYear : "-";
         const popularity = d.popularity ?? 50;
         const isFav = this._isDirectorFavorite();
 
@@ -162,7 +162,7 @@ class DirectorPage {
 
                 <div class="profile-stats">
                     <div class="profile-stat">
-                        <span class="profile-stat__value">${d.filmCount ?? "—"}</span>
+                        <span class="profile-stat__value">${d.filmCount ?? "-"}</span>
                         <span class="profile-stat__label">Film</span>
                     </div>
                     <div class="profile-stat">
@@ -182,11 +182,11 @@ class DirectorPage {
                 <div class="profile-details">
                     <div class="profile-detail-item">
                         <span class="profile-detail-item__label">Tempat Lahir</span>
-                        <span class="profile-detail-item__value">${d.birthPlace || "—"}</span>
+                        <span class="profile-detail-item__value">${d.birthPlace || "-"}</span>
                     </div>
                     <div class="profile-detail-item">
                         <span class="profile-detail-item__label">Tanggal Lahir</span>
-                        <span class="profile-detail-item__value">${d.birthDate ? new Date(d.birthDate).toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" }) : "—"}</span>
+                        <span class="profile-detail-item__value">${d.birthDate ? new Date(d.birthDate).toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" }) : "-"}</span>
                     </div>
                 </div>
 

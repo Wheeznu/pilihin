@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
+
 /* --- pengaturan warna & variabel dasar --- */
 :root {
   --primary: #ff4d6d;
@@ -18,7 +19,7 @@
 }
 
 body {
-  font-family: "segoe ui", system-ui, sans-serif;
+  font-family: "Poppins", "Segoe UI", system-ui, sans-serif;
   background-color: var(--bg-main);
   color: var(--text-dark);
   line-height: 1.6;
@@ -36,7 +37,9 @@ body {
 .blog-header h1 {
   font-size: 1.8rem;
   letter-spacing: 1px;
+  margin-bottom: 8px;
 }
+
 .blog-header p {
   font-size: 0.95rem;
   font-style: italic;
@@ -88,12 +91,25 @@ body {
   margin-bottom: 15px;
   text-align: left;
 }
+
 .info-group .label {
   display: block;
   font-size: 0.7rem;
   text-transform: uppercase;
   color: var(--primary);
   font-weight: bold;
+}
+
+.info-group .value {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.focus-text {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--accent);
+  font-size: 0.85rem;
 }
 
 /* --- gaya tulisan di konten --- */
@@ -106,25 +122,55 @@ body {
 
 .blog-post h3 {
   color: var(--primary-light);
-  margin: 20px 0 10px;
+  margin: 25px 0 10px;
+  font-size: 1.3rem;
 }
+
 .blog-post p {
   margin-bottom: 15px;
   text-align: justify;
   color: var(--text-muted);
 }
+
 .blog-post ul {
   padding-left: 20px;
   margin-bottom: 15px;
 }
 
-pre {
-  background-color: #fff0f3;
-  padding: 12px;
+.blog-post li {
+  margin-bottom: 5px;
+  color: var(--text-muted);
+}
+
+.blog-post hr {
+  margin: 30px 0;
+  border-color: var(--accent);
+}
+
+/* --- interface preview image --- */
+.interface-preview {
+  margin: 15px 0;
+  text-align: center;
+  background: #f8f0f2;
   border-radius: var(--radius);
-  color: #c9184a;
-  font-family: monospace;
-  overflow-x: auto;
+  padding: 10px;
+  border: 1px dashed var(--primary-light);
+}
+
+.interface-img {
+  max-width: 100%;
+  border-radius: var(--radius);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* --- footer --- */
+.blog-footer {
+  text-align: center;
+  padding: 20px;
+  background-color: var(--accent);
+  color: var(--text-dark);
+  font-size: 0.8rem;
+  margin-top: 20px;
 }
 
 /* --- responsif buat mobile --- */
@@ -134,5 +180,11 @@ pre {
   }
   .sidebar-left {
     flex: 1;
+  }
+  .blog-header h1 {
+    font-size: 1.3rem;
+  }
+  .content-right {
+    padding: 20px;
   }
 }

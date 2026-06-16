@@ -206,7 +206,7 @@ class ManagerExportsPage {
                                     </div>
                                     <div>
                                         <div class="exports-history__name">${h.name}</div>
-                                        <div class="exports-history__meta">${h.format.toUpperCase()} — ${_formatDate(h.date)}</div>
+                                        <div class="exports-history__meta">${h.format.toUpperCase()} - ${_formatDate(h.date)}</div>
                                     </div>
                                 </div>
                                 <a href="#" class="exports-history__download" data-history="${h.id}">

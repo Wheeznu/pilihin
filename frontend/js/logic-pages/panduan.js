@@ -12,9 +12,9 @@ const SECTIONS = [
                 title: "Membuat Akun",
                 body: `<p>Klik tombol <strong>Daftar</strong> di pojok kanan atas halaman beranda. Isi form pendaftaran dengan:</p>
 <ul>
-    <li><strong>Username</strong> — pilih nama pengguna yang unik</li>
-    <li><strong>Email</strong> — gunakan email aktif untuk verifikasi</li>
-    <li><strong>Password</strong> — minimal 8 karakter dengan kombinasi huruf dan angka</li>
+    <li><strong>Username</strong> - pilih nama pengguna yang unik</li>
+    <li><strong>Email</strong> - gunakan email aktif untuk verifikasi</li>
+    <li><strong>Password</strong> - minimal 8 karakter dengan kombinasi huruf dan angka</li>
 </ul>
 <p>Setelah mendaftar, kamu bisa langsung login dan menikmati konten Pilih.in.</p>`,
             },
@@ -46,9 +46,9 @@ const SECTIONS = [
                 title: "Katalog Film",
                 body: `<p>Halaman <strong>Katalog</strong> menampilkan semua film yang tersedia di Pilih.in. Kamu bisa mengurutkan film berdasarkan:</p>
 <ul>
-    <li><strong>Terbaru</strong> — film yang baru ditambahkan</li>
-    <li><strong>Trending</strong> — film paling banyak ditonton</li>
-    <li><strong>Rating</strong> — film dengan rating tertinggi</li>
+    <li><strong>Terbaru</strong> - film yang baru ditambahkan</li>
+    <li><strong>Trending</strong> - film paling banyak ditonton</li>
+    <li><strong>Rating</strong> - film dengan rating tertinggi</li>
 </ul>`,
             },
             {
@@ -79,9 +79,9 @@ const SECTIONS = [
                 title: "Kualitas Video",
                 body: `<p>Sesuaikan kualitas video sesuai koneksi internetmu:</p>
 <ul>
-    <li><strong>720p</strong> — untuk koneksi standar (paket Free & Basic)</li>
-    <li><strong>1080p</strong> — Full HD (paket Standard & Premium)</li>
-    <li><strong>4K</strong> — Ultra HD (paket Premium, konten tertentu)</li>
+    <li><strong>720p</strong> - untuk koneksi standar (paket Free & Basic)</li>
+    <li><strong>1080p</strong> - Full HD (paket Standard & Premium)</li>
+    <li><strong>4K</strong> - Ultra HD (paket Premium, konten tertentu)</li>
 </ul>`,
             },
             {
@@ -120,10 +120,10 @@ const SECTIONS = [
                 title: "Memilih Paket",
                 body: `<p>Pilih.in menawarkan beberapa paket berlangganan:</p>
 <ul>
-    <li><strong>Free</strong> — akses terbatas, kualitas 720p, 1 perangkat</li>
-    <li><strong>Basic</strong> — akses lebih banyak, 720p, 1 perangkat</li>
-    <li><strong>Standard</strong> — akses penuh, 1080p, 2 perangkat</li>
-    <li><strong>Premium</strong> — akses penuh + 4K, 4 perangkat</li>
+    <li><strong>Free</strong> - akses terbatas, kualitas 720p, 1 perangkat</li>
+    <li><strong>Basic</strong> - akses lebih banyak, 720p, 1 perangkat</li>
+    <li><strong>Standard</strong> - akses penuh, 1080p, 2 perangkat</li>
+    <li><strong>Premium</strong> - akses penuh + 4K, 4 perangkat</li>
 </ul>`,
             },
             {

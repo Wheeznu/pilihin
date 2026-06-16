@@ -22,7 +22,7 @@ function _saveCollection(name, data) {
 }
 
 function _formatDate(iso) {
-    if (!iso) return "—";
+    if (!iso) return "-";
     return new Date(iso).toLocaleDateString("id-ID", {
         day: "numeric",
         month: "long",

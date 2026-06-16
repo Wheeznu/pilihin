@@ -60,34 +60,10 @@ const ADMIN_LINKS = [
     isActive: (path) => path.includes("/admin/sutradara-edit.html")
   },
   {
-    href: "/frontend/pages/admin/users.html",
-    icon: "shield",
-    label: "Kelola Akun",
-    isActive: (path) => path.includes("/admin/users.html")
-  },
-  {
-    href: "/frontend/pages/admin/reviews.html",
-    icon: "message-square",
-    label: "Balas Ulasan",
-    isActive: (path) => path.includes("/admin/reviews.html")
-  },
-  {
-    href: "/frontend/pages/admin/promo.html",
-    icon: "tag",
-    label: "Kelola Promo",
-    isActive: (path) => path.includes("/admin/promo.html")
-  },
-  {
     href: "/frontend/pages/admin/faq.html",
     icon: "help-circle",
     label: "Kelola FAQ",
     isActive: (path) => path.includes("/admin/faq.html")
-  },
-  {
-    href: "/frontend/pages/admin/notifications.html",
-    icon: "send",
-    label: "Kirim Notifikasi",
-    isActive: (path) => path.includes("/admin/notifications.html")
   }
 ];
 
@@ -123,10 +99,28 @@ const MANAGER_LINKS = [
     isActive: (path) => path.includes("/manager/approvals.html")
   },
   {
+    href: "/frontend/pages/manager/laporan.html",
+    icon: "bar-chart-2",
+    label: "Laporan",
+    isActive: (path) => path.includes("/manager/laporan.html")
+  },
+  {
     href: "/frontend/pages/manager/exports.html",
     icon: "download",
     label: "Ekspor Laporan",
     isActive: (path) => path.includes("/manager/exports.html")
+  },
+  {
+    href: "/frontend/pages/manager/kelola-akun.html",
+    icon: "shield",
+    label: "Kelola Akun",
+    isActive: (path) => path.includes("/manager/kelola-akun.html")
+  },
+  {
+    href: "/frontend/pages/manager/balas-ulasan-user.html",
+    icon: "message-square",
+    label: "Balas Ulasan",
+    isActive: (path) => path.includes("/manager/balas-ulasan-user.html")
   },
   {
     href: "/frontend/pages/manager/reviews.html",
@@ -135,10 +129,85 @@ const MANAGER_LINKS = [
     isActive: (path) => path.includes("/manager/reviews.html")
   },
   {
-    href: "/frontend/pages/manager/laporan.html",
-    icon: "bar-chart-2",
-    label: "Laporan",
-    isActive: (path) => path.includes("/manager/laporan.html")
+    href: "/frontend/pages/manager/kirim-notifikasi.html",
+    icon: "send",
+    label: "Kirim Notifikasi",
+    isActive: (path) => path.includes("/manager/kirim-notifikasi.html")
+  }
+];
+
+const USER_LINKS = [
+  {
+    href: "/frontend/pages/user/profile.html",
+    icon: "user",
+    label: "Profil",
+    isActive: (path) => path.includes("/user/profile.html")
+  },
+  {
+    href: "/frontend/pages/user/security.html",
+    icon: "shield",
+    label: "Keamanan",
+    isActive: (path) => path.includes("/user/security.html")
+  },
+  {
+    href: "/frontend/pages/user/settings.html",
+    icon: "settings",
+    label: "Pengaturan",
+    isActive: (path) => path.includes("/user/settings.html")
+  },
+  {
+    href: "/frontend/pages/user/history.html",
+    icon: "clock",
+    label: "Riwayat Tonton",
+    isActive: (path) => path.includes("/user/history.html")
+  },
+  {
+    href: "/frontend/pages/user/favorites-film.html",
+    icon: "film",
+    label: "Film Favorit",
+    isActive: (path) => path.includes("/user/favorites-film.html")
+  },
+  {
+    href: "/frontend/pages/user/favorites-aktor.html",
+    icon: "users",
+    label: "Aktor Favorit",
+    isActive: (path) => path.includes("/user/favorites-aktor.html")
+  },
+  {
+    href: "/frontend/pages/user/favorites-sutradara.html",
+    icon: "user",
+    label: "Sutradara Favorit",
+    isActive: (path) => path.includes("/user/favorites-sutradara.html")
+  },
+  {
+    href: "/frontend/pages/user/watchlist.html",
+    icon: "bookmark",
+    label: "Daftar Tonton",
+    isActive: (path) => path.includes("/user/watchlist.html")
+  },
+  {
+    href: "/frontend/pages/user/subscription.html",
+    icon: "star",
+    label: "Status Langganan",
+    isActive: (path) => path.includes("/user/subscription.html")
+  },
+  {
+    href: "/frontend/pages/user/payment.html",
+    icon: "gift",
+    label: "Pembayaran & Poin",
+    isActive: (path) => path.includes("/user/payment.html")
+  },
+  {
+    href: "/frontend/pages/user/transactions.html",
+    icon: "credit-card",
+    label: "Transaksi",
+    isActive: (path) => path.includes("/user/transactions.html")
+  },
+  {
+    href: "/frontend/pages/user/notifications.html",
+    icon: "bell",
+    label: "Notifikasi",
+    isActive: (path) => path.includes("/user/notifications.html")
   }
 ];
 
@@ -147,16 +216,31 @@ class Sidebar {
   static PANEL_ID = "sidebarPanel";
   static OVERLAY_ID = "sidebarOverlay";
 
+  static STORAGE_KEY = "pilih-in-sidebar-closed";
+
+  static _wasClosed() {
+    return localStorage.getItem(Sidebar.STORAGE_KEY) === "true";
+  }
+
+  static _setClosed(closed) {
+    if (closed) {
+      localStorage.setItem(Sidebar.STORAGE_KEY, "true");
+    } else {
+      localStorage.removeItem(Sidebar.STORAGE_KEY);
+    }
+  }
+
   static init() {
     if (document.getElementById(Sidebar.TOGGLE_ID)) return;
 
     const session = Sidebar._getSession();
-    if (!session || (session.role !== "admin" && session.role !== "manager")) return;
+    if (!session) return;
 
     const isDesktop = window.innerWidth > 768;
+    const wasClosed = Sidebar._wasClosed();
 
-    Sidebar._createToggle(isDesktop);
-    Sidebar._createPanel(session.role, isDesktop);
+    Sidebar._createToggle(isDesktop, wasClosed);
+    Sidebar._createPanel(session, isDesktop, wasClosed);
     Sidebar._createOverlay(isDesktop);
     Sidebar._bindEvents(isDesktop);
   }
@@ -169,11 +253,12 @@ class Sidebar {
     }
   }
 
-  static _createToggle(isDesktop) {
+  static _createToggle(isDesktop, wasClosed) {
     const btn = document.createElement("button");
     btn.id = Sidebar.TOGGLE_ID;
     btn.className = "sidebar-toggle-btn";
-    btn.innerHTML = isDesktop ? '<i data-feather="x"></i>' : '<i data-feather="menu"></i>';
+    const showClose = isDesktop && !wasClosed;
+    btn.innerHTML = showClose ? '<i data-feather="x"></i>' : '<i data-feather="menu"></i>';
     btn.setAttribute("aria-label", "Toggle Sidebar");
 
     const navbarLeft = document.querySelector(".navbar__left");
@@ -189,17 +274,18 @@ class Sidebar {
     });
   }
 
-  static _createPanel(role, isDesktop) {
+  static _createPanel(session, isDesktop, wasClosed) {
     const panel = document.createElement("aside");
     panel.id = Sidebar.PANEL_ID;
     panel.className = "sidebar-panel";
-    if (isDesktop) {
+    if (isDesktop && !wasClosed) {
       panel.classList.add("sidebar-panel--open");
       document.body.classList.add("sidebar-open");
     }
 
-    const links = role === "admin" ? ADMIN_LINKS : MANAGER_LINKS;
-    const roleLabel = role === "admin" ? "Administrator" : "Manager";
+    const role = session.role || "user";
+    const links = role === "admin" ? ADMIN_LINKS : role === "manager" ? MANAGER_LINKS : USER_LINKS;
+    const roleLabel = role === "admin" ? "Administrator" : role === "manager" ? "Manager" : (session.username || "Pengguna");
 
     const currentPath = window.location.pathname;
 
@@ -253,6 +339,8 @@ class Sidebar {
       const isOpen = panel?.classList.toggle("sidebar-panel--open");
       const currentIsDesktop = window.innerWidth > 768;
 
+      Sidebar._setClosed(!isOpen);
+
       if (currentIsDesktop) {
         document.body.classList.toggle("sidebar-open", isOpen);
         overlay?.classList.remove("sidebar-overlay--open");
@@ -272,6 +360,7 @@ class Sidebar {
     overlay?.addEventListener("click", () => {
       panel?.classList.remove("sidebar-panel--open");
       overlay.classList.remove("sidebar-overlay--open");
+      Sidebar._setClosed(true);
       if (toggle) {
         toggle.innerHTML = '<i data-feather="menu"></i>';
         feather.replace();
@@ -283,6 +372,7 @@ class Sidebar {
         panel?.classList.remove("sidebar-panel--open");
         overlay?.classList.remove("sidebar-overlay--open");
         document.body.classList.remove("sidebar-open");
+        Sidebar._setClosed(true);
         if (toggle) {
           toggle.innerHTML = '<i data-feather="menu"></i>';
           feather.replace();

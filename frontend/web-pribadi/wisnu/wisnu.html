@@ -1,9 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="id">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Wisnu | Developer</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100..900&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="wisnu.css" />
     </head>
     <body>
@@ -12,99 +15,150 @@
                 <img src="wisnu.jpeg" alt="Wisnu" class="avatar" />
                 <h1>Wisnu Aji Saka</h1>
                 <p class="nim">250411100099 | IF-2B</p>
-                <p class="role">Ketua Kelompok</p>
+                <p class="role">Ketua Kelompok & Integrator</p>
                 <div class="links">
-                    <a href="../index.html">Pilih.in</a>
+                    <a href="../../index.html">Pilih.in</a>
                     <a href="https://github.com/wheeznu">GitHub</a>
                     <a href="https://tako.id/Wheeznu">Donasi</a>
                 </div>
             </header>
 
+            <section class="about">
+                <h2>Tentang Saya</h2>
+                <p>
+                    Ketua kelompok yang bertanggung jawab menggabungkan (<em>merge</em>) semua
+                    pekerjaan anggota kelompok, memastikan tidak ada konflik kode,
+                    dan menjaga konsistensi sistem secara keseluruhan. Selain itu
+                    mengerjakan dan mengawasi pengembangan Dashboard Utama beserta
+                    10 halaman di dalamnya.
+                </p>
+            </section>
+
             <section class="jobdesk">
-                <h2>Jobdesk</h2>
+                <h2>Dashboard Utama - 10 Halaman</h2>
 
                 <div class="list">
-                    <a href="../index.html" class="card">
-                        <h3>Dashboard Utama</h3>
+                    <a href="../../index.html" class="card">
+                        <h3>Home</h3>
                         <p>
-                            Halaman utama ketika pengguna/user memasuki website
-                            pilih.in, berisi tombol tombol yang akan mengarahkan
-                            user menuju fitur fitur yang tersedia pada website
-                            pilih.in.
+                            Halaman utama Pilih.in - hero banner dengan film unggulan,
+                            grid film trending & terbaru secara horizontal scroll,
+                            serta daftar artikel dan berita terbaru.
                         </p>
                     </a>
 
-                    <a
-                        href="../fitur-lainnya/about-us/about-us.html"
-                        class="card"
-                    >
-                        <h3>About Us</h3>
-                        <p>
-                            Berisi para developer yang berkontribusi dalam
-                            pembuatan website pilih.in.
-                        </p>
-                    </a>
-
-                    <a href="../fitur-lainnya/login/login.html" class="card">
+                    <a href="../../pages/main/login.html" class="card">
                         <h3>Login</h3>
                         <p>
-                            Halaman login untuk user login ke akun masing
-                            masing..
+                            Halaman autentikasi pengguna dengan form email/username
+                            dan kata sandi, validasi input, serta redirect sesuai
+                            role (user/admin/manager).
                         </p>
                     </a>
 
-                    <a href="../fitur-lainnya/daftar/daftar.html" class="card">
-                        <h3>Daftar</h3>
-                        <p>Halaman untuk pembuatan akun baru.</p>
-                    </a>
-
-                    <a
-                        href="../fitur-lainnya/dashboard-quiz/dashboard-quiz.html"
-                        class="card"
-                    >
-                        <h3>Dashboard Quiz</h3>
+                    <a href="../../pages/main/register.html" class="card">
+                        <h3>Register</h3>
                         <p>
-                            Halaman dashboard menuju quiz yang disediakan oleh
-                            website pilih.in
+                            Halaman pendaftaran akun baru - mengirim data ke server
+                            via POST /api/auth/register dan menyimpan ke account.json.
                         </p>
                     </a>
 
-                    <a
-                        href="../fitur-lainnya/riwayat-skor/riwayat-skor.html"
-                        class="card"
-                    >
-                        <h3>Riwayat Skor</h3>
+                    <a href="../../pages/main/forgot-password.html" class="card">
+                        <h3>Lupa Sandi</h3>
                         <p>
-                            Halaman untuk melihat hasil dan skor kuis
-                            sebelumnya.
+                            Halaman reset kata sandi dengan permintaan ke server
+                            via POST /api/auth/forgot-password.
                         </p>
                     </a>
 
-                    <a
-                        href="../fitur-lainnya/setting/setting.html"
-                        class="card"
-                    >
-                        <h3>Setting</h3>
-                        <p>Pengaturan profil dan opsi logout.</p>
-                    </a>
-
-                    <a
-                        href="../fitur-lainnya/lupa-sandi/lupa-sandi.html"
-                        class="card"
-                    >
-                        <h3>Lupa Kata Sandi</h3>
+                    <a href="../../pages/main/faq.html" class="card">
+                        <h3>FAQ</h3>
                         <p>
-                            Interface untuk melakukan reset password apabila
-                            user lupa sandi
+                            Halaman tanya jawab statis yang dimuat dari data/faq.json
+                            dengan navigasi scroll ke masing-masing pertanyaan.
                         </p>
                     </a>
 
-                    <a href="../fitur-lainnya/404/404.html" class="card">
-                        <h3>Dashboard Admin</h3>
-                        <p>To Be Added Later</p>
+                    <a href="../../pages/main/about.html" class="card">
+                        <h3>About Us</h3>
+                        <p>
+                            Halaman profil tim developer yang berkontribusi dalam
+                            pembuatan website Pilih.in.
+                        </p>
+                    </a>
+
+                    <a href="../../pages/main/contact.html" class="card">
+                        <h3>Contact Us</h3>
+                        <p>
+                            Halaman kontak dengan form nama, email, dan pesan yang
+                            dikirim ke server via POST /api/contact, dilengkapi
+                            peta Google Maps interaktif.
+                        </p>
+                    </a>
+
+                    <a href="../../pages/main/privacy.html" class="card">
+                        <h3>Kebijakan & Privasi</h3>
+                        <p>
+                            Halaman kebijakan privasi statis lengkap dengan footer
+                            component yang konsisten di seluruh halaman.
+                        </p>
+                    </a>
+
+                    <a href="../../pages/main/promo.html" class="card">
+                        <h3>Info Promo</h3>
+                        <p>
+                            Halaman promosi berlangganan - 6 kartu promo (3 bulan,
+                            tahunan, duo, student, trial, weekend) dengan harga
+                            diskon, diambil dari data/promotions.json.
+                        </p>
+                    </a>
+
+                    <a href="../../pages/main/pricing.html" class="card">
+                        <h3>List Harga Langganan</h3>
+                        <p>
+                            Halaman daftar harga 3 tier (Basic/Standard/Premium)
+                            dengan fitur masing-masing. Terintegrasi ke halaman
+                            pembayaran via payment.html.
+                        </p>
                     </a>
                 </div>
             </section>
+
+            <section class="jobdesk">
+                <h2>Komponen Sistem</h2>
+                <div class="list">
+                    <div class="card">
+                        <h3>Navbar</h3>
+                        <p>
+                            Navigasi utama yang konsisten di semua halaman -
+                            mendukung tiga role (user/admin/manager) dengan link
+                            berbeda, dropdown, dark-light toggle, serta konfirmasi
+                            logout.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Sidebar</h3>
+                        <p>
+                            Panel navigasi samping sebagai overlay - 3 set link
+                            terpisah (Admin 11, Manager 11, User 12), status
+                            open/closed tersimpan di localStorage, serta badge
+                            notifikasi.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Footer</h3>
+                        <p>
+                            Komponen footer seragam di seluruh halaman - berisi
+                            navigasi cepat, tautan sosial, informasi kontak, dan
+                            copyright.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
         </div>
     </body>
 </html>

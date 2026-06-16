@@ -239,7 +239,7 @@
     overflow: hidden;
 }
 
-/* Decorative blobs — full page */
+/* Decorative blobs - full page */
 
 .auth-split__deco {
     position: absolute;
@@ -273,7 +273,7 @@
     right: 40%;
 }
 
-/* Hero section — left 65% */
+/* Hero section - left 65% */
 
 .auth-split__hero {
     flex: 0 0 65%;
@@ -337,7 +337,7 @@
     color: var(--accent-primary);
 }
 
-/* Form section — right 35%, no card */
+/* Form section - right 35%, no card */
 
 .auth-split__form {
     flex: 0 0 35%;

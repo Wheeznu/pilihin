@@ -230,7 +230,7 @@ function initPage() {
   }
 
   function formatDate(iso) {
-    if (!iso) return "—";
+    if (!iso) return "-";
     return new Date(iso).toLocaleDateString("id-ID", {
       day: "numeric",
       month: "short",

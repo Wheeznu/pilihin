@@ -347,13 +347,13 @@ class ManagerEarningsPage {
                                             <td>
                                                 <div class="earnings-transactions__user">
                                                     <img class="earnings-transactions__avatar" src="${user?.profilePhoto || ""}" alt="" onerror="this.style.display='none'" />
-                                                    <span class="earnings-transactions__name">${user?.username || "—"}</span>
+                                                    <span class="earnings-transactions__name">${user?.username || "-"}</span>
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="earnings-transactions__tier">${tier?.name || "—"}</div>
+                                                <div class="earnings-transactions__tier">${tier?.name || "-"}</div>
                                             </td>
-                                            <td style="font-size:var(--font-xs);color:var(--text-muted)">${t.paymentMethod || "—"}</td>
+                                            <td style="font-size:var(--font-xs);color:var(--text-muted)">${t.paymentMethod || "-"}</td>
                                             <td><span class="earnings-transactions__amount">${_formatCurrency(t.totalAmount)}</span></td>
                                             <td style="font-size:var(--font-xs);color:var(--text-secondary)">${_formatDate(t.createdAt)}</td>
                                             <td>

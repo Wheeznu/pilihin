@@ -89,7 +89,7 @@ class Navbar {
                 manager: "/frontend/pages/manager/profile.html",
             }[session.role] || "/frontend/pages/user/profile.html";
 
-            const hasSidebar = session.role === "admin" || session.role === "manager";
+            const hasSidebar = true;
 
             const avatarHtml = session.profilePhoto
                 ? `<img src="${session.profilePhoto}" alt="${session.username}" class="navbar__avatar" />`

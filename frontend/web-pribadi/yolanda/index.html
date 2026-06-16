@@ -1,17 +1,15 @@
-<!-- index.html -->
 <!doctype html>
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blog Pribadi - Review Pilih in</title>
+    <title>Blog Pribadi - Developer 4 Pilih.in</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-
   <body>
     <header class="blog-header">
       <h1>Perancangan Interface Desain Komunikasi Visual</h1>
-      <p>Pembuataan Website Film <b>(Pilih in)</b></p>
+      <p>Pembuatan Website Film <b>(Pilih.in)</b> — Developer 4</p>
     </header>
 
     <main class="main-wrapper">
@@ -33,183 +31,309 @@
               <span class="label">Prodi:</span>
               <p class="value">Teknik Informatika</p>
             </div>
-            <p class="focus-text">Website Desain Film Pilih in</p>
+            <p class="focus-text">
+              <strong>Role:</strong> Developer 4 — Admin Content Management
+            </p>
           </div>
         </div>
       </aside>
 
       <section class="content-right">
         <article class="blog-post">
-          <h2>Pembuatan & Penjelasan 10 Interface dari Website Pilih in</h2>
+          <h2>Developer 4 — Admin Content Management</h2>
           <p>
-            Website <strong>Pilih in</strong> adalah website dengan konsep
-            perpaduan warna merah dan hitam dengan tampilan antarmuka
-            (interface) yang rapi dan modern yang dirancang oleh Kelompok 2. Isi
-            dari website film Pilih in yaitu menyediakan berbagai informasi
-            tentang film, seperti katalog film, artikel, berita terbaru, update
-            penayangan film, serta fitur rating dan ulasan pengguna. Website ini
-            dibuat agar pengguna lebih mudah mencari informasi film dengan
-            tampilan yang sederhana, nyaman dilihat, dan mudah digunakan.
+            Sebagai <strong>Developer 4</strong> dalam pembangunan website
+            <strong>Pilih.in</strong>, saya bertanggung jawab atas pengelolaan
+            konten platform. Berikut adalah <strong>10 Interface</strong> yang
+            telah saya kerjakan.
           </p>
 
-          <!-- Bagian Interface 1 -->
-          <h3>1. Interface Dashboard Guest</h3>
+          <!-- ==================== INTERFACE 1: PROFIL ADMIN ==================== -->
+          <h3>1. Profil Admin</h3>
+          <div class="interface-preview">
+            <img
+              src="img/interface/profil-admin.jpg"
+              alt="Profil Admin"
+              class="interface-img"
+              onerror="this.style.display = 'none'"
+            />
+          </div>
           <p>
-            Halaman beranda utama yang dirancang khusus untuk menyambut
-            pengunjung umum yang belum masuk akun (login).
-          </p>
-          <ul>
-            <li>
-              <b>Fungsinya:</b> Menyapa pengguna dengan teks "Selamat datang,
-              Guest/Tamu", menampilkan 3 kotak statistik aktivitas kosong yang
-              hanya bisa digeser (tidak bisa diklik), menyediakan 5 tombol menu
-              ekspres untuk jelajah cepat, serta menyajikan jajaran kartu
-              rekomendasi film info rating usia dan bintang.
-            </li>
-          </ul>
-
-          <!-- Bagian Interface 2 -->
-          <h3>2. Interface Halaman Artikel</h3>
-          <p>
-            Halaman khusus yang berfungsi sebagai ruang bacaan, tips, ulasan
-            mendalam, dan rekomendasi tontonan berdasarkan suasana hati.
+            Halaman profil administrator yang menampilkan informasi pribadi
+            admin seperti nama, email, ID Admin, tanggal bergabung, dan
+            aktivitas terakhir. Dilengkapi dengan
+            <strong>avatar beranimasi</strong> (ring berputar),
+            <strong>form edit profil</strong> untuk mengubah data diri, serta
+            <strong>statistik ringkasan</strong> total film, pengguna, dan
+            ulasan.
           </p>
           <ul>
             <li>
-              <b>Fungsinya:</b> Menampilkan judul banner "Artikel Pilihan"
-              beserta deskripsinya di bagian atas, dan menyajikan susunan 9
-              artikel yang masing-masing dilengkapi keterangan genre, foto Film,
-              tanggal rilis, ringkasan pembahasan, dan judul yang bisa diklik
-              menuju link bacaan di goggle.
+              <strong>Fitur:</strong> Edit profil, upload foto, statistik,
+              aktivitas terbaru
             </li>
+            <li><strong>Status:</strong> ✅ Selesai</li>
           </ul>
 
-          <!-- Bagian Interface 3 -->
-          <h3>3. Interface Halaman Berita</h3>
+          <!-- ==================== INTERFACE 2: KELOLA KONTEN ==================== -->
+          <h3>2. Kelola Konten</h3>
+          <div class="interface-preview">
+            <img
+              src="img/interface/kelola-konten.jpg"
+              alt="Kelola Konten"
+              class="interface-img"
+              onerror="this.style.display = 'none'"
+            />
+          </div>
           <p>
-            Halaman khusus yang menyajikan kabar terupdate, jadwal tayang
-            bioskop, dan perkembangan industri perfilman lokal maupun
-            internasional.
+            Halaman daftar semua film dalam bentuk tabel yang dilengkapi fitur
+            <strong>pencarian</strong>,
+            <strong>filter status</strong> (published/draft),
+            <strong>pagination</strong>, serta tombol <strong>Edit</strong> dan
+            <strong>Hapus</strong>. Admin dapat melihat poster, judul, rating,
+            release date, jumlah pemeran, dan status film.
           </p>
           <ul>
             <li>
-              <b>Fungsinya:</b> Menampilkan judul"Berita Utama" sebagai penunjuk
-              halaman, dan menyajikan susunan 8 kartu berita hangat yang
-              dilengkapi tag kategori khusus (seperti Festival, Box Office, ),
-              tanggal terbit, dan judul berita yang bisa diklik ke link goggle.
+              <strong>Fitur:</strong> Tabel film, search, filter status,
+              pagination, edit, hapus
             </li>
+            <li><strong>Status:</strong> ✅ Selesai</li>
           </ul>
-          <!-- Bagian Interface 4 -->
-          <h3>4. Interface Leaderboard Film - Trending Saat Ini</h3>
+
+          <!-- ==================== INTERFACE 3: TAMBAH ARTIKEL ==================== -->
+          <h3>3. Tambah Artikel</h3>
+          <div class="interface-preview">
+            <img
+              src="img/interface/tambah-artikel.jpg"
+              alt="Tambah Artikel"
+              class="interface-img"
+              onerror="this.style.display = 'none'"
+            />
+          </div>
           <p>
-            Halaman peringkat real-time yang menyajikan daftar film paling
-            populer, banyak dicari.
+            Formulir untuk menambahkan artikel/berita baru ke platform. Berisi
+            field:
+            <strong>Judul Artikel</strong>,
+            <strong>Kategori</strong> (Berita/Artikel),
+            <strong>Thumbnail</strong> (upload gambar),
+            <strong>Konten</strong> (textarea), <strong>Penulis</strong>, dan
+            <strong>Tag</strong>. Dilengkapi preview konten dan tombol simpan.
           </p>
           <ul>
             <li>
-              <b>Fungsinya:</b> Menampilkan daftar film yang sedang populer
-              secara rapi, dilengkapi dengan panah naik atau turun posisi
-              peringkat bintang film tersebut, pengunjung langsung ekplore film
-              .
+              <strong>Fitur:</strong> Upload thumbnail, pilih kategori, preview
+              konten
             </li>
+            <li><strong>Status:</strong> ✅ Selesai</li>
           </ul>
 
-          <!-- Bagian Interface 5 -->
-          <h3>5. Interface Leaderboard Film - Film Terbaik</h3>
+          <!-- ==================== INTERFACE 4: EDIT ARTIKEL ==================== -->
+          <h3>4. Edit Artikel / Berita</h3>
+          <div class="interface-preview">
+            <img
+              src="img/interface/edit-artikel.jpg"
+              alt="Edit Artikel"
+              class="interface-img"
+              onerror="this.style.display = 'none'"
+            />
+          </div>
           <p>
-            Ruang utama mengumpulkan film-film dengan kualitas yang paling di
-            minati pengguna
+            Halaman untuk mengedit artikel yang sudah ada. Data diambil
+            berdasarkan ID artikel, kemudian form diisi otomatis. Admin dapat
+            mengubah judul, kategori, thumbnail, konten, penulis, dan tag.
+            Tersedia tombol <strong>Simpan Perubahan</strong> dan
+            <strong>Hapus Artikel</strong> dengan konfirmasi modal.
           </p>
           <ul>
             <li>
-              <b>Fungsinya:</b> Menyajikan deretan film yang memiliki rating
-              bintang tertinggi dan ada tahun rilis dan keterangan genre
-              menyediakan tombol untuk mengurutkan film berdasarkan genre atau
-              tahun rilis.
+              <strong>Fitur:</strong> Load data otomatis, edit form, hapus
+              dengan konfirmasi
             </li>
+            <li><strong>Status:</strong> ✅ Selesai</li>
           </ul>
 
-          <!-- Bagian Interface 6 -->
-          <h3>6. Interface Leaderboard Film - Animasi</h3>
+          <!-- ==================== INTERFACE 5: TAMBAH FILM ==================== -->
+          <h3>5. Tambah Film</h3>
+          <div class="interface-preview">
+            <img
+              src="img/interface/tambah-film.jpg"
+              alt="Tambah Film"
+              class="interface-img"
+              onerror="this.style.display = 'none'"
+            />
+          </div>
           <p>
-            Halaman peringkat khusus yang didedikasikan sepenuhnya untuk pecinta
-            dunia sinema berbasis ilustrasi, film animasi, maupun serial anime
-            populer.
+            Formulir lengkap untuk menambahkan film baru ke database. Berisi
+            field:
+            <strong>Judul Film</strong>, <strong>Sinopsis</strong>,
+            <strong>Release Date</strong>, <strong>Rating</strong> (bintang
+            1-5), <strong>Link Trailer</strong>,
+            <strong>Link Video Film</strong>, dan
+            <strong>Upload Poster</strong> (dengan preview). Juga terdapat fitur
+            <strong>tambah aktor</strong> dinamis (tag) dan
+            <strong>progress bar</strong> kelengkapan form.
           </p>
           <ul>
             <li>
-              <b>Fungsinya:</b> Memisahkan daftar peringkat film animasi dari
-              jenis live-action agar pencarian kategori lebih spesifik,
-              menyertakan informasi nama genre dalam film tersebut.
+              <strong>Fitur:</strong> Upload poster, tambah aktor dinamis,
+              progress bar, validasi form
             </li>
+            <li><strong>Status:</strong> ✅ Selesai</li>
           </ul>
-          <section id="penjelasan-interface">
-            <h3>7. Interface DaftarFansFilm</h3>
-            <p>
-              Halaman utama yang berfungsi sebagai pusat navigasi bagi pengguna
-              ke seluruh ekosistem PILIH.IN.Miasal mau jeljah Fans base atau
-              buat komunitas
-            </p>
-            <ul>
-              <li>
-                <b>Fungsinya:</b> Menyajikan statistik komunitas secara
-                (Member,informasi grub) untuk membangun relasi. Selain itu,
-                menyediakan akses cepat Call-to-Action bagi user untuk mulai
-                mengeksplorasi katalog yang ada atau berkontribusi dengan
-                mengajukan komunitas baru.
-              </li>
-            </ul>
 
-            <h3>8. Interface Jelajah Fanbase</h3>
-            <p>
-              Halaman direktori berbasis grid yang menampilkan seluruh daftar
-              komunitas film yang terdaftar dalam platform.
-            </p>
-            <ul>
-              <li>
-                <b>Fungsinya:</b> Memudahkan pengguna memilih genre apa yang mau
-                di masuki berdasarkan kategori . Setiap kartu komunitas bersifat
-                informasi mau masuk grub mana.
-              </li>
-            </ul>
+          <!-- ==================== INTERFACE 6: EDIT FILM ==================== -->
+          <h3>6. Edit Film</h3>
+          <div class="interface-preview">
+            <img
+              src="img/interface/edit-film.jpg"
+              alt="Edit Film"
+              class="interface-img"
+              onerror="this.style.display = 'none'"
+            />
+          </div>
+          <p>
+            Halaman untuk mengedit data film yang sudah ada. Data diambil dari
+            URL parameter
+            <code>?id=xxx</code>, kemudian form diisi otomatis. Admin dapat
+            mengubah judul, sinopsis, rating, release date, link trailer, link
+            video, aktor, dan poster. Tersedia tombol
+            <strong>Simpan Perubahan</strong> dan
+            <strong>Hapus Film</strong> dengan konfirmasi modal.
+          </p>
+          <ul>
+            <li>
+              <strong>Fitur:</strong> Load data otomatis, edit form, hapus
+              dengan konfirmasi
+            </li>
+            <li><strong>Status:</strong> ✅ Selesai</li>
+          </ul>
 
-            <h3>9. Interface Ruang Forum</h3>
-            <p>
-              Halaman diskusi interaktif yang bersifat (menggunakan manipulasi
-              DOM untuk mengubah judul dan kategori secara on-the-fly).Dan
-              dengan ada tambah an keterangan dari grub tersebut, dan ada tombol
-              gabung grub
-            </p>
-            <ul>
-              <li>
-                <b>Fungsinya:</b> Menjadi ruang a mencari teman se komunitas
-                untuk berinteraksi. Fitur utamanya adalah tombol "Gabung Grup"
-                yang nyambung dengan sistem notifikasi untuk memberikan
-                informasi bahwa pengguna telah resmi terdaftar di komunitas
-                tersebut.
-              </li>
-            </ul>
+          <!-- ==================== INTERFACE 7: EDIT AKTOR ==================== -->
+          <h3>7. Edit Aktor</h3>
+          <div class="interface-preview">
+            <img
+              src="img/interface/edit-aktor.jpg"
+              alt="Edit Aktor"
+              class="interface-img"
+              onerror="this.style.display = 'none'"
+            />
+          </div>
+          <p>
+            Halaman daftar semua aktor dalam bentuk tabel. Menampilkan foto,
+            nama, tanggal lahir, jumlah film yang dibintangi, dan status. Admin
+            dapat <strong>mencari</strong> aktor, <strong>mengedit</strong> data
+            aktor, atau <strong>menghapus</strong> aktor dengan konfirmasi
+            modal. Terdapat pagination untuk navigasi data.
+          </p>
+          <ul>
+            <li>
+              <strong>Fitur:</strong> Search, pagination, edit, hapus dengan
+              konfirmasi
+            </li>
+            <li><strong>Status:</strong> ✅ Selesai</li>
+          </ul>
 
-            <h3>10. Interface Ajukan Komunitas</h3>
-            <p>
-              Halaman interaktif yang berfungsi sebagai umpan balik dan
-              pengembangan konten berbasis komunitas.
-            </p>
-            <ul>
-              <li>
-                <b>Fungsinya:</b> Memungkinkan pengguna untuk bergabung langsung
-                dalam platform. Dengan sistem mendaftar yang tervalidasi, data
-                usulan film baru akan diterima oleh sistem dan (disimulasikan
-                dengan alert) untuk ditinjau lebih lanjut.
-              </li>
-            </ul>
-          </section>
+          <!-- ==================== INTERFACE 8: TAMBAH AKTOR ==================== -->
+          <h3>8. Tambah Aktor</h3>
+          <div class="interface-preview">
+            <img
+              src="img/interface/tambah-aktor.jpg"
+              alt="Tambah Aktor"
+              class="interface-img"
+              onerror="this.style.display = 'none'"
+            />
+          </div>
+          <p>
+            Formulir untuk menambahkan aktor baru ke database. Berisi field:
+            <strong>Nama Aktor</strong>, <strong>Bio</strong>,
+            <strong>Tanggal Lahir</strong>, <strong>Upload Foto Aktor</strong>,
+            dan <strong>Film yang Dibintangi</strong>
+            (dropdown dari database film yang sudah ada). Layout dua kolom
+            dengan tips pengisian.
+          </p>
+          <ul>
+            <li>
+              <strong>Fitur:</strong> Upload foto, pilih film dari dropdown,
+              simpan ke localStorage
+            </li>
+            <li><strong>Status:</strong> ✅ Selesai</li>
+          </ul>
+
+          <!-- ==================== INTERFACE 9: EDIT SUTRADARA ==================== -->
+          <h3>9. Edit Sutradara</h3>
+          <div class="interface-preview">
+            <img
+              src="img/interface/edit-sutradara.jpg"
+              alt="Edit Sutradara"
+              class="interface-img"
+              onerror="this.style.display = 'none'"
+            />
+          </div>
+          <p>
+            Halaman daftar semua sutradara dalam bentuk tabel. Menampilkan foto,
+            nama, tanggal lahir, jumlah film yang disutradarai, dan status.
+            Admin dapat mencari, mengedit, atau menghapus sutradara. Fitur
+            <strong>edit</strong> akan membawa ID ke halaman edit, sedangkan
+            <strong>hapus</strong> akan memunculkan modal konfirmasi.
+          </p>
+          <ul>
+            <li>
+              <strong>Fitur:</strong> Search, pagination, edit, hapus dengan
+              konfirmasi
+            </li>
+            <li><strong>Status:</strong> ✅ Selesai</li>
+          </ul>
+
+          <!-- ==================== INTERFACE 10: TAMBAH SUTRADARA ==================== -->
+          <h3>10. Tambah Sutradara</h3>
+          <div class="interface-preview">
+            <img
+              src="img/interface/tambah-sutradara.jpg"
+              alt="Tambah Sutradara"
+              class="interface-img"
+              onerror="this.style.display = 'none'"
+            />
+          </div>
+          <p>
+            Formulir untuk menambahkan sutradara baru. Berisi field:
+            <strong>Nama Sutradara</strong>, <strong>Bio</strong>,
+            <strong>Tanggal Lahir</strong>,
+            <strong>Upload Foto Sutradara</strong>, dan
+            <strong>Film yang Disutradarai</strong>
+            (dropdown dari database film yang sudah ada). Layout dua kolom
+            dengan tips pengisian di sisi kanan.
+          </p>
+          <ul>
+            <li>
+              <strong>Fitur:</strong> Upload foto, pilih film dari dropdown,
+              layout estetik
+            </li>
+            <li><strong>Status:</strong> ✅ Selesai</li>
+          </ul>
+
+          <hr style="margin: 30px 0; border-color: var(--accent)" />
+
+          <h3>Kesimpulan</h3>
+          <p>
+            Sebagai Developer 4, saya telah menyelesaikan 10 interface utama
+            untuk pengelolaan konten platform Pilih.in. Mulai dari Profil Admin,
+            Kelola Konten, pengelolaan artikel, pengelolaan film (tambah &
+            edit), pengelolaan aktor (tambah & edit), hingga pengelolaan
+            sutradara (tambah & edit). Seluruh halaman dirancang dengan tampilan
+            estetik, responsif, dan mendukung fungsionalitas CRUD lengkap.
+            Pengerjaan ini memastikan bahwa admin dapat mengelola seluruh konten
+            platform dengan mudah dan efisien.
+          </p>
         </article>
       </section>
     </main>
 
     <footer class="blog-footer">
-      <p>&copy; 2026 Yolanda Dhea Andini. All rights reserved.</p>
+      <p>
+        &copy; 2026 Yolanda Dhea Andini - Developer 4 Pilih.in. All rights
+        reserved.
+      </p>
     </footer>
   </body>
 </html>

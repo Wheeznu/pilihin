@@ -14,7 +14,7 @@ function _getCollection(name) {
 }
 
 function _formatDate(iso) {
-    if (!iso) return "—";
+    if (!iso) return "-";
     return new Date(iso).toLocaleDateString("id-ID", {
         day: "numeric",
         month: "short",
@@ -317,7 +317,7 @@ class ManagerReviewsPage {
                                                 <td>
                                                     <div class="reviews-table__user">
                                                         <img class="reviews-table__avatar" src="${user?.profilePhoto || ""}" alt="" onerror="this.style.display='none'" />
-                                                        <span class="reviews-table__user-name">${user?.username || "—"}</span>
+                                                        <span class="reviews-table__user-name">${user?.username || "-"}</span>
                                                     </div>
                                                 </td>
                                                 <td><span class="reviews-table__film">${this._getFilmTitle(r.filmId)}</span></td>
@@ -326,7 +326,7 @@ class ManagerReviewsPage {
                                                         <i data-feather="star"></i> ${r.rating}/10
                                                     </span>
                                                 </td>
-                                                <td><span class="reviews-table__content">${r.title || r.content?.slice(0, 50) || "—"}</span></td>
+                                                <td><span class="reviews-table__content">${r.title || r.content?.slice(0, 50) || "-"}</span></td>
                                                 <td>
                                                     <span class="reviews-table__status reviews-table__status--${r.status}">
                                                         ${r.status === "approved" ? "Disetujui" : r.status === "pending" ? "Menunggu" : "Ditolak"}

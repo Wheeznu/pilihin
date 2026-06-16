@@ -1,4 +1,4 @@
-import { getDbReady } from "../../../backend/init.js";
+import { getDbReady, apiRequest } from "../../../backend/init.js";
 import { DOM } from "../utils/dom.js";
 import authService from "../../../backend/services/AuthService.js";
 
@@ -34,16 +34,16 @@ function _seedSampleUsers() {
     if (existing.length > 0) return;
 
     const users = [
-        { id: "user-001", username: "budi", email: "budi@gmail.com", password: "user123", role: "user", profilePhoto: "", status: "active", subscriptionTier: "tier-001", subscriptionExpiry: null, createdAt: "2025-01-15T08:00:00Z", updatedAt: "2025-06-01T10:00:00Z", lastLogin: "2025-06-07T07:30:00Z" },
-        { id: "user-002", username: "siti", email: "siti@gmail.com", password: "user123", role: "user", profilePhoto: "", status: "active", subscriptionTier: "tier-002", subscriptionExpiry: "2025-08-15T00:00:00Z", createdAt: "2025-02-10T08:00:00Z", updatedAt: "2025-06-05T12:00:00Z", lastLogin: "2025-06-06T18:00:00Z" },
-        { id: "user-003", username: "agus", email: "agus@yahoo.com", password: "user123", role: "user", profilePhoto: "", status: "suspended", subscriptionTier: "tier-001", subscriptionExpiry: null, createdAt: "2025-03-01T08:00:00Z", updatedAt: "2025-05-20T09:00:00Z", lastLogin: "2025-05-15T14:00:00Z" },
-        { id: "user-004", username: "dewi", email: "dewi@gmail.com", password: "user123", role: "user", profilePhoto: "", status: "active", subscriptionTier: "tier-003", subscriptionExpiry: "2025-12-31T00:00:00Z", createdAt: "2025-01-20T08:00:00Z", updatedAt: "2025-06-07T08:00:00Z", lastLogin: "2025-06-07T08:00:00Z" },
-        { id: "user-005", username: "eko", email: "eko@outlook.com", password: "user123", role: "user", profilePhoto: "", status: "banned", subscriptionTier: null, subscriptionExpiry: null, createdAt: "2025-04-10T08:00:00Z", updatedAt: "2025-05-30T11:00:00Z", lastLogin: "2025-05-25T09:00:00Z" },
-        { id: "user-006", username: "fajar", email: "fajar@gmail.com", password: "user123", role: "user", profilePhoto: "", status: "active", subscriptionTier: "tier-002", subscriptionExpiry: "2025-10-01T00:00:00Z", createdAt: "2025-02-25T08:00:00Z", updatedAt: "2025-06-06T15:00:00Z", lastLogin: "2025-06-06T15:00:00Z" },
-        { id: "user-007", username: "gita", email: "gita@gmail.com", password: "user123", role: "user", profilePhoto: "", status: "active", subscriptionTier: "tier-001", subscriptionExpiry: null, createdAt: "2025-03-15T08:00:00Z", updatedAt: "2025-06-04T10:30:00Z", lastLogin: "2025-06-03T20:00:00Z" },
-        { id: "user-008", username: "hari", email: "hari@yahoo.com", password: "user123", role: "user", profilePhoto: "", status: "suspended", subscriptionTier: "tier-001", subscriptionExpiry: null, createdAt: "2025-04-01T08:00:00Z", updatedAt: "2025-05-28T16:00:00Z", lastLogin: "2025-05-20T11:00:00Z" },
-        { id: "manager-001", username: "manager1", email: "manager@pilihin.com", password: "manager123", role: "manager", profilePhoto: "", status: "active", subscriptionTier: null, subscriptionExpiry: null, createdAt: "2025-01-01T08:00:00Z", updatedAt: "2025-06-07T09:00:00Z", lastLogin: "2025-06-07T09:00:00Z" },
-        { id: "admin-001", username: "admin1", email: "admin@pilihin.com", password: "admin123", role: "admin", profilePhoto: "", status: "active", subscriptionTier: null, subscriptionExpiry: null, createdAt: "2025-01-01T08:00:00Z", updatedAt: "2025-06-07T09:00:00Z", lastLogin: "2025-06-07T09:00:00Z" },
+        { id: "user-001", username: "budi", fullName: "Budi", email: "budi@gmail.com", password: "user123", role: "user", profilePhoto: "", phone: "+6289999999999", bio: "", status: "active", subscriptionTier: "tier-001", subscriptionExpiry: null, createdAt: "2025-01-15T08:00:00Z", updatedAt: "2025-06-01T10:00:00Z", lastLogin: "2025-06-07T07:30:00Z" },
+        { id: "user-002", username: "siti", fullName: "Siti", email: "siti@gmail.com", password: "user123", role: "user", profilePhoto: "", phone: "+6289999999999", bio: "", status: "active", subscriptionTier: "tier-002", subscriptionExpiry: "2025-08-15T00:00:00Z", createdAt: "2025-02-10T08:00:00Z", updatedAt: "2025-06-05T12:00:00Z", lastLogin: "2025-06-06T18:00:00Z" },
+        { id: "user-003", username: "agus", fullName: "Agus", email: "agus@yahoo.com", password: "user123", role: "user", profilePhoto: "", phone: "+6289999999999", bio: "", status: "suspended", subscriptionTier: "tier-001", subscriptionExpiry: null, createdAt: "2025-03-01T08:00:00Z", updatedAt: "2025-05-20T09:00:00Z", lastLogin: "2025-05-15T14:00:00Z" },
+        { id: "user-004", username: "dewi", fullName: "Dewi", email: "dewi@gmail.com", password: "user123", role: "user", profilePhoto: "", phone: "+6289999999999", bio: "", status: "active", subscriptionTier: "tier-003", subscriptionExpiry: "2025-12-31T00:00:00Z", createdAt: "2025-01-20T08:00:00Z", updatedAt: "2025-06-07T08:00:00Z", lastLogin: "2025-06-07T08:00:00Z" },
+        { id: "user-005", username: "eko", fullName: "Eko", email: "eko@outlook.com", password: "user123", role: "user", profilePhoto: "", phone: "+6289999999999", bio: "", status: "banned", subscriptionTier: null, subscriptionExpiry: null, createdAt: "2025-04-10T08:00:00Z", updatedAt: "2025-05-30T11:00:00Z", lastLogin: "2025-05-25T09:00:00Z" },
+        { id: "user-006", username: "fajar", fullName: "Fajar", email: "fajar@gmail.com", password: "user123", role: "user", profilePhoto: "", phone: "+6289999999999", bio: "", status: "active", subscriptionTier: "tier-002", subscriptionExpiry: "2025-10-01T00:00:00Z", createdAt: "2025-02-25T08:00:00Z", updatedAt: "2025-06-06T15:00:00Z", lastLogin: "2025-06-06T15:00:00Z" },
+        { id: "user-007", username: "gita", fullName: "Gita", email: "gita@gmail.com", password: "user123", role: "user", profilePhoto: "", phone: "+6289999999999", bio: "", status: "active", subscriptionTier: "tier-001", subscriptionExpiry: null, createdAt: "2025-03-15T08:00:00Z", updatedAt: "2025-06-04T10:30:00Z", lastLogin: "2025-06-03T20:00:00Z" },
+        { id: "user-008", username: "hari", fullName: "Hari", email: "hari@yahoo.com", password: "user123", role: "user", profilePhoto: "", phone: "+6289999999999", bio: "", status: "suspended", subscriptionTier: "tier-001", subscriptionExpiry: null, createdAt: "2025-04-01T08:00:00Z", updatedAt: "2025-05-28T16:00:00Z", lastLogin: "2025-05-20T11:00:00Z" },
+        { id: "manager-001", username: "manager1", fullName: "Manager", email: "manager@pilihin.com", password: "manager123", role: "manager", profilePhoto: "", phone: "+6289999999999", bio: "", status: "active", subscriptionTier: null, subscriptionExpiry: null, createdAt: "2025-01-01T08:00:00Z", updatedAt: "2025-06-07T09:00:00Z", lastLogin: "2025-06-07T09:00:00Z" },
+        { id: "admin-001", username: "admin1", fullName: "Admin", email: "admin@pilihin.com", password: "admin123", role: "admin", profilePhoto: "", phone: "+6289999999999", bio: "", status: "active", subscriptionTier: null, subscriptionExpiry: null, createdAt: "2025-01-01T08:00:00Z", updatedAt: "2025-06-07T09:00:00Z", lastLogin: "2025-06-07T09:00:00Z" },
     ];
 
     _saveCollection("users", users);
@@ -246,7 +246,7 @@ class ManagerKelolaAkunPage {
                                 <i data-feather="play-circle"></i>
                             </button>
                         ` : `
-                            <span style="font-size:var(--font-xs);color:var(--text-muted)">—</span>
+                            <span style="font-size:var(--font-xs);color:var(--text-muted)">-</span>
                         `}
                     </div>
                 </td>
@@ -305,6 +305,7 @@ class ManagerKelolaAkunPage {
         user.role = newRole;
         user.updatedAt = new Date().toISOString();
         this._saveUsers(users);
+        apiRequest("PUT", `/api/users/${userId}`, { role: newRole });
         this._render();
         this._bindEvents();
         DOM.showToast(`Role berhasil diubah ke ${ROLE_LABELS[newRole]}`, "success");
@@ -320,6 +321,7 @@ class ManagerKelolaAkunPage {
         user.status = "suspended";
         user.updatedAt = new Date().toISOString();
         this._saveUsers(users);
+        apiRequest("PUT", `/api/users/${userId}`, { status: "suspended" });
         this._render();
         this._bindEvents();
         DOM.showToast("Akun berhasil di-suspend", "success");
@@ -335,6 +337,7 @@ class ManagerKelolaAkunPage {
         user.status = "banned";
         user.updatedAt = new Date().toISOString();
         this._saveUsers(users);
+        apiRequest("PUT", `/api/users/${userId}`, { status: "banned" });
         this._render();
         this._bindEvents();
         DOM.showToast("Akun berhasil diblokir", "success");
@@ -348,6 +351,7 @@ class ManagerKelolaAkunPage {
         user.status = "active";
         user.updatedAt = new Date().toISOString();
         this._saveUsers(users);
+        apiRequest("PUT", `/api/users/${userId}`, { status: "active" });
         this._render();
         this._bindEvents();
         DOM.showToast("Akun berhasil diaktifkan kembali", "success");

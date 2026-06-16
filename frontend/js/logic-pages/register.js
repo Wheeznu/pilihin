@@ -5,7 +5,7 @@ import { DOM } from "../utils/dom.js";
 class RegisterPage {
     constructor() {
         if (authService.isLoggedIn()) {
-            window.location.href = "../index.html";
+            window.location.href = "../../index.html";
             return;
         }
         this._cacheElements();
@@ -120,7 +120,7 @@ class RegisterPage {
                     localStorage.setItem("pilih-in-db", JSON.stringify(db));
                 }
             } catch {
-                // localStorage belum ada — skip sync
+                // localStorage belum ada - skip sync
             }
 
             this._setLoading(false);

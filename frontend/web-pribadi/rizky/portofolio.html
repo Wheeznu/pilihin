@@ -1,465 +1,940 @@
 <!doctype html>
 <html lang="id">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Portofolio | Blog Yukyy</title>
-        <link rel="stylesheet" href="css/portofolio.css" />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;800;900&display=swap"
-            rel="stylesheet"
-        />
-    </head>
-    <body>
-        <header class="neo-header">
-            <div class="logo">YUKYY.</div>
-            <nav class="neo-nav">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="../fitur-lainnya/404/404.html" class="nav-link">Artikel</a>
-                <a href="portofolio.html" class="nav-link active">Portofolio</a>
-            </nav>
-        </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Portofolio Rizky Ahmad Nasrulloh — Eksplorasi antarmuka web dan implementasi algoritma struktur data selama masa perkuliahan di Universitas Trunojoyo Madura."
+    />
+    <meta
+      name="keywords"
+      content="portofolio, algoritma, struktur data, python, web, UTM"
+    />
+    <meta name="author" content="Rizky Ahmad Nasrulloh" />
+    <title>Portofolio | YUKYY.</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- ===== HEADER ===== -->
+    <header class="neo-header" id="site-header">
+      <a href="index.html" class="logo">YUKYY.</a>
+      <nav class="neo-nav" aria-label="Navigasi utama">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="blog.html" class="nav-link">Artikel</a>
+        <a href="portofolio.html" class="nav-link active" aria-current="page"
+          >Portofolio</a
+        >
+      </nav>
+    </header>
 
-        <main class="container">
-            <h1 class="section-title-neo">Karya & Proyek</h1>
-            <p class="hero-description">
-                Beberapa eksplorasi antarmuka web dan implementasi algoritma
-                yang telah saya kembangkan selama masa perkuliahan.
+    <!-- ===== MAIN ===== -->
+    <main class="container">
+      <!-- Hero -->
+      <section class="page-hero" aria-label="Halaman utama portofolio">
+        <div class="hero-tag">Karya &amp; Proyek</div>
+        <h1 class="section-title-neo">
+          Algoritma
+          <span>&amp; Implementasi</span>
+        </h1>
+        <p class="hero-desc">
+          Kompilasi eksplorasi antarmuka web dan implementasi algoritma &amp;
+          struktur data yang dikembangkan selama masa perkuliahan di Universitas
+          Trunojoyo Madura.
+        </p>
+      </section>
+
+      <!-- Stats Bar -->
+      <div class="accordion-wrapper" id="accordion-algoritma">
+        <details class="algo-card fade-in-up" id="algo-stack">
+          <summary>
+            <span class="summary-number">01</span>
+            <span class="summary-title">Stack (Tumpukan) &amp; Delimiter</span>
+            <span class="summary-chevron" aria-hidden="true">▾</span>
+          </summary>
+          <div class="algo-body">
+            <p style="margin-bottom: 15px">
+              <span class="concept-chip">LIFO</span>
+              <span class="concept-chip">Push / Pop</span>
+              <strong>Stack (Tumpukan)</strong> adalah struktur data linear yang
+              mengikuti prinsip <em>Last In, First Out</em> (LIFO). Analogi
+              sederhananya adalah tumpukan piring; piring terakhir yang
+              diletakkan di atas tumpukan akan menjadi piring pertama yang
+              diambil. Penambahan elemen baru (<code>push</code>) dan
+              penghapusan elemen (<code>pop</code>) hanya bisa dilakukan pada
+              satu ujung yang sama, yaitu bagian puncak (<em>Top</em>).
             </p>
-
-            <div class="portfolio-grid">
-                <article class="neo-card portfolio-card">
-                    <div class="portfolio-img-container">
-                        <div class="placeholder-img">Screenshot PILIH.IN</div>
-                    </div>
-                    <div class="portfolio-content">
-                        <h2>PILIH.IN - Movie Web</h2>
-                        <p>
-                            Website pencarian dan rekomendasi film interaktif
-                            yang dilengkapi dengan fitur watchlist personal dan
-                            kuis film.
-                        </p>
-                        <div class="project-tags">
-                            <span class="hobby-tag">HTML/CSS/JS</span>
-                            <span class="hobby-tag">Web Design</span>
-                        </div>
-                        <a
-                            href="../index.html"
-                            class="btn-primary btn-small"
-                            >Lihat Detail Project</a
-                        >
-                    </div>
-                </article>
-
-                <article class="neo-card portfolio-card">
-                    <div class="portfolio-img-container">
-                        <div class="placeholder-img">Catatan Strukdat</div>
-                    </div>
-                    <div class="portfolio-content">
-                        <h2>Catatan Struktur Data</h2>
-                        <p>
-                            Kumpulan materi perkuliahan dan implementasi fungsi
-                            hashing menggunakan pendekatan logika prosedural
-                            tanpa class.
-                        </p>
-                        <div class="project-tags">
-                            <span class="hobby-tag">Python</span>
-                            <span class="hobby-tag">Strukdat</span>
-                        </div>
-                        <button
-                            class="btn-primary btn-small w-full text-center"
-                            data-action="toggle-catatan"
-                        >
-                            Lihat Catatan Strukdat
-                        </button>
-                    </div>
-                </article>
-            </div>
-
-            <div
-                id="area-catatan"
-                class="neo-card catatan-area"
-            >
-                <div class="catatan-header">
-                    <h3 class="catatan-title">
-                        Isi Catatan Struktur Data Lengkap
-                    </h3>
-                    <button
-                        class="btn-close"
-                        data-action="toggle-catatan"
-                    >
-                        Tutup [X]
-                    </button>
-                </div>
-
-                <div class="isi-catatan-user catatan-body">
-                    <p class="mb-20">
-                        Berikut adalah seluruh dokumentasi kode, konsep dasar,
-                        dan implementasi materi Struktur Data hasil pengerjaan
-                        di Jupyter Notebook:
-                    </p>
-
-                    <details class="catatan-details">
-                        <summary class="catatan-summary">
-                            1. Stack (Tumpukan) & Simulasi
-                        </summary>
-                        <div class="catatan-content">
-                            <p>
-                                <strong>Konsep:</strong> Sebuah kumpulan item
-                                yang terurut di mana penambahan item baru dan
-                                penghapusan item yang sudah ada selalu dilakukan
-                                pada ujung yang sama (top). Prinsip pengurutan
-                                ini disebut sebagai LIFO (Last In, First Out).
-                            </p>
-                            <pre class="catatan-code"><code>class Stack:
-    def __init__(self): self.items = []
-    def isEmpty(self): return self.items == []
-    def push(self, item): self.items.append(item)
-    def pop(self): return self.items.pop()
-    def peek(self): return self.items[-1]
-    def size(self): return len(self.items)</code></pre>
-
-                            <h4 class="mt-15">
-                                Studi Kasus 1: Pengecekan Palindrome
-                            </h4>
-                            <pre class="catatan-code"><code>kata = "KATAK"
-stack = []
-for huruf in kata: stack.append(huruf)
-hasil = ""
-while stack: hasil += stack.pop()
-print("Palindrome" if kata == hasil else "Bukan Palindrome")</code></pre>
-
-                            <h4 class="mt-15">
-                                Studi Kasus 2: Simulasi Fitur Undo Teks
-                            </h4>
-                            <pre class="catatan-code"><code>stack = []
-while True:
-    teks = input("Input: ")
-    if teks == "UNDO":
-        if stack: stack.pop() 
-        else: print("Tidak ada yang bisa di-UNDO")
-    else: stack.append(teks) 
-    print("Output:", stack[-1] if stack else "")</code></pre>
-
-                            <h4 class="mt-15">
-                                Studi Kasus 3: Simulasi Parkiran (LIFO)
-                            </h4>
-                            <pre class="catatan-code"><code>maks = 5
-parkiran = []
-while True:
-    pilihan = input("Pilih menu (1 Masuk / 2 Keluar): ")
-    if pilihan == "1":
-        if len(parkiran) < maks:
-            mobil = input("Masukkan plat: ")
-            parkiran.append(mobil)
-        else: print("Parkiran Penuh!")
-    elif pilihan == "2":
-        if parkiran: print("Mobil keluar:", parkiran.pop())</code></pre>
-                        </div>
-                    </details>
-
-                    <details class="catatan-details">
-                        <summary class="catatan-summary">
-                            2. Queue & Deque (Antrean)
-                        </summary>
-                        <div class="catatan-content">
-                            <p>
-                                <strong>Queue (FIFO):</strong> Penambahan item
-                                di belakang (rear) dan penghapusan di depan
-                                (front).
-                            </p>
-                            <pre class="catatan-code"><code>class Queue:
-    def __init__(self): self.items = []
-    def enqueue(self, item): self.items.insert(0, item)
-    def dequeue(self): return self.items.pop()</code></pre>
-
-                            <p>
-                                <strong>Deque (Double-Ended Queue):</strong>
-                                Item dapat ditambahkan atau dihapus dari kedua
-                                ujung.
-                            </p>
-                            <pre class="catatan-code"><code>class DeQueue:
-    def __init__(self): self.items = []
-    def addRear(self, item): self.items.insert(0, item)
-    def addFront(self, item): self.items.append(item)
-    def removeFront(self): return self.items.pop()
-    def removeRear(self): return self.items.pop(0)</code></pre>
-                        </div>
-                    </details>
-
-                    <details class="catatan-details">
-                        <summary class="catatan-summary">
-                            3. Evaluasi Ekspresi Postfix
-                        </summary>
-                        <div class="catatan-content">
-                            <p>
-                                Pemanfaatan Stack untuk mengonversi dan
-                                menghitung hasil dari notasi postfix.
-                            </p>
-                            <pre class="catatan-code"><code>def evaluate_postfix(postfix_expr):
-    stack = []
-    for char in postfix_expr:
-        if char.isdigit(): 
-            stack.append(int(char))
-        else:
-            val1 = stack.pop()
-            val2 = stack.pop()
-            if char == '+': stack.append(val2 + val1)
-            elif char == '-': stack.append(val2 - val1)
-            elif char == '*': stack.append(val2 * val1)
-            elif char == '/': stack.append(val2 / val1)
-    return stack.pop()</code></pre>
-                        </div>
-                    </details>
-
-                    <details class="catatan-details">
-                        <summary class="catatan-summary">
-                            4. Algoritma Sorting (Pengurutan)
-                        </summary>
-                        <div class="catatan-content">
-                            <p>
-                                <strong>Bubble Sort:</strong> Menukar elemen
-                                yang bersebelahan.
-                            </p>
-                            <pre class="catatan-code"><code>def bubble_sort(arr):
-    n = len(arr)
-    for i in range(n):
-        for j in range(0, n - i - 1):
-            if arr[j] > arr[j + 1]:
-                arr[j], arr[j+1] = arr[j+1], arr[j]</code></pre>
-
-                            <p>
-                                <strong>Selection Sort:</strong> Mencari elemen
-                                terkecil dan memindahkannya ke kiri.
-                            </p>
-                            <pre class="catatan-code"><code>def selection_sort(arr):
-    n = len(arr)
-    for i in range(n):
-        min_idx = i
-        for j in range(i + 1, n):
-            if arr[j] < arr[min_idx]: min_idx = j
-        arr[i], arr[min_idx] = arr[min_idx], arr[i]</code></pre>
-
-                            <p>
-                                <strong>Insertion Sort:</strong> Menyisipkan
-                                kartu ke posisi yang tepat.
-                            </p>
-                            <pre class="catatan-code"><code>def insertion_sort(arr):
-    for i in range(1, len(arr)):
-        key = arr[i]
-        j = i - 1
-        while j >= 0 and key < arr[j]:
-            arr[j + 1] = arr[j]
-            j -= 1
-        arr[j + 1] = key</code></pre>
-
-                            <p>
-                                <strong>Quick Sort:</strong> Menggunakan Pivot
-                                (Divide and Conquer).
-                            </p>
-                            <pre class="catatan-code"><code>def quick_sort(arr):
-    if len(arr) <= 1: return arr
-    else:
-        pivot = arr[len(arr) // 2]
-        left = [x for x in arr if x < pivot]
-        middle = [x for x in arr if x == pivot]
-        right = [x for x in arr if x > pivot]
-        return quick_sort(left) + middle + quick_sort(right)</code></pre>
-
-                            <p>
-                                <strong>Merge Sort:</strong> Membagi array dan
-                                menggabungkannya saat terurut.
-                            </p>
-                            <pre class="catatan-code"><code>def MergedSort(A):
-    if len(A) > 1:
-        mid = len(A) // 2
-        left, right = A[:mid], A[mid:]
-        MergedSort(left); MergedSort(right)
-        i = j = k = 0
-        while i < len(left) and j < len(right):
-            if left[i] < right[j]: A[k] = left[i]; i += 1
-            else: A[k] = right[j]; j += 1
-            k += 1
-        while i < len(left): A[k] = left[i]; i += 1; k += 1
-        while j < len(right): A[k] = right[j]; j += 1; k += 1</code></pre>
-
-                            <p>
-                                <strong>Shell Sort:</strong> Bubble Sort
-                                berjarak gap.
-                            </p>
-                            <pre class="catatan-code"><code>def shellSort(alist):
-    sublistcount = len(alist) // 2
-    while sublistcount > 0:
-        for startposition in range(sublistcount):
-            gapInsertionSort(alist, startposition, sublistcount)
-        sublistcount = sublistcount // 2</code></pre>
-                        </div>
-                    </details>
-
-                    <details class="catatan-details">
-                        <summary class="catatan-summary">
-                            5. Algoritma Searching (Pencarian)
-                        </summary>
-                        <div class="catatan-content">
-                            <p><strong>Sequential / Linear Search:</strong></p>
-                            <pre class="catatan-code"><code>def sequentialSearch(alist, item):
-    pos = 0; found = False
-    while pos < len(alist) and not found:
-        if alist[pos] == item: found = True
-        else: pos = pos + 1
-    return found</code></pre>
-
-                            <p><strong>Binary Search:</strong></p>
-                            <pre class="catatan-code"><code>def binarySearch(alist, item):
-    first, last = 0, len(alist) - 1
-    found = False
-    while first <= last and not found:
-        midpoint = (first + last) // 2
-        if alist[midpoint] == item: found = True
-        elif item < alist[midpoint]: last = midpoint - 1
-        else: first = midpoint + 1
-    return found</code></pre>
-                        </div>
-                    </details>
-
-                    <details
-                        open
-                        class="catatan-details"
-                    >
-                        <summary class="catatan-summary">
-                            6. Implementasi Hashing Prosedural
-                        </summary>
-                        <div class="catatan-content">
-                            <p>
-                                <strong>Konsep Hash Table:</strong> Struktur
-                                data tempat penyimpanan elemen berdasarkan nilai
-                                kunci pencarian (hash key) guna mempercepat
-                                proses pencarian data (mencapai O(1)).
-                            </p>
-
-                            <div class="catatan-info-box">
-                                <p>
-                                    <strong
-                                        >⚠️ Aturan Batasan Pengodean
-                                        Tugas:</strong
-                                    >
-                                </p>
-                                <ul>
-                                    <li>
-                                        Dilarang keras menggunakan arsitektur
-                                        OOP / <code>class</code>. Wajib
-                                        menggunakan fungsi prosedural.
-                                    </li>
-                                    <li>
-                                        Sistem input tidak digabungkan;
-                                        ditangani per individu prompt (satu
-                                        persatu).
-                                    </li>
-                                    <li>
-                                        Boleh menggunakan parameter
-                                        <code>num</code> dalam operasi
-                                        perhitungan nilai/biner.
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <h4 class="mt-15">1. Linear Probing</h4>
-                            <pre class="catatan-code"><code>table = [None] * 11        
-value = 44                 
-collision = value % 11     
-
-table[collision] = 999    
-found = False
-ind = collision + 1
-if ind >= len(table): ind = 0
-
-while (ind <= len(table) - 1) and not found:
-    if table[ind] == None:
-        found = True; table[ind] = value
-    ind = ind + 1</code></pre>
-
-                            <h4 class="mt-15">
-                                2. Quadratic Probing
-                            </h4>
-                            <pre class="catatan-code"><code>found = False
-i = 1
-ind = collision + 1
-if ind > len(table) - 1: ind = ind - len(table)
-
-while (ind <= len(table) - 1) and not found:
-    if table[ind] == None:
-        found = True; table[ind] = value
-    else:
-        ind = (collision + (i*i)) % 11
-        i = i + 1</code></pre>
-
-                            <h4 class="mt-15">3. Chaining</h4>
-                            <pre class="catatan-code"><code>table = [[] for _ in range(11)]
-
-def hash(x): return x % 11
-def insert(table, key, value): table[hash(key)].append(value)
-
-insert(table, 44, 44)
-insert(table, 55, 55)</code></pre>
-                        </div>
-                    </details>
-                </div>
-            </div>
-
-            <section class="contact-section mt-80">
-                <h2 class="section-title-neo fs-2rem">
-                    Mari Berdiskusi
-                </h2>
-                <form action="#" class="neo-form">
-                    <div class="form-group">
-                        <label for="nama" class="form-label"
-                            >Nama Lengkap</label
-                        >
-                        <input
-                            type="text"
-                            id="nama"
-                            class="form-input"
-                            placeholder="Masukkan namamu..."
-                            required
-                        />
-                    </div>
-                    <div class="form-group">
-                        <label for="email" class="form-label"
-                            >Email Aktif</label
-                        >
-                        <input
-                            type="email"
-                            id="email"
-                            class="form-input"
-                            placeholder="alamat@email.com"
-                            required
-                        />
-                    </div>
-                    <div class="form-group">
-                        <label for="pesan" class="form-label"
-                            >Pesan / Penawaran Kolaborasi</label
-                        >
-                        <textarea
-                            id="pesan"
-                            class="form-input"
-                            rows="5"
-                            placeholder="Tuliskan pesanmu di sini..."
-                            required
-                        ></textarea>
-                    </div>
-                    <button type="submit" class="btn-primary btn-submit">
-                        Kirim Pesan
-                    </button>
-                </form>
-            </section>
-        </main>
-
-        <footer class="neo-footer">
             <p>
-                &copy; 2026 Rizky Ahmad Nasrulloh - Universitas Trunojoyo Madura
+              Dalam ilmu komputer, konsep ini adalah fondasi bagi manajemen
+              memori (<em>Call Stack</em>), fitur <em>Undo</em> pada aplikasi,
+              serta fungsi *parsing* sintaks. Salah satu penerapannya adalah
+              algoritma pengecekan kurung (delimiter) untuk mengevaluasi apakah
+              sebuah ekspresi matematika ditulis dengan urutan buka-tutup kurung
+              yang seimbang dan valid.
             </p>
-        </footer>
 
-        <script src="js/portofolio.js"></script>
-    </body>
+            <h4 style="margin-top: 25px">Operasi Dasar Stack Prosedural</h4>
+            <div class="code-block-wrapper">
+              <div class="code-label">
+                <span class="code-lang">Python</span>
+                <button
+                  class="copy-btn"
+                  data-copy-target="code-stack-1"
+                  aria-label="Salin kode"
+                >
+                  Salin
+                </button>
+              </div>
+              <pre
+                class="code-block"
+                id="code-stack-1"
+              ><code><span class="cm"># Operasi Dasar Stack Prosedural</span>
+<span class="kw">def</span> <span class="fn">buat_stack</span>(): <span class="kw">return</span> []
+<span class="kw">def</span> <span class="fn">push</span>(stack, item): stack.append(item)
+<span class="kw">def</span> <span class="fn">pop</span>(stack): <span class="kw">return</span> stack.pop()
+<span class="kw">def</span> <span class="fn">is_empty</span>(stack): <span class="kw">return</span> stack == []
+<span class="kw">def</span> <span class="fn">peek</span>(stack): <span class="kw">return</span> stack[-<span class="nm">1</span>] <span class="kw">if not</span> <span class="fn">is_empty</span>(stack) <span class="kw">else</span> <span class="kw">None</span></code></pre>
+            </div>
+
+            <h4 style="margin-top: 25px">
+              Studi Kasus: Pengecekan Kurung (Parentheses)
+            </h4>
+            <p>
+              Algoritma untuk memastikan jumlah kurung buka dan tutup dalam
+              operasi matematika seimbang dan valid.
+            </p>
+            <div class="code-block-wrapper">
+              <div class="code-label">
+                <span class="code-lang">Python</span>
+                <button
+                  class="copy-btn"
+                  data-copy-target="code-stack-2"
+                  aria-label="Salin kode"
+                >
+                  Salin
+                </button>
+              </div>
+              <pre
+                class="code-block"
+                id="code-stack-2"
+              ><code><span class="kw">def</span> <span class="fn">checkParentheses</span>(strMat):
+    data = <span class="fn">buat_stack</span>()
+    <span class="kw">for</span> ch <span class="kw">in</span> strMat:
+        <span class="kw">if</span> ch == <span class="st">'('</span>:
+            <span class="fn">push</span>(data, ch)
+        <span class="kw">elif</span> ch == <span class="st">')'</span>:
+            <span class="kw">if</span> <span class="fn">is_empty</span>(data):
+                <span class="kw">return</span> <span class="st">"Kelebihan kurung tutup"</span>
+            <span class="fn">pop</span>(data)
+
+    <span class="kw">if</span> <span class="fn">is_empty</span>(data):
+        <span class="kw">return</span> <span class="kw">True</span>
+    <span class="kw">else</span>:
+        <span class="kw">return</span> <span class="st">"Kelebihan kurung buka"</span></code></pre>
+            </div>
+          </div>
+        </details>
+
+        <details class="algo-card fade-in-up" id="algo-queue">
+          <summary>
+            <span class="summary-number">02</span>
+            <span class="summary-title"
+              >Queue (Antrean) &amp; Sparse Matrix</span
+            >
+            <span class="summary-chevron" aria-hidden="true">▾</span>
+          </summary>
+          <div class="algo-body">
+            <p style="margin-bottom: 15px">
+              <span class="concept-chip">FIFO</span>
+              <span class="concept-chip">Enqueue / Dequeue</span>
+              <strong>Queue (Antrean)</strong> beroperasi dengan prinsip
+              <em>First In, First Out</em> (FIFO). Elemen yang masuk lebih dulu
+              akan diproses dan dikeluarkan lebih dulu. Penambahan data
+              (<code>enqueue</code>) terjadi di sisi belakang (<em>Rear</em>),
+              sedangkan penghapusan data (<code>dequeue</code>) terjadi di sisi
+              depan (<em>Front</em>). Pola ini sangat krusial dalam sistem
+              <em>task scheduling</em> CPU, antrean mesin cetak
+              (<em>printer</em>), hingga pemrosesan pesan (<em
+                >message brokering</em
+              >).
+            </p>
+            <p>
+              Selain Queue, <strong>Sparse Matrix</strong> adalah teknik
+              struktur data tingkat lanjut untuk efisiensi memori. Dalam matriks
+              2D berukuran raksasa yang mayoritas elemennya bernilai nol,
+              menyimpan seluruh elemen tersebut akan memboroskan kapasitas.
+              Dengan konsep Sparse Matrix, kita memanfaatkan
+              <em>Dictionary</em> untuk memetakan koordinat baris dan kolom
+              hanya pada elemen yang memiliki nilai aktual, membuang alokasi
+              memori untuk angka nol.
+            </p>
+
+            <h4 style="margin-top: 25px">Operasi Dasar Queue Prosedural</h4>
+            <div class="code-block-wrapper">
+              <div class="code-label">
+                <span class="code-lang">Python</span>
+                <button
+                  class="copy-btn"
+                  data-copy-target="code-queue-1"
+                  aria-label="Salin kode"
+                >
+                  Salin
+                </button>
+              </div>
+              <pre
+                class="code-block"
+                id="code-queue-1"
+              ><code><span class="cm"># Operasi Dasar Queue Prosedural</span>
+<span class="kw">def</span> <span class="fn">queue</span>(): <span class="kw">return</span> []
+<span class="kw">def</span> <span class="fn">enqueue</span>(q, data): q.append(data)
+<span class="kw">def</span> <span class="fn">dequeue</span>(q): <span class="kw">return</span> q.pop(<span class="nm">0</span>) <span class="kw">if</span> q <span class="kw">else</span> <span class="kw">None</span></code></pre>
+            </div>
+
+            <h4 style="margin-top: 25px">
+              Studi Kasus: Sparse Matrix Menggunakan Dictionary
+            </h4>
+            <div class="code-block-wrapper">
+              <div class="code-label">
+                <span class="code-lang">Python</span>
+                <button
+                  class="copy-btn"
+                  data-copy-target="code-queue-2"
+                  aria-label="Salin kode"
+                >
+                  Salin
+                </button>
+              </div>
+              <pre
+                class="code-block"
+                id="code-queue-2"
+              ><code><span class="kw">def</span> <span class="fn">buat_sparse_matrix</span>(baris, kolom):
+    <span class="kw">return</span> {<span class="st">'baris'</span>: baris, <span class="st">'kolom'</span>: kolom, <span class="st">'data'</span>: {}}
+
+<span class="kw">def</span> <span class="fn">tambah_data_matrix</span>(matrix, baris, kolom, nilai):
+    <span class="kw">if</span> nilai != <span class="nm">0</span>:
+        matrix[<span class="st">'data'</span>][(baris, kolom)] = nilai
+
+<span class="kw">def</span> <span class="fn">tampilkan_matrix</span>(matrix):
+    <span class="kw">for</span> i <span class="kw">in</span> range(matrix[<span class="st">'baris'</span>]):
+        baris_str = <span class="st">""</span>
+        <span class="kw">for</span> j <span class="kw">in</span> range(matrix[<span class="st">'kolom'</span>]):
+            nilai = matrix[<span class="st">'data'</span>].get((i, j), <span class="nm">0</span>)
+            baris_str += str(nilai) + <span class="st">" "</span>
+        print(baris_str)</code></pre>
+            </div>
+          </div>
+        </details>
+
+        <details class="algo-card fade-in-up" id="algo-rekursif">
+          <summary>
+            <span class="summary-number">03</span>
+            <span class="summary-title">Eksplorasi Fungsi Rekursif</span>
+            <span class="summary-chevron" aria-hidden="true">▾</span>
+          </summary>
+          <div class="algo-body">
+            <p style="margin-bottom: 15px">
+              <span class="concept-chip">Base Case</span>
+              <span class="concept-chip">Call Stack</span>
+              <strong>Rekursi</strong> adalah teknik pemrograman di mana sebuah
+              fungsi memanggil dirinya sendiri secara berulang untuk memecah
+              masalah besar menjadi sub-masalah yang lebih kecil namun identik.
+              Komponen paling vital dari rekursi adalah
+              <strong>Base Case</strong> (kondisi dasar); sebuah batas henti
+              agar fungsi tidak memanggil dirinya terus-menerus yang dapat
+              menyebabkan kelebihan beban memori (<em>Stack Overflow</em>).
+            </p>
+            <p>
+              Pendekatan ini menghasilkan kode yang sangat deklaratif dan
+              elegan, terutama untuk persoalan matematis. Misalnya, dalam
+              konversi bilangan desimal ke biner, fungsi rekursif dapat
+              menggunakan parameter <code>num</code> secara dinamis, membagi
+              nilai parameter tersebut menjadi separuhnya pada setiap iterasi
+              hingga mencapai kondisi dasar, sebelum akhirnya mencetak jejak
+              hasil modulus.
+            </p>
+
+            <h4 style="margin-top: 25px">1. Faktorial Rekursif</h4>
+            <div class="code-block-wrapper">
+              <div class="code-label">
+                <span class="code-lang">Python</span>
+                <button
+                  class="copy-btn"
+                  data-copy-target="code-rek-1"
+                  aria-label="Salin kode"
+                >
+                  Salin
+                </button>
+              </div>
+              <pre
+                class="code-block"
+                id="code-rek-1"
+              ><code><span class="kw">def</span> <span class="fn">factorialRekursif</span>(bilangan):
+    <span class="kw">if</span> bilangan &lt;= <span class="nm">1</span>: <span class="kw">return</span> <span class="nm">1</span>  <span class="cm"># Base Case</span>
+    <span class="kw">else</span>: <span class="kw">return</span> bilangan * <span class="fn">factorialRekursif</span>(bilangan - <span class="nm">1</span>)</code></pre>
+            </div>
+
+            <h4 style="margin-top: 25px">2. Eksponen (Pangkat) Rekursif</h4>
+            <div class="code-block-wrapper">
+              <div class="code-label">
+                <span class="code-lang">Python</span>
+                <button
+                  class="copy-btn"
+                  data-copy-target="code-rek-2"
+                  aria-label="Salin kode"
+                >
+                  Salin
+                </button>
+              </div>
+              <pre
+                class="code-block"
+                id="code-rek-2"
+              ><code><span class="kw">def</span> <span class="fn">eksponenRekursif</span>(x, n):
+    <span class="kw">if</span> n == <span class="nm">0</span>: <span class="kw">return</span> <span class="nm">1</span>  <span class="cm"># Base case pangkat 0</span>
+    <span class="kw">else</span>: <span class="kw">return</span> x * <span class="fn">eksponenRekursif</span>(x, n - <span class="nm">1</span>)</code></pre>
+            </div>
+
+            <h4 style="margin-top: 25px">3. Konversi Desimal ke Biner</h4>
+            <div class="code-block-wrapper">
+              <div class="code-label">
+                <span class="code-lang">Python</span>
+                <button
+                  class="copy-btn"
+                  data-copy-target="code-rek-3"
+                  aria-label="Salin kode"
+                >
+                  Salin
+                </button>
+              </div>
+              <pre
+                class="code-block"
+                id="code-rek-3"
+              ><code><span class="kw">def</span> <span class="fn">konversiBiner</span>(num):
+    <span class="kw">if</span> num &gt; <span class="nm">1</span>:
+        <span class="fn">konversiBiner</span>(num // <span class="nm">2</span>)
+    print(num % <span class="nm">2</span>, end=<span class="st">''</span>)</code></pre>
+            </div>
+          </div>
+        </details>
+
+        <details class="algo-card fade-in-up" id="algo-sorting">
+          <summary>
+            <span class="summary-number">04</span>
+            <span class="summary-title">Sorting &amp; Modifikasi Lanjut</span>
+            <span class="summary-chevron" aria-hidden="true">▾</span>
+          </summary>
+          <div class="algo-body">
+            <p style="margin-bottom: 15px">
+              <span class="concept-chip">Bubble Sort</span>
+              <span class="concept-chip">Selection Sort</span>
+              <strong>Sorting (Pengurutan)</strong> adalah proses algoritmik
+              mengatur sekumpulan data ke dalam urutan tertentu (Ascending atau
+              Descending). Berbagai metode digunakan tergantung kompleksitas
+              masalahnya:
+            </p>
+            <ul
+              style="
+                margin-bottom: 15px;
+                margin-left: 20px;
+                color: var(--text-muted);
+              "
+            >
+              <li>
+                <strong>Bubble Sort:</strong> Algoritma klasik yang
+                membandingkan pasangan elemen yang bersebelahan, lalu menukarnya
+                jika posisinya terbalik. Mirip gelembung udara, nilai terbesar
+                akan pelan-pelan "naik" ke ujung array pada setiap iterasi.
+              </li>
+              <li>
+                <strong>Selection Sort:</strong> Bekerja dengan cara membagi
+                rentang data menjadi dua bagian (terurut dan belum terurut).
+                Algoritma ini mencari elemen paling minimum/maksimum dari sisi
+                yang belum terurut, dan memindahkannya ke posisi absolutnya.
+              </li>
+            </ul>
+            <p>
+              Dengan menggunakan logika kontrol prosedural (fungsi berbasis blok
+              iterasi murni tanpa pembungkus objek), memodifikasi indeks—seperti
+              memisahkan area pertukaran angka genap dan ganjil—dapat dilakukan
+              dengan sangat presisi.
+            </p>
+
+            <h4 style="margin-top: 25px">
+              1. Bidirectional Bubble Sort (Cocktail Sort)
+            </h4>
+            <p>
+              Modifikasi performa: Iterasi ganjil bergerak memindai array dari
+              kiri ke kanan, sedangkan iterasi genap memindai dari kanan ke
+              kiri. Dilengkapi mekanisme <em>early stopping</em> jika data sudah
+              terurut.
+            </p>
+            <div class="code-block-wrapper">
+              <div class="code-label">
+                <span class="code-lang">Python</span>
+                <button
+                  class="copy-btn"
+                  data-copy-target="code-sort-1"
+                  aria-label="Salin kode"
+                >
+                  Salin
+                </button>
+              </div>
+              <pre
+                class="code-block"
+                id="code-sort-1"
+              ><code><span class="kw">def</span> <span class="fn">bidirectionalBubbleSort</span>(arr):
+    n = len(arr)
+    tukar = <span class="kw">True</span>
+    awal = <span class="nm">0</span>
+    akhir = n - <span class="nm">1</span>
+
+    <span class="kw">while</span> tukar:
+        tukar = <span class="kw">False</span>
+        <span class="cm"># Kiri ke kanan</span>
+        <span class="kw">for</span> i <span class="kw">in</span> range(awal, akhir):
+            <span class="kw">if</span> arr[i] &gt; arr[i + <span class="nm">1</span>]:
+                arr[i], arr[i + <span class="nm">1</span>] = arr[i + <span class="nm">1</span>], arr[i]
+                tukar = <span class="kw">True</span>
+        <span class="kw">if not</span> tukar: <span class="kw">break</span>
+        tukar = <span class="kw">False</span>
+        akhir -= <span class="nm">1</span>
+        <span class="cm"># Kanan ke kiri</span>
+        <span class="kw">for</span> i <span class="kw">in</span> range(akhir - <span class="nm">1</span>, awal - <span class="nm">1</span>, -<span class="nm">1</span>):
+            <span class="kw">if</span> arr[i] &gt; arr[i + <span class="nm">1</span>]:
+                arr[i], arr[i + <span class="nm">1</span>] = arr[i + <span class="nm">1</span>], arr[i]
+                tukar = <span class="kw">True</span>
+        awal += <span class="nm">1</span></code></pre>
+            </div>
+
+            <h4 style="margin-top: 25px">
+              2. Selection Sort (Genap Ascending, Ganjil Descending)
+            </h4>
+            <div class="code-block-wrapper">
+              <div class="code-label">
+                <span class="code-lang">Python</span>
+                <button
+                  class="copy-btn"
+                  data-copy-target="code-sort-2"
+                  aria-label="Salin kode"
+                >
+                  Salin
+                </button>
+              </div>
+              <pre
+                class="code-block"
+                id="code-sort-2"
+              ><code><span class="kw">def</span> <span class="fn">modifiedSelectionSort</span>(arr):
+    n = len(arr)
+    <span class="kw">for</span> i <span class="kw">in</span> range(n):
+        <span class="kw">if</span> arr[i] % <span class="nm">2</span> == <span class="nm">0</span>:
+            <span class="cm"># Genap: Cari nilai minimum untuk Ascending</span>
+            idx_target = i
+            <span class="kw">for</span> j <span class="kw">in</span> range(i + <span class="nm">1</span>, n):
+                <span class="kw">if</span> arr[j] % <span class="nm">2</span> == <span class="nm">0</span> <span class="kw">and</span> arr[j] &lt; arr[idx_target]:
+                    idx_target = j
+            arr[i], arr[idx_target] = arr[idx_target], arr[i]
+        <span class="kw">else</span>:
+            <span class="cm"># Ganjil: Cari nilai maksimum untuk Descending</span>
+            idx_target = i
+            <span class="kw">for</span> j <span class="kw">in</span> range(i + <span class="nm">1</span>, n):
+                <span class="kw">if</span> arr[j] % <span class="nm">2</span> != <span class="nm">0</span> <span class="kw">and</span> arr[j] &gt; arr[idx_target]:
+                    idx_target = j
+            arr[i], arr[idx_target] = arr[idx_target], arr[i]</code></pre>
+            </div>
+          </div>
+        </details>
+
+        <details class="algo-card fade-in-up" id="algo-searching">
+          <summary>
+            <span class="summary-number">05</span>
+            <span class="summary-title"
+              >Searching &amp; Analisis Jangkauan</span
+            >
+            <span class="summary-chevron" aria-hidden="true">▾</span>
+          </summary>
+          <div class="algo-body">
+            <p style="margin-bottom: 15px">
+              <span class="concept-chip">Linear Search</span>
+              <span class="concept-chip">Binary Search</span>
+              <strong>Searching (Pencarian)</strong> bertujuan untuk menemukan
+              keberadaan dan lokasi spesifik dari sebuah target elemen di dalam
+              himpunan data.
+            </p>
+            <ul
+              style="
+                margin-bottom: 15px;
+                margin-left: 20px;
+                color: var(--text-muted);
+              "
+            >
+              <li>
+                <strong>Linear Search:</strong> Memeriksa setiap elemen data
+                satu demi satu secara sekuensial. Keuntungannya adalah dapat
+                bekerja pada himpunan data yang masih acak (belum terurut).
+              </li>
+              <li>
+                <strong>Binary Search:</strong> Algoritma pencarian super cepat
+                yang membagi ruang array menjadi dua bagian pada setiap
+                iterasinya (<em>Divide and Conquer</em>). Syarat mutlak
+                penggunaannya adalah himpunan data harus sudah dalam kondisi
+                terurut.
+              </li>
+            </ul>
+
+            <h4 style="margin-top: 25px">
+              1. Modifikasi Linear Search (Multi-Match)
+            </h4>
+            <p>
+              Bukan sekadar menemukan kemunculan pertama, algoritma ini
+              menjelajahi seluruh data untuk menangkap keseluruhan indeks, total
+              frekuensi, serta mencatat kemunculan perdana dan terakhir dari
+              target.
+            </p>
+            <div class="code-block-wrapper">
+              <div class="code-label">
+                <span class="code-lang">Python</span>
+                <button
+                  class="copy-btn"
+                  data-copy-target="code-search-1"
+                  aria-label="Salin kode"
+                >
+                  Salin
+                </button>
+              </div>
+              <pre
+                class="code-block"
+                id="code-search-1"
+              ><code><span class="kw">def</span> <span class="fn">multiLinearSearch</span>(arr, target):
+    indeks_ditemukan = []
+    <span class="kw">for</span> i <span class="kw">in</span> range(len(arr)):
+        <span class="kw">if</span> arr[i] == target:
+            indeks_ditemukan.append(i)
+
+    <span class="kw">if</span> len(indeks_ditemukan) &gt; <span class="nm">0</span>:
+        print(<span class="st">"Ditemukan di index:"</span>, indeks_ditemukan)
+        print(<span class="st">"Total kemunculan:"</span>, len(indeks_ditemukan))
+        print(<span class="st">"Index pertama:"</span>, indeks_ditemukan[<span class="nm">0</span>], <span class="st">"Terakhir:"</span>, indeks_ditemukan[-<span class="nm">1</span>])
+    <span class="kw">else</span>:
+        print(<span class="st">"Data tidak ditemukan"</span>)</code></pre>
+            </div>
+
+            <h4 style="margin-top: 25px">
+              2. Closest Value &amp; Range Search
+            </h4>
+            <div class="code-block-wrapper">
+              <div class="code-label">
+                <span class="code-lang">Python</span>
+                <button
+                  class="copy-btn"
+                  data-copy-target="code-search-2"
+                  aria-label="Salin kode"
+                >
+                  Salin
+                </button>
+              </div>
+              <pre
+                class="code-block"
+                id="code-search-2"
+              ><code><span class="kw">def</span> <span class="fn">cari_terdekat</span>(arr, target):
+    terdekat = arr[<span class="nm">0</span>]
+    selisih_min = abs(target - arr[<span class="nm">0</span>])
+
+    <span class="kw">for</span> num <span class="kw">in</span> arr:
+        selisih = abs(target - num)
+        <span class="kw">if</span> selisih &lt; selisih_min:
+            terdekat = num
+            selisih_min = selisih
+    <span class="kw">return</span> terdekat
+
+<span class="kw">def</span> <span class="fn">cari_range</span>(arr, lower, upper):
+    hasil = []
+    <span class="kw">for</span> num <span class="kw">in</span> arr:
+        <span class="kw">if</span> lower &lt;= num &lt;= upper:
+            hasil.append(num)
+    <span class="kw">return</span> hasil</code></pre>
+            </div>
+          </div>
+        </details>
+
+        <details class="algo-card fade-in-up" id="algo-hashing" open>
+          <summary>
+            <span class="summary-number">06</span>
+            <span class="summary-title">Hashing, Chaining &amp; Anagram</span>
+            <span class="summary-chevron" aria-hidden="true">▾</span>
+          </summary>
+          <div class="algo-body">
+            <p style="margin-bottom: 15px">
+              <span class="concept-chip">O(1) Lookup</span>
+              <span class="concept-chip">Chaining</span>
+              <span class="concept-chip">Collision</span>
+              <strong>Hashing</strong> adalah fondasi dari pemetaan data dengan
+              kecepatan akses konstan, atau <em>O(1)</em>. Data didistribusikan
+              ke dalam sel-sel array bernama Tabel Hash, di mana indeks
+              tujuannya dihitung berdasarkan rumus matematis spesifik (seperti
+              fungsi sisa bagi / modulo).
+            </p>
+            <p>
+              Problem utama dalam hashing adalah
+              <strong>Collision</strong> (Tabrakan), yang terjadi manakala dua
+              nilai kunci berbeda menghasilkan indeks penyimpanan yang sama.
+              Implementasi di bawah ini menggunakan teknik resolusi
+              <strong>Chaining</strong>, yaitu menyarangkan senarai (list) di
+              dalam setiap slot tabel untuk mengakomodir beberapa elemen di
+              indeks yang sama. Pendekatan pada struktur dan eksekusinya
+              berorientasi murni secara prosedural, menghindari enkapsulasi
+              class, guna menjamin ketepatan aliran fungsi secara linear.
+            </p>
+
+            <h4 style="margin-top: 25px">Aturan Input Data Individual</h4>
+            <p>
+              Untuk menghindari anomali penggabungan dalam serangkaian kalkulasi
+              nilai, sistem input menangkap dan mengikat setiap data dari
+              keyboard secara berurutan dalam prompt yang terisolasi per
+              individu variabel.
+            </p>
+            <div class="code-block-wrapper">
+              <div class="code-label">
+                <span class="code-lang">Python</span>
+                <button
+                  class="copy-btn"
+                  data-copy-target="code-hash-0"
+                  aria-label="Salin kode"
+                >
+                  Salin
+                </button>
+              </div>
+              <pre
+                class="code-block"
+                id="code-hash-0"
+              ><code><span class="cm"># Sistem pengambilan data dikendalikan secara presisi, variabel per variabel</span>
+input_A = int(input(<span class="st">"Masukkan nilai A: "</span>))
+input_B = int(input(<span class="st">"Masukkan nilai B: "</span>))
+<span class="cm"># Kalkulasi hash operasional dilanjutkan...</span></code></pre>
+            </div>
+
+            <h4 style="margin-top: 25px">
+              1. Pembuatan Tabel &amp; Pencarian (searchHash)
+            </h4>
+            <div class="code-block-wrapper">
+              <div class="code-label">
+                <span class="code-lang">Python</span>
+                <button
+                  class="copy-btn"
+                  data-copy-target="code-hash-1"
+                  aria-label="Salin kode"
+                >
+                  Salin
+                </button>
+              </div>
+              <pre
+                class="code-block"
+                id="code-hash-1"
+              ><code><span class="kw">def</span> <span class="fn">create_hash_table</span>(size):
+    <span class="kw">return</span> [[] <span class="kw">for</span> _ <span class="kw">in</span> range(size)]
+
+<span class="kw">def</span> <span class="fn">remainder_function</span>(data, size):
+    <span class="kw">return</span> data % size
+
+<span class="kw">def</span> <span class="fn">chaining</span>(arr_data, hash_table):
+    <span class="kw">for</span> item <span class="kw">in</span> arr_data:
+        slot = <span class="fn">remainder_function</span>(item, len(hash_table))
+        hash_table[slot].append(item)
+
+<span class="kw">def</span> <span class="fn">searchHash</span>(target, hash_table):
+    slot = <span class="fn">remainder_function</span>(target, len(hash_table))
+    <span class="kw">for</span> i <span class="kw">in</span> range(len(hash_table[slot])):
+        <span class="kw">if</span> hash_table[slot][i] == target:
+            <span class="kw">return</span> <span class="st">f"Data di slot ke-{slot}, indeks ke-{i}"</span>
+    <span class="kw">return</span> <span class="kw">False</span></code></pre>
+            </div>
+
+            <h4 style="margin-top: 25px">
+              2. Deteksi Anagram (Implementasi Dictionary/Hash)
+            </h4>
+            <p>
+              Pengembangan pemetaan Hash yang menguji apakah dua untai teks
+              merupakan anagram; yakni memiliki sebaran frekuensi karakter
+              pembentuk yang persis sama, meskipun posisi hurufnya
+              dikombinasikan ulang.
+            </p>
+            <div class="code-block-wrapper">
+              <div class="code-label">
+                <span class="code-lang">Python</span>
+                <button
+                  class="copy-btn"
+                  data-copy-target="code-hash-2"
+                  aria-label="Salin kode"
+                >
+                  Salin
+                </button>
+              </div>
+              <pre
+                class="code-block"
+                id="code-hash-2"
+              ><code><span class="kw">def</span> <span class="fn">deteksi_anagram</span>(kata1, kata2):
+    <span class="kw">if</span> len(kata1) != len(kata2): <span class="kw">return</span> <span class="kw">False</span>
+
+    kamus_huruf = {}
+    <span class="kw">for</span> char <span class="kw">in</span> kata1:
+        <span class="kw">if</span> char <span class="kw">in</span> kamus_huruf: kamus_huruf[char] += <span class="nm">1</span>
+        <span class="kw">else</span>: kamus_huruf[char] = <span class="nm">1</span>
+
+    <span class="kw">for</span> char <span class="kw">in</span> kata2:
+        <span class="kw">if</span> char <span class="kw">in</span> kamus_huruf: kamus_huruf[char] -= <span class="nm">1</span>
+        <span class="kw">else</span>: <span class="kw">return</span> <span class="kw">False</span>
+
+    <span class="kw">for</span> count <span class="kw">in</span> kamus_huruf.values():
+        <span class="kw">if</span> count != <span class="nm">0</span>: <span class="kw">return</span> <span class="kw">False</span>
+    <span class="kw">return</span> <span class="kw">True</span></code></pre>
+            </div>
+          </div>
+        </details>
+      </div>
+
+      <details class="algo-card fade-in-up" id="algo-linkedlist">
+          <summary>
+            <span class="summary-number">07</span>
+            <span class="summary-title">Linked List (Senarai Berantai)</span>
+            <span class="summary-chevron" aria-hidden="true">▾</span>
+          </summary>
+          <div class="algo-body">
+            <p style="margin-bottom: 15px;">
+              <span class="concept-chip">Node</span>
+              <span class="concept-chip">Head</span>
+              <span class="concept-chip">Traversal</span>
+              <strong>Linked List</strong> adalah struktur data dinamis yang disusun oleh sekumpulan objek bernama Node yang saling terhubung. Berbeda dengan tipe data List bawaan yang ukurannya diatur otomatis, struktur ini mengalokasikan ukuran secara dinamis dari awal tanpa penetapan ukuran tetap. Setiap <em>node</em> menyimpan dua informasi utama: data (nilai) dan referensi (pointer) yang menunjuk ke lokasi data berikutnya.
+            </p>
+
+            <h4 style="margin-top: 25px;">Operasi Dasar Linked List</h4>
+            <div class="code-block-wrapper">
+              <div class="code-label">
+                <span class="code-lang">Python</span>
+                <button class="copy-btn" data-copy-target="code-ll-1" aria-label="Salin kode">Salin</button>
+              </div>
+              <pre class="code-block" id="code-ll-1"><code><span class="cm"># Implementasi Linked List Prosedural (Memanfaatkan Dictionary sebagai Node)</span>
+<span class="kw">def</span> <span class="fn">buat_node</span>(data_awal):
+    <span class="kw">return</span> {<span class="st">'data'</span>: data_awal, <span class="st">'next'</span>: <span class="kw">None</span>}
+
+<span class="kw">def</span> <span class="fn">buat_linked_list</span>():
+    <span class="kw">return</span> {<span class="st">'head'</span>: <span class="kw">None</span>}
+
+<span class="kw">def</span> <span class="fn">is_empty</span>(ll):
+    <span class="kw">return</span> ll[<span class="st">'head'</span>] <span class="kw">is None</span>
+
+<span class="kw">def</span> <span class="fn">add</span>(ll, item):
+    temp = <span class="fn">buat_node</span>(item)
+    temp[<span class="st">'next'</span>] = ll[<span class="st">'head'</span>]
+    ll[<span class="st">'head'</span>] = temp
+
+<span class="kw">def</span> <span class="fn">size</span>(ll):
+    curent = ll[<span class="st">'head'</span>]
+    count = <span class="nm">0</span>
+    <span class="kw">while</span> curent <span class="kw">is not None</span>:
+        count += <span class="nm">1</span>
+        curent = curent[<span class="st">'next'</span>]
+    <span class="kw">return</span> count
+
+<span class="kw">def</span> <span class="fn">search</span>(ll, item):
+    curent = ll[<span class="st">'head'</span>]
+    found = <span class="kw">False</span>
+    <span class="kw">while</span> curent <span class="kw">is not None and not</span> found:
+        <span class="kw">if</span> curent[<span class="st">'data'</span>] == item:
+            found = <span class="kw">True</span>
+        <span class="kw">else</span>:
+            curent = curent[<span class="st">'next'</span>]
+    <span class="kw">return</span> found</code></pre>
+            </div>
+          </div>
+        </details>
+
+        <details class="algo-card fade-in-up" id="algo-tree">
+          <summary>
+            <span class="summary-number">08</span>
+            <span class="summary-title">Binary Tree &amp; Parse Tree</span>
+            <span class="summary-chevron" aria-hidden="true">▾</span>
+          </summary>
+          <div class="algo-body">
+            <p style="margin-bottom: 15px;">
+              <span class="concept-chip">Root</span>
+              <span class="concept-chip">Leaf</span>
+              <span class="concept-chip">Parse Tree</span>
+              <strong>Binary Tree</strong> adalah struktur data berbentuk non-linear. Konsep dasarnya terbalik dari ekosistem pohon biologi, di mana <em>root</em> (akar) berada di tingkat paling atas dan memiliki <em>edge</em> (cabang) yang menjalar ke bawah sampai mencapai <em>leaf</em> (daun). Dalam versi biner, setiap <em>parent</em> dibatasi maksimal hanya memiliki dua anak: anak kiri (<em>left child</em>) dan anak kanan (<em>right child</em>).
+            </p>
+
+            <h4 style="margin-top: 25px;">1. Pembentukan Binary Tree &amp; Percabangan</h4>
+            <div class="code-block-wrapper">
+              <div class="code-label">
+                <span class="code-lang">Python</span>
+                <button class="copy-btn" data-copy-target="code-tree-1" aria-label="Salin kode">Salin</button>
+              </div>
+              <pre class="code-block" id="code-tree-1"><code><span class="cm"># Implementasi Pohon Biner Prosedural</span>
+<span class="kw">def</span> <span class="fn">buat_binary_tree</span>(root_val):
+    <span class="kw">return</span> {<span class="st">'key'</span>: root_val, <span class="st">'left_child'</span>: <span class="kw">None</span>, <span class="st">'right_child'</span>: <span class="kw">None</span>}
+
+<span class="kw">def</span> <span class="fn">insert_left</span>(tree, new_node):
+    <span class="kw">if</span> tree[<span class="st">'left_child'</span>] <span class="kw">is None</span>:
+        tree[<span class="st">'left_child'</span>] = <span class="fn">buat_binary_tree</span>(new_node)
+    <span class="kw">else</span>:
+        t = <span class="fn">buat_binary_tree</span>(new_node)
+        t[<span class="st">'left_child'</span>] = tree[<span class="st">'left_child'</span>]
+        tree[<span class="st">'left_child'</span>] = t
+
+<span class="kw">def</span> <span class="fn">insert_right</span>(tree, new_node):
+    <span class="kw">if</span> tree[<span class="st">'right_child'</span>] <span class="kw">is None</span>:
+        tree[<span class="st">'right_child'</span>] = <span class="fn">buat_binary_tree</span>(new_node)
+    <span class="kw">else</span>:
+        t = <span class="fn">buat_binary_tree</span>(new_node)
+        t[<span class="st">'right_child'</span>] = tree[<span class="st">'right_child'</span>]
+        tree[<span class="st">'right_child'</span>] = t
+
+<span class="kw">def</span> <span class="fn">get_left_child</span>(tree): <span class="kw">return</span> tree[<span class="st">'left_child'</span>]
+<span class="kw">def</span> <span class="fn">get_right_child</span>(tree): <span class="kw">return</span> tree[<span class="st">'right_child'</span>]
+<span class="kw">def</span> <span class="fn">set_root_val</span>(tree, obj): tree[<span class="st">'key'</span>] = obj
+<span class="kw">def</span> <span class="fn">get_root_val</span>(tree): <span class="kw">return</span> tree[<span class="st">'key'</span>]</code></pre>
+            </div>
+
+            <h4 style="margin-top: 25px;">2. Aplikasi Parse Tree</h4>
+            <p>Digunakan untuk memecahkan dan mengevaluasi persamaan matematika. Mengkombinasikan struktur penyimpanan <strong>Stack</strong> dan memori hirarkis dari <strong>Binary Tree</strong> untuk menyimpan alur turun-naik (prioritas kurung).</p>
+            <div class="code-block-wrapper">
+              <div class="code-label">
+                <span class="code-lang">Python</span>
+                <button class="copy-btn" data-copy-target="code-tree-2" aria-label="Salin kode">Salin</button>
+              </div>
+              <pre class="code-block" id="code-tree-2"><code><span class="cm"># Algoritma Pembangunan Parse Tree (menggabungkan stack &amp; tree)</span>
+<span class="kw">def</span> <span class="fn">build_parse_tree</span>(math_exp):
+    token_list = math_exp.split()
+    parent_stack = <span class="fn">buat_stack</span>() 
+    exp_tree = <span class="fn">buat_binary_tree</span>(<span class="st">''</span>)
+    <span class="fn">push</span>(parent_stack, exp_tree)
+    current_tree = exp_tree
+    
+    <span class="kw">for</span> i <span class="kw">in</span> token_list:
+        <span class="kw">if</span> i == <span class="st">'('</span>:
+            <span class="fn">insert_left</span>(current_tree, <span class="st">''</span>)
+            <span class="fn">push</span>(parent_stack, current_tree)
+            current_tree = <span class="fn">get_left_child</span>(current_tree)
+        <span class="kw">elif</span> i <span class="kw">not in</span> [<span class="st">'+'</span>, <span class="st">'-'</span>, <span class="st">'*'</span>, <span class="st">'/'</span>, <span class="st">')'</span>]:
+            <span class="fn">set_root_val</span>(current_tree, int(i))
+            current_tree = <span class="fn">pop</span>(parent_stack)
+        <span class="kw">elif</span> i <span class="kw">in</span> [<span class="st">'+'</span>, <span class="st">'-'</span>, <span class="st">'*'</span>, <span class="st">'/'</span>]:
+            <span class="fn">set_root_val</span>(current_tree, i)
+            <span class="fn">insert_right</span>(current_tree, <span class="st">''</span>)
+            <span class="fn">push</span>(parent_stack, current_tree)
+            current_tree = <span class="fn">get_right_child</span>(current_tree)
+        <span class="kw">elif</span> i == <span class="st">')'</span>:
+            current_tree = <span class="fn">pop</span>(parent_stack)
+            
+    <span class="kw">return</span> exp_tree</code></pre>
+            </div>
+          </div>
+        </details>
+
+      <!-- end accordion-wrapper -->
+
+      <hr class="section-divider" />
+
+      <!-- ===== CONTACT SECTION ===== -->
+      <section class="contact-section" id="kontak" aria-label="Formulir kontak">
+        <div class="contact-grid">
+          <!-- Info -->
+          <div class="contact-info">
+            <div class="hero-tag" style="margin-bottom: 16px">Hubungi Saya</div>
+            <h2>
+              Mari
+              <span>Berdiskusi</span>
+            </h2>
+            <p>
+              Terbuka untuk kolaborasi proyek, diskusi algoritma, atau sekadar
+              menyapa. Kirim pesan dan saya akan membalasnya sesegera mungkin.
+            </p>
+            <div class="contact-detail">
+              <div class="contact-item">
+                <span class="contact-item-icon">🎓</span>
+                <div class="contact-item-text">
+                  <strong>Universitas</strong>
+                  Universitas Trunojoyo Madura
+                </div>
+              </div>
+              <div class="contact-item">
+                <span class="contact-item-icon">💻</span>
+                <div class="contact-item-text">
+                  <strong>Fokus</strong>
+                  Web Dev &amp; Algoritma
+                </div>
+              </div>
+              <div class="contact-item">
+                <span class="contact-item-icon">📍</span>
+                <div class="contact-item-text">
+                  <strong>Lokasi</strong>
+                  Jawa Timur, Indonesia
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Form -->
+          <form
+            id="form-kontak"
+            class="neo-form"
+            novalidate
+            aria-label="Form pesan"
+          >
+            <div class="form-group">
+              <label for="nama" class="form-label">Nama Lengkap</label>
+              <input
+                type="text"
+                id="nama"
+                class="form-input"
+                placeholder="Nama kamu..."
+                required
+                autocomplete="name"
+              />
+            </div>
+            <div class="form-group">
+              <label for="email" class="form-label">Email Aktif</label>
+              <input
+                type="email"
+                id="email"
+                class="form-input"
+                placeholder="alamat@email.com"
+                required
+                autocomplete="email"
+              />
+            </div>
+            <div class="form-group">
+              <label for="pesan" class="form-label"
+                >Pesan / Penawaran Kolaborasi</label
+              >
+              <textarea
+                id="pesan"
+                class="form-input"
+                rows="5"
+                placeholder="Tuliskan pesanmu di sini..."
+                required
+              ></textarea>
+            </div>
+            <button type="submit" class="btn-primary btn-submit" id="btn-kirim">
+              <span id="btn-kirim-text">Kirim Pesan</span>
+              <span id="btn-kirim-icon">→</span>
+            </button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="neo-footer">
+      <p>
+        © 2026 <span>Rizky Ahmad Nasrulloh</span> — Universitas Trunojoyo Madura
+      </p>
+    </footer>
+
+    <!-- Toast notification -->
+    <div class="toast" id="toast-notif" role="alert" aria-live="polite"></div>
+
+    <script src="script.js"></script>
+  </body>
 </html>

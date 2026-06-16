@@ -1,84 +1,99 @@
 <!doctype html>
 <html lang="id">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Memahami Algoritma Hashing | Blog Yukyy</title>
-        <link rel="stylesheet" href="css/single.css" />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;800;900&display=swap"
-            rel="stylesheet"
-        />
-    </head>
-    <body>
-        <div class="progress-container">
-            <div class="progress-bar" id="readingProgress"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Memahami algoritma hashing menggunakan pendekatan prosedural — tanpa class, murni fungsi. Catatan kuliah Rizky Ahmad Nasrulloh."
+    />
+    <meta name="author" content="Rizky Ahmad Nasrulloh" />
+    <title>Memahami Algoritma Hashing | YUKYY.</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+
+    <!-- Reading Progress Bar -->
+    <div class="progress-container" aria-hidden="true">
+      <div class="progress-bar" id="readingProgress"></div>
+    </div>
+
+    <!-- ===== HEADER ===== -->
+    <header class="neo-header" id="site-header">
+      <a href="index.html" class="logo">YUKYY.</a>
+      <nav class="neo-nav" aria-label="Navigasi utama">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="blog.html" class="nav-link active" aria-current="page">Artikel</a>
+        <a href="portofolio.html" class="nav-link">Portofolio</a>
+      </nav>
+    </header>
+
+    <!-- ===== ARTICLE ===== -->
+    <main class="article-container">
+
+      <a href="blog.html" class="btn-back" aria-label="Kembali ke halaman artikel">
+        ← Kembali ke Blog
+      </a>
+
+      <!-- Article Header -->
+      <header class="article-header">
+        <span class="hobby-tag">Coding &amp; Tugas</span>
+        <h1 class="article-title">
+          Memahami Algoritma Hashing<br />Tanpa Pusing
+        </h1>
+        <div class="article-meta">
+          <span>📅 14 Mei 2026</span>
+          <span>✍️ Rizky Ahmad Nasrulloh</span>
         </div>
+        <div class="read-time-badge" aria-label="Estimasi waktu baca">
+          ⏱ 8 menit baca
+        </div>
+      </header>
 
-        <header class="neo-header">
-            <div class="logo">YUKYY.</div>
-            <nav class="neo-nav">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="../fitur-lainnya/404/404.html" class="nav-link active">Artikel</a>
-                <a href="portofolio.html" class="nav-link">Portofolio</a>
-            </nav>
-        </header>
+      <!-- Article Body -->
+      <article class="article-content" id="article-body">
+        <p>
+          Saat mengerjakan tugas struktur data, seringkali kita terjebak pada
+          pemikiran bahwa semuanya harus diselesaikan dengan pendekatan
+          <em>Object-Oriented Programming</em> (OOP). Padahal, untuk memahami
+          dasar kerja sebuah algoritma, terkadang kembali ke dasar itu jauh
+          lebih baik.
+        </p>
 
-        <main class="container article-container">
-            <a href="blog.html" class="btn-back">&larr; Kembali ke Blog</a>
+        <p>
+          Dalam pengerjaan tugas implementasi hashing kali ini, ada aturan main
+          yang cukup menantang: <strong>dilarang menggunakan class</strong>. Kita
+          harus menyelesaikan program murni menggunakan pendekatan fungsi
+          prosedural — tidak lebih, tidak kurang.
+        </p>
 
-            <header class="article-header">
-                <span class="hobby-tag">Coding & Tugas</span>
-                <h1 class="article-title">
-                    Memahami Algoritma Hashing Tanpa Pusing
-                </h1>
-                <div class="article-meta">
-                    <span>📅 14 Mei 2026</span>
-                    <span>✍️ Rizky Ahmad Nasrulloh</span>
-                </div>
-            </header>
+        <h3>Kenapa Fungsi Prosedural?</h3>
 
-            <article class="article-content">
-                <p>
-                    Saat mengerjakan tugas struktur data, seringkali kita
-                    terjebak pada pemikiran bahwa semuanya harus diselesaikan
-                    dengan pendekatan
-                    <em>Object-Oriented Programming</em> (OOP). Padahal, untuk
-                    memahami dasar kerja sebuah algoritma, terkadang kembali ke
-                    dasar itu jauh lebih baik.
-                </p>
+        <p>
+          Membangun fungsi <em>hash</em> tanpa <code>class</code> memaksa kita
+          untuk benar-benar memahami bagaimana data mengalir dari satu fungsi ke
+          fungsi lain. Kita tidak bisa menyembunyikan <em>state</em> di dalam
+          objek — semuanya harus eksplisit.
+        </p>
 
-                <p>
-                    Dalam pengerjaan tugas implementasi hashing kali ini, ada
-                    aturan main yang cukup menantang:
-                    <strong>dilarang menggunakan class</strong>. Kita harus
-                    menyelesaikan program pengurutan dan konversi data murni
-                    menggunakan pendekatan fungsi prosedural.
-                </p>
+        <blockquote>
+          "Kadang batasan (constraints) dalam coding justru membuat kita lebih
+          kreatif dan paham fundamental."
+        </blockquote>
 
-                <h3>Kenapa Fungsi Prosedural?</h3>
-                <p>
-                    Membangun fungsi <em>hash</em> tanpa
-                    <code>class</code> memaksa kita untuk benar-benar memahami
-                    bagaimana data mengalir dari satu fungsi ke fungsi lain.
-                    Kita tidak bisa menyembunyikan <em>state</em> di dalam
-                    objek.
-                </p>
+        <h3>Contoh Snippet Logika</h3>
 
-                <blockquote>
-                    "Kadang batasan (constraints) dalam coding justru membuat
-                    kita lebih kreatif dan paham fundamental."
-                </blockquote>
+        <p>
+          Berikut adalah bayangan kasar bagaimana kita bisa mengelola
+          <em>hash table</em> menggunakan array dan fungsi sederhana di Python,
+          tanpa melibatkan OOP sama sekali:
+        </p>
 
-                <h3>Contoh Snippet Logika</h3>
-                <p>
-                    Berikut adalah bayangan kasar bagaimana kita bisa mengelola
-                    <em>hash table</em> menggunakan array dan fungsi sederhana
-                    di Python, tanpa melibatkan OOP sama sekali:
-                </p>
-
-                <pre><code>
-# Inisialisasi hash table kosong
+<pre><code># Inisialisasi hash table kosong
 hash_table = [None] * 10
 
 # Fungsi prosedural untuk menghitung index
@@ -89,23 +104,48 @@ def hitung_hash(nilai):
 def insert_data(tabel, nilai):
     index = hitung_hash(nilai)
     tabel[index] = nilai
-            </code></pre>
 
-                <p>
-                    Pendekatan ini sangat <em>straightforward</em>. Output dan
-                    inputnya jelas. Bagi yang sedang belajar algoritma, cobalah
-                    sesekali membuang <code>class</code> dan lihat bagaimana
-                    kodemu terbentuk murni dari deretan fungsi prosedural.
-                </p>
-            </article>
-        </main>
+# Fungsi prosedural untuk mencari data
+def cari_data(tabel, nilai):
+    index = hitung_hash(nilai)
+    return tabel[index] == nilai</code></pre>
 
-        <footer class="neo-footer">
-            <p>
-                &copy; 2026 Rizky Ahmad Nasrulloh - Universitas Trunojoyo Madura
-            </p>
-        </footer>
+        <h3>Collision: Masalah Utama Hashing</h3>
 
-        <script src="/js/single.js"></script>
-    </body>
+        <p>
+          Ketika dua nilai berbeda menghasilkan index yang sama, itulah yang
+          disebut <em>collision</em>. Pendekatan paling umum untuk menyelesaikan
+          ini adalah <strong>chaining</strong> — setiap slot menyimpan list,
+          bukan satu nilai tunggal.
+        </p>
+
+<pre><code># Hash table dengan chaining
+def create_hash_table(size):
+    return [[] for _ in range(size)]
+
+def chaining_insert(tabel, nilai):
+    index = nilai % len(tabel)
+    tabel[index].append(nilai)
+
+def chaining_search(tabel, nilai):
+    index = nilai % len(tabel)
+    return nilai in tabel[index]</code></pre>
+
+        <p>
+          Pendekatan ini sangat <em>straightforward</em>. Output dan inputnya
+          jelas. Bagi yang sedang belajar algoritma, cobalah sesekali membuang
+          <code>class</code> dan lihat bagaimana kodemu terbentuk murni dari
+          deretan fungsi prosedural — kamu akan lebih paham alur datanya.
+        </p>
+      </article>
+
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="neo-footer">
+      <p>© 2026 <span>Rizky Ahmad Nasrulloh</span> — Universitas Trunojoyo Madura</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
 </html>

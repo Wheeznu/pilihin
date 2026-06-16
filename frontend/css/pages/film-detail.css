@@ -1,7 +1,7 @@
 .detail-page {
     max-width: var(--content-max-width);
     margin: 0 auto;
-    padding: 0 var(--space-xl) var(--space-3xl);
+    padding: var(--space-xl) var(--space-xl) var(--space-3xl);
 }
 
 /* ── Video Section ── */

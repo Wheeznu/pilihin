@@ -17,7 +17,7 @@ const DATA_SOURCES = [
   { path: "/data/faq.json", key: "faqs" },
 ];
 
-const DB_VERSION = "2.3";
+const DB_VERSION = "2.5";
 
 export const API_BASE = "http://localhost:3000";
 

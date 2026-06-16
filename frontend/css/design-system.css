@@ -137,3 +137,5 @@ body {
 .text-secondary { color: var(--text-secondary); }
 .text-muted { color: var(--text-muted); }
 .text-danger { color: var(--danger); }
+
+.user-page { padding: var(--space-xl); }

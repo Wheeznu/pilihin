@@ -1,28 +1,23 @@
-/* ===================================================
-   TEMA: SAGE GREEN & MATCHA LATTE (SUPER SEGAR & PREMIUM)
-   =================================================== */
 :root {
-    --primary: #6b8e75;          /* Hijau Sage Sage (Aksen Utama) */
+    --primary: #6b8e75;
     --primary-hover: #52705b;
-    --bg-main: #f1f5f2;          /* Latar belakang Matcha Light */
-    --text-main: #2d3b32;        /* Hijau Pinus Gelap (Lebih natural dibanding hitam) */
-    --text-secondary: #5a6e61;   /* Hijau Lumut Halus untuk teks sekunder */
-    --border: #d4ded7;           /* Garis pembatas pastel sage */
-    --card-bg: rgba(255, 255, 255, 0.45); /* Efek Kaca Transparan */
+    --bg-main: #f1f5f2;
+    --text-main: #2d3b32;
+    --text-secondary: #5a6e61;
+    --border: #d4ded7;
+    --card-bg: rgba(255, 255, 255, 0.45);
 }
 
-/* BASE STYLES */
 body {
     font-family: 'Poppins', sans-serif;
     background-color: #f1f5f2;
-    /* MESH GRADIENT SEGAR: Perpaduan soft sage, light matcha, dan warm cream */
     background-image: 
         radial-gradient(at 0% 0%, rgba(212, 227, 215, 0.7) 0px, transparent 50%),
         radial-gradient(at 100% 0%, rgba(193, 212, 197, 0.6) 0px, transparent 50%),
         radial-gradient(at 100% 100%, rgba(245, 242, 235, 0.8) 0px, transparent 50%),
         radial-gradient(at 0% 100%, rgba(206, 222, 210, 0.6) 0px, transparent 50%),
         linear-gradient(rgba(241, 245, 242, 0.5), rgba(241, 245, 242, 0.6)),
-        url('wb.jpg'); /* Tekstur wb.jpg bawaanmu tetap menyatu di belakang */
+        url('wb.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -32,9 +27,8 @@ body {
     min-height: 100vh;
 }
 
-/* NAVBAR (TIDAK PUTIH - Menggunakan Hijau Sage Tua Transparan) */
 .navbar {
-    background-color: rgba(45, 59, 50, 0.85); /* Warna dasar hijau pinus gelap transparan */
+    background-color: rgba(45, 59, 50, 0.85);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     padding: 15px 30px;
     position: fixed; 
@@ -53,21 +47,20 @@ body {
     font-size: 20px;
     margin: 0;
     font-weight: 600;
-    color: #ffffff; /* Teks navbar putih agar kontras */
+    color: #ffffff;
     letter-spacing: 0.5px;
 }
 
 .highlight {
-    color: #bcebb5; /* Warna hijau neon pastel cerah untuk highlight navbar */
+    color: #bcebb5;
 }
 
 .nav-links {
     font-size: 14px;
-    color: #cedcd1; /* Warna teks sekunder navbar yang lembut */
+    color: #cedcd1;
     font-weight: 400;
 }
 
-/* TATA LETAK GRID CONTAINER */
 .main-container {
     margin-top: 100px;
     padding: 20px;
@@ -82,11 +75,10 @@ body {
 
 @media (min-width: 850px) {
     .main-container {
-        grid-template-columns: 280px 1fr; /* Kiri sidebar, Kanan konten */
+        grid-template-columns: 280px 1fr;
     }
 }
 
-/* STYLING SIDEBAR (KIRI) */
 .sidebar {
     position: relative;
 }
@@ -94,11 +86,10 @@ body {
 @media (min-width: 850px) {
     .profile-sticky {
         position: sticky;
-        top: 110px; /* Sidebar melayang saat di-scroll */
+        top: 110px;
     }
 }
 
-/* PREMIUM GLASSMORPHISM CARDS */
 .profile-sticky, .content-card {
     background: var(--card-bg); 
     border: 1px solid rgba(255, 255, 255, 0.6); 
@@ -150,7 +141,6 @@ body {
     color: var(--primary);
 }
 
-/* STYLING AREA KONTEN (KANAN) */
 .content-area {
     display: flex;
     flex-direction: column;
@@ -179,7 +169,6 @@ body {
     color: var(--text-main);
 }
 
-/* KATA SAMBUTAN DENGAN BLUR GLASS */
 .intro-box {
     background: rgba(107, 142, 117, 0.07);
     backdrop-filter: blur(8px);
@@ -201,24 +190,66 @@ body {
 .section-title {
     font-size: 18px;
     font-weight: 600;
-    margin-bottom: 25px;
+    margin-bottom: 12px;
     border-bottom: 1px solid var(--border);
-    padding-bottom: 10px;
+    padding-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    color: var(--text-main);
+    flex-wrap: wrap;
+}
+
+.section-title-text {
     display: flex;
     align-items: center;
     gap: 10px;
-    color: var(--text-main);
 }
 
 .section-title i {
     color: var(--primary);
 }
 
-/* INTERFACE ITEMS */
+.toggle-all-btn {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--primary);
+    background: rgba(107, 142, 117, 0.1);
+    border: 1px solid rgba(107, 142, 117, 0.25);
+    border-radius: 20px;
+    padding: 7px 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.toggle-all-btn:hover {
+    background: var(--primary);
+    color: #ffffff;
+}
+
+.section-hint {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    opacity: 0.85;
+    margin: 0 0 22px 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.section-hint i {
+    color: var(--primary);
+}
+
 .interface-item {
-    margin-bottom: 30px;
-    padding-bottom: 25px;
+    margin-bottom: 14px;
     border-bottom: 1px dashed var(--border);
+    padding-bottom: 14px;
 }
 
 .interface-item:last-child {
@@ -228,33 +259,97 @@ body {
 }
 
 .interface-title {
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
     font-size: 16px;
     font-weight: 600;
     color: var(--text-main);
-    margin: 0 0 8px 0;
+    margin: 0;
+    padding: 12px 14px;
+    border: none;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.35);
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 10px;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.2s ease, color 0.2s ease;
 }
 
-.interface-title span {
-    background: rgba(107, 142, 117, 0.12);
+.interface-title:hover {
+    background: rgba(107, 142, 117, 0.14);
+}
+
+.interface-item.active .interface-title {
+    background: var(--primary);
+    color: #ffffff;
+}
+
+.interface-item.active .interface-title .item-number {
+    background: rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+}
+
+.title-text {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.item-number {
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(107, 142, 117, 0.15);
     color: var(--primary);
-    font-size: 11px;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-weight: 500;
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.toggle-icon {
+    font-size: 13px;
+    color: var(--primary);
+    transition: transform 0.3s ease, color 0.2s ease;
+}
+
+.interface-item.active .toggle-icon {
+    transform: rotate(180deg);
+    color: #ffffff;
+}
+
+.interface-body {
+    display: grid;
+    grid-template-rows: 0fr;
+    overflow: hidden;
+    transition: grid-template-rows 0.35s ease;
+}
+
+.interface-item.active .interface-body {
+    grid-template-rows: 1fr;
+}
+
+.interface-body-inner {
+    min-height: 0;
+    overflow: hidden;
 }
 
 .interface-desc {
     font-size: 14px;
     color: var(--text-secondary);
     line-height: 1.7;
-    margin-bottom: 12px;
+    margin: 16px 14px 12px 14px;
 }
 
 .feature-list {
     padding-left: 20px;
+    margin: 0 14px 4px 14px;
     font-size: 13.5px;
     color: var(--text-secondary);
 }

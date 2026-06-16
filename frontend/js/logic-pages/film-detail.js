@@ -42,6 +42,7 @@ class DetailPage {
             this._bindActions();
             this._bindTrailerModal();
             feather.replace();
+            this._scrollToHashMode();
         } catch (err) {
             console.warn("DetailPage: retrying...", err);
             setTimeout(() => this._init(), 500);
@@ -60,10 +61,22 @@ class DetailPage {
     }
 
     _getFilmFromHash() {
-        const id = window.location.hash.replace("#", "");
+        const raw = window.location.hash.replace("#", "");
+        const id = raw.split("?")[0];
         if (!id) return null;
         if (!this._db || !this._db.films) return null;
         return this._db.films.find((f) => f.id === id && f.status === "published") || null;
+    }
+
+    _scrollToHashMode() {
+        const raw = window.location.hash.replace("#", "");
+        const mode = raw.includes("?info") ? "info" : "default";
+        if (mode === "info") {
+            const el = document.querySelector(".film-header-info");
+            if (el) {
+                setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+            }
+        }
     }
 
     _getGenres() {
@@ -97,13 +110,13 @@ class DetailPage {
             video.removeAttribute("controls");
             if (overlay) overlay.style.display = "flex";
             if (section) section.classList.add("video-section--locked");
-            if (f.banner) video.poster = f.banner;
+            video.poster = f.poster;
             return;
         }
 
         if (f.streamingUrl) {
             source.src = f.streamingUrl;
-            if (f.banner) video.poster = f.banner;
+            video.poster = f.poster;
             video.load();
         } else {
             if (section) section.style.display = "none";
@@ -119,10 +132,10 @@ class DetailPage {
             this.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(f.title)}&background=1db954&color=fff&size=400`;
         };
 
-        const year = f.releaseDate ? new Date(f.releaseDate).getFullYear() : "—";
+        const year = f.releaseDate ? new Date(f.releaseDate).getFullYear() : "-";
         DOM.$("#filmYear").textContent = year;
         DOM.$("#filmDuration").textContent = `${f.duration} mnt`;
-        DOM.$("#filmRating").textContent = f.rating || "—";
+        DOM.$("#filmRating").textContent = f.rating || "-";
     }
 
     _populateBadges() {
@@ -137,7 +150,7 @@ class DetailPage {
         container.innerHTML = `
             <span class="badge badge--rating">
                 <i data-feather="star" style="width:14px;height:14px;fill:currentColor"></i>
-                ${f.averageRating || "—"}
+                ${f.averageRating || "-"}
             </span>
             <span class="badge" title="${qualityLabel}">${qualityBadge}</span>
             ${genreNames.map((g) => `<a href="/frontend/pages/film/katalog.html?genre=${g.id}" class="badge badge--genre">${g.name}</a>`).join("")}
@@ -177,11 +190,11 @@ class DetailPage {
         const grid = DOM.$("#filmDetailGrid");
         if (!grid) return;
 
-        const year = f.releaseDate ? new Date(f.releaseDate).getFullYear() : "—";
-        const subtitles = f.subtitles?.map((s) => (s === "id" ? "Indonesia" : s === "en" ? "Inggris" : s)).join(", ") || "—";
-        const directorName = f.director || "—";
+        const year = f.releaseDate ? new Date(f.releaseDate).getFullYear() : "-";
+        const subtitles = f.subtitles?.map((s) => (s === "id" ? "Indonesia" : s === "en" ? "Inggris" : s)).join(", ") || "-";
+        const directorName = f.director || "-";
         const actorNames = f.actors || [];
-        const qualityLabel = f.videoQuality?.join(", ") || "—";
+        const qualityLabel = f.videoQuality?.join(", ") || "-";
 
         grid.innerHTML = `
             <div class="detail-item">
@@ -194,7 +207,7 @@ class DetailPage {
             </div>
             <div class="detail-item">
                 <span class="detail-item__label">Rating Usia</span>
-                <span class="detail-item__value">${f.rating || "—"}</span>
+                <span class="detail-item__value">${f.rating || "-"}</span>
             </div>
             <div class="detail-item">
                 <span class="detail-item__label">Kualitas Video</span>
@@ -208,7 +221,7 @@ class DetailPage {
                 <span class="detail-item__label">Rating</span>
                 <span class="detail-item__value">
                     <i data-feather="star" style="width:14px;height:14px;fill:currentColor;color:var(--accent-primary);vertical-align:middle"></i>
-                    ${f.averageRating || "—"} / 10
+                    ${f.averageRating || "-"} / 10
                 </span>
             </div>
             <div class="detail-item">
@@ -461,7 +474,7 @@ class DetailPage {
         if (!url) return;
 
         source.src = url;
-        if (this._film.banner) video.poster = this._film.banner;
+        video.poster = this._film.poster;
         video.load();
 
         modal.style.display = "flex";

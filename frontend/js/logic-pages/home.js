@@ -76,7 +76,7 @@ class HomePage {
 
     _heroSlideHTML(film, index) {
         const genreNames = this._genreNames(film.genres);
-        const year = film.releaseDate ? new Date(film.releaseDate).getFullYear() : "—";
+        const year = film.releaseDate ? new Date(film.releaseDate).getFullYear() : "-";
         const qArr = film.videoQuality || []; const quality = qArr.length > 2 ? qArr[2 + Math.floor(Math.random() * (qArr.length - 2))] : qArr[qArr.length - 1] || 'HD';
 
         return `
@@ -99,17 +99,17 @@ class HomePage {
                     <div class="hero__meta">
                         <span>${year}</span>
                         <span>&bull;</span>
-                        <span>${film.duration || "—"} mnt</span>
+                        <span>${film.duration || "-"} mnt</span>
                         <span>&bull;</span>
                         <span>${quality}</span>
                         ${genreNames ? `<span>&bull;</span><span>${genreNames}</span>` : ''}
                     </div>
                     <p class="hero__description">${film.description || ''}</p>
                     <div class="hero__actions">
-                        <a href="${film.streamingUrl || `/frontend/pages/film/detail.html#${film.id}`}" class="btn btn-primary btn-lg">
+                        <a href="/frontend/pages/film/detail.html#${film.id}" class="btn btn-primary btn-lg">
                             <i data-feather="play-circle"></i> Tonton Sekarang
                         </a>
-                        <a href="/frontend/pages/film/detail.html#${film.id}" class="btn btn-ghost btn-lg">
+                        <a href="/frontend/pages/film/detail.html#${film.id}?info" class="btn btn-ghost btn-lg">
                             <i data-feather="info"></i> Selengkapnya
                         </a>
                     </div>
@@ -194,8 +194,8 @@ class HomePage {
     _filmCardHTML(film) {
         const genreNames = this._genreNames(film.genres);
         const qArr = film.videoQuality || []; const quality = qArr.length > 2 ? qArr[2 + Math.floor(Math.random() * (qArr.length - 2))] : qArr[qArr.length - 1] || "HD";
-        const year = film.releaseDate ? new Date(film.releaseDate).getFullYear() : "—";
-        const rating = film.averageRating || film.rating || "—";
+        const year = film.releaseDate ? new Date(film.releaseDate).getFullYear() : "-";
+        const rating = film.averageRating || film.rating || "-";
 
         return `
             <div class="film-card" data-film-id="${film.id}">
@@ -218,7 +218,7 @@ class HomePage {
                     <h3 class="film-card__title">${film.title}</h3>
                     <div class="film-card__meta">
                         <span>${year}</span>
-                        <span>${film.duration || "—"} mnt</span>
+                        <span>${film.duration || "-"} mnt</span>
                     </div>
                     <p class="film-card__genre">${genreNames}</p>
                 </div>

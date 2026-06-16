@@ -1,114 +1,131 @@
 <!doctype html>
 <html lang="id">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Blog Pribadi | Yukyy</title>
-        <link rel="stylesheet" href="css/style.css" />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;800;900&display=swap"
-            rel="stylesheet"
-        />
-    </head>
-    <body>
-        <header class="neo-header">
-            <div class="logo">YUKYY.</div>
-            <nav class="neo-nav">
-                <a href="index.html" class="nav-link active">Home</a>
-                <a href="blog.html" class="nav-link">Artikel</a>
-                <a href="portofolio.html" class="nav-link">Portofolio</a>
-            </nav>
-        </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Blog pribadi Rizky Ahmad Nasrulloh — Mahasiswa Teknik Informatika Universitas Trunojoyo Madura."
+    />
+    <meta name="author" content="Rizky Ahmad Nasrulloh" />
+    <title>Home | YUKYY.</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
 
-        <main class="container">
-            <section class="profile-card">
-                <div class="profile-layout">
-                    <div class="profile-text">
-                        <div class="badge">Mahasiswa</div>
-                        <h1 class="name">Rizky Ahmad Nasrulloh</h1>
+    <!-- ===== HEADER ===== -->
+    <header class="neo-header" id="site-header">
+      <a href="index.html" class="logo">YUKYY.</a>
+      <nav class="neo-nav" aria-label="Navigasi utama">
+        <a href="index.html" class="nav-link active" aria-current="page">Home</a>
+        <a href="blog.html" class="nav-link">Artikel</a>
+        <a href="portofolio.html" class="nav-link">Portofolio</a>
+      </nav>
+    </header>
 
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <span class="label">NIM</span>
-                                <span class="value">250411100022</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="label">Kelas</span>
-                                <span class="value">DPW B</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="label">Program Studi</span>
-                                <span class="value">Teknik Informatika</span>
-                            </div>
-                            <div class="info-item">
-                                <span class="label">Fakultas</span>
-                                <span class="value">Teknik</span>
-                            </div>
-                        </div>
+    <!-- ===== MAIN ===== -->
+    <main class="container">
 
-                        <a href="portofolio.html" class="btn-primary">
-                            Cek Proyekku
-                        </a>
-                    </div>
+      <!-- Profile Card -->
+      <section class="profile-card fade-in-up" aria-label="Profil pengguna">
+        <div class="profile-layout">
 
-                    <div class="profile-image-container">
-                        <img
-                            src="image/pfp.jpeg"
-                            alt="Rizky Ahmad Nasrulloh"
-                            class="neo-foto"
-                        />
-                    </div>
-                </div>
-            </section>
+          <!-- Text side -->
+          <div class="profile-text">
+            <div class="badge">Mahasiswa Aktif</div>
+            <h1 class="name">Rizky Ahmad<br />Nasrulloh</h1>
 
-            <section class="skills-section">
-                <h2 class="section-title-neo">Fokus Belajar</h2>
-                <div class="skills-container">
-                    <span class="skill-badge">HTML & CSS</span>
-                    <span class="skill-badge">JavaScript</span>
-                    <span class="skill-badge">Python</span>
-                    <span class="skill-badge">Generative AI</span>
-                    <span class="skill-badge">Struktur Data</span>
-                </div>
-            </section>
+            <div class="info-grid" role="list" aria-label="Detail biodata">
+              <div class="info-item" role="listitem">
+                <span class="label">NIM</span>
+                <span class="value">250411100022</span>
+              </div>
+              <div class="info-item" role="listitem">
+                <span class="label">Kelas</span>
+                <span class="value">DPW B</span>
+              </div>
+              <div class="info-item" role="listitem">
+                <span class="label">Program Studi</span>
+                <span class="value">Teknik Informatika</span>
+              </div>
+              <div class="info-item" role="listitem">
+                <span class="label">Fakultas</span>
+                <span class="value">Teknik</span>
+              </div>
+            </div>
 
-            <section class="hobbies-section">
-                <h2 class="section-title-neo">Ketertarikan</h2>
-                <div class="hobbies-grid">
-                    <div class="hobby-card">
-                        <div class="hobby-icon">🎮</div>
-                        <h3 class="hobby-tag">Gaming</h3>
-                        <p>
-                            Aktif bermain Valorant, Mobile Legends: Bang Bang,
-                            dan Honkai: Star Rail untuk mengisi waktu luang.
-                        </p>
-                    </div>
-                    <div class="hobby-card">
-                        <div class="hobby-icon">🎬</div>
-                        <h3 class="hobby-tag">Movies & Anime</h3>
-                        <p>
-                            Penggemar jagat MonsterVerse dan penikmat setia seri
-                            Jujutsu Kaisen.
-                        </p>
-                    </div>
-                    <div class="hobby-card">
-                        <div class="hobby-icon">🎨</div>
-                        <h3 class="hobby-tag">Web Design</h3>
-                        <p>
-                            Suka mengeksplorasi layout web yang unik seperti
-                            Neobrutalism ini.
-                        </p>
-                    </div>
-                </div>
-            </section>
-        </main>
+            <a href="portofolio.html" class="btn-primary">
+              Cek Proyekku <span aria-hidden="true">→</span>
+            </a>
+          </div>
 
-        <footer class="neo-footer">
+          <!-- Photo side -->
+          <div class="profile-image-container" aria-label="Foto profil Rizky">
+            <img
+              src="image/pfp.jpeg"
+              alt="Foto profil Rizky Ahmad Nasrulloh"
+              class="neo-foto"
+              loading="eager"
+            />
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Skills Section -->
+      <section class="skills-section fade-in-up" aria-label="Fokus belajar">
+        <h2 class="section-title-neo">Fokus Belajar</h2>
+        <div class="skills-container" role="list" aria-label="Daftar skill">
+          <span class="skill-badge" role="listitem">HTML &amp; CSS</span>
+          <span class="skill-badge" role="listitem">JavaScript</span>
+          <span class="skill-badge" role="listitem">Python</span>
+          <span class="skill-badge" role="listitem">Generative AI</span>
+          <span class="skill-badge" role="listitem">Struktur Data</span>
+        </div>
+      </section>
+
+      <!-- Hobbies Section -->
+      <section class="hobbies-section fade-in-up" aria-label="Ketertarikan dan hobi">
+        <h2 class="section-title-neo">Ketertarikan</h2>
+        <div class="hobbies-grid">
+          <div class="hobby-card">
+            <span class="hobby-icon" aria-hidden="true">🎮</span>
+            <h3 class="hobby-tag">Gaming</h3>
             <p>
-                &copy; 2026 Rizky Ahmad Nasrulloh - Universitas Trunojoyo Madura
+              Aktif bermain Valorant, Mobile Legends: Bang Bang, dan Honkai:
+              Star Rail untuk mengisi waktu luang.
             </p>
-        </footer>
+          </div>
+          <div class="hobby-card">
+            <span class="hobby-icon" aria-hidden="true">🎬</span>
+            <h3 class="hobby-tag">Movies &amp; Anime</h3>
+            <p>
+              Penggemar jagat MonsterVerse dan penikmat setia seri Jujutsu
+              Kaisen.
+            </p>
+          </div>
+          <div class="hobby-card">
+            <span class="hobby-icon" aria-hidden="true">🎨</span>
+            <h3 class="hobby-tag">Web Design</h3>
+            <p>
+              Suka mengeksplorasi layout web yang unik dan berbeda, seperti gaya
+              Neobrutalism ini.
+            </p>
+          </div>
+        </div>
+      </section>
 
-        <script src="/js/script.js"></script>
-    </body>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="neo-footer">
+      <p>© 2026 <span>Rizky Ahmad Nasrulloh</span> — Universitas Trunojoyo Madura</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
 </html>

@@ -94,7 +94,7 @@ class SearchPage {
                 <div class="film-card__info">
                     <h3 class="film-card__title">${film.title}</h3>
                     <div class="film-card__meta">
-                        <span>${film.releaseDate ? new Date(film.releaseDate).getFullYear() : "—"}</span>
+                        <span>${film.releaseDate ? new Date(film.releaseDate).getFullYear() : "-"}</span>
                         <span>${film.duration || "?"} mnt</span>
                     </div>
                     <p class="film-card__genre">${genreNames}</p>

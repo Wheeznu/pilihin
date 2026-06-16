@@ -21,7 +21,7 @@ function loadFilmsDropdown() {
   const films = getAllFilms();
   const select = document.getElementById("filmSelect");
   if (!select) return;
-  select.innerHTML = '<option value="">— Pilih Film —</option>';
+  select.innerHTML = '<option value="">- Pilih Film -</option>';
   films.forEach((film) => {
     const option = document.createElement("option");
     option.value = film.id;

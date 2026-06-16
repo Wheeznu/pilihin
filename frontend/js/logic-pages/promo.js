@@ -92,7 +92,7 @@ class PromoPage {
                         <span class="promo-carousel__discount">-${promo.discount}%</span>
                     </div>
                     <div class="promo-carousel__actions">
-                        <a href="/frontend/pages/main/register.html" class="btn btn-primary" data-trx>
+                        <a href="/frontend/pages/user/payment.html?promo=${promo.id}" class="btn btn-primary" data-trx>
                             <i data-feather="shopping-cart"></i> Ambil Promo
                         </a>
                     </div>
@@ -193,7 +193,7 @@ class PromoPage {
                     <span class="promo-card__discount">-${promo.discount}%</span>
                 </div>
                 <div class="promo-card__actions">
-                    <a href="/frontend/pages/main/register.html" class="btn btn-primary" data-trx>
+                    <a href="/frontend/pages/user/payment.html?promo=${promo.id}" class="btn btn-primary" data-trx>
                         <i data-feather="shopping-cart"></i> Ambil Promo
                     </a>
                     <a href="/frontend/pages/main/pricing.html" class="btn btn-ghost">

@@ -9,6 +9,10 @@ const ACCOUNT_FILE = path.join(DATA_DIR, "account.json");
 const CONTACT_FILE = path.join(DATA_DIR, "contact-messages.json");
 const USERDATA_FILE = path.join(DATA_DIR, "user-data.json");
 const CONTENT_FILE = path.join(DATA_DIR, "content.json");
+const POINTS_FILE = path.join(DATA_DIR, "userpoints.json");
+const TRANSACTIONS_FILE = path.join(DATA_DIR, "transactions.json");
+const PROMOTIONS_FILE = path.join(DATA_DIR, "promotions.json");
+const PRICING_FILE = path.join(DATA_DIR, "pricing-tiers.json");
 
 const SEED_SOURCES = {
   films: path.join(DATA_DIR, "data-film.json"),
@@ -441,8 +445,230 @@ async function handleDeleteContent(req, res, collection, itemId) {
   sendJSON(res, 404, { success: false, error: "Item tidak ditemukan" });
 }
 
+/* ── User Update ───────────────────────────────────────── */
+
+async function handleUpdateUser(req, res, userId) {
+  const body = await parseBody(req);
+  if (!body) {
+    return sendJSON(res, 400, { success: false, error: "Body tidak valid" });
+  }
+
+  const db = readJSON(ACCOUNT_FILE);
+  if (!db) {
+    return sendJSON(res, 500, { success: false, error: "Gagal membaca database" });
+  }
+
+  const idx = db.users.findIndex((u) => u.id === userId);
+  if (idx === -1) {
+    return sendJSON(res, 404, { success: false, error: "User tidak ditemukan" });
+  }
+
+  db.users[idx] = { ...db.users[idx], ...body, updatedAt: new Date().toISOString() };
+  writeJSON(ACCOUNT_FILE, db);
+
+  sendJSON(res, 200, { success: true, user: db.users[idx] });
+}
+
+/* ── Payment & Points ──────────────────────────────────── */
+
+const TIER_MAP = { basic: "tier-001", standard: "tier-003", premium: "tier-004" };
+const PROMO_DURATION = {
+  "promo-001": 90, "promo-002": 365, "promo-003": 30,
+  "promo-004": 30, "promo-005": 7, "promo-006": 2,
+};
+
+function readPoints() {
+  return readJSON(POINTS_FILE) || { points: [] };
+}
+
+function writePoints(data) {
+  writeJSON(POINTS_FILE, data);
+}
+
+function readTransactions() {
+  return readJSON(TRANSACTIONS_FILE) || { transactions: [] };
+}
+
+function writeTransactions(data) {
+  writeJSON(TRANSACTIONS_FILE, data);
+}
+
+function getUserPoints(userId) {
+  const db = readPoints();
+  let entry = db.points.find((p) => p.userId === userId);
+  if (!entry) {
+    entry = { userId, totalPoints: 0, lifetimePoints: 0, level: "bronze", history: [], lastUpdated: new Date().toISOString() };
+    db.points.push(entry);
+    writePoints(db);
+  }
+  return entry;
+}
+
+function addPoints(userId, pts, desc) {
+  const db = readPoints();
+  let entry = db.points.find((p) => p.userId === userId);
+  if (!entry) {
+    entry = { userId, totalPoints: 0, lifetimePoints: 0, level: "bronze", history: [], lastUpdated: new Date().toISOString() };
+    db.points.push(entry);
+  }
+  const now = new Date().toISOString();
+  entry.totalPoints += pts;
+  entry.lifetimePoints += pts;
+  entry.history.push({ type: "earn", desc, pts, date: now });
+  if (entry.lifetimePoints >= 5000) entry.level = "platinum";
+  else if (entry.lifetimePoints >= 2000) entry.level = "gold";
+  else if (entry.lifetimePoints >= 500) entry.level = "silver";
+  else entry.level = "bronze";
+  entry.lastUpdated = now;
+  writePoints(db);
+  return entry;
+}
+
+function deductPoints(userId, pts, desc) {
+  const db = readPoints();
+  let entry = db.points.find((p) => p.userId === userId);
+  if (!entry) return null;
+  if (entry.totalPoints < pts) return null;
+  const now = new Date().toISOString();
+  entry.totalPoints -= pts;
+  entry.history.push({ type: "spend", desc, pts: -pts, date: now });
+  entry.lastUpdated = now;
+  writePoints(db);
+  return entry;
+}
+
+async function handleGetPoints(req, res) {
+  const url = new URL(req.url, `http://${req.headers.host}`);
+  const userId = url.searchParams.get("userId");
+  if (!userId) {
+    return sendJSON(res, 400, { success: false, error: "Parameter userId wajib" });
+  }
+  const entry = getUserPoints(userId);
+  sendJSON(res, 200, {
+    success: true,
+    points: { totalPoints: entry.totalPoints, lifetimePoints: entry.lifetimePoints, level: entry.level, history: entry.history },
+  });
+}
+
+async function handleGetReferral(req, res) {
+  const url = new URL(req.url, `http://${req.headers.host}`);
+  const userId = url.searchParams.get("userId");
+  if (!userId) {
+    return sendJSON(res, 400, { success: false, error: "Parameter userId wajib" });
+  }
+  const code = userId.slice(0, 8).toUpperCase() + crypto.randomBytes(2).toString("hex").toUpperCase();
+  sendJSON(res, 200, { success: true, referralCode: code, friendCount: 0 });
+}
+
+function calcExpiry(durationDays) {
+  const d = new Date();
+  d.setDate(d.getDate() + durationDays);
+  return d.toISOString();
+}
+
+async function handleProcessPayment(req, res) {
+  const body = await parseBody(req);
+  if (!body || !body.userId || !body.paymentMethod) {
+    return sendJSON(res, 400, { success: false, error: "Data pembayaran tidak lengkap" });
+  }
+
+  const { userId, tierId, paymentMethod, sourceType, promoId, promoCode, discountAmount, pointsUsed, voucherName, billingPeriod } = body;
+
+  const db = readJSON(ACCOUNT_FILE);
+  if (!db) return sendJSON(res, 500, { success: false, error: "Gagal membaca database" });
+  const idx = db.users.findIndex((u) => u.id === userId);
+  if (idx === -1) return sendJSON(res, 404, { success: false, error: "User tidak ditemukan" });
+  const user = db.users[idx];
+
+  let newTier, amount, durationDays, itemLabel;
+
+  if (sourceType === "promo") {
+    const promos = readJSON(PROMOTIONS_FILE);
+    const promo = promos?.promotions?.find((p) => p.id === promoId);
+    if (!promo) return sendJSON(res, 400, { success: false, error: "Promo tidak ditemukan" });
+    amount = promo.promoPrice;
+    durationDays = PROMO_DURATION[promoId] || 30;
+    newTier = TIER_MAP[tierId] || "tier-004";
+    itemLabel = promo.title;
+  } else {
+    const tiers = readJSON(PRICING_FILE);
+    const tier = tiers?.tiers?.find((t) => t.id === tierId);
+    if (!tier) return sendJSON(res, 400, { success: false, error: "Tier tidak ditemukan" });
+    amount = billingPeriod === "tahunan" ? tier.priceYearly : tier.price;
+    durationDays = billingPeriod === "tahunan" ? 365 : 30;
+    newTier = TIER_MAP[tierId] || "tier-003";
+    itemLabel = billingPeriod === "tahunan" ? `Paket ${tier.name} (Tahunan)` : `Paket ${tier.name}`;
+  }
+
+  const totalAmount = Math.max(0, amount - (discountAmount || 0));
+
+  if (pointsUsed > 0) {
+    const ptsEntry = deductPoints(userId, pointsUsed, `Voucher diskon: ${voucherName || "Diskon"}`);
+    if (!ptsEntry) return sendJSON(res, 400, { success: false, error: "Gagal memotong poin" });
+  }
+
+  const now = new Date().toISOString();
+  const currentExpiry = user.subscriptionExpiry ? new Date(user.subscriptionExpiry).getTime() : 0;
+  const baseDate = currentExpiry > Date.now() ? new Date(user.subscriptionExpiry) : new Date();
+  const expiryDate = new Date(baseDate);
+  expiryDate.setDate(expiryDate.getDate() + durationDays);
+
+  user.subscriptionTier = newTier;
+  user.subscriptionExpiry = expiryDate.toISOString();
+  user.updatedAt = now;
+  db.users[idx] = user;
+  writeJSON(ACCOUNT_FILE, db);
+
+  const transId = generateId("trans");
+  const transaction = {
+    id: transId,
+    userId,
+    tierId: tierId || "premium",
+    sourceType: sourceType || "tier",
+    promoId: promoId || null,
+    itemLabel,
+    amount,
+    currency: "IDR",
+    paymentMethod,
+    status: "completed",
+    promoCode: promoCode || null,
+    voucherName: voucherName || null,
+    discountAmount: discountAmount || 0,
+    pointsUsed: pointsUsed || 0,
+    totalAmount,
+    durationDays,
+    billingPeriod: billingPeriod || null,
+    invoiceUrl: null,
+    paidAt: now,
+    expiresAt: expiryDate.toISOString(),
+    createdAt: now,
+    updatedAt: now,
+  };
+  const txns = readTransactions();
+  txns.transactions.push(transaction);
+  writeTransactions(txns);
+
+  const bonusPts = tierId === "standard" ? 50 : 100;
+  const desc = `Berlangganan ${itemLabel}`;
+  const pointsEntry = addPoints(userId, bonusPts, desc);
+
+  sendJSON(res, 200, {
+    success: true,
+    transaction,
+    points: {
+      totalPoints: pointsEntry.totalPoints,
+      lifetimePoints: pointsEntry.lifetimePoints,
+      level: pointsEntry.level,
+      history: pointsEntry.history,
+    },
+    user: { id: user.id, email: user.email, subscriptionTier: user.subscriptionTier, subscriptionExpiry: user.subscriptionExpiry },
+    bonusPoints: bonusPts,
+  });
+}
+
 /* ── Router ────────────────────────────────────────────── */
 
+const USER_RE = /^\/api\/users\/([^/]+)$/;
 const USER_DATA_RE = /^\/api\/user-data\/([^/]+)\/([^/]+)(?:\/([^/]+))?$/;
 
 const server = http.createServer(async (req, res) => {
@@ -459,6 +685,15 @@ const server = http.createServer(async (req, res) => {
     await handleForgotPassword(req, res);
   } else if (req.method === "POST" && pathname === "/api/contact") {
     await handleContact(req, res);
+  } else if (req.method === "PUT" && pathname.match(/^\/api\/users\/([^/]+)$/)) {
+    const m = pathname.match(USER_RE);
+    await handleUpdateUser(req, res, m[1]);
+  } else if (req.method === "GET" && pathname === "/api/points") {
+    await handleGetPoints(req, res);
+  } else if (req.method === "GET" && pathname === "/api/referral") {
+    await handleGetReferral(req, res);
+  } else if (req.method === "POST" && pathname === "/api/payment/process") {
+    await handleProcessPayment(req, res);
   } else {
     let m = pathname.match(CONTENT_COL_RE);
     if (m) {

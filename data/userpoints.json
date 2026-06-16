@@ -1,0 +1,243 @@
+{
+  "points": [
+    {
+      "userId": "user-1780080993352-9c7ccd",
+      "totalPoints": 250,
+      "lifetimePoints": 250,
+      "level": "bronze",
+      "history": [
+        {
+          "type": "earn",
+          "desc": "Berlangganan Paket Standard",
+          "pts": 50,
+          "date": "2026-06-15T06:28:17.242Z"
+        },
+        {
+          "type": "earn",
+          "desc": "Berlangganan Paket Premium (Tahunan)",
+          "pts": 100,
+          "date": "2026-06-15T06:24:20.464Z"
+        },
+        {
+          "type": "earn",
+          "desc": "Berlangganan paket Premium",
+          "pts": 100,
+          "date": "2026-06-12T12:29:41.959Z"
+        }
+      ],
+      "lastUpdated": "2026-06-15T06:28:17.242Z"
+    },
+    {
+      "userId": "user-1781302839756-167f45",
+      "totalPoints": 300,
+      "lifetimePoints": 1300,
+      "level": "bronze",
+      "history": [
+        {
+          "type": "earn",
+          "desc": "Berlangganan Paket Premium",
+          "pts": 100,
+          "date": "2026-06-13T13:32:56.260Z"
+        },
+        {
+          "type": "earn",
+          "desc": "Berlangganan Paket Standard",
+          "pts": 50,
+          "date": "2026-06-13T12:09:20.648Z"
+        },
+        {
+          "type": "spend",
+          "desc": "Voucher diskon: Diskon Rp 5.000",
+          "pts": -500,
+          "date": "2026-06-13T12:09:20.648Z"
+        },
+        {
+          "type": "earn",
+          "desc": "Berlangganan Paket Premium (Tahunan)",
+          "pts": 100,
+          "date": "2026-06-13T12:05:43.758Z"
+        },
+        {
+          "type": "earn",
+          "desc": "Berlangganan Hemat 3 Bulan",
+          "pts": 100,
+          "date": "2026-06-13T03:48:25.326Z"
+        },
+        {
+          "type": "earn",
+          "desc": "Berlangganan Paket Premium",
+          "pts": 100,
+          "date": "2026-06-13T03:47:21.957Z"
+        },
+        {
+          "type": "earn",
+          "desc": "Berlangganan Paket Premium",
+          "pts": 100,
+          "date": "2026-06-13T03:46:27.000Z"
+        },
+        {
+          "type": "earn",
+          "desc": "Berlangganan Paket Standard",
+          "pts": 50,
+          "date": "2026-06-12T22:53:57.007Z"
+        },
+        {
+          "type": "earn",
+          "desc": "Berlangganan Paket Standard",
+          "pts": 50,
+          "date": "2026-06-12T22:49:51.615Z"
+        },
+        {
+          "type": "earn",
+          "desc": "Berlangganan Paket Standard",
+          "pts": 50,
+          "date": "2026-06-12T22:49:17.753Z"
+        },
+        {
+          "type": "earn",
+          "desc": "Berlangganan Paket Premium",
+          "pts": 100,
+          "date": "2026-06-12T22:26:46.965Z"
+        },
+        {
+          "type": "spend",
+          "desc": "Voucher diskon: Diskon Rp 5.000",
+          "pts": -500,
+          "date": "2026-06-12T22:26:46.965Z"
+        },
+        {
+          "type": "earn",
+          "desc": "Berlangganan Paket Premium",
+          "pts": 100,
+          "date": "2026-06-12T22:25:36.958Z"
+        },
+        {
+          "type": "earn",
+          "desc": "Berlangganan Paket Premium",
+          "pts": 100,
+          "date": "2026-06-12T22:25:28.473Z"
+        },
+        {
+          "type": "earn",
+          "desc": "Berlangganan Paket Premium",
+          "pts": 100,
+          "date": "2026-06-12T22:25:22.917Z"
+        },
+        {
+          "type": "earn",
+          "desc": "Berlangganan Paket Premium",
+          "pts": 100,
+          "date": "2026-06-12T22:25:17.061Z"
+        },
+        {
+          "type": "earn",
+          "desc": "Berlangganan Hemat 3 Bulan",
+          "pts": 100,
+          "date": "2026-06-12T22:23:27.112Z"
+        }
+      ],
+      "lastUpdated": "2026-06-13T13:32:56.260Z"
+    },
+    {
+      "userId": "user-1781369530829-a7ba2a",
+      "totalPoints": 150,
+      "lifetimePoints": 150,
+      "level": "bronze",
+      "history": [
+        {
+          "type": "earn",
+          "desc": "Berlangganan Paket Premium",
+          "pts": 100,
+          "date": "2026-06-13T23:22:25.621Z"
+        },
+        {
+          "type": "earn",
+          "desc": "Berlangganan Paket Standard",
+          "pts": 50,
+          "date": "2026-06-13T16:57:17.116Z"
+        }
+      ],
+      "lastUpdated": "2026-06-13T23:22:25.621Z"
+    },
+    {
+      "userId": "user-008",
+      "totalPoints": 0,
+      "lifetimePoints": 0,
+      "level": "bronze",
+      "history": [],
+      "lastUpdated": "2026-06-16T03:31:07.572Z"
+    },
+    {
+      "userId": "user-003",
+      "totalPoints": 550,
+      "lifetimePoints": 1200,
+      "level": "silver",
+      "history": [
+        {
+          "type": "earn",
+          "desc": "Berlangganan Paket Standard",
+          "pts": 50,
+          "date": "2026-06-16T03:31:16.167Z"
+        },
+        {
+          "type": "earn",
+          "desc": "Berlangganan Hemat 3 Bulan",
+          "pts": 100,
+          "date": "2026-06-16T03:31:21.120Z"
+        },
+        {
+          "type": "spend",
+          "desc": "Voucher diskon: Diskon Rp 5.000",
+          "pts": -500,
+          "date": "2026-06-16T03:31:28.263Z"
+        },
+        {
+          "type": "earn",
+          "desc": "Berlangganan Paket Premium (Tahunan)",
+          "pts": 100,
+          "date": "2026-06-16T03:31:28.264Z"
+        },
+        {
+          "type": "earn",
+          "desc": "Admin fix",
+          "pts": 1000,
+          "date": "2026-06-16T00:00:00.000Z"
+        },
+        {
+          "type": "spend",
+          "desc": "Voucher diskon: Diskon Rp 5.000",
+          "pts": -500,
+          "date": "2026-06-16T03:32:00.208Z"
+        },
+        {
+          "type": "earn",
+          "desc": "Berlangganan Paket Standard",
+          "pts": 50,
+          "date": "2026-06-16T03:32:00.208Z"
+        }
+      ],
+      "lastUpdated": "2026-06-16T03:32:00.208Z"
+    },
+    {
+      "userId": "user-1780821109229-036bf4",
+      "totalPoints": 150,
+      "lifetimePoints": 150,
+      "level": "bronze",
+      "history": [
+        {
+          "type": "earn",
+          "desc": "Berlangganan Paket Standard",
+          "pts": 50,
+          "date": "2026-06-16T03:47:51.096Z"
+        },
+        {
+          "type": "earn",
+          "desc": "Berlangganan Paket Tahunan",
+          "pts": 100,
+          "date": "2026-06-16T03:48:25.097Z"
+        }
+      ],
+      "lastUpdated": "2026-06-16T03:48:25.097Z"
+    }
+  ]
+}

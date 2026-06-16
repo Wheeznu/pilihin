@@ -14,23 +14,23 @@
 
     <div class="navbar">
         <h1>Blog <span class="highlight">Pribadi</span></h1>
-        <div class="nav-links">Progres Project Kelompok</div>
+        <div class="nav-links">Project Kelompok</div>
     </div>
 
     <div class="main-container">
-        
+
         <aside class="sidebar">
             <div class="profile-sticky">
                 <img src="foto.jpeg" alt="Foto Rina Suhita">
                 <h2>Rina Suhita</h2>
-                
+
                 <div class="meta-info">
                     <div class="meta-label">NIM</div>
                     <div>250411100067</div>
-                    
+
                     <div class="meta-label">Kelas</div>
                     <div>IF-2B</div>
-                    
+
                     <div class="meta-label">Prodi</div>
                     <div>Teknik Informatika</div>
                 </div>
@@ -38,93 +38,231 @@
         </aside>
 
         <main class="content-area">
-            
+
             <div class="project-header">
-                <h3>Project Akhir Mata Kuliah Dasar Pemrograman Web</h3>
-                <h2>Pengembangan Antarmuka Website Rekomendasi & Review Film: "PILIH.IN"</h2>
+                <h3>Project Website Mata Kuliah Dasar Pemrograman Web</h3>
+                <h2>Website Streaming Film: Pilih.in</h2>
             </div>
 
             <div class="intro-box">
-                <i class="fas fa-quote-left"></i> 
-                Halo semua, selamat datang di blog pribadi saya. Artikel ini dibuat untuk mendokumentasikan progres pengerjaan proyek akhir mata kuliah DPW, yaitu website <strong>PILIH.IN</strong>. Di sini, saya berfokus pada pengembangan dashboard reviewer, detail website, dan jadwal rilis film. Berikut adalah detail interface yang telah saya selesaikan:
+                <i class="fas fa-quote-left"></i>
+                Halo, selamat datang di blog pribadi saya. Artikel ini dibuat untuk mendokumentasikan progres pengerjaan project akhir mata kuliah DPW. Pada project kali ini, saya berfokus untuk menyelesaikan komponen <strong>Dashboard User</strong>. Berikut adalah detail 10 interface yang telah saya selesaikan:
             </div>
 
             <div class="content-card">
                 <div class="section-title">
-                    <i class="fas fa-laptop-code"></i> Penjelasan Interface
+                    <div class="section-title-text">
+                        <i class="fas fa-laptop-code"></i> Detail Interface
+                    </div>
+                    <button class="toggle-all-btn collapsed-state" id="toggleAllBtn" type="button">
+                        <i class="fas fa-layer-group"></i> Buka Semua
+                    </button>
                 </div>
 
                 <div class="interface-item">
-                    <h4 class="interface-title">1. Edit Profil Reviewer</h4>
-                    <p class="interface-desc">Halaman khusus yang digunakan oleh reviewer untuk mengubah atau mengatur informasi akun mereka sendiri secara langsung di website.</p>
-                    <ul class="feature-list">
-                        <li>Reviewer dapat langsung mengganti dan melihat pratinjau <strong>(preview) foto profil</strong> sebelum disimpan.</li>
-                        <li>Dapat mengubah nama pengguna <strong>(username)</strong> secara instan di halaman tersebut.</li>
-                        <li>Terdapat kolom bio untuk menulis deskripsi singkat atau perkenalan diri mengenai jenis film favorit mereka.</li>
-                    </ul>
+                    <button class="interface-title" type="button">
+                        <span class="title-text"><span class="item-number">1</span> Profil Pengguna</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </button>
+                    <div class="interface-body">
+                        <div class="interface-body-inner">
+                            <p class="interface-desc">Profil pengguna merupakan interface untuk mengelola seluruh informasi identitas diri dan data fundamental akun pengguna di dalam platform.</p>
+                            <ul class="feature-list">
+                                <li>Menampilkan foto profil, nama pengguna (username), email, status langganan, dan tanggal pertama kali bergabung.</li>
+                                <li>Menyediakan informasi lengkap akun yang meliputi nama lengkap, jenis kelamin, nomor HP, tanggal lahir, serta bio singkat.</li>
+                                <li>Dilengkapi dengan fitur interaktif untuk mengunggah atau mengganti foto profil serta tombol untuk menyimpan setiap perubahan data informasi akun.</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="interface-item">
-                    <h4 class="interface-title">2. Detail Ulasan (Riwayat Bulanan & Keseluruhan)</h4>
-                    <p class="interface-desc">Berbentuk tabel rapi yang menampilkan daftar lengkap ulasan film yang pernah ditulis oleh pengguna, baik riwayat di bulan ini maupun keseluruhan.</p>
-                    <ul class="feature-list">
-                        <li>Menampilkan info lengkap ulasan mulai dari poster film, tanggal tulis, sampai jumlah rating bintang.</li>
-                        <li>Menampilkan statistik interaksi seperti jumlah orang yang menyukai <strong>(likes)</strong> dan komentar dari pengguna lain.</li>
-                        <li>Dilengkapi tombol <strong>Edit Ulasan</strong> untuk mengubah teks ulasan dan tombol <strong>Hapus Ulasan</strong> dengan kotak konfirmasi keamanan.</li>
-                    </ul>
+                    <button class="interface-title" type="button">
+                        <span class="title-text"><span class="item-number">2</span> Status Langganan</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </button>
+                    <div class="interface-body">
+                        <div class="interface-body-inner">
+                            <p class="interface-desc">Status langganan merupakan interface untuk menyajikan transparansi data finansial mengenai jenis kemitraan paket yang sedang berjalan.</p>
+                            <ul class="feature-list">
+                                <li>Menampilkan informasi detail mengenai status paket langganan film aktif saat ini beserta batas waktu atau masa berlaku langganan tersebut.</li>
+                                <li>Menjabarkan poin-poin keuntungan (benefit) eksklusif yang berhak didapatkan dari paket langganan yang dimiliki.</li>
+                                <li>Jika akun terdeteksi masih menggunakan paket Basic atau Standard, antarmuka secara dinamis menampilkan tombol pintas untuk melakukan upgrade ke paket Premium serta melihat daftar promo yang tersedia.</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="interface-item">
-                    <h4 class="interface-title">3. Manajemen Draf Ulasan (Draft Review)</h4>
-                    <p class="interface-desc">Tempat penampungan ulasan film berbentuk susunan kartu (grid) untuk menyimpan tulisan ulasan yang statusnya masih disimpan sementara dan belum diterbitkan.</p>
-                    <ul class="feature-list">
-                        <li>Menampilkan tulisan ulasan lama yang belum sempat selesai diketik dengan penanda status draf yang jelas.</li>
-                        <li>Memudahkan pengguna untuk membuka kembali draf dan mengedit isinya sebelum siap dipublikasikan.</li>
-                        <li>Terdapat tombol utama <strong>Publish Ulasan</strong> untuk menerbitkan tulisan agar otomatis pindah ke halaman riwayat utama.</li>
-                        <li>Ada tombol hapus jika pengguna ingin membatalkan atau membuang draf ulasan film tersebut.</li>
-                    </ul>
+                    <button class="interface-title" type="button">
+                        <span class="title-text"><span class="item-number">3</span> Pengaturan Profil</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </button>
+                    <div class="interface-body">
+                        <div class="interface-body-inner">
+                            <p class="interface-desc">Pengaturan profil merupakan interface untuk menyesuaikan preferensi personal, kualitas pemutaran, dan kontrol privasi halaman sesuai kenyamanan pengguna.</p>
+                            <ul class="feature-list">
+                                <li>Fitur preferensi genre yang berfungsi memfilter katalog agar film yang direkomendasikan sesuai dengan minat pengguna.</li>
+                                <li>Opsi untuk memilih resolusi dan kualitas video yang disesuaikan dengan jenis paket langganan yang aktif.</li>
+                                <li>Pusat pengaturan notifikasi untuk mengelola pemberitahuan sistem, film baru, hingga info promo.</li>
+                                <li>Fitur pengatur tema visual untuk beralih antara mode terang (light mode) atau mode gelap (dark mode).</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="interface-item">
-                    <h4 class="interface-title">4. Galeri Daftar Film Favorit</h4>
-                    <p class="interface-desc">Halaman galeri visual yang mengumpulkan poster-poster film yang telah ditandai atau disukai dengan menekan ikon hati oleh pengguna.</p>
-                    <ul class="feature-list">
-                        <li>Jumlah film favorit yang dimasukkan otomatis terhitung dan muncul sebagai angka statistik di profil pengguna.</li>
-                        <li>Tampilan poster film tersusun rapi, responsif, dan terlihat estetik saat dibuka di laptop maupun HP.</li>
-                        <li>Menyediakan tombol silang kecil di ujung kartu film untuk membatalkan pilihan atau menghapus film dari daftar favorit secara cepat.</li>
-                    </ul>
+                    <button class="interface-title" type="button">
+                        <span class="title-text"><span class="item-number">4</span> Pengaturan Keamanan</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </button>
+                    <div class="interface-body">
+                        <div class="interface-body-inner">
+                            <p class="interface-desc">Pengaturan keamanan merupakan interface untuk memantau aktivitas autentikasi sekaligus mengonfigurasi tingkat proteksi pada akun pengguna.</p>
+                            <ul class="feature-list">
+                                <li>Menampilkan indikator status akun, catatan waktu login terakhir, serta tanggal pembuatan akun.</li>
+                                <li>Menyediakan utilitas untuk mengubah kata sandi (password) dan alamat email aktif dengan prosedur verifikasi.</li>
+                                <li>Menampilkan daftar perangkat (devices) yang sedang terhubung, dilengkapi tombol keluar (logout) dari semua perangkat.</li>
+                                <li>Menyediakan opsi tindakan tegas seperti penonaktifan sementara (deactivate) atau penghapusan akun permanen.</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="interface-item">
-                    <h4 class="interface-title">5. Notifikasi Aktivitas Terbaru</h4>
-                    <p class="interface-desc">Sebuah jendela kecil (pop-up) di pojok atas yang berguna untuk memberi tahu pengguna jika ada aktivitas atau interaksi terbaru dari orang lain.</p>
-                    <ul class="feature-list">
-                        <li>Dilengkapi ikon tanda angka merah di atas tombol lonceng yang otomatis hilang begitu jendela notifikasi diklik.</li>
-                        <li>Menampilkan pemberitahuan real-time ketika tulisan ulasan kita mendapat tanda suka baru atau mendapat balasan komentar dari sesama anggota komunitas film.</li>
-                    </ul>
+                    <button class="interface-title" type="button">
+                        <span class="title-text"><span class="item-number">5</span> Riwayat Tonton</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </button>
+                    <div class="interface-body">
+                        <div class="interface-body-inner">
+                            <p class="interface-desc">Riwayat tonton merupakan interface untuk melacak kembali daftar film atau serial yang telah diputar oleh pengguna sebelumnya.</p>
+                            <ul class="feature-list">
+                                <li>Menampilkan deretan judul film yang pernah ditonton lengkap dengan indikator persentase durasi tontonan berjalan.</li>
+                                <li>Jika tontonan selesai, sistem menyediakan tombol "Tonton Lagi" untuk memutar ulang film favorit.</li>
+                                <li>Jika belum selesai, sistem memunculkan tombol "Lanjutkan Menonton" agar pengguna bisa meneruskan sisa durasi dengan cepat.</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="interface-item">
-                    <h4 class="interface-title">6. Jadwal Rilis Sinema</h4>
-                    <p class="interface-desc">Antarmuka visual berbentuk daftar kartu yang menginformasikan tanggal rilis film-film global dan domestik mendatang secara real-time.</p>
-                    <ul class="feature-list">
-                        <li>Terdapat filter kategori jadwal (Sedang Tayang vs Akan Datang)</li>
-                        <li>Setiap kartu film telah dilengkapi dengan tombol interaktif "Tonton Trailer" untuk melihat cuplikan video, serta tombol "Ingatkan Saya" sebagai fitur penanda rilis internal bagi pengguna.</li>
-                    </ul>
+                    <button class="interface-title" type="button">
+                        <span class="title-text"><span class="item-number">6</span> Aktor Favorit</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </button>
+                    <div class="interface-body">
+                        <div class="interface-body-inner">
+                            <p class="interface-desc">Aktor favorit merupakan interface untuk menyimpan dan mengelola daftar aktor atau aktris yang paling disukai oleh pengguna.</p>
+                            <ul class="feature-list">
+                                <li>Menampilkan koleksi profil aktor atau aktris favorit yang telah disematkan oleh pengguna ke dalam daftar pribadi.</li>
+                                <li>Mendukung fitur pencarian dinamis berdasarkan nama aktor untuk mempermudah navigasi ke halaman detail profil aktor tersebut.</li>
+                                <li>Memberikan akses langsung menonton film yang dibintangi oleh aktor favorit tersebut.</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="interface-item">
-                    <h4 class="interface-title">7. Informasi Detail Website dengan Sistem Navigasi Lintas Fitur & Form Feedback</h4>
-                    <p class="interface-desc">Komponen antarmuka informatif berstruktur Landing Page yang mengenalkan anatomi ekosistem PILIH.IN, serta dilengkapi tombol navigasi taktis terintegrasi menuju fitur lain dan halaman kontribusi komunitas.</p>
-                    <ul class="feature-list">
-                        <li>Berisi informasi tentang website, untuk mengedukasi pengguna mengenai alur website pilih.in.</li>
-                        <li>Tombol Navigasi dan Form Masukan: Ada tombol "Temukan Film Favorit" buat langsung pindah ke halaman All Film, dan tombol "Kontribusi & Feedback" buat mengarahkan user ke form pengisian nama, email, kategori, serta pesan masukan.</li>
-                    </ul>
+                    <button class="interface-title" type="button">
+                        <span class="title-text"><span class="item-number">7</span> Sutradara Favorit</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </button>
+                    <div class="interface-body">
+                        <div class="interface-body-inner">
+                            <p class="interface-desc">Sutradara favorit merupakan interface untuk mengorganisasi daftar sineas andalan yang karyanya ingin terus dipantau oleh pengguna.</p>
+                            <ul class="feature-list">
+                                <li>Menampilkan daftar sutradara yang telah ditambahkan ke dalam daftar favorit untuk memudahkan pemantauan karya terbaru.</li>
+                                <li>Mendukung fitur pencarian berdasarkan nama sutradara untuk menemukan profil dan informasi detail terkait karya-karyanya.</li>
+                                <li>Menyediakan akses cepat untuk menonton film-film yang disutradarai oleh tokoh-tokoh favorit yang telah disimpan dalam daftar.</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
+
+                <div class="interface-item">
+                    <button class="interface-title" type="button">
+                        <span class="title-text"><span class="item-number">8</span> Riwayat Transaksi</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </button>
+                    <div class="interface-body">
+                        <div class="interface-body-inner">
+                            <p class="interface-desc">Riwayat transaksi merupakan interface untuk mendokumentasikan seluruh riwayat pelunasan dan invoice finansial yang diterbitkan oleh platform.</p>
+                            <ul class="feature-list">
+                                <li>Menampilkan log transaksi pembelian paket langganan secara terperinci, lengkap dengan lembar detail nota transaksi.</li>
+                                <li>Menyediakan pemisah status untuk memilah transaksi ke dalam kategori Berhasil, Pending, atau Gagal.</li>
+                                <li>Dilengkapi fitur penyaringan (filter) untuk mengurutkan transaksi berdasarkan parameter terbaru-terlama serta nominal tertinggi-terendah.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="interface-item">
+                    <button class="interface-title" type="button">
+                        <span class="title-text"><span class="item-number">9</span> Pembayaran & Tukar Poin</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </button>
+                    <div class="interface-body">
+                        <div class="interface-body-inner">
+                            <p class="interface-desc">Pembayaran & tukar poin merupakan interface untuk memproses transaksi pembelian paket serta mengelola poin loyalitas pengguna.</p>
+                            <ul class="feature-list">
+                                <li>Memfasilitasi pembayaran paket langganan melalui berbagai metode seperti e-wallet, transfer bank, dan kartu kredit.</li>
+                                <li>Menyediakan fitur penukaran poin akumulatif menjadi voucher diskon untuk pembelian paket berikutnya.</li>
+                                <li>Poin dapat diperoleh secara organik dari aktivitas pengguna seperti menulis ulasan, mengajak teman, dan transaksi berlangganan.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="interface-item">
+                    <button class="interface-title" type="button">
+                        <span class="title-text"><span class="item-number">10</span> Detail Notifikasi User</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </button>
+                    <div class="interface-body">
+                        <div class="interface-body-inner">
+                            <p class="interface-desc">Detail notifikasi user merupakan interface untuk pusat penampungan informasi masuk, interaksi sosial, dan pembaruan sistem bagi pengguna.</p>
+                            <ul class="feature-list">
+                                <li>Menampilkan pesan berdasarkan topik: info langganan, konfirmasi transaksi, promo, rilis film baru, hingga balasan ulasan.</li>
+                                <li>Menghitung secara real-time jumlah notifikasi yang belum dibaca (unread) baik pada ikon menu maupun di halaman utama.</li>
+                                <li>Menyediakan tombol "Tandai Semua Telah Dibaca" untuk memperbarui status notifikasi secara keseluruhan sekaligus.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </main>
-
     </div>
 
+    <script>
+        const items = document.querySelectorAll('.interface-item');
+        const toggleAllBtn = document.getElementById('toggleAllBtn');
+
+        items.forEach(item => {
+            const titleBtn = item.querySelector('.interface-title');
+            titleBtn.addEventListener('click', () => {
+                item.classList.toggle('active');
+                updateToggleAllLabel();
+            });
+        });
+
+        toggleAllBtn.addEventListener('click', () => {
+            const shouldOpen = toggleAllBtn.classList.contains('collapsed-state');
+            items.forEach(item => item.classList.toggle('active', shouldOpen));
+            updateToggleAllLabel();
+        });
+
+        function updateToggleAllLabel() {
+            const allOpen = Array.from(items).every(item => item.classList.contains('active'));
+            if (allOpen) {
+                toggleAllBtn.innerHTML = '<i class="fas fa-layer-group"></i> Tutup Semua';
+                toggleAllBtn.classList.remove('collapsed-state');
+            } else {
+                toggleAllBtn.innerHTML = '<i class="fas fa-layer-group"></i> Buka Semua';
+                toggleAllBtn.classList.add('collapsed-state');
+            }
+        }
+    </script>
 </body>
 </html>

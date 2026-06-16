@@ -118,7 +118,7 @@ class PricingPage {
                 <div class="pricing-card__action">
                     ${isFree
                         ? `<a href="/frontend/pages/main/register.html" class="btn btn-ghost" data-trx>Daftar Gratis</a>`
-                        : `<a href="/frontend/pages/main/register.html" class="btn btn-primary" data-trx>
+                        : `<a href="/frontend/pages/user/payment.html?tier=${tier.id}&period=${this._isYearly ? 'tahunan' : 'bulanan'}" class="btn btn-primary" data-trx>
                             <i data-feather="shopping-cart"></i> Langganan
                         </a>`
                     }
