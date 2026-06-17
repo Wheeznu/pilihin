@@ -71,6 +71,10 @@ class FavoritesSutradaraPage {
 
         const dirs = this._getFavDirs();
 
+        const countHTML = dirs.length
+            ? `<div class="page-header__count"><i data-feather="camera"></i> ${dirs.length} Sutradara</div>`
+            : "";
+
         main.innerHTML = `
             <div class="user-page">
 
@@ -78,30 +82,21 @@ class FavoritesSutradaraPage {
                     <div class="page-header__text">
                         <h1 class="page-header__title">Sutradara Favorit</h1>
                         <p class="page-header__subtitle">Sutradara yang kamu sukai</p>
+                        ${countHTML}
                     </div>
                 </div>
 
-                <div class="fav-section">
-                    <div class="fav-section__header">
-                        <div class="fav-section__title-wrap">
-                            <i data-feather="camera"></i>
-                            <h2 class="fav-section__title">Sutradara Favorit</h2>
-                            <span class="fav-count" id="countSutradara">${dirs.length}</span>
-                        </div>
+                <div class="fav-search-bar">
+                    <div class="fav-search-input-wrap">
+                        <i data-feather="search" class="fav-search-icon"></i>
+                        <input type="text" id="inputSearchSutradara" class="fav-search-input"
+                            placeholder="Cari nama sutradara..." autocomplete="off">
                     </div>
+                    <div class="fav-search-dropdown" id="dropdownSutradara"></div>
+                </div>
 
-                    <div class="fav-search-bar">
-                        <div class="fav-search-input-wrap">
-                            <i data-feather="search" class="fav-search-icon"></i>
-                            <input type="text" id="inputSearchSutradara" class="fav-search-input"
-                                placeholder="Cari nama sutradara..." autocomplete="off">
-                        </div>
-                        <div class="fav-search-dropdown" id="dropdownSutradara"></div>
-                    </div>
-
-                    <div id="sectionSutradara">
-                        ${this._personGridHTML(dirs)}
-                    </div>
+                <div id="sectionSutradara">
+                    ${this._personGridHTML(dirs)}
                 </div>
 
                 <!-- MODAL -->
@@ -147,17 +142,13 @@ class FavoritesSutradaraPage {
 
         return `<div class="fav-person-grid">${persons.map(p => `
             <div class="fav-person-card" data-person-name="${p.name}" data-person-type="sutradara">
-                <button class="btn-remove-fav" data-type="sutradara" data-id="${p.name}"
+                <button class="btn-remove-person" data-type="sutradara" data-id="${p.name}"
                         title="Hapus dari favorit">
                     <i data-feather="x"></i>
                 </button>
-                <div class="fav-person-card__img-wrap">
-                    <img class="fav-person-card__img" src="${p.photo || ""}" alt="${p.name}"
-                         onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(p.name)}&background=1db954&color=fff&size=300'">
-                    <div class="fav-person-card__overlay">
-                        <i data-feather="film"></i>
-                        <span>Lihat Film</span>
-                    </div>
+                <div class="fav-person-card__avatar-wrap">
+                    <img class="fav-person-card__avatar" src="${p.photo || ""}" alt="${p.name}"
+                         onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(p.name)}&background=1db954&color=fff&size=200'">
                 </div>
                 <div class="fav-person-card__body">
                     <p class="fav-person-card__name">${p.name}</p>
@@ -170,14 +161,13 @@ class FavoritesSutradaraPage {
         const main = document.getElementById("favoritesSutradaraMain");
 
         main?.addEventListener("click", e => {
-            const removeBtn = e.target.closest(".btn-remove-fav");
+            const removeBtn = e.target.closest(".btn-remove-person");
             if (removeBtn) {
                 e.preventDefault();
                 e.stopPropagation();
                 const name = removeBtn.dataset.id;
                 this._removeDirector(name);
-                document.getElementById("sectionSutradara").innerHTML = this._personGridHTML(this._getFavDirs());
-                document.getElementById("countSutradara").textContent = this._getFavDirs().length;
+                this._renderPage();
                 feather.replace();
                 this._toast("Dihapus dari favorit.", "success");
                 return;

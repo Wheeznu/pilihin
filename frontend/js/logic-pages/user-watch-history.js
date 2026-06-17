@@ -110,6 +110,17 @@ class UserWatchHistoryPage {
             .join(", ");
     }
 
+    _calcProgress(record) {
+        if (record.completed) return 100;
+        if (record.progress > 0) return Math.min(100, Math.floor(record.progress));
+        const totalSeconds = record.duration || 0;
+        const currTime = record.currentTime || 0;
+        if (totalSeconds > 0) {
+            return Math.min(100, Math.floor((currTime / totalSeconds) * 100));
+        }
+        return 0;
+    }
+
     _formatDate(iso) {
         if (!iso) return "-";
         return new Date(iso).toLocaleDateString("id-ID", {
@@ -129,12 +140,12 @@ class UserWatchHistoryPage {
     _itemHTML({ record, film }) {
         const genreNames = this._genreNames(film.genres);
         const quality = film.videoQuality?.[0] || "HD";
-        const progress = Math.min(100, Math.max(0, record.progress || 0));
-        const completed = !!record.completed || progress >= 95;
+        const progress = this._calcProgress(record);
+        const completed = !!record.completed || progress >= 100;
 
         const statusLabel = completed
             ? "Selesai ditonton"
-            : `${progress}% ditonton (belum selesai)`;
+            : `${progress}% ditonton`;
 
         const actionBtn = completed
             ? `<a href="/frontend/pages/film/detail.html#${film.id}" class="btn btn-primary btn-history-action" data-film-id="${film.id}">
@@ -154,7 +165,7 @@ class UserWatchHistoryPage {
                     <span class="film-card__rating"><i data-feather="star" style="width:12px;height:12px;fill:currentColor"></i> ${film.averageRating || "?"}</span>
                     <span class="film-card__quality">${quality}</span>
                     <div class="history-card__progress">
-                        <div class="history-card__progress-bar" style="width:${progress}%"></div>
+                        <div class="history-card__progress-bar" style="width:${progress}%;background:${completed ? "var(--accent-primary)" : "#e0a000"}"></div>
                     </div>
                 </div>
                 <div class="history-card__info">
@@ -187,11 +198,11 @@ class UserWatchHistoryPage {
         const headerHTML = `
             <div class="page-header">
                 <div class="page-header__text">
-                    <h1 class="page-header__title">Riwayat Tonton</h1>
-                    <p class="page-header__subtitle">Film yang sudah kamu tonton di Pilih.in</p>
+                    <h1 class="page-header__title" style="font-weight:700;font-size:var(--font-2xl)">Riwayat Tonton</h1>
+                    <p class="page-header__subtitle" style="color:var(--text-secondary);font-size:var(--font-sm);margin-top:var(--space-xs)">Film yang sudah kamu tonton di Pilih.in</p>
                 </div>
                 ${items.length ? `
-                <button id="btnClearHistory" class="btn btn-ghost">
+                <button id="btnClearHistory" class="btn btn-outline btn-clear-all">
                     <i data-feather="trash-2"></i> Hapus Semua
                 </button>` : ""}
             </div>
@@ -229,6 +240,7 @@ class UserWatchHistoryPage {
         document.getElementById("historyMain")?.addEventListener("click", (e) => {
             const clearBtn = e.target.closest("#btnClearHistory");
             if (clearBtn) {
+                if (!window.confirm("Hapus semua riwayat tontonan?")) return;
                 this._clearHistory();
                 this._renderPage();
                 feather.replace();

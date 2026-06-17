@@ -85,9 +85,7 @@ class FavoritesFilmPage {
                     </a>` : ""}
                 </div>
 
-                <div class="fav-section">
-                    ${this._filmGridHTML(films)}
-                </div>
+                ${this._filmGridHTML(films)}
 
             </div>`;
     }

@@ -96,28 +96,116 @@ class DetailPage {
         return !!localStorage.getItem("pilih-in-session");
     }
 
+    _toEmbedUrl(url) {
+        if (!url) return "";
+        const match = url.match(
+            /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/
+        );
+        if (match) {
+            return `https://www.youtube.com/embed/${match[1]}?enablejsapi=1`;
+        }
+        return url;
+    }
+
+    _extractVideoId(url) {
+        if (!url) return null;
+        const match = url.match(
+            /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/
+        );
+        return match ? match[1] : null;
+    }
+
+    /* ── YouTube IFrame API ── */
+    _loadYTAPI() {
+        if (this._ytApiPromise) return this._ytApiPromise;
+        this._ytApiPromise = new Promise((resolve) => {
+            if (window.YT && window.YT.Player) {
+                resolve();
+                return;
+            }
+            window.onYouTubeIframeAPIReady = resolve;
+            const tag = document.createElement("script");
+            tag.src = "https://www.youtube.com/iframe_api";
+            document.head.appendChild(tag);
+        });
+        return this._ytApiPromise;
+    }
+
+    /* ── Watch History ── */
+    _onVideoPlay() {
+        if (this._watchHistoryAdded) return;
+        clearTimeout(this._whTimer);
+        this._whTimer = setTimeout(() => this._addToWatchHistory(), 5000);
+    }
+
+    _addToWatchHistory() {
+        if (this._watchHistoryAdded) return;
+        this._watchHistoryAdded = true;
+        const user = this._getSessionUser();
+        if (!user || !this._film) return;
+        const entry = {
+            id: `wh-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+            userId: user.userId,
+            filmId: this._film.id,
+            watchedAt: new Date().toISOString(),
+            currentTime: 5,
+            duration: (this._film.duration || 0) * 60,
+            progress: 5,
+            completed: false,
+        };
+        const db = this._getDb();
+        if (db) {
+            if (!db.watchHistory) db.watchHistory = [];
+            db.watchHistory = db.watchHistory.filter(
+                (r) => !(r.userId === user.userId && r.filmId === this._film.id)
+            );
+            db.watchHistory.push(entry);
+            localStorage.setItem("pilih-in-db", JSON.stringify(db));
+        }
+    }
+
     /* ── Video ── */
     _populateVideo() {
         const f = this._film;
         const section = DOM.$("#videoSection");
-        const video = DOM.$("#filmVideo");
-        const source = video?.querySelector("source");
+        const container = DOM.$("#filmVideo");
         const overlay = DOM.$("#videoLoginOverlay");
-        if (!video || !source) return;
+        if (!container) return;
 
         if (!this._isLoggedIn()) {
-            video.controls = false;
-            video.removeAttribute("controls");
+            container.innerHTML = "";
             if (overlay) overlay.style.display = "flex";
             if (section) section.classList.add("video-section--locked");
-            video.poster = f.poster;
             return;
         }
 
         if (f.streamingUrl) {
-            source.src = f.streamingUrl;
-            video.poster = f.poster;
-            video.load();
+            const videoId = this._extractVideoId(f.streamingUrl);
+            if (videoId) {
+                this._watchHistoryAdded = false;
+                this._loadYTAPI().then(() => {
+                    try {
+                        this._ytPlayer = new YT.Player("filmVideo", {
+                            videoId,
+                            playerVars: {
+                                autoplay: 1,
+                                controls: 1,
+                                rel: 0,
+                                modestbranding: 1,
+                            },
+                            events: {
+                                onStateChange: (e) => {
+                                    if (e.data === YT.PlayerState.PLAYING) {
+                                        this._onVideoPlay();
+                                    }
+                                },
+                            },
+                        });
+                    } catch (err) {
+                        console.warn("DetailPage: YT Player gagal", err);
+                    }
+                });
+            }
         } else {
             if (section) section.style.display = "none";
         }
@@ -466,38 +554,28 @@ class DetailPage {
 
     _openTrailer() {
         const modal = DOM.$("#trailerModal");
-        const video = DOM.$("#trailerVideo");
-        const source = video?.querySelector("source");
-        if (!modal || !video || !source) return;
+        const iframe = DOM.$("#trailerVideo");
+        if (!modal || !iframe) return;
 
         const url = this._film.trailerUrl || this._film.streamingUrl;
         if (!url) return;
 
-        source.src = url;
-        video.poster = this._film.poster;
-        video.load();
-
+        iframe.src = this._toEmbedUrl(url);
         modal.style.display = "flex";
         document.body.style.overflow = "hidden";
-
-        video.play().catch(() => {});
         feather.replace();
     }
 
     _closeTrailer() {
         const modal = DOM.$("#trailerModal");
-        const video = DOM.$("#trailerVideo");
+        const iframe = DOM.$("#trailerVideo");
         if (!modal) return;
 
         modal.style.display = "none";
         document.body.style.overflow = "";
 
-        if (video) {
-            video.pause();
-            video.currentTime = 0;
-            const source = video.querySelector("source");
-            if (source) source.src = "";
-            video.load();
+        if (iframe) {
+            iframe.src = "";
         }
     }
 

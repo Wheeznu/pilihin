@@ -17,11 +17,16 @@
     position: relative;
 }
 
-.video-wrapper video {
+.video-wrapper iframe,
+.video-wrapper #filmVideo {
     width: 100%;
     height: 100%;
-    object-fit: contain;
     display: block;
+}
+
+.video-wrapper #filmVideo > div {
+    width: 100%;
+    height: 100%;
 }
 
 /* ── Video Login Overlay ── */
@@ -484,10 +489,9 @@
     width: 100%;
 }
 
-.modal-video-wrapper video {
+.modal-video-wrapper iframe {
     width: 100%;
     height: 100%;
-    object-fit: contain;
     display: block;
 }
 

@@ -133,7 +133,13 @@ class UserWatchlistPage {
                 <div class="page-header__text">
                     <h1 class="page-header__title">Daftar Tonton</h1>
                     <p class="page-header__subtitle">Film yang kamu simpan untuk ditonton nanti</p>
+                    ${films.length > 0 ? `<div class="page-header__count">
+                        <i data-feather="bookmark"></i> ${films.length} film
+                    </div>` : ""}
                 </div>
+                ${films.length > 0 ? `<a href="/frontend/pages/film/katalog.html" class="btn btn-ghost">
+                    <i data-feather="film"></i> Jelajahi Film
+                </a>` : ""}
             </div>
         `;
 

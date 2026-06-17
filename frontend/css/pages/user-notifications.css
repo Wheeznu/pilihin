@@ -1,32 +1,119 @@
-/* ─── Filter chips ─── */
-.notif-filters {
+/* ─── Page Header ─── */
+.page-header {
     display: flex;
-    gap: var(--space-sm);
-    flex-wrap: wrap;
-    margin-bottom: var(--space-lg);
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
 }
 
-.notif-filter {
-    padding: var(--space-xs) var(--space-md);
+.page-header__left {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.page-header__title {
+    font-size: var(--font-3xl);
+    font-weight: var(--fw-bold);
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1.2;
+}
+
+.page-header__subtitle {
+    font-size: var(--font-sm);
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.5;
+}
+
+.page-header__count {
+    color: var(--accent-primary);
+    font-weight: var(--fw-bold);
+}
+
+/* ─── Mark All Read Button ─── */
+.btn-mark-all {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-lg);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-full);
     background: transparent;
     color: var(--text-secondary);
     font-size: var(--font-sm);
     font-weight: var(--fw-medium);
+    font-family: var(--font-family);
     cursor: pointer;
-    transition: border-color var(--transition-fast), color var(--transition-fast), background var(--transition-fast);
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.btn-mark-all i {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-mark-all:hover {
+    background: var(--bg-hover);
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+}
+
+.btn-mark-all:active {
+    transform: scale(0.97);
+}
+
+/* ─── Filter Chips ─── */
+.notif-filters {
+    display: flex;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xl);
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.notif-filters::-webkit-scrollbar {
+    display: none;
+}
+
+.notif-filter {
+    flex-shrink: 0;
+    padding: var(--space-sm) var(--space-lg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-full);
+    background: transparent;
+    color: var(--text-muted);
+    font-size: var(--font-sm);
+    font-weight: var(--fw-medium);
+    font-family: var(--font-family);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    white-space: nowrap;
 }
 
 .notif-filter:hover {
     border-color: var(--accent-primary);
-    color: var(--text-primary);
+    color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.03);
 }
 
 .notif-filter--active {
     border-color: var(--accent-primary);
-    background: rgba(29, 185, 84, 0.12);
     color: var(--accent-primary);
+    background: rgba(29, 185, 84, 0.1);
+}
+
+.notif-filter--active:hover {
+    background: rgba(29, 185, 84, 0.15);
 }
 
 /* ─── List & Card ─── */
@@ -212,6 +299,20 @@
 
 /* ─── Responsive ─── */
 @media (max-width: 640px) {
+    .page-header {
+        flex-direction: column;
+        gap: var(--space-md);
+    }
+
+    .page-header__title {
+        font-size: var(--font-2xl);
+    }
+
+    .btn-mark-all {
+        width: 100%;
+        justify-content: center;
+    }
+
     .notif-card {
         flex-direction: column;
         gap: var(--space-sm);

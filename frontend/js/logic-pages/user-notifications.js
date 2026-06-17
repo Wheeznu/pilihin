@@ -311,14 +311,16 @@ class UserNotificationsPage {
 
         const headerHTML = `
             <div class="page-header">
-                <div class="page-header__text">
+                <div class="page-header__left">
                     <h1 class="page-header__title">Notifikasi</h1>
                     <p class="page-header__subtitle">
-                        ${unreadCount > 0 ? `${unreadCount} notifikasi belum dibaca` : "Semua notifikasi sudah dibaca"}
+                        ${unreadCount > 0
+                            ? `<span class="page-header__count">${unreadCount}</span> notifikasi belum dibaca`
+                            : "Semua notifikasi sudah dibaca"}
                     </p>
                 </div>
                 ${unreadCount > 0 ? `
-                <button id="btnMarkAllRead" class="btn btn-ghost">
+                <button id="btnMarkAllRead" class="btn-mark-all">
                     <i data-feather="check"></i> Tandai Semua Dibaca
                 </button>` : ""}
             </div>
