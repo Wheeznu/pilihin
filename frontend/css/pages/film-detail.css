@@ -434,6 +434,50 @@
     font-weight: var(--fw-semibold);
 }
 
+/* ── Review Rating Selector ── */
+.review-rating-selector {
+    display: flex;
+    gap: 4px;
+    margin-bottom: var(--space-md);
+}
+
+.review-star {
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: color var(--transition-fast), transform var(--transition-fast);
+    display: inline-flex;
+}
+
+.review-star.selected {
+    color: #f1c40f;
+}
+
+.review-star .feather {
+    width: 20px;
+    height: 20px;
+}
+
+.review-star:hover {
+    transform: scale(1.15);
+}
+
+/* ── Pending Review Card ── */
+.review-card--pending {
+    border-color: var(--accent-primary);
+    opacity: 0.75;
+}
+
+.review-card__pending-badge {
+    font-size: var(--font-xs);
+    font-weight: var(--fw-semibold);
+    color: var(--accent-primary);
+    background: rgba(29, 185, 84, 0.12);
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+    margin-left: var(--space-sm);
+    white-space: nowrap;
+}
+
 /* ── Trailer Modal ── */
 .modal-overlay {
     position: fixed;

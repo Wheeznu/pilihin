@@ -1,6 +1,6 @@
 import { DOM } from "../utils/dom.js";
 import { UserData } from "../utils/user-data.js";
-import { getDbReady } from "../../../backend/init.js";
+import { getDbReady, dbManager } from "../../../backend/init.js";
 
 const GENRE_MAP = {
     "genre-001": "Comedy",
@@ -50,7 +50,7 @@ class DetailPage {
     }
 
     async _loadUserData() {
-        this._reviews = await UserData.get("reviews");
+        this._reviews = dbManager.getCollection("reviews");
         this._watchLists = await UserData.get("watchLists");
         this._favorites = await UserData.get("favorites");
     }
@@ -326,25 +326,67 @@ class DetailPage {
     }
 
     /* ── Reviews ── */
+    _getSessionUser() {
+        try {
+            const raw = localStorage.getItem("pilih-in-session");
+            return raw ? JSON.parse(raw) : null;
+        } catch {
+            return null;
+        }
+    }
+
+    _getUserDisplayName(userId) {
+        const users = dbManager.getCollection("users");
+        const user = users.find((u) => u.id === userId);
+        return user?.username || `User ${(userId || "xxxx").slice(-4)}`;
+    }
+
+    _saveGlobalReviews(reviews) {
+        dbManager.saveCollection("reviews", reviews);
+    }
+
     _populateReviews() {
         const tab = DOM.$("#tab-ulasan");
         if (!tab) return;
 
-        const reviews = this._reviews.filter((r) => r.filmId === this._film.id);
-        const isLoggedIn = this._isLoggedIn();
-        const session = isLoggedIn ? (JSON.parse(localStorage.getItem("pilih-in-session") || "{}")) : null;
+        const session = this._getSessionUser();
+        const userId = session?.userId;
+        const isLoggedIn = !!userId;
+
+        const allReviews = dbManager.getCollection("reviews");
+        const filmReviews = allReviews.filter((r) => r.filmId === this._film.id);
+        const approvedReviews = filmReviews.filter((r) => r.status === "approved");
+        const userPending = filmReviews.find((r) => r.userId === userId && r.status === "pending");
 
         let html = "";
 
-        // Auth section
+        // Auth section / review form
         if (isLoggedIn) {
-            html += `
-                <div class="review-form-container">
-                    <h3>Tulis Ulasan</h3>
-                    <textarea id="reviewInput" class="review-form-input" rows="3" placeholder="Bagikan pendapatmu tentang film ini..."></textarea>
-                    <button id="submitReviewBtn" class="btn btn-primary" style="margin-top:var(--space-sm)">Kirim Ulasan</button>
-                </div>
-            `;
+            if (userPending) {
+                html += `
+                    <div class="review-form-container">
+                        <h3>Tulis Ulasan</h3>
+                        <p style="color:var(--text-muted);font-size:var(--font-sm);margin-bottom:var(--space-md)">
+                            Anda sudah mengirimkan ulasan untuk film ini. Menunggu persetujuan moderator.
+                        </p>
+                    </div>
+                `;
+            } else {
+                html += `
+                    <div class="review-form-container">
+                        <h3>Tulis Ulasan</h3>
+                        <div class="review-rating-selector" id="reviewRatingSelector">
+                            ${Array.from({ length: 10 }, (_, i) => `
+                                <span class="review-star" data-value="${i + 1}" title="${i + 1}">
+                                    <i data-feather="star"></i>
+                                </span>
+                            `).join("")}
+                        </div>
+                        <textarea id="reviewInput" class="review-form-input" rows="3" placeholder="Bagikan pendapatmu tentang film ini..."></textarea>
+                        <button id="submitReviewBtn" class="btn btn-primary" style="margin-top:var(--space-sm)" disabled>Kirim Ulasan</button>
+                    </div>
+                `;
+            }
         } else {
             html += `
                 <div class="review-login-prompt" style="cursor:pointer" onclick="if(confirm('Anda harus login terlebih dahulu. Ingin login sekarang?')){window.location.href='/frontend/pages/main/login.html'}">
@@ -355,7 +397,7 @@ class DetailPage {
         }
 
         // Reviews list
-        if (!reviews.length) {
+        if (approvedReviews.length === 0 && !userPending) {
             html += `
                 <div class="reviews-empty">
                     <i data-feather="message-square"></i>
@@ -365,70 +407,104 @@ class DetailPage {
             `;
         } else {
             html += `<div class="reviews-container">`;
-            reviews.forEach((r) => {
-                const date = r.createdAt
-                    ? new Date(r.createdAt).toLocaleDateString("id-ID", { year: "numeric", month: "long", day: "numeric" })
-                    : "";
-                const stars = r.rating
-                    ? Array.from({ length: 5 }, (_, i) =>
-                          i < Math.round(r.rating)
-                              ? '<i data-feather="star" style="width:12px;height:12px;fill:currentColor"></i>'
-                              : '<i data-feather="star" style="width:12px;height:12px"></i>'
-                      ).join("")
-                    : "";
-                const initial = (r.userName || "A")[0].toUpperCase();
-                html += `
-                    <div class="review-card">
-                        <div class="review-card__header">
-                            <div class="review-card__avatar">${initial}</div>
-                            <span class="review-card__user">${r.userName || "Anonim"}</span>
-                            ${r.rating ? `<span class="review-card__rating">${stars}</span>` : ""}
-                            ${date ? `<span class="review-card__date">${date}</span>` : ""}
-                        </div>
-                        <div class="review-card__body">${r.comment || ""}</div>
-                    </div>
-                `;
+
+            // Show user's pending review first
+            if (userPending) {
+                html += this._renderReviewCard(userPending, true);
+            }
+
+            // Show approved reviews
+            approvedReviews.forEach((r) => {
+                html += this._renderReviewCard(r, false);
             });
+
             html += `</div>`;
         }
 
         tab.innerHTML = html;
         feather.replace();
 
-        // Bind submit
-        if (isLoggedIn) {
-            const submitBtn = DOM.$("#submitReviewBtn");
-            const input = DOM.$("#reviewInput");
-            if (submitBtn && input) {
-                submitBtn.addEventListener("click", async () => {
-                    const comment = input.value.trim();
-                    if (!comment) return;
+        // Bind rating selector & submit
+        if (isLoggedIn && !userPending) {
+            this._bindReviewForm();
+        }
+    }
 
-                    this._reviews.push({
-                        filmId: this._film.id,
-                        userId: session?.userId || "anonymous",
-                        userName: `User ${(session?.userId || "xxxx").slice(-4)}`,
-                        comment: comment,
-                        createdAt: new Date().toISOString(),
-                    });
-                    await UserData.set("reviews", this._reviews);
-                    input.value = "";
-                    this._populateReviews();
+    _renderReviewCard(r, isPending) {
+        const date = r.createdAt
+            ? new Date(r.createdAt).toLocaleDateString("id-ID", { year: "numeric", month: "long", day: "numeric" })
+            : "";
+        const stars = r.rating
+            ? Array.from({ length: 10 }, (_, i) =>
+                  i < r.rating
+                      ? '<i data-feather="star" style="width:12px;height:12px;fill:currentColor;color:#f1c40f"></i>'
+                      : '<i data-feather="star" style="width:12px;height:12px;color:var(--text-muted)"></i>'
+              ).join("")
+            : "";
+        const displayName = this._getUserDisplayName(r.userId);
+        const initial = displayName[0].toUpperCase();
+
+        return `
+            <div class="review-card ${isPending ? "review-card--pending" : ""}">
+                <div class="review-card__header">
+                    <div class="review-card__avatar">${initial}</div>
+                    <span class="review-card__user">${displayName}</span>
+                    ${r.rating ? `<span class="review-card__rating">${stars}</span>` : ""}
+                    ${date ? `<span class="review-card__date">${date}</span>` : ""}
+                    ${isPending ? `<span class="review-card__pending-badge">Menunggu</span>` : ""}
+                </div>
+                <div class="review-card__body">${r.content || ""}</div>
+            </div>
+        `;
+    }
+
+    _bindReviewForm() {
+        let selectedRating = 0;
+        const stars = DOM.$$("#reviewRatingSelector .review-star");
+        const submitBtn = DOM.$("#submitReviewBtn");
+        const input = DOM.$("#reviewInput");
+        const session = this._getSessionUser();
+        if (!session) return;
+
+        stars.forEach((star) => {
+            star.addEventListener("click", () => {
+                selectedRating = parseInt(star.dataset.value);
+                stars.forEach((s) => {
+                    const val = parseInt(s.dataset.value);
+                    s.classList.toggle("selected", val <= selectedRating);
                 });
-            }
+                if (selectedRating > 0) {
+                    submitBtn.disabled = false;
+                }
+            });
+        });
+
+        if (submitBtn && input) {
+            submitBtn.addEventListener("click", () => {
+                const comment = input.value.trim();
+                if (!comment || selectedRating === 0) return;
+
+                const allReviews = dbManager.getCollection("reviews");
+                const review = {
+                    id: "review-" + Date.now() + "-" + Math.random().toString(36).slice(2, 6),
+                    filmId: this._film.id,
+                    userId: session.userId,
+                    rating: selectedRating,
+                    content: comment,
+                    status: "pending",
+                    helpful: 0,
+                    createdAt: new Date().toISOString(),
+                    updatedAt: new Date().toISOString(),
+                };
+                allReviews.push(review);
+                this._saveGlobalReviews(allReviews);
+                input.value = "";
+                this._populateReviews();
+            });
         }
     }
 
     /* ── Action Buttons ── */
-    _getSessionUser() {
-        try {
-            const raw = localStorage.getItem("pilih-in-session");
-            return raw ? JSON.parse(raw) : null;
-        } catch {
-            return null;
-        }
-    }
-
     _isInWatchlist() {
         const user = this._getSessionUser();
         if (!user) return false;
