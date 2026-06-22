@@ -420,7 +420,7 @@
     width: 26px;
     height: 26px;
     border-radius: 50%;
-    color: #fff;
+    color: #;
     font-size: var(--font-xs);
     font-weight: var(--fw-bold);
     display: flex;
@@ -470,4 +470,130 @@
     height: 14px;
     margin-top: 1px;
     color: #ffc107;
+}
+/* ── Keranjang Film ─────────────────────────────────────── */
+.cart-desc {
+    font-size: var(--font-sm);
+    color: var(--text-secondary);
+    margin: 0 0 var(--space-sm);
+    line-height: 1.6;
+}
+
+.cart-stats {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-md);
+}
+
+.cart-stat {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--font-xs);
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+}
+.cart-stat svg { width: 12px; height: 12px; }
+.cart-stat--free  { background: #1db954; color: #000; }
+.cart-stat--paid  { background: #eab308; color: #000; }
+.cart-stat--excl  { background: #a855f7; color: #000; }
+
+/* Grid poster */
+.cart-film-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: var(--space-sm);
+    margin-bottom: var(--space-sm);
+}
+
+.cart-film-card {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.cart-film-card__poster-wrap {
+    position: relative;
+    aspect-ratio: 2/3;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--surface-secondary);
+}
+
+.cart-film-card__poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.2s;
+}
+
+.cart-film-card:hover .cart-film-card__poster {
+    transform: scale(1.04);
+}
+
+.cart-film-card__badge {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    font-size: 10px;
+    padding: 2px 6px;
+    backdrop-filter: blur(4px);
+}
+
+.cart-film-card__info {
+    padding: 0 2px;
+}
+
+.cart-film-card__title {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.cart-film-card__year {
+    font-size: 10px;
+    color: var(--text-muted);
+    margin-top: 1px;
+}
+
+/* Badge */
+.cart-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: var(--radius-full);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+.cart-badge svg { width: 11px; height: 11px; }
+.cart-badge--free      { background: #1db954; color: #000; border: 1px solid #17a349; }
+.cart-badge--paid      { background: #eab308; color: #000; border: 1px solid #ca9a06; }
+.cart-badge--exclusive { background: #a855f7; color: #000; border: 1px solid #9333ea; }
+
+.cart-note {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: var(--font-xs);
+    color: var(--text-muted);
+    margin: 0;
+}
+.cart-note svg { width: 12px; height: 12px; flex-shrink: 0; }
+
+@media (max-width: 600px) {
+    .cart-film-grid {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        gap: var(--space-xs);
+    }
 }

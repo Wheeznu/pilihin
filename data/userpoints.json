@@ -2,9 +2,9 @@
   "points": [
     {
       "userId": "user-1780080993352-9c7ccd",
-      "totalPoints": 250,
-      "lifetimePoints": 250,
-      "level": "bronze",
+      "totalPoints": 550,
+      "lifetimePoints": 550,
+      "level": "silver",
       "history": [
         {
           "type": "earn",
@@ -23,9 +23,27 @@
           "desc": "Berlangganan paket Premium",
           "pts": 100,
           "date": "2026-06-12T12:29:41.959Z"
+        },
+        {
+          "type": "earn",
+          "desc": "Berlangganan Weekend Spesial",
+          "pts": 100,
+          "date": "2026-06-22T07:33:33.199Z"
+        },
+        {
+          "type": "earn",
+          "desc": "Berlangganan Paket Premium",
+          "pts": 100,
+          "date": "2026-06-22T08:10:22.248Z"
+        },
+        {
+          "type": "earn",
+          "desc": "Berlangganan Weekend Spesial",
+          "pts": 100,
+          "date": "2026-06-22T09:21:44.205Z"
         }
       ],
-      "lastUpdated": "2026-06-15T06:28:17.242Z"
+      "lastUpdated": "2026-06-22T09:21:44.205Z"
     },
     {
       "userId": "user-1781302839756-167f45",
@@ -238,6 +256,21 @@
         }
       ],
       "lastUpdated": "2026-06-16T03:48:25.097Z"
+    },
+    {
+      "userId": "user-1782120207679-865fca",
+      "totalPoints": 100,
+      "lifetimePoints": 100,
+      "level": "bronze",
+      "history": [
+        {
+          "type": "earn",
+          "desc": "Berlangganan Weekend Spesial",
+          "pts": 100,
+          "date": "2026-06-22T09:24:05.008Z"
+        }
+      ],
+      "lastUpdated": "2026-06-22T09:24:05.008Z"
     }
   ]
 }

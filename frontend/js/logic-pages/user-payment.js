@@ -103,6 +103,7 @@ class PaymentPage {
     this._promo          = null;   // diisi jika sourceType = "promo"
 
     this._pts            = null;
+    this._allFilms       = [];
     this._selectedMethod = null;
 
     // Diskon kode promo (% dari harga)
@@ -126,14 +127,16 @@ class PaymentPage {
     this._user = await authService.getCurrentUser();
     if (!this._user) { window.location.href = "/frontend/pages/main/login.html"; return; }
 
-    // Load tiers & promotions
+    // Load tiers, promotions & film catalog
     try {
-      const [tr, pr] = await Promise.all([
+      const [tr, pr, fm] = await Promise.all([
         fetch("/data/pricing-tiers.json").then(r => r.json()),
         fetch("/data/promotions.json").then(r => r.json()),
+        fetch("/data/data-film.json").then(r => r.json()),
       ]);
-      this._tiers  = tr.tiers  || [];
-      this._promos = pr.promotions || [];
+      this._tiers    = tr.tiers  || [];
+      this._promos   = pr.promotions || [];
+      this._allFilms = (fm.films || []).filter(f => f.status === "published");
     } catch { /**/ }
 
     // Query params: ?tier=standard  ATAU  ?promo=promo-001
@@ -423,6 +426,9 @@ class PaymentPage {
         </div>
       </div>
 
+      <!-- Keranjang Film -->
+      ${this._cartHTML()}
+
       <!-- Metode pembayaran -->
       <div class="settings-section">
         <h3 class="pay-section-title"><i data-feather="credit-card"></i> Metode Pembayaran</h3>
@@ -453,6 +459,87 @@ class PaymentPage {
             <i data-feather="lock"></i> Bayar Sekarang
           </button>
         </div>
+      </div>`;
+  }
+
+  /* ─────────────────────────────────────────────────
+     KERANJANG FILM
+  ───────────────────────────────────────────────── */
+  _cartHTML() {
+    const tierName = this._sourceType === "promo"
+      ? (this._promo?.subtitle?.toLowerCase().includes("standard") ? "standard" : "premium")
+      : (this._tier?.id || "basic");
+
+    const allowed = {
+      basic:    ["free"],
+      standard: ["free", "paid"],
+      premium:  ["free", "paid", "exclusive"],
+    }[tierName] || ["free"];
+
+    const films = this._allFilms.filter(f => allowed.includes(f.accessType || "paid"));
+
+    if (films.length === 0) {
+      return `
+        <div class="settings-section">
+          <h3 class="pay-section-title"><i data-feather="shopping-cart"></i> Konten yang Tersedia di Paket Ini</h3>
+          <p style="color:var(--text-muted);font-size:var(--font-sm)">Gagal memuat katalog film.</p>
+        </div>`;
+    }
+
+    const pick = (type, max) => films.filter(f => f.accessType === type).slice(0, max);
+    const shown = [
+      ...pick("free", 4),
+      ...pick("paid", 4),
+      ...pick("exclusive", 6),
+    ].slice(0, 12);
+
+    const freeCount = films.filter(f => f.accessType === "free").length;
+    const paidCount = films.filter(f => f.accessType === "paid").length;
+    const exclCount = films.filter(f => f.accessType === "exclusive").length;
+
+    const badgeMap = {
+      free:      { label: "Gratis",    cls: "cart-badge--free",      icon: "check-circle" },
+      paid:      { label: "Berbayar",  cls: "cart-badge--paid",      icon: "lock" },
+      exclusive: { label: "Eksklusif", cls: "cart-badge--exclusive", icon: "star" },
+    };
+
+    const filmCards = shown.map(f => {
+      const b    = badgeMap[f.accessType] || badgeMap.paid;
+      const year = f.releaseDate ? new Date(f.releaseDate).getFullYear() : "";
+      return `
+        <div class="cart-film-card">
+          <div class="cart-film-card__poster-wrap">
+            <img class="cart-film-card__poster" src="${f.poster}" alt="${f.title}"
+              onerror="this.style.background='var(--surface-secondary)'">
+            <span class="cart-badge ${b.cls} cart-film-card__badge">
+              <i data-feather="${b.icon}"></i> ${b.label}
+            </span>
+          </div>
+          <div class="cart-film-card__info">
+            <div class="cart-film-card__title">${f.title}</div>
+            <div class="cart-film-card__year">${year}</div>
+          </div>
+        </div>`;
+    }).join("");
+
+    const statsHTML = `
+      <div class="cart-stats">
+        ${freeCount > 0 ? `<span class="cart-stat cart-stat--free"><i data-feather="check-circle"></i> ${freeCount} Film Gratis</span>` : ""}
+        ${paidCount > 0 ? `<span class="cart-stat cart-stat--paid"><i data-feather="lock"></i> ${paidCount} Film Berbayar</span>` : ""}
+        ${exclCount > 0 ? `<span class="cart-stat cart-stat--excl"><i data-feather="star"></i> ${exclCount} Konten Eksklusif</span>` : ""}
+      </div>`;
+
+    return `
+      <div class="settings-section">
+        <h3 class="pay-section-title"><i data-feather="shopping-cart"></i> Konten yang Tersedia di Paket Ini</h3>
+        <p class="cart-desc">
+          Film berikut tersedia setelah berlangganan <strong>${this._itemName()}</strong>.
+          Film <strong>Gratis</strong> bisa ditonton semua orang, sedangkan <strong>Berbayar</strong>
+          hanya bisa diakses pelanggan aktif.${exclCount > 0 ? " Film <strong>Eksklusif</strong> khusus paket Premium." : ""}
+        </p>
+        ${statsHTML}
+        <div class="cart-film-grid">${filmCards}</div>
+        <p class="cart-note"><i data-feather="info"></i> Menampilkan ${shown.length} dari ${films.length} film yang tersedia di paket ini.</p>
       </div>`;
   }
 
@@ -841,6 +928,9 @@ class PaymentPage {
       this._pts  = data.points;
       this._user = data.user;
 
+      // Simpan notifikasi transaksi ke localStorage
+      this._saveTransactionNotif(data.transaction);
+
       // Reset voucher setelah bayar berhasil
       this._voucherDiscount   = 0;
       this._voucherPointsCost = 0;
@@ -994,6 +1084,29 @@ class PaymentPage {
     const fullYear = tier.price * 12;
     if (fullYear <= 0) return 0;
     return Math.round(((fullYear - tier.priceYearly) / fullYear) * 100);
+  }
+
+  _saveTransactionNotif(transaction) {
+    try {
+      const raw = localStorage.getItem("pilih-in-db");
+      if (!raw) return;
+      const db = JSON.parse(raw);
+      if (!Array.isArray(db.notifications)) db.notifications = [];
+      const notif = {
+        id: "notif-txn-" + transaction.id,
+        type: "transaksi",
+        title: "Pembayaran Berhasil",
+        message: `Pembayaran untuk ${transaction.itemLabel} sebesar Rp ${transaction.totalAmount.toLocaleString("id-ID")} telah berhasil diproses.`,
+        createdAt: transaction.createdAt || new Date().toISOString(),
+        read: false,
+        actionUrl: "/frontend/pages/user/transactions.html",
+        actionLabel: "Lihat Transaksi",
+      };
+      db.notifications.unshift(notif);
+      localStorage.setItem("pilih-in-db", JSON.stringify(db));
+    } catch (e) {
+      console.warn("Gagal menyimpan notifikasi transaksi:", e);
+    }
   }
 
   _toast(msg, type = "success") {

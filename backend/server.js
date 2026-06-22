@@ -469,6 +469,129 @@ async function handleUpdateUser(req, res, userId) {
   sendJSON(res, 200, { success: true, user: db.users[idx] });
 }
 
+/* ── Auth: Update Profile / Password / Email / Delete ─────
+   Dipanggil dari dashboard user (profil, pengaturan, keamanan)
+   lewat POST /api/auth/...                                 */
+
+async function handleAuthUpdateProfile(req, res) {
+  const body = await parseBody(req);
+  if (!body || !body.userId) {
+    return sendJSON(res, 400, { success: false, error: "userId wajib diisi" });
+  }
+
+  const db = readJSON(ACCOUNT_FILE);
+  if (!db) {
+    return sendJSON(res, 500, { success: false, error: "Gagal membaca database" });
+  }
+
+  const idx = db.users.findIndex((u) => u.id === body.userId);
+  if (idx === -1) {
+    return sendJSON(res, 404, { success: false, error: "User tidak ditemukan" });
+  }
+
+  const { userId, ...updates } = body;
+
+  if (typeof updates.username === "string") {
+    const username = updates.username.trim();
+    if (username.length < 3) {
+      return sendJSON(res, 400, { success: false, error: "Username minimal 3 karakter" });
+    }
+    updates.username = username;
+  }
+
+  // Preferences digabung (bukan ditimpa total) supaya field lama tidak hilang
+  if (updates.preferences && typeof updates.preferences === "object") {
+    updates.preferences = { ...(db.users[idx].preferences || {}), ...updates.preferences };
+  }
+
+  db.users[idx] = { ...db.users[idx], ...updates, updatedAt: new Date().toISOString() };
+  writeJSON(ACCOUNT_FILE, db);
+
+  sendJSON(res, 200, { success: true, user: db.users[idx] });
+}
+
+async function handleAuthChangePassword(req, res) {
+  const body = await parseBody(req);
+  if (!body || !body.userId || !body.currentPassword || !body.newPassword) {
+    return sendJSON(res, 400, { success: false, error: "Semua field wajib diisi" });
+  }
+
+  const db = readJSON(ACCOUNT_FILE);
+  if (!db) {
+    return sendJSON(res, 500, { success: false, error: "Gagal membaca database" });
+  }
+
+  const idx = db.users.findIndex((u) => u.id === body.userId);
+  if (idx === -1) {
+    return sendJSON(res, 404, { success: false, error: "User tidak ditemukan" });
+  }
+
+  const user = db.users[idx];
+  if (body.currentPassword !== user.password) {
+    return sendJSON(res, 401, { success: false, error: "Password saat ini salah" });
+  }
+  if (body.newPassword.length < 8) {
+    return sendJSON(res, 400, { success: false, error: "Password baru minimal 8 karakter" });
+  }
+
+  user.password = body.newPassword;
+  user.updatedAt = new Date().toISOString();
+  db.users[idx] = user;
+  writeJSON(ACCOUNT_FILE, db);
+
+  sendJSON(res, 200, { success: true, user });
+}
+
+async function handleAuthChangeEmail(req, res) {
+  const body = await parseBody(req);
+  if (!body || !body.userId || !body.newEmail) {
+    return sendJSON(res, 400, { success: false, error: "Semua field wajib diisi" });
+  }
+
+  const db = readJSON(ACCOUNT_FILE);
+  if (!db) {
+    return sendJSON(res, 500, { success: false, error: "Gagal membaca database" });
+  }
+
+  const idx = db.users.findIndex((u) => u.id === body.userId);
+  if (idx === -1) {
+    return sendJSON(res, 404, { success: false, error: "User tidak ditemukan" });
+  }
+
+  const newEmail = body.newEmail.trim().toLowerCase();
+  if (db.users.some((u) => u.id !== body.userId && u.email.toLowerCase() === newEmail)) {
+    return sendJSON(res, 409, { success: false, error: "Email sudah digunakan" });
+  }
+
+  db.users[idx].email = newEmail;
+  db.users[idx].updatedAt = new Date().toISOString();
+  writeJSON(ACCOUNT_FILE, db);
+
+  sendJSON(res, 200, { success: true, user: db.users[idx] });
+}
+
+async function handleAuthDeleteAccount(req, res) {
+  const body = await parseBody(req);
+  if (!body || !body.userId) {
+    return sendJSON(res, 400, { success: false, error: "userId wajib diisi" });
+  }
+
+  const db = readJSON(ACCOUNT_FILE);
+  if (!db) {
+    return sendJSON(res, 500, { success: false, error: "Gagal membaca database" });
+  }
+
+  const idx = db.users.findIndex((u) => u.id === body.userId);
+  if (idx === -1) {
+    return sendJSON(res, 404, { success: false, error: "User tidak ditemukan" });
+  }
+
+  db.users.splice(idx, 1);
+  writeJSON(ACCOUNT_FILE, db);
+
+  sendJSON(res, 200, { success: true });
+}
+
 /* ── Payment & Points ──────────────────────────────────── */
 
 const TIER_MAP = { basic: "tier-001", standard: "tier-003", premium: "tier-004" };
@@ -558,6 +681,20 @@ async function handleGetReferral(req, res) {
   }
   const code = userId.slice(0, 8).toUpperCase() + crypto.randomBytes(2).toString("hex").toUpperCase();
   sendJSON(res, 200, { success: true, referralCode: code, friendCount: 0 });
+}
+
+async function handleGetTransactions(req, res) {
+  const url = new URL(req.url, `http://${req.headers.host}`);
+  const userId = url.searchParams.get("userId");
+  if (!userId) {
+    return sendJSON(res, 400, { success: false, error: "Parameter userId wajib" });
+  }
+  const db = readTransactions();
+  const transactions = db.transactions
+    .filter((t) => t.userId === userId)
+    .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+
+  sendJSON(res, 200, { success: true, transactions });
 }
 
 function calcExpiry(durationDays) {
@@ -683,6 +820,14 @@ const server = http.createServer(async (req, res) => {
     await handleRegister(req, res);
   } else if (req.method === "POST" && pathname === "/api/auth/forgot-password") {
     await handleForgotPassword(req, res);
+  } else if (req.method === "POST" && pathname === "/api/auth/update-profile") {
+    await handleAuthUpdateProfile(req, res);
+  } else if (req.method === "POST" && pathname === "/api/auth/change-password") {
+    await handleAuthChangePassword(req, res);
+  } else if (req.method === "POST" && pathname === "/api/auth/change-email") {
+    await handleAuthChangeEmail(req, res);
+  } else if (req.method === "POST" && pathname === "/api/auth/delete-account") {
+    await handleAuthDeleteAccount(req, res);
   } else if (req.method === "POST" && pathname === "/api/contact") {
     await handleContact(req, res);
   } else if (req.method === "PUT" && pathname.match(/^\/api\/users\/([^/]+)$/)) {
@@ -692,6 +837,8 @@ const server = http.createServer(async (req, res) => {
     await handleGetPoints(req, res);
   } else if (req.method === "GET" && pathname === "/api/referral") {
     await handleGetReferral(req, res);
+  } else if (req.method === "GET" && pathname === "/api/transactions") {
+    await handleGetTransactions(req, res);
   } else if (req.method === "POST" && pathname === "/api/payment/process") {
     await handleProcessPayment(req, res);
   } else {

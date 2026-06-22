@@ -49,8 +49,13 @@ class TransactionsPage {
         if (!authService.requireAuth()) return;
         this._user = await authService.getCurrentUser();
         if (!this._user) {
-            window.location.href = "/frontend/pages/main/login.html";
-            return;
+            // Fallback: gunakan data session langsung
+            const session = authService.getSession();
+            if (!session) {
+                window.location.href = "/frontend/pages/main/login.html";
+                return;
+            }
+            this._user = session; // session punya userId, email, dll
         }
 
         loadNotifBadge(this._user);
@@ -118,13 +123,18 @@ class TransactionsPage {
         `;
 
         this._bindEvents();
-        this._bindBurger();
     }
 
     /* ─────────── LOAD DATA ─────────── */
     async _loadTransactions() {
+        const userId = this._user?.id || this._user?.userId
+            || JSON.parse(localStorage.getItem("pilih-in-session") || "{}").userId;
+        if (!userId) {
+            this._showError("Sesi tidak ditemukan. Silakan login ulang.");
+            return;
+        }
         try {
-            const res  = await fetch(`${API}/api/transactions?userId=${this._user.id}`);
+            const res  = await fetch(`${API}/api/transactions?userId=${userId}`);
             const data = await res.json();
             if (!data.success) throw new Error(data.error);
             this._transactions = data.transactions || [];

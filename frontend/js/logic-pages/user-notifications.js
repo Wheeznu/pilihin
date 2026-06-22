@@ -50,7 +50,11 @@ class UserNotificationsPage {
             return;
         }
 
-        await this._buildNotifications();
+        try {
+            await this._buildNotifications();
+        } catch (err) {
+            console.warn('Gagal membangun notifikasi:', err);
+        }
         loadNotifBadge(this._user);
         this._renderPage();
         this._bindEvents();

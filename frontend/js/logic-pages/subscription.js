@@ -59,6 +59,9 @@ class SubscriptionPage {
                     </div>
                 </div>
 
+                <!-- Notifikasi hampir habis -->
+                ${this._renewalBannerHTML(u)}
+
                 <!-- Kartu Paket Aktif -->
                 ${this._activeCardHTML(u, activeTier, isFree)}
 
@@ -258,10 +261,60 @@ class SubscriptionPage {
         `;
     }
 
+    /* ─────────── RENEWAL BANNER ─────────── */
+    _renewalBannerHTML(u) {
+        if (!u.subscriptionExpiry) return "";
+
+        const expiryDate = new Date(u.subscriptionExpiry);
+        const daysLeft   = Math.ceil((expiryDate - Date.now()) / (1000 * 60 * 60 * 24));
+        const dateStr    = expiryDate.toLocaleDateString("id-ID", {
+            day: "numeric", month: "long", year: "numeric",
+        });
+
+        // Hanya tampilkan jika <= 7 hari atau sudah habis
+        if (daysLeft > 7) return "";
+
+        const isExpired = daysLeft <= 0;
+        const bannerClass = isExpired ? "renewal-banner renewal-banner--expired" : "renewal-banner renewal-banner--warning";
+        const icon   = isExpired ? "alert-octagon" : "bell";
+        const title  = isExpired
+            ? "Langganan kamu sudah berakhir!"
+            : `Langganan kamu akan berakhir dalam ${daysLeft} hari`;
+        const desc   = isExpired
+            ? `Paket kamu berakhir pada ${dateStr}. Perpanjang sekarang agar tidak kehilangan akses ke konten favorit kamu.`
+            : `Paket kamu aktif hingga ${dateStr}. Perpanjang sekarang untuk terus menikmati streaming tanpa gangguan.`;
+
+        return `
+            <div class="${bannerClass}" id="renewalBanner">
+                <div class="renewal-banner__icon">
+                    <i data-feather="${icon}"></i>
+                </div>
+                <div class="renewal-banner__body">
+                    <h3 class="renewal-banner__title">${title}</h3>
+                    <p class="renewal-banner__desc">${desc}</p>
+                </div>
+                <div class="renewal-banner__actions">
+                    <a href="/frontend/pages/main/pricing.html" class="btn btn-primary btn-sm" id="btnRenew">
+                        <i data-feather="refresh-cw"></i> Perpanjang Sekarang
+                    </a>
+                    <button class="btn btn-ghost btn-sm" id="btnDismissRenewal">
+                        <i data-feather="x"></i> Nanti Saja
+                    </button>
+                </div>
+            </div>`;
+    }
+
     /* ─────────── EVENTS ─────────── */
     _bindEvents() {
-        // kosong - tidak ada interaksi inline di halaman ini,
-        // semua aksi diarahkan ke halaman pricing / promo
+        document.getElementById("btnDismissRenewal")?.addEventListener("click", () => {
+            const banner = document.getElementById("renewalBanner");
+            if (banner) {
+                banner.style.opacity = "0";
+                banner.style.transform = "translateY(-8px)";
+                banner.style.transition = "opacity 0.3s, transform 0.3s";
+                setTimeout(() => banner.remove(), 300);
+            }
+        });
     }
 
     /* ─────────── HELPERS ─────────── */

@@ -94,8 +94,8 @@
       "role": "user",
       "status": "active",
       "profilePhoto": "https://ui-avatars.com/api/?name=siti&background=1db954&color=fff",
-      "subscriptionTier": "tier-002",
-      "subscriptionExpiry": null,
+      "subscriptionTier": "tier-004",
+      "subscriptionExpiry": "2026-07-26T07:33:33.193Z",
       "preferences": {
         "theme": "dark",
         "language": "id",
@@ -103,7 +103,7 @@
         "privateProfile": false
       },
       "createdAt": "2026-05-29T18:56:33.352Z",
-      "updatedAt": "2026-05-29T18:56:33.352Z",
+      "updatedAt": "2026-06-22T09:21:44.199Z",
       "lastLogin": null
     },
     {
@@ -113,18 +113,31 @@
       "password": "111111",
       "role": "user",
       "status": "active",
-      "profilePhoto": "https://ui-avatars.com/api/?name=budi_gaming&background=1db954&color=fff",
+      "profilePhoto": null,
       "subscriptionTier": "tier-004",
       "subscriptionExpiry": "2027-07-16T03:47:51.094Z",
       "preferences": {
         "theme": "dark",
         "language": "id",
         "notifications": true,
-        "privateProfile": false
+        "privateProfile": false,
+        "genres": [
+          "genre-001",
+          "genre-005"
+        ],
+        "notifFilm": true,
+        "notifPromo": true,
+        "notifSistem": true,
+        "streamQuality": "480p"
       },
       "createdAt": "2026-06-07T08:31:49.229Z",
-      "updatedAt": "2026-06-16T03:48:25.096Z",
-      "lastLogin": null
+      "updatedAt": "2026-06-22T14:12:22.483Z",
+      "lastLogin": null,
+      "fullName": "nn",
+      "gender": "",
+      "birthDate": "",
+      "bio": "",
+      "phone": ""
     },
     {
       "id": "user-1781441020822-92e154",
@@ -207,6 +220,26 @@
       },
       "createdAt": "2026-06-16T03:23:53.689Z",
       "updatedAt": "2026-06-16T03:23:53.689Z",
+      "lastLogin": null
+    },
+    {
+      "id": "user-1782120207679-865fca",
+      "username": "rina",
+      "email": "rwin@gmail.com",
+      "password": "111111",
+      "role": "user",
+      "status": "active",
+      "profilePhoto": "https://ui-avatars.com/api/?name=rina&background=1db954&color=fff",
+      "subscriptionTier": "tier-004",
+      "subscriptionExpiry": "2026-06-24T09:24:05.004Z",
+      "preferences": {
+        "theme": "dark",
+        "language": "id",
+        "notifications": true,
+        "privateProfile": false
+      },
+      "createdAt": "2026-06-22T09:23:27.679Z",
+      "updatedAt": "2026-06-22T09:24:05.004Z",
       "lastLogin": null
     }
   ]

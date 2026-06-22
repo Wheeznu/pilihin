@@ -245,3 +245,81 @@
         align-items: flex-start;
     }
 }
+/* ── Renewal Banner ─────────────────────────────────────── */
+.renewal-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-lg);
+    border: 1px solid;
+    flex-wrap: wrap;
+}
+
+.renewal-banner--warning {
+    background: rgba(234, 179, 8, 0.1);
+    border-color: rgba(234, 179, 8, 0.4);
+}
+
+.renewal-banner--expired {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.4);
+}
+
+.renewal-banner__icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.renewal-banner--warning .renewal-banner__icon {
+    background: rgba(234, 179, 8, 0.2);
+    color: #eab308;
+}
+
+.renewal-banner--expired .renewal-banner__icon {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+}
+
+.renewal-banner__body {
+    flex: 1;
+    min-width: 200px;
+}
+
+.renewal-banner__title {
+    font-size: var(--font-base);
+    font-weight: 700;
+    margin: 0 0 4px;
+    color: var(--text-primary);
+}
+
+.renewal-banner--warning .renewal-banner__title { color: #eab308; }
+.renewal-banner--expired .renewal-banner__title  { color: #ef4444; }
+
+.renewal-banner__desc {
+    font-size: var(--font-sm);
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.renewal-banner__actions {
+    display: flex;
+    gap: var(--space-sm);
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+    .renewal-banner {
+        flex-direction: column;
+    }
+    .renewal-banner__actions {
+        width: 100%;
+    }
+}

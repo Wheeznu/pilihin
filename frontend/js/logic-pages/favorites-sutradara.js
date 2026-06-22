@@ -147,8 +147,8 @@ class FavoritesSutradaraPage {
                     <i data-feather="x"></i>
                 </button>
                 <div class="fav-person-card__avatar-wrap">
-                    <img class="fav-person-card__avatar" src="${p.photo || ""}" alt="${p.name}"
-                         onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(p.name)}&background=1db954&color=fff&size=200'">
+                    <img class="fav-person-card__avatar" src="${p.photo || `https://ui-avatars.com/api/?name=${encodeURIComponent(p.name)}&background=1db954&color=fff&size=200`}" alt="${p.name}"
+                         onerror="this.src=\`https://ui-avatars.com/api/?name=\${encodeURIComponent(this.alt)}&background=1db954&color=fff&size=200\`">
                 </div>
                 <div class="fav-person-card__body">
                     <p class="fav-person-card__name">${p.name}</p>
@@ -212,8 +212,8 @@ class FavoritesSutradaraPage {
                 const already = favNames.includes(p.name);
                 return `<div class="fav-search-item ${already ? "fav-search-item--added" : ""}"
                              data-name="${p.name}" data-type="sutradara">
-                    <img class="fav-search-item__img" src="${p.photo || ""}" alt="${p.name}"
-                         onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(p.name)}&background=1db954&color=fff&size=80'">
+                    <img class="fav-search-item__img" src="${p.photo || `https://ui-avatars.com/api/?name=${encodeURIComponent(p.name)}&background=1db954&color=fff&size=80`}" alt="${p.name}"
+                         onerror="this.src=\`https://ui-avatars.com/api/?name=\${encodeURIComponent(this.alt)}&background=1db954&color=fff&size=80\`">
                     <div class="fav-search-item__info">
                         <span class="fav-search-item__name">${p.name}</span>
                         <span class="fav-search-item__meta">Sutradara · ${p.filmCount || "-"} film</span>
@@ -267,7 +267,7 @@ class FavoritesSutradaraPage {
             (f.director || "").toLowerCase() === name.toLowerCase()
         );
 
-        document.getElementById("modalPersonPhoto").src = person.photo || "";
+        document.getElementById("modalPersonPhoto").src = person.photo || `https://ui-avatars.com/api/?name=${encodeURIComponent(person.name)}&background=1db954&color=fff&size=200`;
         document.getElementById("modalPersonPhoto").onerror = () => {
             document.getElementById("modalPersonPhoto").src =
                 `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=1db954&color=fff&size=200`;
